@@ -25,6 +25,6 @@ const LaunchScene = <T extends Phaser.Types.Scenes.SceneType>(
         parent,
         scene: scene,
     });
-}
+};
 
 export { LaunchScene };

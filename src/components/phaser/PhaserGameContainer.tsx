@@ -49,7 +49,7 @@ function PhaserGameContainer(props: PhaserGameContainerProps) {
                 game.current.destroy(true, false);
                 game.current = null;
             }
-        }
+        };
     }, [ref, game]);
 
     useEffect(() => {
@@ -62,7 +62,7 @@ function PhaserGameContainer(props: PhaserGameContainerProps) {
 
         return () => {
             EventBus.removeListener("current-scene-ready");
-        }
+        };
     }, [ref]);
 
     return (

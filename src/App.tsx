@@ -1,6 +1,6 @@
 import "./App.css";
 
-import type { PhaserGameContainerRef } from "./components/phaser/PhaserGameContainer";
+import type { PhaserGameContainerRef } from "@/components/phaser/PhaserGameContainer";
 
 import { useRef } from "react";
 
@@ -13,9 +13,9 @@ function App() {
     return (
         <>
             <PhaserGameContainer
-              viewport={{width: 600, height: 500}}
-              launch={{scene: MazeScene, key: "default-scene"}}
-              containerRef={phaserRef}
+                viewport={{width: 600, height: 500}}
+                launch={{scene: MazeScene, key: "default-scene"}}
+                containerRef={phaserRef}
             />
         </>
     );
