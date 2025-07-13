@@ -4,8 +4,9 @@
     "types": ["vitest/globals"],
     "paths": {
       "@/*": ["./src/*"],
+      "@assets/*": ["./src/assets/*"],
       "@components/*":["./src/components/*"],
-      "@assets": ["./src/assets/*"],
+      "@game/*": ["./src/game/*"],
       "@tests/*": ["./tests/*"]
     },
 

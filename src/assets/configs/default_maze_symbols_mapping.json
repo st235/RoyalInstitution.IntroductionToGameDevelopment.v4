@@ -1,0 +1,9 @@
+{
+    "start": "SP",
+    "finish": "F",
+    "wall": "W",
+    "coin": "C",
+    "key": "K",
+    "door": "D",
+    "monster": "M"
+}

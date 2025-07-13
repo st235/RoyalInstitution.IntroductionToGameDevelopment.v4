@@ -1,6 +1,7 @@
 export default {
     "@": "/src",
-    "@components": "/src/components",
     "@assets": "/src/assets",
+    "@components": "/src/components",
+    "@game": "/src/game",
     "@tests": "/tests",
 };

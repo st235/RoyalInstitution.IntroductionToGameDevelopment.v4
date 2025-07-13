@@ -2,8 +2,8 @@ import { assert } from "@/util/Assert";
 
 class TileCode {
 
-    readonly typeCode: string;
-    readonly variation: number | undefined;
+    public readonly typeCode: string;
+    public readonly variation: number | undefined;
 
     /**
      * @param typeCode shorten tile type. Converted to upper case on
