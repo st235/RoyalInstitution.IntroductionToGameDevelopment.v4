@@ -107,6 +107,9 @@ class TileCodeMapper {
      * 
      * @param config with a tile type codes mapping.
      * @returns an instance on {@link TileCodeMapper}.
+     * 
+     * @see TileTypeCodeMapping
+     * @see default_tile_symbols_mapping.json
      */
     public static fromConfig(config: TileTypeCodeMapping = this.defaultConfig()): TileCodeMapper | undefined {
         if (!config || Object.keys(config).length <= 0) {

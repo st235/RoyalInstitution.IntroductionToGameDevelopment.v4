@@ -1,4 +1,5 @@
 import Phaser from "phaser";
+import Maze from "./Maze";
 
 class MazeScene extends Phaser.Scene {
 
@@ -22,10 +23,14 @@ class MazeScene extends Phaser.Scene {
             [ 39,  39,  39,  39,  39,  39,  39,  39,  39,  39,  39 ]
         ];
 
-        const levelForeground = [
-            [ 340,  340,  340,  340,  340,  340,  340,  340,  340,  340,  340 ],
-            [ -1,  -1,  -1,  -1,  -1,  -1,  -1,  -1,  -1,  -1,  -1 ],
-        ];
+        const maze = Maze.fromConfig(`
+            W0 W0 W0 W1 W1 W2 W2
+            W1 .  .  .  W3 .  W4
+            W6 .  .  .  .  .  w7
+            W0 W0 W0 W1 W1 W2 W2
+        `);
+
+        const levelForeground = maze!.getWallsLayer();
 
         const map = this.make.tilemap({ tileWidth: 10, tileHeight: 10 });
         const tileset = map.addTilesetImage("tileset");

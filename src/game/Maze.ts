@@ -1,27 +1,25 @@
-import type { Result } from "@/util/Result";
-import { succeed, error, requireValue } from "@/util/Result";
+import MazeConfig from "./config/MazeConfig";
+import WallConfig from "./config/WallConfig";
 
-type ConfigMetaData = {
-    spawnSymbol: string;
-    wallSymbol: string;
-    coinSymbols: string[];
-    keySymbols: [string, string][];
-};
-type ConfigMetaDataError = "line-not-prefixed" | "meta-key-not-found";
-type ConfigMetaKeyType = "spawn" | "wall" | "coins" | "keys";
-
-type MazeItemRawType = "unnoccupied" | "spawn" | "wall" | "coin" | "key";
-
-type MazeItemType = {
-    id: string;
-    rawType: MazeItemRawType;
-};
+import { pad2D } from "@/util/Arrays";
 
 class Maze {
 
-    private readonly items: MazeItemType[][];
+    private readonly _config: MazeConfig;
+    private readonly _wallVariationConfig: WallConfig;
 
-    constructor() {
+    constructor(config: MazeConfig, wallVariationConfig: WallConfig) {
+        this._config = config;
+        this._wallVariationConfig = wallVariationConfig;
+    }
+
+    getWallsLayer(): number[][] {
+        const tiles = this._config.getMappedTiles({
+            unoccupied: () => -1,
+            wall: variation => this._wallVariationConfig.getTileFor(variation),
+        });
+
+        return pad2D(tiles, this._wallVariationConfig.getDefaultTile(), 1);
     }
 
     /**
@@ -29,100 +27,10 @@ class Maze {
      * @param config raw config string.
      */
     static fromConfig(config: string): Maze | undefined {
-        const configSplits = config.split(/\r?\n/);
+        const wallVariationConfig = WallConfig.create();
+        const mazeConfig = MazeConfig.fromConfig(config);
 
-        let fieldSeparator = 0;
-        while (fieldSeparator < configSplits.length &&
-            configSplits[fieldSeparator].length > 0) {
-            fieldSeparator++;
-            break;
-        }
-
-        const metaDataResult = this._readConfigMeta(configSplits.slice(0, fieldSeparator));
-        if (!metaDataResult.success) {
-            return undefined;
-        }
-
-        if (fieldSeparator >= configSplits.length) {
-            return undefined;
-        }
-
-        const metaData = requireValue(metaDataResult);
-        const dimensions: integer[] = configSplits[fieldSeparator].split(/\s*/).map(parseInt);
-        if (dimensions.length !== 2) {
-            return undefined;
-        }
-
-        const [width, height] = dimensions;
-
-        for (let row = 0; row < height; row++) {
-            for (let column = 0; column < width; column++) {
-                
-            }
-        }
-    }
-
-    /**
-     * Reads config metadata.
-     * 
-     * Metadata section can be completely empty,
-     * if there are no extra maze objects present on the field.
-     * Some rows can be optional or empty, and all of them should
-     * be prefixed with the information they provide.
-     * 
-     * The rows are:
-     *  spawn: %symbol%
-     *  wall: %symbol%
-     *  coins: %symbol%[,%symbol% ...]
-     *  keys: %key symbol%,%door symbol%[,%key symbol%,%door symbol% ...]
-     * 
-     * @param meta 
-     */
-    private static _readConfigMeta(metaSlice: string[]): Result<ConfigMetaData, ConfigMetaDataError> {
-        const outConfigMetaData: ConfigMetaData = {
-            spawnSymbol: "",
-            wallSymbol: "",
-            coinSymbols: [],
-            keySymbols: [],
-        };
-
-        for (const metaRow of metaSlice) {
-            const metaParts = metaRow.split(":");
-
-            if (metaParts.length != 2) {
-                return error("line-not-prefixed");
-            }
-
-            const [metaKey, metaValue] = metaParts;
-            switch (metaKey as ConfigMetaKeyType) {
-            case "wall": {
-                outConfigMetaData.spawnSymbol = metaValue.trim();
-                break;
-            }
-            case "spawn": {
-                outConfigMetaData.spawnSymbol = metaValue.trim();
-                break;
-            }
-            case "coins": {
-                outConfigMetaData.coinSymbols = metaValue.split(",").map(i => i.trim());
-                break;
-            }
-            case "keys": {
-                const out: [string, string][] = [];
-                for (let i = 0; i + 1 < metaValue.length; i += 2) {
-                    out.push([metaValue[i], metaValue[i + 1]]);
-                }
-                outConfigMetaData.keySymbols = out;
-                break;
-            }
-            default: {
-                // If metaKey does not conforms to ConfigMetaKeyType.
-                return error("meta-key-not-found");
-            }
-            }
-        }
-
-        return succeed(outConfigMetaData);
+        return new Maze(mazeConfig!, wallVariationConfig);
     }
 };
 
