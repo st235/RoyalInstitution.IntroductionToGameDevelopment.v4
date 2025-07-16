@@ -83,7 +83,7 @@ class MazeConfig {
         return out;
     }
 
-    public static fromConfig(config: string, mapping?: TileTypeCodeMapping): MazeConfig | undefined {
+    public static create(config: string, mapping?: TileTypeCodeMapping): MazeConfig | undefined {
         const mapper = TileCodeMapper.fromConfig(mapping);
         if (!mapper) {
             return undefined;

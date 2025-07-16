@@ -1,5 +1,6 @@
 import Phaser from "phaser";
 
+import CharacterConfig from "@game/config/CharacterConfig";
 import MazeConfig from "@game/config/MazeConfig";
 import WallConfig from "@game/config/WallConfig";
 
@@ -9,19 +10,27 @@ class Maze {
 
     private readonly _wallsPadding: number = 1;
 
-    private readonly _config: MazeConfig;
+    private readonly _layoutConfig: MazeConfig;
+    private readonly _characterConfig: CharacterConfig;
     private readonly _wallVariationConfig: WallConfig;
 
     private _startPositions: [number, number][];
     private _finishPositions: [number, number][];
 
-    constructor(config: MazeConfig, wallVariationConfig: WallConfig) {
-        this._config = config;
+    constructor(layoutConfig: MazeConfig,
+        characterConfig: CharacterConfig,
+        wallVariationConfig: WallConfig) {
+        this._layoutConfig = layoutConfig;
+        this._characterConfig = characterConfig;
         this._wallVariationConfig = wallVariationConfig;
 
-        const groupedStartAndFinishPoints = this._config.groupSpawnAndFinishPoints();
+        const groupedStartAndFinishPoints = this._layoutConfig.groupSpawnAndFinishPoints();
         this._startPositions = groupedStartAndFinishPoints[0];
         this._finishPositions = groupedStartAndFinishPoints[1];
+    }
+
+    getCharacterTile(): number {
+        return this._characterConfig.getTile();
     }
 
     getStartPosition(): [number, number] {
@@ -35,7 +44,7 @@ class Maze {
     }
 
     getWallsLayer(): number[][] {
-        const tiles = this._config.mapTiles({
+        const tiles = this._layoutConfig.mapTiles({
             unoccupied: () => -1,
             start: () => -1,
             wall: variation => this._wallVariationConfig.getTileFor(variation),
@@ -46,13 +55,15 @@ class Maze {
 
     /**
      * 
-     * @param config raw config string.
+     * @param layout raw config string.
      */
-    static fromConfig(config: string): Maze | undefined {
-        const wallVariationConfig = WallConfig.create();
-        const mazeConfig = MazeConfig.fromConfig(config);
-
-        return new Maze(mazeConfig!, wallVariationConfig);
+    static fromConfig(
+        layout: string,
+        characterConfig: CharacterConfig = CharacterConfig.create(),
+        wallVariationConfig: WallConfig = WallConfig.create(),
+    ): Maze | undefined {
+        const layoutConfig = MazeConfig.create(layout);
+        return new Maze(layoutConfig!, characterConfig, wallVariationConfig);
     }
 };
 

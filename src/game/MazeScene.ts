@@ -75,7 +75,7 @@ class MazeScene extends Phaser.Scene {
 
         const startPosition = this._maze!.getStartPosition();
         const startCoordinates = this._tilemap.tileToWorldXY(startPosition[1], startPosition[0]);
-        this._player = Player.add(this, "characters", 0, 10, 10, startCoordinates!.x, startCoordinates!.y);
+        this._player = Player.add(this, "characters", this._maze!.getCharacterTile(), 10, 10, startCoordinates!.x, startCoordinates!.y);
         this._playerController = PlayerController.wrap(this, this._player);
     }
 
