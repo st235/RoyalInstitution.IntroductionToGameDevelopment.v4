@@ -2,8 +2,16 @@ import Phaser from "phaser";
 
 const defaultConfig = {
     type: Phaser.AUTO,
-    parent: "game-container",
-    pixelArt: true,
+    render: {
+        antialiasGL: false,
+        pixelArt: true,
+        autoResize: false,
+    },
+    scale: {
+        parent: "game-container",
+        mode: Phaser.Scale.FIT,
+        autoCenter: Phaser.Scale.CENTER_BOTH,
+    },
     physics: {
         default: "arcade",
         arcade: {

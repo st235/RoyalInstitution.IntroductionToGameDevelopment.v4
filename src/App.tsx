@@ -13,7 +13,7 @@ function App() {
     return (
         <>
             <PhaserGameContainer
-                viewport={{width: 600, height: 500}}
+                viewport={{width: 200, height: 140}}
                 launch={{scene: MazeScene, key: "default-scene"}}
                 containerRef={phaserRef}
             />

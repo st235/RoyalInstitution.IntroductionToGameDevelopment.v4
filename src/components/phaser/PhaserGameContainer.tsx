@@ -66,9 +66,7 @@ function PhaserGameContainer(props: PhaserGameContainerProps) {
     }, [ref]);
 
     return (
-        <div className="game-container">
-            <div id="game-canvas" />
-        </div>
+        <div id="game-container" />
     );
 }
 
