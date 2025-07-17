@@ -16,6 +16,7 @@ type RenderingTilesMappers<T> = {
     unoccupied: () => T;
     wall: (variation?: number) => T;
     door: (variation?: number) => T;
+    garniture: (variation?: number) => T;
 }
 
 class LayoutConfigReader {
@@ -35,6 +36,22 @@ class LayoutConfigReader {
         return [this._dimensions[0], this._dimensions[1]];
     }
 
+    getTileCodeAt(i: number, j: number): OptionalTileCode {
+        return this._tiles[i][j];
+    }
+
+    isWall(tileCode: TileCode): boolean {
+        return this._tileCodeMapper.isWall(tileCode);
+    }
+
+    isDoor(tileCode: TileCode): boolean {
+        return this._tileCodeMapper.isDoor(tileCode);
+    }
+
+    isGarniture(tileCode: TileCode): boolean {
+        return this._tileCodeMapper.isGarniture(tileCode);
+    }
+
     mapStaticLayer<T = unknown>(renderingMapper: RenderingTilesMappers<T>): T[][] {
         return this._tiles.map(items => {
             return items.map(item => {
@@ -43,6 +60,9 @@ class LayoutConfigReader {
                 }
                 if (item && this._tileCodeMapper.isDoor(item)) {
                     return renderingMapper.door(item.variation);
+                }
+                if (item && this._tileCodeMapper.isGarniture(item)) {
+                    return renderingMapper.garniture(item.variation);
                 }
                 return renderingMapper.unoccupied();
             });

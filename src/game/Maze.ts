@@ -2,13 +2,14 @@ import Phaser from "phaser";
 
 import { assert } from "@/util/Assert";
 import { clamp2D, pad2D } from "@/util/Arrays";
-import CharacterConfigReader from "@/game/config/CharacterConfigReader";
-import CoinsConfigReader from "@/game/config/CoinsConfigReader";
-import DoorsConfigReader from "@/game/config/DoorsConfigReader";
-import FlagConfigReader from "@/game/config/FlagConfigReader";
-import LayoutConfigReader, { KEY_START_POINT, KEY_FINISH_POINT, KEY_COIN, KEY_KEY, KEY_DOOR, KEY_MONSTER } from "@/game/config/LayoutConfigReader";
-import MonstersConfigReader from "@/game/config/MonstersConfigReader";
-import WallConfigReader from "@/game/config/WallConfigReader";
+import CharacterConfigReader from "@game/config/CharacterConfigReader";
+import CoinsConfigReader from "@game/config/CoinsConfigReader";
+import DoorsConfigReader from "@game/config/DoorsConfigReader";
+import FlagConfigReader from "@game/config/FlagConfigReader";
+import GarnitureConfigReader from "@game/config/GarnitureConfigReader";
+import LayoutConfigReader, { KEY_START_POINT, KEY_FINISH_POINT, KEY_COIN, KEY_KEY, KEY_DOOR, KEY_MONSTER } from "@game/config/LayoutConfigReader";
+import MonstersConfigReader from "@game/config/MonstersConfigReader";
+import WallConfigReader from "@game/config/WallConfigReader";
 
 /**
  * A tile index for unnocupied cells.
@@ -32,6 +33,7 @@ class Maze {
     private readonly _coinsConfigReader: CoinsConfigReader;
     private readonly _doorsConfigReader: DoorsConfigReader;
     private readonly _flagConfigReader: FlagConfigReader;
+    private readonly _garnitureConfigReader: GarnitureConfigReader;
     private readonly _monstersConfigReader: MonstersConfigReader;
     private readonly _wallConfigReader: WallConfigReader;
 
@@ -48,6 +50,7 @@ class Maze {
         coinsConfigReader: CoinsConfigReader,
         doorsConfigReader: DoorsConfigReader,
         flagConfigReader: FlagConfigReader,
+        garnitureConfigReader: GarnitureConfigReader,
         monstersConfigReader: MonstersConfigReader,
         wallConfigReader: WallConfigReader) {
         this._desiredSize = [Math.floor(desiredSize[0]), Math.floor(desiredSize[1])];
@@ -58,6 +61,7 @@ class Maze {
         this._coinsConfigReader = coinsConfigReader;
         this._doorsConfigReader = doorsConfigReader;
         this._flagConfigReader = flagConfigReader;
+        this._garnitureConfigReader = garnitureConfigReader;
         this._monstersConfigReader = monstersConfigReader;
         this._wallConfigReader = wallConfigReader;
 
@@ -96,6 +100,10 @@ class Maze {
 
     getMonsterTile(variation: number): number {
         return this._monstersConfigReader.getTileFor(variation);
+    }
+
+    getGarnitureTile(variation: number): number {
+        return this._garnitureConfigReader.getTileFor(variation);
     }
 
     getStartPoint(): PointWithVariation {
@@ -149,6 +157,7 @@ class Maze {
         const tiles = this._layoutConfigReader.mapStaticLayer({
             wall: variation => this._wallConfigReader.getTileFor(variation),
             door: variation => this._doorsConfigReader.getTileForClosedDoor(variation),
+            garniture: variation => this._garnitureConfigReader.getTileFor(variation),
             unoccupied: () => _TILE_UNNOCUPIED,
         });
 
@@ -158,6 +167,34 @@ class Maze {
                 Math.max(0, this._desiredSize[1] - this._outerWallsPadding * 2),
             ]);
         return pad2D(expandedTiles, this._wallConfigReader.getDefaultTile(), this._outerWallsPadding);
+    }
+
+    doesCollideAt(i: number, j: number): boolean {
+        const [mazeWidth, mazeHeight] = this._layoutConfigReader.getDimensions();
+
+        if (i < this._outerWallsPadding || i >= this._outerWallsPadding + mazeHeight ||
+            j < this._outerWallsPadding || i >= this._outerWallsPadding + mazeWidth) {
+            return true;
+        }
+
+        const tile = this._layoutConfigReader.getTileCodeAt(
+            i - this._outerWallsPadding,
+            j - this._outerWallsPadding
+        );
+        if (!tile) {
+            return false;
+        }
+
+        if (this._layoutConfigReader.isWall(tile) ||
+            this._layoutConfigReader.isDoor(tile)) {
+            return true;
+        }
+
+        if (this._layoutConfigReader.isGarniture(tile)) {
+            return this._garnitureConfigReader.doesCollide(tile.variation);
+        }
+
+        return false;
     }
 
     private _padAll(points: PointWithVariation[]): PointWithVariation[] {
@@ -181,6 +218,7 @@ class Maze {
         coinsConfigReader: CoinsConfigReader = CoinsConfigReader.create(),
         doorsConfigReader: DoorsConfigReader = DoorsConfigReader.create(),
         flagConfigReader: FlagConfigReader = FlagConfigReader.create(),
+        garnitureConfigReader: GarnitureConfigReader = GarnitureConfigReader.create(),
         monstersConfigReader: MonstersConfigReader | undefined = MonstersConfigReader.create(),
         wallConfigReader: WallConfigReader = WallConfigReader.create(),
     ): Maze | undefined {
@@ -190,7 +228,8 @@ class Maze {
         }
 
         return new Maze(availableSize, layoutConfigReader, characterConfigReader, coinsConfigReader,
-            doorsConfigReader, flagConfigReader, monstersConfigReader, wallConfigReader);
+            doorsConfigReader, flagConfigReader, garnitureConfigReader,
+            monstersConfigReader, wallConfigReader);
     }
 };
 

@@ -47,20 +47,6 @@ class MazeScene extends BaseScene {
 
         const { width, height } = this.game.scale;
 
-        const levelBackground = [
-            [ 0,  0,  34,  34,  34,  34,  34,  34,  34,  34,  34 ],
-            [ 34,   1,   2,   3,  34,  34,  34,   1,   2,   3,  34 ],
-            [ 34,   5,   6,   7,  34,  34,  34,   5,   6,   7,  34 ],
-            [ 34,  34,  34,  34,  34,  34,  34,  34,  34,  34,  34 ],
-            [ 34,  34,  34,  14,  13,  14,  34,  34,  34,  34,  34 ],
-            [ 34,  34,  34,  34,  34,  34,  34,  34,  34,  34,  34 ],
-            [ 34,  34,  34,  34,  34,  34,  34,  34,  34,  34,  34 ],
-            [ 34,  34,  14,  14,  14,  14,  14,  34,  34,  34,  15 ],
-            [ 34,  34,  34,  34,  34,  34,  34,  34,  34,  15,  15 ],
-            [ 35,  36,  37,  34,  34,  34,  34,  34,  15,  15,  15 ],
-            [ 39,  39,  39,  39,  39,  39,  39,  39,  39,  39,  39 ]
-        ];
-
         this._maze = Maze.fromConfig(
             [ height / 10, width / 10],
             `W0 W0 W0 W1 W1 W2 . W2 .
@@ -70,7 +56,7 @@ class MazeScene extends BaseScene {
             W6 .  SP .  D0  .  . . M0
             W6 .  .  .  .  .  . w7 .
             W6 C0  .  K0  .  F0  . w7 .
-            . .  .  F1  .  .  . w7 .
+            . .  .  F1  .  .  G3 w7 .
             W0 W0 W0 W1 W1 W2 W2 W2 .
             W0 W0 W0 W1 W1 W2 W2 W2 .`);
 
@@ -88,10 +74,9 @@ class MazeScene extends BaseScene {
         const backgroundLayer = this._tilemap.createBlankLayer("Background", mainTileset!);
         const foregroundLayer = this._tilemap.createBlankLayer("Foreground", mainTileset!);
 
-        backgroundLayer?.putTilesAt(levelBackground, 0, 0);
-        foregroundLayer?.putTilesAt(levelWalls, 0, 0);
-        foregroundLayer?.forEachTile(tile => {
-            if (tile.index != -1) {
+        backgroundLayer?.putTilesAt(levelWalls, 0, 0);
+        backgroundLayer?.forEachTile(tile => {
+            if (this._maze?.doesCollideAt(tile.y, tile.x)) {
                 tile.properties.collides = true;
             }
         });
@@ -170,7 +155,8 @@ class MazeScene extends BaseScene {
 
         this._playerController?.handleInput(position => {
             const tilemap = this._tilemap!;
-            const tile = tilemap.getTileAtWorldXY(position[0], position[1]);
+            const tile = tilemap.getTileAtWorldXY(position[0], position[1],
+                false, undefined, "Background");
             return tile?.properties.collides !== true;
         });
 
@@ -203,7 +189,7 @@ class MazeScene extends BaseScene {
         for (const door of doorsToOpen) {
             const [i, j, v] = door;
             const openDoorTile = this._maze!.getOpenDoorTile(v);
-            this._tilemap?.removeTileAt(j, i, true, true, "Foreground");
+            this._tilemap?.removeTileAt(j, i, true, true, "Background");
             this._tilemap?.putTileAt(openDoorTile, j, i, true, "Foreground");
         }
 

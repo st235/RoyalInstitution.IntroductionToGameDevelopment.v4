@@ -11,6 +11,7 @@ type TileTypeCodeMapping = {
     readonly key: string;
     readonly door: string;
     readonly monster: string;
+    readonly garniture: string;
 };
 
 class TileCodeMapper {
@@ -99,6 +100,16 @@ class TileCodeMapper {
      */
     public isMonster(tileCode: TileCode): boolean {
         return this._typeCodeMapping.monster === tileCode.typeCode;
+    }
+
+    /**
+     * Checks whether the passed {@link TileCode} is garniture.
+     * 
+     * @param tileCode to check.
+     * @returns {@code true} if the passed object is garniture and {@code false} otherwise.
+     */
+    public isGarniture(tileCode: TileCode): boolean {
+        return this._typeCodeMapping.garniture === tileCode.typeCode;
     }
 
     /**
