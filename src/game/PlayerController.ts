@@ -1,5 +1,7 @@
 import Phaser from "phaser";
 
+import FogOfWarFXPipeline, { KEY_FX_FOW } from "@game/fx/FogOfWarFXPipeline";
+
 import KeyboardMapper from "@game/KeyboardMapper";
 import Player from "@game/Player";
 
@@ -32,6 +34,12 @@ class PlayerController {
         if (this._mapper.justDown("down")
             && canNavigate(this._player.getFacingPoint([0, 1]))) {
             this._player.goDown();
+        }
+
+        const fowFXPipeline = 
+            this._player.scene.cameras.main.getPostPipeline(KEY_FX_FOW);
+        if (fowFXPipeline && !(Array.isArray(fowFXPipeline) && fowFXPipeline.length == 0)) {
+            (fowFXPipeline as FogOfWarFXPipeline).setPlayerCoordinates(this._player.x, this._player.y);
         }
     }
 

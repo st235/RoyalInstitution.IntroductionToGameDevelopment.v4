@@ -1,7 +1,9 @@
 import Phaser from "phaser";
 
+const KEY_FX_CRT = "CathodeRayTubeTvFXPipeline";
+
 const fragmentShader = `
-#define SHADER_NAME CRT_FS
+#define SHADER_NAME CRT_FX
 
 #ifdef GL_ES
 precision mediump float;
@@ -49,7 +51,7 @@ void main() {
 }
 `;
 
-class CrtTvFxPipeline extends Phaser.Renderer.WebGL.Pipelines.PostFXPipeline {
+class CathodeRayTubeTvFXPipeline extends Phaser.Renderer.WebGL.Pipelines.PostFXPipeline {
     constructor(game: Phaser.Game) {
         super({
             game,
@@ -63,4 +65,5 @@ class CrtTvFxPipeline extends Phaser.Renderer.WebGL.Pipelines.PostFXPipeline {
     }
 };
 
-export default CrtTvFxPipeline;
+export default CathodeRayTubeTvFXPipeline;
+export { KEY_FX_CRT };

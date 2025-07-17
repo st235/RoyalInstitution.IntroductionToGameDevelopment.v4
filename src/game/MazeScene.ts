@@ -1,13 +1,13 @@
 import Phaser from "phaser";
 
-import CrtTvFxPipeline from "@game/CrtTvFxPipeline";
+import BaseScene from "@game/BaseScene";
 import Flag from "@game/Flag";
 import Maze from "@game/Maze";
 import Monster from "@game/Monster";
 import Player from "@game/Player";
 import PlayerController from "@game/PlayerController";
 
-class MazeScene extends Phaser.Scene {
+class MazeScene extends BaseScene {
 
     private _flag?: Flag;
     private _maze?: Maze;
@@ -29,6 +29,8 @@ class MazeScene extends Phaser.Scene {
     }
 
     preload() {
+        super.preload();
+
         this.load.setBaseURL(import.meta.env.BASE_URL);
 
         this.load.image("tileset-main", "tileset-colour.png");
@@ -41,14 +43,9 @@ class MazeScene extends Phaser.Scene {
     }
 
     create() {
+        super.create();
+
         const { width, height } = this.game.scale;
-        this.cameras.main.setBounds(0, 0, width, height);
-
-        (this.game.renderer as Phaser.Renderer.WebGL.WebGLRenderer).pipelines
-            .addPostPipeline("crt", CrtTvFxPipeline);
-        this.cameras.main.setPostPipeline("crt");
-
-        // this.add.rectangle(0, 0, 2 * this.game.scale.width, 2 * this.game.scale.height, 0xfffffff);
 
         const levelBackground = [
             [ 0,  0,  34,  34,  34,  34,  34,  34,  34,  34,  34 ],
