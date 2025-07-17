@@ -1,0 +1,13 @@
+[
+    {
+        "id": 0,
+        "variant": 0,
+        "updateTimeMs": 1000,
+        "path": [
+            "left",
+            "up",
+            "right",
+            "down"
+        ]
+    }
+]

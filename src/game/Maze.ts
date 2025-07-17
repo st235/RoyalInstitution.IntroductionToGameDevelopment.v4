@@ -6,7 +6,8 @@ import CharacterConfig from "@game/config/CharacterConfig";
 import CoinsConfig from "@game/config/CoinsConfig";
 import DoorsConfig from "@game/config/DoorsConfig";
 import FlagConfig from "@game/config/FlagConfig";
-import LayoutConfig, { KEY_START_POINT, KEY_FINISH_POINT, KEY_COIN, KEY_KEY, KEY_DOOR } from "@/game/config/LayoutConfig";
+import LayoutConfig, { KEY_START_POINT, KEY_FINISH_POINT, KEY_COIN, KEY_KEY, KEY_DOOR, KEY_MONSTER } from "@/game/config/LayoutConfig";
+import MonstersConfig from "@game/config/MonstersConfig";
 import WallConfig from "@game/config/WallConfig";
 
 /**
@@ -31,6 +32,7 @@ class Maze {
     private readonly _coinsConfig: CoinsConfig;
     private readonly _doorsConfig: DoorsConfig;
     private readonly _flagConfig: FlagConfig;
+    private readonly _monstersConfig: MonstersConfig;
     private readonly _wallVariationConfig: WallConfig;
 
     private _startPositions: PointWithVariation[];
@@ -38,6 +40,7 @@ class Maze {
     private _coinsPositions: PointWithVariation[];
     private _keysPositions: PointWithVariation[];
     private _doorsPositions: PointWithVariation[];
+    private _monstersPositions: PointWithVariation[];
 
     constructor(desiredSize: [number, number],
         layoutConfig: LayoutConfig,
@@ -45,6 +48,7 @@ class Maze {
         coinsConfig: CoinsConfig,
         doorsConfig: DoorsConfig,
         flagConfig: FlagConfig,
+        monstersConfig: MonstersConfig,
         wallVariationConfig: WallConfig) {
         this._desiredSize = [Math.floor(desiredSize[0]), Math.floor(desiredSize[1])];
         assert(this._desiredSize[0] > 0 && this._desiredSize[1] > 0);
@@ -54,6 +58,7 @@ class Maze {
         this._coinsConfig = coinsConfig;
         this._doorsConfig = doorsConfig;
         this._flagConfig = flagConfig;
+        this._monstersConfig = monstersConfig;
         this._wallVariationConfig = wallVariationConfig;
 
         const groupedDynamicObjects = this._layoutConfig.groupDynamicObjects();
@@ -62,6 +67,7 @@ class Maze {
         this._coinsPositions = this._padAll(groupedDynamicObjects[KEY_COIN] ?? []);
         this._keysPositions = this._padAll(groupedDynamicObjects[KEY_KEY] ?? []);
         this._doorsPositions = this._padAll(groupedDynamicObjects[KEY_DOOR] ?? []);
+        this._monstersPositions = this._padAll(groupedDynamicObjects[KEY_MONSTER] ?? []);
     }
 
     getCharacterTile(): number {
@@ -88,8 +94,8 @@ class Maze {
         return this._doorsConfig.getTileForOpenDoor(variation);
     }
 
-    getCoinScore(variation?: number): number {
-        return this._coinsConfig.getScoreFor(variation);
+    getMonsterTile(variation: number): number {
+        return this._monstersConfig.getTileFor(variation);
     }
 
     getStartPoint(): PointWithVariation {
@@ -108,6 +114,14 @@ class Maze {
         return this._keysPositions;
     }
 
+    getMonsters(): PointWithVariation[] {
+        return this._monstersPositions;
+    }
+
+    getCoinScore(variation?: number): number {
+        return this._coinsConfig.getScoreFor(variation);
+    }
+
     openDoors(variation?: number): PointWithVariation[] {
         if (variation === undefined) {
             return [];
@@ -121,6 +135,14 @@ class Maze {
         }
 
         return out;
+    }
+
+    getMonsterUpdateTimeMs(variation: number): number {
+        return this._monstersConfig.getUpdateTimeFor(variation);
+    }
+
+    getMonsterPath(variation: number): [number, number][] {
+        return this._monstersConfig.getPathFor(variation);
     }
 
     getWallsLayer(): number[][] {
@@ -153,21 +175,22 @@ class Maze {
      * @param layout raw config string.
      */
     static fromConfig(
-        desiredSize: [number, number],
+        availableSize: [number, number],
         layout: string,
         characterConfig: CharacterConfig = CharacterConfig.create(),
         coinsConfig: CoinsConfig = CoinsConfig.create(),
         doorsConfig: DoorsConfig = DoorsConfig.create(),
         flagConfig: FlagConfig = FlagConfig.create(),
+        monstersConfig: MonstersConfig | undefined = MonstersConfig.create(),
         wallVariationConfig: WallConfig = WallConfig.create(),
     ): Maze | undefined {
         const layoutConfig = LayoutConfig.create(layout);
-        if (!layoutConfig) {
+        if (!layoutConfig || !monstersConfig) {
             return undefined;
         }
 
-        return new Maze(desiredSize, layoutConfig, characterConfig, coinsConfig,
-            doorsConfig, flagConfig, wallVariationConfig);
+        return new Maze(availableSize, layoutConfig, characterConfig, coinsConfig,
+            doorsConfig, flagConfig, monstersConfig, wallVariationConfig);
     }
 };
 

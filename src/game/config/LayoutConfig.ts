@@ -8,6 +8,7 @@ const KEY_FINISH_POINT = 1;
 const KEY_COIN = 2;
 const KEY_KEY = 3;
 const KEY_DOOR = 4;
+const KEY_MONSTER = 5;
 
 type OptionalTileCode = TileCode | undefined;
 
@@ -64,6 +65,9 @@ class LayoutConfig {
             }
             if (item && this._tileCodeMapper.isDoor(item)) {
                 return KEY_DOOR;
+            }
+            if (item && this._tileCodeMapper.isMonster(item)) {
+                return KEY_MONSTER;
             }
             return undefined;
         });
@@ -122,4 +126,4 @@ class LayoutConfig {
 };
 
 export default LayoutConfig;
-export { KEY_START_POINT, KEY_FINISH_POINT, KEY_COIN, KEY_KEY, KEY_DOOR };
+export { KEY_START_POINT, KEY_FINISH_POINT, KEY_COIN, KEY_KEY, KEY_DOOR, KEY_MONSTER };

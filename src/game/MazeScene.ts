@@ -3,6 +3,7 @@ import Phaser from "phaser";
 import CrtTvFxPipeline from "@game/CrtTvFxPipeline";
 import Flag from "@game/Flag";
 import Maze from "@game/Maze";
+import Monster from "@game/Monster";
 import Player from "@game/Player";
 import PlayerController from "@game/PlayerController";
 
@@ -16,6 +17,7 @@ class MazeScene extends Phaser.Scene {
     private _tilemap?: Phaser.Tilemaps.Tilemap;
     private _coins?: Phaser.Physics.Arcade.StaticGroup;
     private _keys?: Phaser.Physics.Arcade.StaticGroup;
+    private _monsters?: Phaser.Physics.Arcade.Group;
 
     constructor(config?: string | Phaser.Types.Scenes.SettingsConfig) {
         super(config);
@@ -34,6 +36,7 @@ class MazeScene extends Phaser.Scene {
         this.load.spritesheet("characters", "characters-colour.png", { frameWidth: 10, frameHeight: 10 });
         this.load.spritesheet("gems", "gems-colour.png", { frameWidth: 10, frameHeight: 10 });
         this.load.spritesheet("tools", "tools-colour.png", { frameWidth: 10, frameHeight: 10 });
+        this.load.spritesheet("creatures", "creatures-colour.png", { frameWidth: 10, frameHeight: 10 });
     }
 
     create() {
@@ -45,7 +48,6 @@ class MazeScene extends Phaser.Scene {
         this.cameras.main.setPostPipeline("crt");
 
         // this.add.rectangle(0, 0, 2 * this.game.scale.width, 2 * this.game.scale.height, 0xfffffff);
-
 
         const levelBackground = [
             [ 0,  0,  34,  34,  34,  34,  34,  34,  34,  34,  34 ],
@@ -63,16 +65,16 @@ class MazeScene extends Phaser.Scene {
 
         this._maze = Maze.fromConfig(
             [ height / 10, width / 10],
-            `W0 W0 W0 W1 W1 W2 . W2
-            W1 .  SP  .  W3 .  . W4
-            W6 .  D0 .  .  SP  . w7
-            W6 .  .  .  .  .  C1 w7
-            W6 .  SP .  D0  .  . w7
-            W6 .  .  .  .  .  . w7
-            W6 C0  .  K0  .  F0  . w7
-            . .  .  F1  .  .  . w7 
-            W0 W0 W0 W1 W1 W2 W2 W2
-            W0 W0 W0 W1 W1 W2 W2 W2`);
+            `W0 W0 W0 W1 W1 W2 . W2 .
+            W1 .  SP  .  W3 .  . W4 .
+            W6 .  D0 .  .  SP  . w7 .
+            W6 .  .  .  .  .  C1 w7 .
+            W6 .  SP .  D0  .  . . M0
+            W6 .  .  .  .  .  . w7 .
+            W6 C0  .  K0  .  F0  . w7 .
+            . .  .  F1  .  .  . w7 .
+            W0 W0 W0 W1 W1 W2 W2 W2 .
+            W0 W0 W0 W1 W1 W2 W2 W2 .`);
 
         const levelWalls = this._maze!.getWallsLayer();
 
@@ -143,13 +145,28 @@ class MazeScene extends Phaser.Scene {
             obj.data.set("variation", v);
         });
 
+        // Monsters.
+        const monstersLayer = this._maze?.getMonsters();
+        this._monsters = this.physics.add.group();
+
+        monstersLayer?.forEach(point => {
+            const [i, j, v] = point;
+
+            const position = this._tilemap?.tileToWorldXY(j, i);
+            const tile = this._maze?.getMonsterTile(v!);
+
+            const monster = Monster.add(this, this._monsters!, "creatures", tile!, 10, 10, position!.x, position!.y);
+            monster.setPath(this._maze!.getMonsterPath(v!), this._maze!.getMonsterUpdateTimeMs(v!));
+        });
+
+
         // Ordering.
         backgroundLayer?.setDepth(0);
         this._player?.setDepth(1);
         foregroundLayer?.setDepth(2);
     }
 
-    update() {
+    update(timeMs: number) {
         const player = this._player!;
 
         this._playerController?.handleInput(position => {
@@ -158,9 +175,15 @@ class MazeScene extends Phaser.Scene {
             return tile?.properties.collides !== true;
         });
 
+        this._monsters?.children.each(monster => {
+            monster.update(timeMs);
+            return true;
+        });
+
         this.physics.overlap(player, this._flag, this._onFinishReached as Phaser.Types.Physics.Arcade.ArcadePhysicsCallback);
         this.physics.overlap(player, this._coins, this._onConsumeCoin as Phaser.Types.Physics.Arcade.ArcadePhysicsCallback);
         this.physics.overlap(player, this._keys, this._onKeyCollected as Phaser.Types.Physics.Arcade.ArcadePhysicsCallback);
+        this.physics.overlap(player, this._monsters, this._onMonsterCollapsed as Phaser.Types.Physics.Arcade.ArcadePhysicsCallback);
     }
 
     private _onConsumeCoin(_player: Phaser.Types.Physics.Arcade.GameObjectWithBody,
@@ -191,6 +214,10 @@ class MazeScene extends Phaser.Scene {
     private _onFinishReached(_player: Phaser.Types.Physics.Arcade.GameObjectWithBody,
         flag: Phaser.Types.Physics.Arcade.GameObjectWithBody) {
         flag.destroy(true);
+    }
+
+    private _onMonsterCollapsed() {
+        console.log("Ate by monster.");
     }
 };
 
