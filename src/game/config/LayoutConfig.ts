@@ -7,12 +7,14 @@ const KEY_START_POINT = 0;
 const KEY_FINISH_POINT = 1;
 const KEY_COIN = 2;
 const KEY_KEY = 3;
+const KEY_DOOR = 4;
 
 type OptionalTileCode = TileCode | undefined;
 
 type RenderingTilesMapper<T> = {
     unoccupied: () => T;
     wall: (variation?: number) => T;
+    door: (variation?: number) => T;
 }
 
 class LayoutConfig {
@@ -38,6 +40,9 @@ class LayoutConfig {
                 if (item && this._tileCodeMapper.isWall(item)) {
                     return renderingMapper.wall(item.variation);
                 }
+                if (item && this._tileCodeMapper.isDoor(item)) {
+                    return renderingMapper.door(item.variation);
+                }
                 return renderingMapper.unoccupied();
             });
         });
@@ -56,6 +61,9 @@ class LayoutConfig {
             }
             if (item && this._tileCodeMapper.isKey(item)) {
                 return KEY_KEY;
+            }
+            if (item && this._tileCodeMapper.isDoor(item)) {
+                return KEY_DOOR;
             }
             return undefined;
         });
@@ -114,4 +122,4 @@ class LayoutConfig {
 };
 
 export default LayoutConfig;
-export { KEY_START_POINT, KEY_FINISH_POINT, KEY_COIN, KEY_KEY };
+export { KEY_START_POINT, KEY_FINISH_POINT, KEY_COIN, KEY_KEY, KEY_DOOR };

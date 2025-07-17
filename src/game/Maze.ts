@@ -4,7 +4,7 @@ import CharacterConfig from "@game/config/CharacterConfig";
 import CoinsConfig from "@game/config/CoinsConfig";
 import DoorsConfig from "@game/config/DoorsConfig";
 import FlagConfig from "@game/config/FlagConfig";
-import LayoutConfig, { KEY_START_POINT, KEY_FINISH_POINT, KEY_COIN, KEY_KEY } from "@/game/config/LayoutConfig";
+import LayoutConfig, { KEY_START_POINT, KEY_FINISH_POINT, KEY_COIN, KEY_KEY, KEY_DOOR } from "@/game/config/LayoutConfig";
 import WallConfig from "@game/config/WallConfig";
 
 import { pad2D } from "@/util/Arrays";
@@ -30,6 +30,7 @@ class Maze {
     private _finishPositions: PointWithVariation[];
     private _coinsPositions: PointWithVariation[];
     private _keysPositions: PointWithVariation[];
+    private _doorsPositions: PointWithVariation[];
 
     constructor(layoutConfig: LayoutConfig,
         characterConfig: CharacterConfig,
@@ -49,6 +50,7 @@ class Maze {
         this._finishPositions = this._padAll(groupedDynamicObjects[KEY_FINISH_POINT] ?? []);
         this._coinsPositions = this._padAll(groupedDynamicObjects[KEY_COIN] ?? []);
         this._keysPositions = this._padAll(groupedDynamicObjects[KEY_KEY] ?? []);
+        this._doorsPositions = this._padAll(groupedDynamicObjects[KEY_DOOR] ?? []);
     }
 
     getCharacterTile(): number {
@@ -65,6 +67,14 @@ class Maze {
 
     getKeyTile(variation?: number): number {
         return this._doorsConfig.getTileForKey(variation);
+    }
+
+    getClosedDoorTile(variation?: number): number {
+        return this._doorsConfig.getTileForClosedDoor(variation);
+    }
+
+    getOpenDoorTile(variation?: number): number {
+        return this._doorsConfig.getTileForOpenDoor(variation);
     }
 
     getCoinScore(variation?: number): number {
@@ -87,9 +97,25 @@ class Maze {
         return this._keysPositions;
     }
 
+    openDoors(variation?: number): PointWithVariation[] {
+        if (variation === undefined) {
+            return [];
+        }
+
+        const out: PointWithVariation[] = [];
+        for (const door of this._doorsPositions) {
+            if (door[2] === variation) {
+                out.push(door);
+            }
+        }
+
+        return out;
+    }
+
     getWallsLayer(): number[][] {
         const tiles = this._layoutConfig.mapStaticLayer({
             wall: variation => this._wallVariationConfig.getTileFor(variation),
+            door: variation => this._doorsConfig.getTileForClosedDoor(variation),
             unoccupied: () => -1,
         });
         return pad2D(tiles, this._wallVariationConfig.getDefaultTile(), this._outerWallsPadding);

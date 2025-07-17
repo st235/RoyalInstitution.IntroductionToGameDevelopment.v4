@@ -21,6 +21,7 @@ class MazeScene extends Phaser.Scene {
         super(config);
 
         this._onConsumeCoin = this._onConsumeCoin.bind(this);
+        this._onKeyCollected = this._onKeyCollected.bind(this);
         this._onFinishReached = this._onFinishReached.bind(this);
     }
 
@@ -63,9 +64,9 @@ class MazeScene extends Phaser.Scene {
         this._maze = Maze.fromConfig(`
             W0 W0 W0 W1 W1 W2 . W2
             W1 .  SP  .  W3 .  . W4
-            W6 .  . .  .  SP  . w7
+            W6 .  D0 .  .  SP  . w7
             W6 .  .  .  .  .  C1 w7
-            W6 .  SP .  .  .  . w7
+            W6 .  SP .  D0  .  . w7
             W6 .  .  .  .  .  . w7
             W6 C0  .  K0  .  F0  . w7
             . .  .  F1  .  .  . w7 
@@ -84,18 +85,16 @@ class MazeScene extends Phaser.Scene {
 
         const mainTileset = this._tilemap.addTilesetImage("tileset-main");
 
-        if (mainTileset) {
-            const backgroundLayer = this._tilemap.createBlankLayer("Background", mainTileset);
-            const foregroundLayer = this._tilemap.createBlankLayer("Foreground", mainTileset);
+        const backgroundLayer = this._tilemap.createBlankLayer("Background", mainTileset!);
+        const foregroundLayer = this._tilemap.createBlankLayer("Foreground", mainTileset!);
 
-            backgroundLayer?.putTilesAt(levelBackground, 0, 0);
-            foregroundLayer?.putTilesAt(levelWalls, 0, 0);
-            foregroundLayer?.forEachTile(tile => {
-                if (tile.index != -1) {
-                    tile.properties.collides = true;
-                }
-            });
-        }
+        backgroundLayer?.putTilesAt(levelBackground, 0, 0);
+        foregroundLayer?.putTilesAt(levelWalls, 0, 0);
+        foregroundLayer?.forEachTile(tile => {
+            if (tile.index != -1) {
+                tile.properties.collides = true;
+            }
+        });
 
         // Start point.
         const [startI, startJ] = this._maze!.getStartPoint();
@@ -143,6 +142,11 @@ class MazeScene extends Phaser.Scene {
             obj.setDataEnabled();
             obj.data.set("variation", v);
         });
+
+        // Ordering.
+        backgroundLayer?.setDepth(0);
+        this._player?.setDepth(1);
+        foregroundLayer?.setDepth(2);
     }
 
     update() {
@@ -156,6 +160,7 @@ class MazeScene extends Phaser.Scene {
 
         this.physics.overlap(player, this._flag, this._onFinishReached as Phaser.Types.Physics.Arcade.ArcadePhysicsCallback);
         this.physics.overlap(player, this._coins, this._onConsumeCoin as Phaser.Types.Physics.Arcade.ArcadePhysicsCallback);
+        this.physics.overlap(player, this._keys, this._onKeyCollected as Phaser.Types.Physics.Arcade.ArcadePhysicsCallback);
     }
 
     private _onConsumeCoin(_player: Phaser.Types.Physics.Arcade.GameObjectWithBody,
@@ -166,6 +171,21 @@ class MazeScene extends Phaser.Scene {
         console.log(score);
 
         coin.destroy(true);
+    }
+
+    private _onKeyCollected(_player: Phaser.Types.Physics.Arcade.GameObjectWithBody,
+        key: Phaser.Types.Physics.Arcade.GameObjectWithBody) {
+        const variation: number = key.data.get("variation");
+        const doorsToOpen = this._maze?.openDoors(variation) ?? [];
+
+        for (const door of doorsToOpen) {
+            const [i, j, v] = door;
+            const openDoorTile = this._maze!.getOpenDoorTile(v);
+            this._tilemap?.removeTileAt(j, i, true, true, "Foreground");
+            this._tilemap?.putTileAt(openDoorTile, j, i, true, "Foreground");
+        }
+
+        key.destroy(true);
     }
 
     private _onFinishReached(_player: Phaser.Types.Physics.Arcade.GameObjectWithBody,
