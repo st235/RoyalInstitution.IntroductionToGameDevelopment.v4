@@ -1,7 +1,7 @@
 import defaultGameConfig from "@assets/configs/default_game_config.json";
 
 type GameConfig = {
-    useColourTiles: boolean;
+    useColourTiles?: boolean;
     applyCathodRayTubeEffect: boolean;
     applyFogOfWar: boolean;
     background?: string;
@@ -15,7 +15,7 @@ class GameConfigReader {
     }
 
     isUsingColourTiles(): boolean {
-        return this._config.useColourTiles;
+        return this._config.useColourTiles ?? true;
     }
 
     shouldUseCathodRayTubeEffect(): boolean {

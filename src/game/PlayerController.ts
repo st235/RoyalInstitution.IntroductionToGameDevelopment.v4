@@ -9,31 +9,38 @@ class PlayerController {
 
     private readonly _player: Player;
     private readonly _mapper: KeyboardMapper;
+    private readonly _onPlayerMadeMoved?: () => void;
 
-    constructor(player: Player, mapper: KeyboardMapper) {
+    constructor(player: Player, mapper: KeyboardMapper,
+        onPlayerMadeMoved?: () => void) {
         this._player = player;
         this._mapper = mapper;
+        this._onPlayerMadeMoved = onPlayerMadeMoved;
     }
 
     handleInput(canNavigate: (position: [number, number]) => boolean) {
         if (this._mapper.justDown("left")
             && canNavigate(this._player.getFacingPoint([-1, 0]))) {
             this._player.goLeft();
+            this._onPlayerMadeMoved?.();
         }
 
         if (this._mapper.justDown("up")
             && canNavigate(this._player.getFacingPoint([0, -1]))) {
             this._player.goUp();
+            this._onPlayerMadeMoved?.();
         }
 
         if (this._mapper.justDown("right")
             && canNavigate(this._player.getFacingPoint([1, 0]))) {
             this._player.goRight();
+            this._onPlayerMadeMoved?.();
         }
 
         if (this._mapper.justDown("down")
             && canNavigate(this._player.getFacingPoint([0, 1]))) {
             this._player.goDown();
+            this._onPlayerMadeMoved?.();
         }
 
         const fowFXPipeline = 
@@ -43,7 +50,8 @@ class PlayerController {
         }
     }
 
-    static wrap(scene: Phaser.Scene, player: Player): PlayerController {
+    static wrap(scene: Phaser.Scene, player: Player,
+        onPlayerMadeMoved?: () => void): PlayerController {
         const mapper = new KeyboardMapper(scene, {
             left: [
                 Phaser.Input.Keyboard.KeyCodes.LEFT,
@@ -63,7 +71,7 @@ class PlayerController {
             ],
         });
 
-        return new PlayerController(player, mapper);
+        return new PlayerController(player, mapper, onPlayerMadeMoved);
     }
 }
 

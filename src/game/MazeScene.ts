@@ -85,7 +85,9 @@ class MazeScene extends BaseScene {
         const [startI, startJ] = this._maze!.getStartPoint();
         const startCoordinates = this._tilemap.tileToWorldXY(startJ, startI);
         this._player = Player.add(this, "characters", this._maze!.getCharacterTile(), 10, 10, startCoordinates!.x, startCoordinates!.y);
-        this._playerController = PlayerController.wrap(this, this._player);
+        this._playerController = PlayerController.wrap(this, this._player, () => {
+            console.log("Moved");
+        });
 
         // Finish point.
         const [finishI, finishJ, flagVariation] = this._maze!.getFinishPoint();
@@ -144,10 +146,12 @@ class MazeScene extends BaseScene {
 
 
         // Ordering.
-        backgroundLayer?.setDepth(0);
-        this._player?.setDepth(1);
+        this._coins?.setDepth(0);
+        this._keys?.setDepth(1);
         this._monsters?.setDepth(2);
-        foregroundLayer?.setDepth(3);
+        backgroundLayer?.setDepth(3);
+        this._player?.setDepth(4);
+        foregroundLayer?.setDepth(5);
     }
 
     update(timeMs: number) {
