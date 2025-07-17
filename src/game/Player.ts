@@ -2,18 +2,21 @@ import Phaser from "phaser";
 
 class Player extends Phaser.GameObjects.Container {
 
+    private readonly _child: Phaser.GameObjects.Image;
+
     constructor(scene: Phaser.Scene,
         texture: string, frame: number,
         width: number, height: number,
         x: number, y: number) {
         super(scene, x + width / 2, y + height / 2);
-        this.add(new Phaser.GameObjects.Image(scene, 0, 0, texture, frame));
+        this._child = new Phaser.GameObjects.Image(scene, 0, 0, texture, frame);
+        this.add(this._child);
         this.setSize(width, height);
     }
 
     public goLeft() {
         this._move(-this.width, 0);
-        this.scaleX = -1;
+        this._child.scaleX = -1;
     }
 
     public goUp() {
@@ -22,7 +25,7 @@ class Player extends Phaser.GameObjects.Container {
 
     public goRight() {
         this._move(this.width, 0);
-        this.scaleX = 1;
+        this._child.scaleX = 1;
     }
 
     public goDown() {
@@ -44,6 +47,7 @@ class Player extends Phaser.GameObjects.Container {
         x: number, y: number): Player {
         const player = new Player(scene, texture, frame, width, height, x, y);
         scene.add.existing(player);
+        scene.physics.add.existing(player);
         return player;
     }
 };

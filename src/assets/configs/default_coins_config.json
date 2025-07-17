@@ -1,0 +1,10 @@
+{
+    "defaultScore": 5,
+    "coins": [
+        {
+            "variant": 0,
+            "score": 10
+        }
+    ],
+    "variations": [0, 1, 2, 3, 4]
+}

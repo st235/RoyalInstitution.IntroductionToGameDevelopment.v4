@@ -1,26 +1,48 @@
 import Phaser from "phaser";
 
+import CrtTvFxPipeline from "@game/CrtTvFxPipeline";
+import Flag from "@game/Flag";
 import Maze from "@game/Maze";
 import Player from "@game/Player";
 import PlayerController from "@game/PlayerController";
 
 class MazeScene extends Phaser.Scene {
 
+    private _flag?: Flag;
     private _maze?: Maze;
     private _player?: Player;
     private _playerController?: PlayerController;
 
     private _tilemap?: Phaser.Tilemaps.Tilemap;
+    private _coins?: Phaser.Physics.Arcade.StaticGroup;
+
+    constructor(config?: string | Phaser.Types.Scenes.SettingsConfig) {
+        super(config);
+
+        this._onConsumeCoin = this._onConsumeCoin.bind(this);
+        this._onFinishReached = this._onFinishReached.bind(this);
+    }
 
     preload() {
         this.load.setBaseURL(import.meta.env.BASE_URL);
-        this.load.image("tileset", "tileset-colour.png");
-        this.load.spritesheet("characters", "characters.png", { frameWidth: 10, frameHeight: 10 });
+
+        this.load.image("tileset-main", "tileset-colour.png");
+
+        this.load.spritesheet("elements", "tileset-colour.png", { frameWidth: 10, frameHeight: 10 });
+        this.load.spritesheet("characters", "characters-colour.png", { frameWidth: 10, frameHeight: 10 });
+        this.load.spritesheet("gems", "gems-colour.png", { frameWidth: 10, frameHeight: 10 });
     }
 
     create() {
         const { width, height } = this.game.scale;
         this.cameras.main.setBounds(0, 0, width, height);
+
+        (this.game.renderer as Phaser.Renderer.WebGL.WebGLRenderer).pipelines
+            .addPostPipeline("crt", CrtTvFxPipeline);
+        this.cameras.main.setPostPipeline("crt");
+
+        // this.add.rectangle(0, 0, 2 * this.game.scale.width, 2 * this.game.scale.height, 0xfffffff);
+
 
         const levelBackground = [
             [ 0,  0,  34,  34,  34,  34,  34,  34,  34,  34,  34 ],
@@ -38,18 +60,18 @@ class MazeScene extends Phaser.Scene {
 
         this._maze = Maze.fromConfig(`
             W0 W0 W0 W1 W1 W2 . W2
-            W1 .  .  .  W3 .  . W4
+            W1 .  SP  .  W3 .  . W4
             W6 .  . .  .  SP  . w7
-            W6 .  .  .  .  .  . w7
+            W6 .  .  .  .  .  C1 w7
             W6 .  SP .  .  .  . w7
             W6 .  .  .  .  .  . w7
-            W6 .  .  .  .  .  . w7
-            . .  .  .  .  .  . w7 
+            W6 C0  .  .  .  F0  . w7
+            . .  .  F1  .  .  . w7 
             W0 W0 W0 W1 W1 W2 W2 W2
             W0 W0 W0 W1 W1 W2 W2 W2
         `);
 
-        const levelForeground = this._maze!.getWallsLayer();
+        const levelWalls = this._maze!.getWallsLayer();
 
         this._tilemap = this.make.tilemap({ 
             tileWidth: 10,
@@ -57,15 +79,15 @@ class MazeScene extends Phaser.Scene {
             width: this.game.scale.width,
             height: this.game.scale.height,
         });
-        const tileset = this._tilemap.addTilesetImage("tileset");
 
-        if (tileset) {
-            const backgroundLayer = this._tilemap.createBlankLayer("Background", tileset);
-            const foregroundLayer = this._tilemap.createBlankLayer("Foreground", tileset);
+        const mainTileset = this._tilemap.addTilesetImage("tileset-main");
+
+        if (mainTileset) {
+            const backgroundLayer = this._tilemap.createBlankLayer("Background", mainTileset);
+            const foregroundLayer = this._tilemap.createBlankLayer("Foreground", mainTileset);
 
             backgroundLayer?.putTilesAt(levelBackground, 0, 0);
-            foregroundLayer?.putTilesAt(levelForeground, 0, 0);
-
+            foregroundLayer?.putTilesAt(levelWalls, 0, 0);
             foregroundLayer?.forEachTile(tile => {
                 if (tile.index != -1) {
                     tile.properties.collides = true;
@@ -73,18 +95,62 @@ class MazeScene extends Phaser.Scene {
             });
         }
 
-        const startPosition = this._maze!.getStartPosition();
-        const startCoordinates = this._tilemap.tileToWorldXY(startPosition[1], startPosition[0]);
+        // Start point.
+        const [startI, startJ] = this._maze!.getStartPoint();
+        const startCoordinates = this._tilemap.tileToWorldXY(startJ, startI);
         this._player = Player.add(this, "characters", this._maze!.getCharacterTile(), 10, 10, startCoordinates!.x, startCoordinates!.y);
         this._playerController = PlayerController.wrap(this, this._player);
+
+        // Finish point.
+        const [finishI, finishJ, flagVariation] = this._maze!.getFinishPoint();
+        const finishCoordinates = this._tilemap.tileToWorldXY(finishJ, finishI);
+        this._flag = Flag.add(this, "elements", this._maze!.getFlagTile(flagVariation), 10, 10, finishCoordinates!.x, finishCoordinates!.y);
+
+        // Coins.
+        const coinsLayer = this._maze?.getCoins();
+        this._coins = this.physics.add.staticGroup();
+
+        coinsLayer?.forEach(point => {
+            const [i, j, v] = point;
+
+            const position = this._tilemap?.tileToWorldXY(j, i);
+            const tile = this._maze?.getCoinTile(v);
+
+            const obj = this._coins?.create(position!.x, position!.y, "gems", tile);
+            obj.setOrigin(0, 0);
+            obj.refreshBody();
+
+            obj.setDataEnabled();
+            obj.data.set("variation", v);
+        });
     }
 
     update() {
+        const player = this._player!;
+
         this._playerController?.handleInput(position => {
             const tilemap = this._tilemap!;
             const tile = tilemap.getTileAtWorldXY(position[0], position[1]);
             return tile?.properties.collides !== true;
         });
+
+        this.physics.overlap(player, this._flag, this._onFinishReached as Phaser.Types.Physics.Arcade.ArcadePhysicsCallback);
+        this.physics.overlap(player, this._coins, this._onConsumeCoin as Phaser.Types.Physics.Arcade.ArcadePhysicsCallback);
+    }
+
+    private _onConsumeCoin(_player: Phaser.Types.Physics.Arcade.GameObjectWithBody,
+        coin: Phaser.Types.Physics.Arcade.GameObjectWithBody) {
+        const variation: number = coin.data.get("variation");
+        const score = this._maze!.getCoinScore(variation);
+
+        console.log(score);
+
+        coin.destroy(true);
+    }
+
+    private _onFinishReached(_player: Phaser.Types.Physics.Arcade.GameObjectWithBody,
+        flag: Phaser.Types.Physics.Arcade.GameObjectWithBody) {
+        flag.destroy(true);
     }
 };
 

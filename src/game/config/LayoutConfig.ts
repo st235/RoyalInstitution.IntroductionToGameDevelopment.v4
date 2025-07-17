@@ -3,15 +3,18 @@ import type { TileTypeCodeMapping } from "@game/config/TileCodeMapper";
 import TileCode from "@game/config/TileCode";
 import TileCodeMapper from "@game/config/TileCodeMapper";
 
+const KEY_START_POINT = 0;
+const KEY_FINISH_POINT = 1;
+const KEY_COIN = 2;
+
 type OptionalTileCode = TileCode | undefined;
 
 type RenderingTilesMapper<T> = {
     unoccupied: () => T;
     wall: (variation?: number) => T;
-    start: (position: [number, number]) => T;
 }
 
-class MazeConfig {
+class LayoutConfig {
 
     private readonly _dimensions: [number, number];
     private readonly _tiles: OptionalTileCode[][];
@@ -28,42 +31,34 @@ class MazeConfig {
         return [this._dimensions[0], this._dimensions[1]];
     }
 
-    mapTiles<T = unknown>(renderingMapper: RenderingTilesMapper<T>): T[][] {
-        return this._tiles.map((items, row) => {
-            return items.map((item, column) => {
-                if (!item) {
-                    return renderingMapper.unoccupied();
-                }
-
-                if (this._tileCodeMapper.isWall(item)) {
+    mapStaticLayer<T = unknown>(renderingMapper: RenderingTilesMapper<T>): T[][] {
+        return this._tiles.map(items => {
+            return items.map(item => {
+                if (item && this._tileCodeMapper.isWall(item)) {
                     return renderingMapper.wall(item.variation);
                 }
-
-                if (this._tileCodeMapper.isStartPoint(item)) {
-                    return renderingMapper.start([row, column]);
-                }
-
-                throw new Error("Unrecognised type.");
+                return renderingMapper.unoccupied();
             });
         });
     }
 
-    groupSpawnAndFinishPoints(): {[Key: string]: [number, number][]} {
+    groupDynamicObjects(): {[Key: string]: [number, number, number | undefined][]} {
         return this._groupPositions(item => {
             if (item && this._tileCodeMapper.isStartPoint(item)) {
-                return 0;
+                return KEY_START_POINT;
             }
-
             if (item && this._tileCodeMapper.isFinishPoint(item)) {
-                return 1;
+                return KEY_FINISH_POINT;
             }
-
+            if (item && this._tileCodeMapper.isCoin(item)) {
+                return KEY_COIN;
+            }
             return undefined;
         });
     }
 
-    private _groupPositions(groupingPredicate: (item: OptionalTileCode) => (number | undefined)): {[Key: string]: [number, number][]} {
-        const out: {[Key: string]: [number, number][]} = {};
+    private _groupPositions(groupingPredicate: (item: OptionalTileCode) => (number | undefined)): {[Key: string]: [number, number, number | undefined][]} {
+        const out: {[Key: string]: [number, number, number | undefined][]} = {};
 
         for (let i = 0; i < this._tiles.length; i++) {
             for (let j = 0; j < this._tiles[i].length; j++) {
@@ -76,14 +71,15 @@ class MazeConfig {
                     out[group] = [];
                 }
 
-                out[group].push([i, j]);
+                const variation = this._tiles[i][j]?.variation;
+                out[group].push([i, j, variation]);
             }
         }
 
         return out;
     }
 
-    public static create(config: string, mapping?: TileTypeCodeMapping): MazeConfig | undefined {
+    public static create(config: string, mapping?: TileTypeCodeMapping): LayoutConfig | undefined {
         const mapper = TileCodeMapper.fromConfig(mapping);
         if (!mapper) {
             return undefined;
@@ -109,8 +105,9 @@ class MazeConfig {
             }
         }
 
-        return new MazeConfig([width, height], tiles, mapper);
+        return new LayoutConfig([width, height], tiles, mapper);
     }
 };
 
-export default MazeConfig;
+export default LayoutConfig;
+export { KEY_START_POINT, KEY_FINISH_POINT, KEY_COIN };
