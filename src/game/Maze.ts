@@ -2,8 +2,9 @@ import Phaser from "phaser";
 
 import CharacterConfig from "@game/config/CharacterConfig";
 import CoinsConfig from "@game/config/CoinsConfig";
+import DoorsConfig from "@game/config/DoorsConfig";
 import FlagConfig from "@game/config/FlagConfig";
-import LayoutConfig, { KEY_START_POINT, KEY_FINISH_POINT, KEY_COIN } from "@/game/config/LayoutConfig";
+import LayoutConfig, { KEY_START_POINT, KEY_FINISH_POINT, KEY_COIN, KEY_KEY } from "@/game/config/LayoutConfig";
 import WallConfig from "@game/config/WallConfig";
 
 import { pad2D } from "@/util/Arrays";
@@ -21,28 +22,33 @@ class Maze {
     private readonly _layoutConfig: LayoutConfig;
     private readonly _characterConfig: CharacterConfig;
     private readonly _coinsConfig: CoinsConfig;
+    private readonly _doorsConfig: DoorsConfig;
     private readonly _flagConfig: FlagConfig;
     private readonly _wallVariationConfig: WallConfig;
 
     private _startPositions: PointWithVariation[];
     private _finishPositions: PointWithVariation[];
     private _coinsPositions: PointWithVariation[];
+    private _keysPositions: PointWithVariation[];
 
     constructor(layoutConfig: LayoutConfig,
         characterConfig: CharacterConfig,
         coinsConfig: CoinsConfig,
+        doorsConfig: DoorsConfig,
         flagConfig: FlagConfig,
         wallVariationConfig: WallConfig) {
         this._layoutConfig = layoutConfig;
         this._characterConfig = characterConfig;
         this._coinsConfig = coinsConfig;
+        this._doorsConfig = doorsConfig;
         this._flagConfig = flagConfig;
         this._wallVariationConfig = wallVariationConfig;
 
         const groupedDynamicObjects = this._layoutConfig.groupDynamicObjects();
-        this._startPositions = this._padAll(groupedDynamicObjects[KEY_START_POINT]) ?? [];
-        this._finishPositions = this._padAll(groupedDynamicObjects[KEY_FINISH_POINT]) ?? [];
-        this._coinsPositions = this._padAll(groupedDynamicObjects[KEY_COIN]) ?? [];
+        this._startPositions = this._padAll(groupedDynamicObjects[KEY_START_POINT] ?? []);
+        this._finishPositions = this._padAll(groupedDynamicObjects[KEY_FINISH_POINT] ?? []);
+        this._coinsPositions = this._padAll(groupedDynamicObjects[KEY_COIN] ?? []);
+        this._keysPositions = this._padAll(groupedDynamicObjects[KEY_KEY] ?? []);
     }
 
     getCharacterTile(): number {
@@ -55,6 +61,10 @@ class Maze {
 
     getCoinTile(variation?: number): number {
         return this._coinsConfig.getTileFor(variation);
+    }
+
+    getKeyTile(variation?: number): number {
+        return this._doorsConfig.getTileForKey(variation);
     }
 
     getCoinScore(variation?: number): number {
@@ -71,6 +81,10 @@ class Maze {
 
     getCoins(): PointWithVariation[] {
         return this._coinsPositions;
+    }
+
+    getKeys(): PointWithVariation[] {
+        return this._keysPositions;
     }
 
     getWallsLayer(): number[][] {
@@ -99,12 +113,13 @@ class Maze {
         layout: string,
         characterConfig: CharacterConfig = CharacterConfig.create(),
         coinsConfig: CoinsConfig = CoinsConfig.create(),
+        doorsConfig: DoorsConfig = DoorsConfig.create(),
         flagConfig: FlagConfig = FlagConfig.create(),
         wallVariationConfig: WallConfig = WallConfig.create(),
     ): Maze | undefined {
         const layoutConfig = LayoutConfig.create(layout);
         return new Maze(layoutConfig!, characterConfig, coinsConfig,
-            flagConfig, wallVariationConfig);
+            doorsConfig, flagConfig, wallVariationConfig);
     }
 };
 

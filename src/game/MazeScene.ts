@@ -15,6 +15,7 @@ class MazeScene extends Phaser.Scene {
 
     private _tilemap?: Phaser.Tilemaps.Tilemap;
     private _coins?: Phaser.Physics.Arcade.StaticGroup;
+    private _keys?: Phaser.Physics.Arcade.StaticGroup;
 
     constructor(config?: string | Phaser.Types.Scenes.SettingsConfig) {
         super(config);
@@ -31,6 +32,7 @@ class MazeScene extends Phaser.Scene {
         this.load.spritesheet("elements", "tileset-colour.png", { frameWidth: 10, frameHeight: 10 });
         this.load.spritesheet("characters", "characters-colour.png", { frameWidth: 10, frameHeight: 10 });
         this.load.spritesheet("gems", "gems-colour.png", { frameWidth: 10, frameHeight: 10 });
+        this.load.spritesheet("tools", "tools-colour.png", { frameWidth: 10, frameHeight: 10 });
     }
 
     create() {
@@ -65,7 +67,7 @@ class MazeScene extends Phaser.Scene {
             W6 .  .  .  .  .  C1 w7
             W6 .  SP .  .  .  . w7
             W6 .  .  .  .  .  . w7
-            W6 C0  .  .  .  F0  . w7
+            W6 C0  .  K0  .  F0  . w7
             . .  .  F1  .  .  . w7 
             W0 W0 W0 W1 W1 W2 W2 W2
             W0 W0 W0 W1 W1 W2 W2 W2
@@ -117,6 +119,24 @@ class MazeScene extends Phaser.Scene {
             const tile = this._maze?.getCoinTile(v);
 
             const obj = this._coins?.create(position!.x, position!.y, "gems", tile);
+            obj.setOrigin(0, 0);
+            obj.refreshBody();
+
+            obj.setDataEnabled();
+            obj.data.set("variation", v);
+        });
+
+        // Keys.
+        const keysLayer = this._maze?.getKeys();
+        this._keys = this.physics.add.staticGroup();
+
+        keysLayer?.forEach(point => {
+            const [i, j, v] = point;
+
+            const position = this._tilemap?.tileToWorldXY(j, i);
+            const tile = this._maze?.getKeyTile(v);
+
+            const obj = this._keys?.create(position!.x, position!.y, "tools", tile);
             obj.setOrigin(0, 0);
             obj.refreshBody();
 

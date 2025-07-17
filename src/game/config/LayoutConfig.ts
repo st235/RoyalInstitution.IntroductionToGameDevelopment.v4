@@ -6,6 +6,7 @@ import TileCodeMapper from "@game/config/TileCodeMapper";
 const KEY_START_POINT = 0;
 const KEY_FINISH_POINT = 1;
 const KEY_COIN = 2;
+const KEY_KEY = 3;
 
 type OptionalTileCode = TileCode | undefined;
 
@@ -52,6 +53,9 @@ class LayoutConfig {
             }
             if (item && this._tileCodeMapper.isCoin(item)) {
                 return KEY_COIN;
+            }
+            if (item && this._tileCodeMapper.isKey(item)) {
+                return KEY_KEY;
             }
             return undefined;
         });
@@ -110,4 +114,4 @@ class LayoutConfig {
 };
 
 export default LayoutConfig;
-export { KEY_START_POINT, KEY_FINISH_POINT, KEY_COIN };
+export { KEY_START_POINT, KEY_FINISH_POINT, KEY_COIN, KEY_KEY };
