@@ -61,8 +61,9 @@ class MazeScene extends Phaser.Scene {
             [ 39,  39,  39,  39,  39,  39,  39,  39,  39,  39,  39 ]
         ];
 
-        this._maze = Maze.fromConfig(`
-            W0 W0 W0 W1 W1 W2 . W2
+        this._maze = Maze.fromConfig(
+            [ height / 10, width / 10],
+            `W0 W0 W0 W1 W1 W2 . W2
             W1 .  SP  .  W3 .  . W4
             W6 .  D0 .  .  SP  . w7
             W6 .  .  .  .  .  C1 w7
@@ -71,8 +72,7 @@ class MazeScene extends Phaser.Scene {
             W6 C0  .  K0  .  F0  . w7
             . .  .  F1  .  .  . w7 
             W0 W0 W0 W1 W1 W2 W2 W2
-            W0 W0 W0 W1 W1 W2 W2 W2
-        `);
+            W0 W0 W0 W1 W1 W2 W2 W2`);
 
         const levelWalls = this._maze!.getWallsLayer();
 

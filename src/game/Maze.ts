@@ -1,5 +1,7 @@
 import Phaser from "phaser";
 
+import { assert } from "@/util/Assert";
+import { clamp2D, pad2D } from "@/util/Arrays";
 import CharacterConfig from "@game/config/CharacterConfig";
 import CoinsConfig from "@game/config/CoinsConfig";
 import DoorsConfig from "@game/config/DoorsConfig";
@@ -7,7 +9,10 @@ import FlagConfig from "@game/config/FlagConfig";
 import LayoutConfig, { KEY_START_POINT, KEY_FINISH_POINT, KEY_COIN, KEY_KEY, KEY_DOOR } from "@/game/config/LayoutConfig";
 import WallConfig from "@game/config/WallConfig";
 
-import { pad2D } from "@/util/Arrays";
+/**
+ * A tile index for unnocupied cells.
+ */
+const _TILE_UNNOCUPIED = -1;
 
 /**
  * Tuple represeting i, j position of a tile on a grid,
@@ -18,6 +23,8 @@ type PointWithVariation = [number, number, number | undefined];
 class Maze {
 
     private readonly _outerWallsPadding: number = 1;
+
+    private readonly _desiredSize: [number, number];
 
     private readonly _layoutConfig: LayoutConfig;
     private readonly _characterConfig: CharacterConfig;
@@ -32,12 +39,16 @@ class Maze {
     private _keysPositions: PointWithVariation[];
     private _doorsPositions: PointWithVariation[];
 
-    constructor(layoutConfig: LayoutConfig,
+    constructor(desiredSize: [number, number],
+        layoutConfig: LayoutConfig,
         characterConfig: CharacterConfig,
         coinsConfig: CoinsConfig,
         doorsConfig: DoorsConfig,
         flagConfig: FlagConfig,
         wallVariationConfig: WallConfig) {
+        this._desiredSize = [Math.floor(desiredSize[0]), Math.floor(desiredSize[1])];
+        assert(this._desiredSize[0] > 0 && this._desiredSize[1] > 0);
+
         this._layoutConfig = layoutConfig;
         this._characterConfig = characterConfig;
         this._coinsConfig = coinsConfig;
@@ -116,9 +127,15 @@ class Maze {
         const tiles = this._layoutConfig.mapStaticLayer({
             wall: variation => this._wallVariationConfig.getTileFor(variation),
             door: variation => this._doorsConfig.getTileForClosedDoor(variation),
-            unoccupied: () => -1,
+            unoccupied: () => _TILE_UNNOCUPIED,
         });
-        return pad2D(tiles, this._wallVariationConfig.getDefaultTile(), this._outerWallsPadding);
+
+        const expandedTiles = clamp2D(tiles, _TILE_UNNOCUPIED, 
+            [
+                Math.max(0, this._desiredSize[0] - this._outerWallsPadding * 2),
+                Math.max(0, this._desiredSize[1] - this._outerWallsPadding * 2),
+            ]);
+        return pad2D(expandedTiles, this._wallVariationConfig.getDefaultTile(), this._outerWallsPadding);
     }
 
     private _padAll(points: PointWithVariation[]): PointWithVariation[] {
@@ -136,6 +153,7 @@ class Maze {
      * @param layout raw config string.
      */
     static fromConfig(
+        desiredSize: [number, number],
         layout: string,
         characterConfig: CharacterConfig = CharacterConfig.create(),
         coinsConfig: CoinsConfig = CoinsConfig.create(),
@@ -144,7 +162,11 @@ class Maze {
         wallVariationConfig: WallConfig = WallConfig.create(),
     ): Maze | undefined {
         const layoutConfig = LayoutConfig.create(layout);
-        return new Maze(layoutConfig!, characterConfig, coinsConfig,
+        if (!layoutConfig) {
+            return undefined;
+        }
+
+        return new Maze(desiredSize, layoutConfig, characterConfig, coinsConfig,
             doorsConfig, flagConfig, wallVariationConfig);
     }
 };
