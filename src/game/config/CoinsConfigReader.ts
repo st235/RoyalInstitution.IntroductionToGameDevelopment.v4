@@ -9,21 +9,22 @@ type CoinInfo = {
     score: number,
 };
 
-type CoinsDescriptor = VariableTileAppearance & {
+type CoinsConfig = VariableTileAppearance & {
     defaultScore?: number;
     coins?: CoinInfo[];
 };
 
-class CoinsConfig {
-    private readonly _coinsDescriptor: CoinsDescriptor;
+class CoinsConfigReader {
+
+    private readonly _coinsConfig: CoinsConfig;
     private readonly _coinInfoLookup: { [Key: string]: CoinInfo };
     private readonly _tileVariationReader: TileVariationReader;
     
-    constructor(coinsInfo: CoinsDescriptor, tileVariationReader: TileVariationReader) {
-        this._coinsDescriptor = coinsInfo;
+    constructor(coinsConfig: CoinsConfig, tileVariationReader: TileVariationReader) {
+        this._coinsConfig = coinsConfig;
 
         this._coinInfoLookup = {};
-        const coinInfos = coinsInfo.coins ?? [];
+        const coinInfos = coinsConfig.coins ?? [];
         for (const coinInfo of coinInfos) {
             this._coinInfoLookup[coinInfo.variant] = coinInfo;
         }
@@ -36,7 +37,7 @@ class CoinsConfig {
     }
 
     getScoreFor(variation?: number): number {
-        const defaultScore = this._coinsDescriptor.defaultScore ?? 0;
+        const defaultScore = this._coinsConfig.defaultScore ?? 0;
 
         if (variation === undefined) {
             return defaultScore;
@@ -45,11 +46,10 @@ class CoinsConfig {
         return this._coinInfoLookup[variation]?.score ?? defaultScore;
     }
 
-    public static create(appearance?: CoinsDescriptor): CoinsConfig {
-        const coinsInfo = defaultCoinsConfig as CoinsDescriptor;
-        const reader = TileVariationReader.fromConfig(appearance ?? coinsInfo);
-        return new CoinsConfig(coinsInfo, reader);
+    public static create(coinsConfig: CoinsConfig = defaultCoinsConfig): CoinsConfigReader {
+        const reader = TileVariationReader.fromConfig(coinsConfig);
+        return new CoinsConfigReader(coinsConfig, reader);
     }
 }
 
-export default CoinsConfig;
+export default CoinsConfigReader;

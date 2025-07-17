@@ -4,7 +4,7 @@ import type { VariableTileAppearance } from "@game/config/TileVariationReader";
 
 import TileVariationReader from "@game/config/TileVariationReader";
 
-class WallConfig {
+class WallConfigReader {
 
     private readonly _tileVariationReader: TileVariationReader;
     
@@ -20,11 +20,10 @@ class WallConfig {
         return this._tileVariationReader.getTileFor(variation);
     }
 
-    public static create(appearance?: VariableTileAppearance): WallConfig {
-        const reader = TileVariationReader.fromConfig(appearance ?? 
-            (defaultWallsVariationConfig as VariableTileAppearance));
-        return new WallConfig(reader);
+    public static create(config: VariableTileAppearance = defaultWallsVariationConfig): WallConfigReader {
+        const reader = TileVariationReader.fromConfig(config);
+        return new WallConfigReader(reader);
     }
 };
 
-export default WallConfig;
+export default WallConfigReader;

@@ -25,6 +25,7 @@ class MazeScene extends Phaser.Scene {
         this._onConsumeCoin = this._onConsumeCoin.bind(this);
         this._onKeyCollected = this._onKeyCollected.bind(this);
         this._onFinishReached = this._onFinishReached.bind(this);
+        this._onMonsterCollapsed = this._onMonsterCollapsed.bind(this);
     }
 
     preload() {
@@ -163,7 +164,8 @@ class MazeScene extends Phaser.Scene {
         // Ordering.
         backgroundLayer?.setDepth(0);
         this._player?.setDepth(1);
-        foregroundLayer?.setDepth(2);
+        this._monsters?.setDepth(2);
+        foregroundLayer?.setDepth(3);
     }
 
     update(timeMs: number) {

@@ -2,13 +2,13 @@ import Phaser from "phaser";
 
 import { assert } from "@/util/Assert";
 import { clamp2D, pad2D } from "@/util/Arrays";
-import CharacterConfig from "@game/config/CharacterConfig";
-import CoinsConfig from "@game/config/CoinsConfig";
-import DoorsConfig from "@game/config/DoorsConfig";
-import FlagConfig from "@game/config/FlagConfig";
-import LayoutConfig, { KEY_START_POINT, KEY_FINISH_POINT, KEY_COIN, KEY_KEY, KEY_DOOR, KEY_MONSTER } from "@/game/config/LayoutConfig";
-import MonstersConfig from "@game/config/MonstersConfig";
-import WallConfig from "@game/config/WallConfig";
+import CharacterConfigReader from "@/game/config/CharacterConfigReader";
+import CoinsConfigReader from "@/game/config/CoinsConfigReader";
+import DoorsConfigReader from "@/game/config/DoorsConfigReader";
+import FlagConfigReader from "@/game/config/FlagConfigReader";
+import LayoutConfigReader, { KEY_START_POINT, KEY_FINISH_POINT, KEY_COIN, KEY_KEY, KEY_DOOR, KEY_MONSTER } from "@/game/config/LayoutConfigReader";
+import MonstersConfigReader from "@/game/config/MonstersConfigReader";
+import WallConfigReader from "@/game/config/WallConfigReader";
 
 /**
  * A tile index for unnocupied cells.
@@ -27,13 +27,13 @@ class Maze {
 
     private readonly _desiredSize: [number, number];
 
-    private readonly _layoutConfig: LayoutConfig;
-    private readonly _characterConfig: CharacterConfig;
-    private readonly _coinsConfig: CoinsConfig;
-    private readonly _doorsConfig: DoorsConfig;
-    private readonly _flagConfig: FlagConfig;
-    private readonly _monstersConfig: MonstersConfig;
-    private readonly _wallVariationConfig: WallConfig;
+    private readonly _layoutConfigReader: LayoutConfigReader;
+    private readonly _characterConfigReader: CharacterConfigReader;
+    private readonly _coinsConfigReader: CoinsConfigReader;
+    private readonly _doorsConfigReader: DoorsConfigReader;
+    private readonly _flagConfigReader: FlagConfigReader;
+    private readonly _monstersConfigReader: MonstersConfigReader;
+    private readonly _wallConfigReader: WallConfigReader;
 
     private _startPositions: PointWithVariation[];
     private _finishPositions: PointWithVariation[];
@@ -43,25 +43,25 @@ class Maze {
     private _monstersPositions: PointWithVariation[];
 
     constructor(desiredSize: [number, number],
-        layoutConfig: LayoutConfig,
-        characterConfig: CharacterConfig,
-        coinsConfig: CoinsConfig,
-        doorsConfig: DoorsConfig,
-        flagConfig: FlagConfig,
-        monstersConfig: MonstersConfig,
-        wallVariationConfig: WallConfig) {
+        layoutConfigReader: LayoutConfigReader,
+        characterConfigReader: CharacterConfigReader,
+        coinsConfigReader: CoinsConfigReader,
+        doorsConfigReader: DoorsConfigReader,
+        flagConfigReader: FlagConfigReader,
+        monstersConfigReader: MonstersConfigReader,
+        wallConfigReader: WallConfigReader) {
         this._desiredSize = [Math.floor(desiredSize[0]), Math.floor(desiredSize[1])];
         assert(this._desiredSize[0] > 0 && this._desiredSize[1] > 0);
 
-        this._layoutConfig = layoutConfig;
-        this._characterConfig = characterConfig;
-        this._coinsConfig = coinsConfig;
-        this._doorsConfig = doorsConfig;
-        this._flagConfig = flagConfig;
-        this._monstersConfig = monstersConfig;
-        this._wallVariationConfig = wallVariationConfig;
+        this._layoutConfigReader = layoutConfigReader;
+        this._characterConfigReader = characterConfigReader;
+        this._coinsConfigReader = coinsConfigReader;
+        this._doorsConfigReader = doorsConfigReader;
+        this._flagConfigReader = flagConfigReader;
+        this._monstersConfigReader = monstersConfigReader;
+        this._wallConfigReader = wallConfigReader;
 
-        const groupedDynamicObjects = this._layoutConfig.groupDynamicObjects();
+        const groupedDynamicObjects = this._layoutConfigReader.groupDynamicObjects();
         this._startPositions = this._padAll(groupedDynamicObjects[KEY_START_POINT] ?? []);
         this._finishPositions = this._padAll(groupedDynamicObjects[KEY_FINISH_POINT] ?? []);
         this._coinsPositions = this._padAll(groupedDynamicObjects[KEY_COIN] ?? []);
@@ -71,31 +71,31 @@ class Maze {
     }
 
     getCharacterTile(): number {
-        return this._characterConfig.getTile();
+        return this._characterConfigReader.getTile();
     }
 
     getFlagTile(variation?: number): number {
-        return this._flagConfig.getTileFor(variation);
+        return this._flagConfigReader.getTileFor(variation);
     }
 
     getCoinTile(variation?: number): number {
-        return this._coinsConfig.getTileFor(variation);
+        return this._coinsConfigReader.getTileFor(variation);
     }
 
     getKeyTile(variation?: number): number {
-        return this._doorsConfig.getTileForKey(variation);
+        return this._doorsConfigReader.getTileForKey(variation);
     }
 
     getClosedDoorTile(variation?: number): number {
-        return this._doorsConfig.getTileForClosedDoor(variation);
+        return this._doorsConfigReader.getTileForClosedDoor(variation);
     }
 
     getOpenDoorTile(variation?: number): number {
-        return this._doorsConfig.getTileForOpenDoor(variation);
+        return this._doorsConfigReader.getTileForOpenDoor(variation);
     }
 
     getMonsterTile(variation: number): number {
-        return this._monstersConfig.getTileFor(variation);
+        return this._monstersConfigReader.getTileFor(variation);
     }
 
     getStartPoint(): PointWithVariation {
@@ -119,7 +119,7 @@ class Maze {
     }
 
     getCoinScore(variation?: number): number {
-        return this._coinsConfig.getScoreFor(variation);
+        return this._coinsConfigReader.getScoreFor(variation);
     }
 
     openDoors(variation?: number): PointWithVariation[] {
@@ -138,17 +138,17 @@ class Maze {
     }
 
     getMonsterUpdateTimeMs(variation: number): number {
-        return this._monstersConfig.getUpdateTimeFor(variation);
+        return this._monstersConfigReader.getUpdateTimeFor(variation);
     }
 
     getMonsterPath(variation: number): [number, number][] {
-        return this._monstersConfig.getPathFor(variation);
+        return this._monstersConfigReader.getPathFor(variation);
     }
 
     getWallsLayer(): number[][] {
-        const tiles = this._layoutConfig.mapStaticLayer({
-            wall: variation => this._wallVariationConfig.getTileFor(variation),
-            door: variation => this._doorsConfig.getTileForClosedDoor(variation),
+        const tiles = this._layoutConfigReader.mapStaticLayer({
+            wall: variation => this._wallConfigReader.getTileFor(variation),
+            door: variation => this._doorsConfigReader.getTileForClosedDoor(variation),
             unoccupied: () => _TILE_UNNOCUPIED,
         });
 
@@ -157,7 +157,7 @@ class Maze {
                 Math.max(0, this._desiredSize[0] - this._outerWallsPadding * 2),
                 Math.max(0, this._desiredSize[1] - this._outerWallsPadding * 2),
             ]);
-        return pad2D(expandedTiles, this._wallVariationConfig.getDefaultTile(), this._outerWallsPadding);
+        return pad2D(expandedTiles, this._wallConfigReader.getDefaultTile(), this._outerWallsPadding);
     }
 
     private _padAll(points: PointWithVariation[]): PointWithVariation[] {
@@ -177,20 +177,20 @@ class Maze {
     static fromConfig(
         availableSize: [number, number],
         layout: string,
-        characterConfig: CharacterConfig = CharacterConfig.create(),
-        coinsConfig: CoinsConfig = CoinsConfig.create(),
-        doorsConfig: DoorsConfig = DoorsConfig.create(),
-        flagConfig: FlagConfig = FlagConfig.create(),
-        monstersConfig: MonstersConfig | undefined = MonstersConfig.create(),
-        wallVariationConfig: WallConfig = WallConfig.create(),
+        characterConfigReader: CharacterConfigReader = CharacterConfigReader.create(),
+        coinsConfigReader: CoinsConfigReader = CoinsConfigReader.create(),
+        doorsConfigReader: DoorsConfigReader = DoorsConfigReader.create(),
+        flagConfigReader: FlagConfigReader = FlagConfigReader.create(),
+        monstersConfigReader: MonstersConfigReader | undefined = MonstersConfigReader.create(),
+        wallConfigReader: WallConfigReader = WallConfigReader.create(),
     ): Maze | undefined {
-        const layoutConfig = LayoutConfig.create(layout);
-        if (!layoutConfig || !monstersConfig) {
+        const layoutConfigReader = LayoutConfigReader.create(layout);
+        if (!layoutConfigReader || !monstersConfigReader) {
             return undefined;
         }
 
-        return new Maze(availableSize, layoutConfig, characterConfig, coinsConfig,
-            doorsConfig, flagConfig, monstersConfig, wallVariationConfig);
+        return new Maze(availableSize, layoutConfigReader, characterConfigReader, coinsConfigReader,
+            doorsConfigReader, flagConfigReader, monstersConfigReader, wallConfigReader);
     }
 };
 

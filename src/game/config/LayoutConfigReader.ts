@@ -12,13 +12,13 @@ const KEY_MONSTER = 5;
 
 type OptionalTileCode = TileCode | undefined;
 
-type RenderingTilesMapper<T> = {
+type RenderingTilesMappers<T> = {
     unoccupied: () => T;
     wall: (variation?: number) => T;
     door: (variation?: number) => T;
 }
 
-class LayoutConfig {
+class LayoutConfigReader {
 
     private readonly _dimensions: [number, number];
     private readonly _tiles: OptionalTileCode[][];
@@ -35,7 +35,7 @@ class LayoutConfig {
         return [this._dimensions[0], this._dimensions[1]];
     }
 
-    mapStaticLayer<T = unknown>(renderingMapper: RenderingTilesMapper<T>): T[][] {
+    mapStaticLayer<T = unknown>(renderingMapper: RenderingTilesMappers<T>): T[][] {
         return this._tiles.map(items => {
             return items.map(item => {
                 if (item && this._tileCodeMapper.isWall(item)) {
@@ -95,7 +95,7 @@ class LayoutConfig {
         return out;
     }
 
-    public static create(config: string, mapping?: TileTypeCodeMapping): LayoutConfig | undefined {
+    public static create(config: string, mapping?: TileTypeCodeMapping): LayoutConfigReader | undefined {
         const mapper = TileCodeMapper.fromConfig(mapping);
         if (!mapper) {
             return undefined;
@@ -121,9 +121,9 @@ class LayoutConfig {
             }
         }
 
-        return new LayoutConfig([width, height], tiles, mapper);
+        return new LayoutConfigReader([width, height], tiles, mapper);
     }
 };
 
-export default LayoutConfig;
+export default LayoutConfigReader;
 export { KEY_START_POINT, KEY_FINISH_POINT, KEY_COIN, KEY_KEY, KEY_DOOR, KEY_MONSTER };

@@ -4,7 +4,7 @@ import type { VariableTileAppearance } from "@game/config/TileVariationReader";
 
 import TileVariationReader from "@game/config/TileVariationReader";
 
-type DoorsLayout = {
+type DoorsConfig = {
     key: VariableTileAppearance;
     door: {
         open: VariableTileAppearance;
@@ -12,16 +12,16 @@ type DoorsLayout = {
     }
 };
 
-class DoorsConfig {
+class DoorsConfigReader {
 
     private readonly _keysVariationReader: TileVariationReader;
     private readonly _closedDoorsVariationReader: TileVariationReader;
     private readonly _openDoorsVariationReader: TileVariationReader;
     
-    constructor(layout: DoorsLayout) {
-        this._keysVariationReader = TileVariationReader.fromConfig(layout.key);
-        this._closedDoorsVariationReader = TileVariationReader.fromConfig(layout.door.closed);
-        this._openDoorsVariationReader = TileVariationReader.fromConfig(layout.door.open);
+    constructor(doorsConfig: DoorsConfig) {
+        this._keysVariationReader = TileVariationReader.fromConfig(doorsConfig.key);
+        this._closedDoorsVariationReader = TileVariationReader.fromConfig(doorsConfig.door.closed);
+        this._openDoorsVariationReader = TileVariationReader.fromConfig(doorsConfig.door.open);
     }
 
     getTileForKey(variation?: number): number {
@@ -36,9 +36,9 @@ class DoorsConfig {
         return this._openDoorsVariationReader.getTileFor(variation);
     }
 
-    public static create(layout: DoorsLayout = defaultDoorsConfig): DoorsConfig {
-        return new DoorsConfig(layout);
+    public static create(doorsConfig: DoorsConfig = defaultDoorsConfig): DoorsConfigReader {
+        return new DoorsConfigReader(doorsConfig);
     }
 }
 
-export default DoorsConfig;
+export default DoorsConfigReader;

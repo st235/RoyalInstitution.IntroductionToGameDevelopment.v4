@@ -4,7 +4,7 @@ import type { VariableTileAppearance } from "@game/config/TileVariationReader";
 
 import TileVariationReader from "@game/config/TileVariationReader";
 
-class FlagConfig {
+class FlagConfigReader {
     private readonly _tileVariationReader: TileVariationReader;
     
     constructor(tileVariationReader: TileVariationReader) {
@@ -15,11 +15,10 @@ class FlagConfig {
         return this._tileVariationReader.getTileFor(variation);
     }
 
-    public static create(appearance?: VariableTileAppearance): FlagConfig {
-        const reader = TileVariationReader.fromConfig(appearance ?? 
-            (defaultFlagVariationConfig as VariableTileAppearance));
-        return new FlagConfig(reader);
+    public static create(config: VariableTileAppearance = defaultFlagVariationConfig): FlagConfigReader {
+        const reader = TileVariationReader.fromConfig(config);
+        return new FlagConfigReader(reader);
     }
 }
 
-export default FlagConfig;
+export default FlagConfigReader;

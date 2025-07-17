@@ -1,7 +1,7 @@
 import defaultMonstersConfig from "@assets/configs/default_monsters_config.json";
 
 /**
- * [i, j]
+ * [di, dj]
  */
 const rawPathMapping: { [Key: string]: [number, number] } = {
     "left": [0, -1],
@@ -17,14 +17,14 @@ type MonsterDescriptor = {
     path: [number, number][],
 };
 
-type MonsterRawDescriptor = {
+type MonstersConfig = {
     id: number,
     variant: number,
     updateTimeMs: number,
     path: string[],
 };
 
-class MonstersConfig {
+class MonstersConfigReader {
 
     private readonly _descriptors: { [Key: string]: MonsterDescriptor };
 
@@ -74,10 +74,9 @@ class MonstersConfig {
         return point[0] == 0 && point[1] == 0;
     }
 
-    public static create(rawDescriptors: MonsterRawDescriptor[] = defaultMonstersConfig): MonstersConfig | undefined {
+    public static create(config: MonstersConfig[] = defaultMonstersConfig): MonstersConfigReader | undefined {
         const out: MonsterDescriptor[] = [];
-
-        for (const rawDescriptor of rawDescriptors) {
+        for (const rawDescriptor of config) {
             const path = this._convertPath(rawDescriptor.path);
             if (!path || !this._checkCycleExists(path)) {
                 return undefined;
@@ -91,8 +90,8 @@ class MonstersConfig {
             });
         }
 
-        return new MonstersConfig(out);
+        return new MonstersConfigReader(out);
     }
 }
 
-export default MonstersConfig;
+export default MonstersConfigReader;
