@@ -19,6 +19,10 @@ class PlayerController {
     }
 
     handleInput(canNavigate: (position: [number, number]) => boolean) {
+        if (!this._player.active) {
+            return;
+        }
+
         if (this._mapper.justDown("left")
             && canNavigate(this._player.getFacingPoint([-1, 0]))) {
             this._player.goLeft();

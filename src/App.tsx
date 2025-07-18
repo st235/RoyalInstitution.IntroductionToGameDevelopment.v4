@@ -9,6 +9,9 @@ import PhaserGameContainer from "./components/phaser/PhaserGameContainer";
 import MazeScene from "./game/MazeScene";
 
 const sceneData: MazeSceneParams = {
+    gameConfig: {
+        applyCathodRayTubeEffect: false,
+    },
     levelConfig: {
         id: 0,
         title: "Very first level",
@@ -18,7 +21,6 @@ const sceneData: MazeSceneParams = {
             ".  W0 W0 W0 W0 .  .  .  .  .  .  .  .  .  .  .  .  . ",
             ".  D0 .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . ",
             ".  W0 W3 W5 W5 .  .  .  .  .  .  .  .  .  .  .  W0 . ",
-            ".  W0 .  .  .  .  .  .  .  .  .  .  .  .  .  .  W0 . ",
             ".  W0 .  .  .  .  .  .  .  .  .  .  .  .  .  .  W0 . ",
             ".  W0 .  .  .  .  .  .  .  .  .  .  .  .  .  .  W0 . ",
             ".  W0 .  .  .  .  .  .  .  .  .  .  .  .  .  .  W0 . ",

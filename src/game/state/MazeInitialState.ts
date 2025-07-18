@@ -30,11 +30,11 @@ const _TILE_UNNOCUPIED = -1;
  */
 type PointWithVariation = [number, number, number | undefined];
 
-class Maze {
+class MazeInitialState {
 
     private readonly _outerWallsPadding: number = 1;
 
-    private readonly _desiredSize: [number, number];
+    private readonly _availableSize: [number, number];
 
     private readonly _layoutConfigReader: LayoutConfigReader;
     private readonly _characterConfigReader: CharacterConfigReader;
@@ -52,7 +52,7 @@ class Maze {
     private _doorsPositions: PointWithVariation[];
     private _monstersPositions: PointWithVariation[];
 
-    constructor(desiredSize: [number, number],
+    constructor(availableSize: [number, number],
         layoutConfigReader: LayoutConfigReader,
         characterConfigReader: CharacterConfigReader,
         coinsConfigReader: CoinsConfigReader,
@@ -61,8 +61,8 @@ class Maze {
         garnitureConfigReader: GarnitureConfigReader,
         monstersConfigReader: MonstersConfigReader,
         wallConfigReader: WallConfigReader) {
-        this._desiredSize = [Math.floor(desiredSize[0]), Math.floor(desiredSize[1])];
-        assert(this._desiredSize[0] > 0 && this._desiredSize[1] > 0);
+        this._availableSize = [Math.floor(availableSize[0]), Math.floor(availableSize[1])];
+        assert(this._availableSize[0] > 0 && this._availableSize[1] > 0);
 
         this._layoutConfigReader = layoutConfigReader;
         this._characterConfigReader = characterConfigReader;
@@ -171,17 +171,15 @@ class Maze {
 
         const expandedTiles = clamp2D(tiles, _TILE_UNNOCUPIED, 
             [
-                Math.max(0, this._desiredSize[0] - this._outerWallsPadding * 2),
-                Math.max(0, this._desiredSize[1] - this._outerWallsPadding * 2),
+                Math.max(0, this._availableSize[1] - this._outerWallsPadding * 2),
+                Math.max(0, this._availableSize[0] - this._outerWallsPadding * 2),
             ]);
         return pad2D(expandedTiles, this._wallConfigReader.getDefaultTile(), this._outerWallsPadding);
     }
 
     doesCollideAt(i: number, j: number): boolean {
-        const [mazeWidth, mazeHeight] = this._layoutConfigReader.getDimensions();
-
-        if (i < this._outerWallsPadding || i >= this._outerWallsPadding + mazeHeight ||
-            j < this._outerWallsPadding || i >= this._outerWallsPadding + mazeWidth) {
+        if (i < this._outerWallsPadding || i >= (this._availableSize[1] - this._outerWallsPadding) ||
+            j < this._outerWallsPadding || j >= (this._availableSize[0] - this._outerWallsPadding)) {
             return true;
         }
 
@@ -217,7 +215,7 @@ class Maze {
 
     /**
      * 
-     * @param layout raw config string.
+     * @param availableSize [width, height]
      */
     static fromConfig(
         availableSize: [number, number],
@@ -229,7 +227,7 @@ class Maze {
         garnitureConfig?: GarnitureConfig,
         monstersConfig?: MonstersConfig[],
         wallConfig?: VariableTileAppearance,
-    ): Maze | undefined {
+    ): MazeInitialState | undefined {
         const layoutConfigReader = LayoutConfigReader.create(layout);
         const characterConfigReader: CharacterConfigReader = CharacterConfigReader.create(characterConfig);
         const coinsConfigReader: CoinsConfigReader = CoinsConfigReader.create(coinsConfig);
@@ -243,12 +241,12 @@ class Maze {
             return undefined;
         }
 
-        return new Maze(availableSize,
+        return new MazeInitialState(availableSize,
             layoutConfigReader, characterConfigReader, coinsConfigReader,
             doorsConfigReader, flagConfigReader, garnitureConfigReader,
             monstersConfigReader, wallConfigReader);
     }
 };
 
-export default Maze;
+export default MazeInitialState;
 export type { PointWithVariation };
