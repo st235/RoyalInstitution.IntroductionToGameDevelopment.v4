@@ -4,7 +4,7 @@ import type { VariableTileAppearance } from "@game/config/TileVariationReader";
 
 import TileVariationReader from "@game/config/TileVariationReader";
 
-type GarniteConfig = VariableTileAppearance & {
+type GarnitureConfig = VariableTileAppearance & {
     collides: number[];
 };
 
@@ -13,7 +13,7 @@ class GarnitureConfigReader {
     private readonly _collidableVariations: Set<number>;
     private readonly _tileVariationReader: TileVariationReader;
     
-    constructor(config: GarniteConfig, tileVariationReader: TileVariationReader) {
+    constructor(config: GarnitureConfig, tileVariationReader: TileVariationReader) {
         this._collidableVariations = new Set<number>();
         this._tileVariationReader = tileVariationReader;
 
@@ -33,10 +33,11 @@ class GarnitureConfigReader {
         return this._collidableVariations.has(variation);
     }
 
-    public static create(config: GarniteConfig = defaultGarnitureConfig): GarnitureConfigReader {
+    public static create(config: GarnitureConfig = defaultGarnitureConfig): GarnitureConfigReader {
         const reader = TileVariationReader.fromConfig(config);
         return new GarnitureConfigReader(config, reader);
     }
 }
 
 export default GarnitureConfigReader;
+export type { GarnitureConfig };

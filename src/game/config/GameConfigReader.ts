@@ -1,10 +1,24 @@
 import defaultGameConfig from "@assets/configs/default_game_config.json";
 
+import type { VariableTileAppearance } from "@game/config/TileVariationReader";
+import type { CharacterConfig } from "@game/config/CharacterConfigReader";
+import type { CoinsConfig } from "@game/config/CoinsConfigReader";
+import type { DoorsConfig } from "@game/config/DoorsConfigReader";
+import type { GarnitureConfig } from "@game/config/GarnitureConfigReader";
+import type { MonstersConfig } from "@game/config/MonstersConfigReader";
+
 type GameConfig = {
     useColourTiles?: boolean;
     applyCathodRayTubeEffect: boolean;
-    applyFogOfWar: boolean;
-    background?: string;
+    configsOverwrites?: {
+        character?: CharacterConfig;
+        coins?: CoinsConfig;
+        doors?: DoorsConfig;
+        flags?: VariableTileAppearance;
+        garnitures?: GarnitureConfig;
+        monsters?: MonstersConfig[];
+        walls?: VariableTileAppearance;
+    };
 };
 
 class GameConfigReader {
@@ -22,16 +36,32 @@ class GameConfigReader {
         return this._config.applyCathodRayTubeEffect;
     }
 
-    shouldUseFogOfWar(): boolean {
-        return this._config.applyFogOfWar;
+    getCharacterConfig(): CharacterConfig | undefined {
+        return this._config.configsOverwrites?.character;
     }
 
-    background(): number | undefined {
-        const hexBackgroundValue = this._config.background?.replaceAll("#", "");
-        if (hexBackgroundValue === undefined) {
-            return undefined;
-        }
-        return parseInt(hexBackgroundValue, 16);
+    getCoinsConfig(): CoinsConfig | undefined {
+        return this._config.configsOverwrites?.coins;
+    }
+
+    getDoorsConfig(): DoorsConfig | undefined {
+        return this._config.configsOverwrites?.doors;
+    }
+
+    getFlagsConfig(): VariableTileAppearance | undefined {
+        return this._config.configsOverwrites?.flags;
+    }
+
+    getGarnitureConfig(): GarnitureConfig | undefined {
+        return this._config.configsOverwrites?.garnitures;
+    }
+
+    getMonstersConfig(): MonstersConfig[] | undefined {
+        return this._config.configsOverwrites?.monsters;
+    }
+
+    getWallsConfig(): VariableTileAppearance | undefined {
+        return this._config.configsOverwrites?.walls;
     }
 
     public static create(config: GameConfig = defaultGameConfig): GameConfigReader {

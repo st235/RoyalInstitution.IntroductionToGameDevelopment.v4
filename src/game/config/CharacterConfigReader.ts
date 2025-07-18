@@ -22,3 +22,4 @@ class CharacterConfigReader {
 }
 
 export default CharacterConfigReader;
+export type { CharacterConfig };

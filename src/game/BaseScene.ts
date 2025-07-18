@@ -3,7 +3,6 @@ import Phaser from "phaser";
 import type { GameConfig } from "@game/config/GameConfigReader";
 
 import CathodeRayTubeTvFXPipeline, { KEY_FX_CRT } from "@game/fx/CathodeRayTubeTvFXPipeline";
-import FogOfWarFXPipeline, { KEY_FX_FOW } from "@game/fx/FogOfWarFXPipeline";
 import GameConfigReader from "@game/config/GameConfigReader";
 
 type BaseSceneParams = {
@@ -53,12 +52,7 @@ class BaseScene extends Phaser.Scene {
 
         const pipeline: string[] = [];
 
-        if (this._gameConfigReader?.shouldUseFogOfWar()) {
-            (this.game.renderer as Phaser.Renderer.WebGL.WebGLRenderer)
-                .pipelines
-                .addPostPipeline(KEY_FX_FOW, FogOfWarFXPipeline);
-            pipeline.push(KEY_FX_FOW);
-        }
+        this.onModifyPipeline(pipeline);
 
         if (this._gameConfigReader?.shouldUseCathodRayTubeEffect()) {
             (this.game.renderer as Phaser.Renderer.WebGL.WebGLRenderer)
@@ -68,16 +62,12 @@ class BaseScene extends Phaser.Scene {
         }
 
         this.cameras.main.setPostPipeline(pipeline);
-
-        const background = this._gameConfigReader?.background();
-        if (background) {
-            this.add.rectangle(0, 0,
-                this.game.scale.displaySize.width,
-                this.game.scale.displaySize.height,
-                background);
-        }
     }
 
+    onModifyPipeline(_pipeline: string[]) {
+        // Empty on purpose.
+    }
 };
 
 export default BaseScene;
+export type { BaseSceneParams };

@@ -1,5 +1,4 @@
 {
     "useColourTiles": true,
-    "applyCathodRayTubeEffect": true,
-    "applyFogOfWar": false
+    "applyCathodRayTubeEffect": true
 }

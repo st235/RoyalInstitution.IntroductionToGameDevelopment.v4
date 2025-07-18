@@ -19,6 +19,7 @@ type PhaserGameContainerProps = {
     launch: {
         key: string;
         scene: Phaser.Types.Scenes.SceneType;
+        data?: object;
     }
     containerRef: React.RefObject<PhaserGameContainerRef>;
     onNewScene?: (scene: Phaser.Scene) => void;
@@ -37,7 +38,7 @@ function PhaserGameContainer(props: PhaserGameContainerProps) {
                 props.viewport.width,
                 props.viewport.height,
             );
-            game.current.scene.start(props.launch.key);
+            game.current.scene.start(props.launch.key, props.launch.data);
 
             if (ref !== null) {
                 ref.current = { game: game.current, activeScene: null };

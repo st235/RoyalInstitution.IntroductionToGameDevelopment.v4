@@ -9,5 +9,20 @@
             "right",
             "down"
         ]
+    },
+    {
+        "id": 1,
+        "variant": 50,
+        "updateTimeMs": 1000,
+        "path": [
+            "up",
+            "up",
+            "up",
+            "up",
+            "down",
+            "down",
+            "down",
+            "down"
+        ]
     }
 ]

@@ -15,8 +15,8 @@ uniform vec2 uResolution;
 // --- [ original shader ] ---
 // source: https://www.shadertoy.com/view/WsVSzV
 
-float warp = 0.85; // simulate curvature of CRT monitor
-float scan = 0.25; // simulate darkness between scanlines
+float warp = 0.80; // simulate curvature of CRT monitor
+float scan = 0.40; // simulate darkness between scanlines
 
 void mainImage(out vec4 fragColor,in vec2 fragCoord)
 {

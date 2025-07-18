@@ -42,3 +42,4 @@ class DoorsConfigReader {
 }
 
 export default DoorsConfigReader;
+export type { DoorsConfig };

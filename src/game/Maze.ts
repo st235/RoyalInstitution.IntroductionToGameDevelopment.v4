@@ -1,5 +1,13 @@
 import Phaser from "phaser";
 
+import type { CharacterConfig } from "@game/config/CharacterConfigReader";
+import type { CoinsConfig } from "@game/config/CoinsConfigReader";
+import type { DoorsConfig } from "@game/config/DoorsConfigReader";
+import type { GarnitureConfig } from "@game/config/GarnitureConfigReader";
+import type { MonstersConfig } from "@game/config/MonstersConfigReader";
+import type { RawLayout } from "@game/config/LayoutConfigReader";
+import type { VariableTileAppearance } from "@game/config/TileVariationReader";
+
 import { assert } from "@/util/Assert";
 import { clamp2D, pad2D } from "@/util/Arrays";
 import CharacterConfigReader from "@game/config/CharacterConfigReader";
@@ -213,21 +221,30 @@ class Maze {
      */
     static fromConfig(
         availableSize: [number, number],
-        layout: string,
-        characterConfigReader: CharacterConfigReader = CharacterConfigReader.create(),
-        coinsConfigReader: CoinsConfigReader = CoinsConfigReader.create(),
-        doorsConfigReader: DoorsConfigReader = DoorsConfigReader.create(),
-        flagConfigReader: FlagConfigReader = FlagConfigReader.create(),
-        garnitureConfigReader: GarnitureConfigReader = GarnitureConfigReader.create(),
-        monstersConfigReader: MonstersConfigReader | undefined = MonstersConfigReader.create(),
-        wallConfigReader: WallConfigReader = WallConfigReader.create(),
+        layout: RawLayout,
+        characterConfig?: CharacterConfig,
+        coinsConfig?: CoinsConfig,
+        doorsConfig?: DoorsConfig,
+        flagConfig?: VariableTileAppearance,
+        garnitureConfig?: GarnitureConfig,
+        monstersConfig?: MonstersConfig[],
+        wallConfig?: VariableTileAppearance,
     ): Maze | undefined {
         const layoutConfigReader = LayoutConfigReader.create(layout);
+        const characterConfigReader: CharacterConfigReader = CharacterConfigReader.create(characterConfig);
+        const coinsConfigReader: CoinsConfigReader = CoinsConfigReader.create(coinsConfig);
+        const doorsConfigReader: DoorsConfigReader = DoorsConfigReader.create(doorsConfig);
+        const flagConfigReader: FlagConfigReader = FlagConfigReader.create(flagConfig);
+        const garnitureConfigReader: GarnitureConfigReader = GarnitureConfigReader.create(garnitureConfig);
+        const monstersConfigReader: MonstersConfigReader | undefined = MonstersConfigReader.create(monstersConfig);
+        const wallConfigReader: WallConfigReader = WallConfigReader.create(wallConfig);
+
         if (!layoutConfigReader || !monstersConfigReader) {
             return undefined;
         }
 
-        return new Maze(availableSize, layoutConfigReader, characterConfigReader, coinsConfigReader,
+        return new Maze(availableSize,
+            layoutConfigReader, characterConfigReader, coinsConfigReader,
             doorsConfigReader, flagConfigReader, garnitureConfigReader,
             monstersConfigReader, wallConfigReader);
     }

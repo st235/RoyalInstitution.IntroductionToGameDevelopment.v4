@@ -19,6 +19,8 @@ type RenderingTilesMappers<T> = {
     garniture: (variation?: number) => T;
 }
 
+type RawLayout = string[] | string;
+
 class LayoutConfigReader {
 
     private readonly _dimensions: [number, number];
@@ -115,15 +117,27 @@ class LayoutConfigReader {
         return out;
     }
 
-    public static create(config: string, mapping?: TileTypeCodeMapping): LayoutConfigReader | undefined {
+    public static create(rawLayout: RawLayout, mapping?: TileTypeCodeMapping): LayoutConfigReader | undefined {
         const mapper = TileCodeMapper.fromConfig(mapping);
         if (!mapper) {
             return undefined;
         }
 
-        const tiles: OptionalTileCode[][] = config.trim().split(/\r?\n/)
-            .filter(l => l.length > 0)
-            .map(l => l.trim().split(/\s+/).map(i => TileCode.fromRaw(i)));
+        let layout: string[];
+        if (Array.isArray(rawLayout)) {
+            layout = rawLayout;
+        } else {
+            layout = rawLayout
+                .trim()
+                .split(/\r?\n/)
+                .filter(l => l.length > 0);
+        }
+
+        const tiles: OptionalTileCode[][] = layout.map(l => 
+            l.trim()
+                .split(/\s+/)
+                .map(i => TileCode.fromRaw(i))
+        );
 
         const height = tiles.length;
         if (height <= 0) {
@@ -147,3 +161,4 @@ class LayoutConfigReader {
 
 export default LayoutConfigReader;
 export { KEY_START_POINT, KEY_FINISH_POINT, KEY_COIN, KEY_KEY, KEY_DOOR, KEY_MONSTER };
+export type { RawLayout };

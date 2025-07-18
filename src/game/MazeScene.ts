@@ -1,13 +1,24 @@
 import Phaser from "phaser";
 
+import type { BaseSceneParams } from "@game/BaseScene";
+import type { LevelConfig } from "@game/config/LevelConfigReader";
+
 import BaseScene from "@game/BaseScene";
 import Flag from "@game/Flag";
+import FogOfWarFXPipeline, { KEY_FX_FOW } from "@game/fx/FogOfWarFXPipeline";
+import LevelConfigReader from "@game/config/LevelConfigReader";
 import Maze from "@game/Maze";
 import Monster from "@game/Monster";
 import Player from "@game/Player";
 import PlayerController from "@game/PlayerController";
 
+type MazeSceneParams = BaseSceneParams & {
+    levelConfig: LevelConfig;
+};
+
 class MazeScene extends BaseScene {
+
+    private _levelConfigReader?: LevelConfigReader;
 
     private _flag?: Flag;
     private _maze?: Maze;
@@ -19,8 +30,10 @@ class MazeScene extends BaseScene {
     private _keys?: Phaser.Physics.Arcade.StaticGroup;
     private _monsters?: Phaser.Physics.Arcade.Group;
 
-    constructor(config?: string | Phaser.Types.Scenes.SettingsConfig) {
-        super(config);
+    constructor() {
+        super({
+            key: "MazeScene",
+        });
 
         this._onConsumeCoin = this._onConsumeCoin.bind(this);
         this._onKeyCollected = this._onKeyCollected.bind(this);
@@ -28,37 +41,44 @@ class MazeScene extends BaseScene {
         this._onMonsterCollapsed = this._onMonsterCollapsed.bind(this);
     }
 
-    preload() {
-        super.preload();
+    init(data: MazeSceneParams) {
+        super.init(data);
+        console.log(data);
+        this._levelConfigReader = LevelConfigReader.create(data.levelConfig);
+    }
 
-        this.load.setBaseURL(import.meta.env.BASE_URL);
-
-        this.load.image("tileset-main", "tileset-colour.png");
-
-        this.load.spritesheet("elements", "tileset-colour.png", { frameWidth: 10, frameHeight: 10 });
-        this.load.spritesheet("characters", "characters-colour.png", { frameWidth: 10, frameHeight: 10 });
-        this.load.spritesheet("gems", "gems-colour.png", { frameWidth: 10, frameHeight: 10 });
-        this.load.spritesheet("tools", "tools-colour.png", { frameWidth: 10, frameHeight: 10 });
-        this.load.spritesheet("creatures", "creatures-colour.png", { frameWidth: 10, frameHeight: 10 });
+    onModifyPipeline(pipeline: string[]): void {
+        if (this._levelConfigReader?.shouldUseFogOfWar()) {
+            (this.game.renderer as Phaser.Renderer.WebGL.WebGLRenderer)
+                .pipelines
+                .addPostPipeline(KEY_FX_FOW, FogOfWarFXPipeline);
+            pipeline.push(KEY_FX_FOW);
+        }
     }
 
     create() {
         super.create();
-
         const { width, height } = this.game.scale;
+
+        const background = this._levelConfigReader?.background();
+        if (background) {
+            this.add.rectangle(0, 0,
+                this.game.scale.displaySize.width,
+                this.game.scale.displaySize.height,
+                background);
+        }
 
         this._maze = Maze.fromConfig(
             [ height / 10, width / 10],
-            `W0 W0 W0 W1 W1 W2 . W2 .
-            W1 .  SP  .  W3 .  . W4 .
-            W6 .  D0 .  .  SP  . w7 .
-            W6 .  .  .  .  .  C1 w7 .
-            W6 .  SP .  D0  .  . . M0
-            W6 .  .  .  .  .  . w7 .
-            W6 C0  .  K0  .  F0  . w7 .
-            . .  .  F1  .  .  G3 w7 .
-            W0 W0 W0 W1 W1 W2 W2 W2 .
-            W0 W0 W0 W1 W1 W2 W2 W2 .`);
+            this._levelConfigReader!.getLevelLayout(),
+            this._gameConfigReader?.getCharacterConfig(),
+            this._gameConfigReader?.getCoinsConfig(),
+            this._gameConfigReader?.getDoorsConfig(),
+            this._gameConfigReader?.getFlagsConfig(),
+            this._gameConfigReader?.getGarnitureConfig(),
+            this._gameConfigReader?.getMonstersConfig(),
+            this._gameConfigReader?.getWallsConfig(),
+        );
 
         const levelWalls = this._maze!.getWallsLayer();
 
@@ -211,3 +231,4 @@ class MazeScene extends BaseScene {
 };
 
 export default MazeScene;
+export type { MazeSceneParams };

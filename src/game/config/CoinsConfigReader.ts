@@ -53,3 +53,4 @@ class CoinsConfigReader {
 }
 
 export default CoinsConfigReader;
+export type { CoinsConfig };

@@ -95,3 +95,4 @@ class MonstersConfigReader {
 }
 
 export default MonstersConfigReader;
+export type { MonstersConfig };
