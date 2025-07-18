@@ -11,10 +11,17 @@ precision mediump float;
 
 uniform sampler2D uMainSampler;
 uniform vec2 uResolution;
+uniform vec4 uPaddings;
 uniform float uRadius;
 uniform vec2 uPosition;
 
 void main() {
+    if (gl_FragCoord.x < uPaddings.x || gl_FragCoord.x > uResolution.x - uPaddings.z ||
+        (uResolution.y - gl_FragCoord.y) < uPaddings.y || (uResolution.y - gl_FragCoord.y) > uResolution.y - uPaddings.w) {
+        gl_FragColor = vec4(texture2D(uMainSampler, gl_FragCoord.xy/uResolution.xy).rgb, 1.0);
+        return;
+    }
+
     vec2 playerPosition = vec2(uPosition.x, uResolution.y - uPosition.y);
 
     vec2 dc = abs(playerPosition - gl_FragCoord.xy);
@@ -33,6 +40,7 @@ class FogOfWarFXPipeline extends Phaser.Renderer.WebGL.Pipelines.PostFXPipeline 
 
     private _radius: number;
     private _playerCoordinates: [number, number];
+    private _paddings: [number, number, number, number];
 
     constructor(game: Phaser.Game) {
         super({
@@ -42,7 +50,8 @@ class FogOfWarFXPipeline extends Phaser.Renderer.WebGL.Pipelines.PostFXPipeline 
         });
 
         this._radius = 0.25;
-        this._playerCoordinates = [0.5, 0.5];
+        this._playerCoordinates = [0, 0];
+        this._paddings = [0, 0, 0, 0];
     }
 
     setRadius(radius: number) {
@@ -53,8 +62,13 @@ class FogOfWarFXPipeline extends Phaser.Renderer.WebGL.Pipelines.PostFXPipeline 
         this._playerCoordinates = [x, y];
     }
 
+    setPaddings(left: number, top: number, right: number, bottom: number) {
+        this._paddings = [left, top, right, bottom];
+    }
+
     onPreRender() {
         this.set2f("uResolution", this.game.scale.width, this.game.scale.height);
+        this.set4f("uPaddings", this._paddings[0], this._paddings[1], this._paddings[2], this._paddings[3]);
         this.set1f("uRadius",
             Math.min(this.game.scale.width, this.game.scale.height) * this._radius);
         this.set2f("uPosition",

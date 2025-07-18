@@ -46,7 +46,11 @@ class MazeScene extends BaseScene {
 
     create() {
         super.create();
+        const { width, height } = this.game.scale;
+        const [paddingLeft, paddingTop, paddingRight, paddingBottom] = [0, this._defaultTileSize, 0, 0];
+        const [mazeWidth, mazeHeight] = [width - paddingLeft - paddingRight, height - paddingTop - paddingBottom];
 
+        // Maze level config background.
         const background = this._levelConfigReader?.background();
         if (background) {
             this.add.rectangle(0, 0,
@@ -55,9 +59,10 @@ class MazeScene extends BaseScene {
                 background);
         }
 
-        const { width, height } = this.game.scale;
-        const [paddingLeft, paddingTop, paddingRight, paddingBottom] = [0, this._defaultTileSize, 0, 0];
-        const [mazeWidth, mazeHeight] = [width - paddingLeft - paddingRight, height - paddingTop - paddingBottom];
+        const fowFXPipeline = this.cameras.main.getPostPipeline(KEY_FX_FOW);
+        if (fowFXPipeline && !(Array.isArray(fowFXPipeline) && fowFXPipeline.length == 0)) {
+            (fowFXPipeline as FogOfWarFXPipeline).setPaddings(paddingLeft, paddingTop, paddingRight, paddingBottom);
+        }
 
         const mazeInitialState = MazeInitialState.fromConfig(
             [mazeWidth / this._defaultTileSize, mazeHeight / this._defaultTileSize],
