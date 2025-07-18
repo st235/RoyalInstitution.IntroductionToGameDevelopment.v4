@@ -39,6 +39,9 @@ class LayoutConfigReader {
     }
 
     getTileCodeAt(i: number, j: number): OptionalTileCode {
+        if (!this._tiles[i]) {
+            return undefined;
+        }
         return this._tiles[i][j];
     }
 

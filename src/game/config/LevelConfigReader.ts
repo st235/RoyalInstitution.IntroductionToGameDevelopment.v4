@@ -1,5 +1,5 @@
 type LevelConstraints = {
-    maxTimeMs?: number;
+    maxTimeSec?: number;
     maxMoves?: number;
     minScore?: number;
 };
@@ -11,6 +11,7 @@ type LevelConfig = {
     background?: string;
     levelLayout: string[];
     constraints: LevelConstraints;
+    nextLevelId?: number;
 };
 
 class LevelConfigReader {
@@ -46,6 +47,10 @@ class LevelConfigReader {
 
     getLevelConstraints(): LevelConstraints {
         return this._config.constraints;
+    }
+
+    getNextLevelId(): number | undefined {
+        return this._config.nextLevelId;
     }
 
     public static create(config: LevelConfig): LevelConfigReader {

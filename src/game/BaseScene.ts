@@ -44,6 +44,8 @@ class BaseScene extends Phaser.Scene {
         this.load.spritesheet("gems", `gems${filesColourSuffix}.png`, frameConfig);
         this.load.spritesheet("tools", `tools${filesColourSuffix}.png`, frameConfig);
         this.load.spritesheet("creatures", `creatures${filesColourSuffix}.png`, frameConfig);
+        
+        this.load.bitmapFont("bitpotion", "BitPotion.png", "BitPotion.xml");
     }
 
     create() {

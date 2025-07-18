@@ -4,20 +4,31 @@ import type { BaseSceneParams } from "@game/BaseScene";
 import type { LevelConfig } from "@game/config/LevelConfigReader";
 
 import BaseScene from "@game/BaseScene";
+import ConstraintsTracker from "@game/ConstraintsTracker";
 import FogOfWarFXPipeline, { KEY_FX_FOW } from "@game/fx/FogOfWarFXPipeline";
 import LevelConfigReader from "@game/config/LevelConfigReader";
 import MazeInitialState from "@/game/state/MazeInitialState";
-
 import MazeSubScene from "@game/MazeSubScene";
 
 type MazeSceneParams = BaseSceneParams & {
-    levelConfig: LevelConfig;
+    currentLevelId: number;
+    levels: LevelConfig[];
 };
 
 class MazeScene extends BaseScene {
 
+    private _params?: MazeSceneParams;
     private _levelConfigReader?: LevelConfigReader;
     private _mazeSubScene?: MazeSubScene;
+    private _constraintsTracker?: ConstraintsTracker;
+
+    // UI.
+    private _timerText?: Phaser.GameObjects.BitmapText;
+    private _movesLeftText?: Phaser.GameObjects.BitmapText;
+    private _scoreText?: Phaser.GameObjects.BitmapText;
+
+    // State.
+    private _currentScore?: number;
 
     constructor() {
         super({
@@ -32,7 +43,9 @@ class MazeScene extends BaseScene {
 
     init(data: MazeSceneParams) {
         super.init(data);
-        this._levelConfigReader = LevelConfigReader.create(data.levelConfig);
+        const currentLevel = data.levels.find(l => l.id == data.currentLevelId);
+        this._levelConfigReader = LevelConfigReader.create(currentLevel!);
+        this._params = data;
     }
 
     onModifyPipeline(pipeline: string[]): void {
@@ -47,7 +60,7 @@ class MazeScene extends BaseScene {
     create() {
         super.create();
         const { width, height } = this.game.scale;
-        const [paddingLeft, paddingTop, paddingRight, paddingBottom] = [0, this._defaultTileSize, 0, 0];
+        const [paddingLeft, paddingTop, paddingRight, paddingBottom] = [0, 2 * this._defaultTileSize, 0, 0];
         const [mazeWidth, mazeHeight] = [width - paddingLeft - paddingRight, height - paddingTop - paddingBottom];
 
         // Maze level config background.
@@ -64,6 +77,7 @@ class MazeScene extends BaseScene {
             (fowFXPipeline as FogOfWarFXPipeline).setPaddings(paddingLeft, paddingTop, paddingRight, paddingBottom);
         }
 
+        console.log([mazeWidth / this._defaultTileSize, mazeHeight / this._defaultTileSize]);
         const mazeInitialState = MazeInitialState.fromConfig(
             [mazeWidth / this._defaultTileSize, mazeHeight / this._defaultTileSize],
             this._levelConfigReader!.getLevelLayout(),
@@ -86,27 +100,83 @@ class MazeScene extends BaseScene {
         this._mazeSubScene?.setOnReachedFinishListener(this._onReachedFinishListener);
         this._mazeSubScene?.setOnGameOverListener(this._onGameOverListener);
 
-        this._mazeSubScene?.placeFlag();
+        // State.
+        this._currentScore = 0;
+
+        // UI.
+        const uiElementsSafePadding = 8;
+        this._scoreText = this.add.bitmapText(uiElementsSafePadding, this._defaultTileSize / 2, "bitpotion", "Score: 0", 7)
+            .setCenterAlign()
+            .setOrigin(0, 0.5);
+        this.add.bitmapText(width - uiElementsSafePadding, this._defaultTileSize / 2, "bitpotion", `Level: ${this._levelConfigReader?.getId()}`, 7)
+            .setRightAlign()
+            .setAlpha(0.7)
+            .setOrigin(1.0, 0.5);
+        this.add.bitmapText(width - uiElementsSafePadding, this._defaultTileSize * 3 / 2, "bitpotion", this._levelConfigReader?.getTitle(), 7)
+            .setRightAlign()
+            .setAlpha(0.7)
+            .setOrigin(1.0, 0.5);
+
+        // Constraints.
+        const constraints = this._levelConfigReader?.getLevelConstraints();
+        this._constraintsTracker = new ConstraintsTracker(constraints);
+
+        if (this._constraintsTracker.hasTimeConstraint()) {
+            this._timerText = this.add.bitmapText(width / 2, this._defaultTileSize, "bitpotion", "", 7)
+                .setCenterAlign()
+                .setOrigin(0.5, 0.5);
+        }
+
+        if (this._constraintsTracker.hasMovesConstraint()) {
+            this._movesLeftText = this.add.bitmapText(uiElementsSafePadding, this._defaultTileSize * 3 / 2, "bitpotion", "", 7)
+                .setCenterAlign()
+                .setOrigin(0, 0.5);
+        }
+
+        this._constraintsTracker.setOnFlagReadyListener(() => {
+            this._mazeSubScene?.placeFlag();
+        });
+
+        this._constraintsTracker.setOnTimeLeftListener(time => {
+            this._timerText?.setText(time);
+        });
+
+        this._constraintsTracker.setOnMovesLeftListener(moves => {
+            this._movesLeftText?.setText(`Moves: ${moves.toString().padStart(2, "0")}`);
+        });
+
+        this._constraintsTracker.setOnGameOverListener(this._onGameOverListener);
     }
 
-    update(timeMs: number) {
+    update(timeMs: number, dtMs: number) {
         this._mazeSubScene?.update(timeMs);
+        this._constraintsTracker?.update(dtMs);
     }
 
     private _onMovedListener() {
-        console.log("On player moved");
+        this._constraintsTracker?.movePlayer();
     }
 
     private _onScoreListener(score: number) {
-        console.log("On player scored: " + score);
+        if (this._currentScore !== undefined) {
+            this._currentScore += score;
+            this._scoreText?.setText(`Score: ${this._currentScore}`);
+        }
+        this._constraintsTracker?.addScore(score);
     }
 
     private _onReachedFinishListener() {
-        console.log("On player reached finish");
+        const nextLevelId = this._levelConfigReader?.getNextLevelId();
+        if (nextLevelId) {
+            this.game.scene.start("MazeScene", {
+                ...this._params,
+                currentLevelId: nextLevelId,
+            });
+        }
     }
 
     private _onGameOverListener() {
-        console.log("On game over");
+        this.scene.stop();
     }
 };
 

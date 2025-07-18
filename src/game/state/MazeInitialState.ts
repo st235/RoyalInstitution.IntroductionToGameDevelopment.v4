@@ -174,6 +174,7 @@ class MazeInitialState {
                 Math.max(0, this._availableSize[1] - this._outerWallsPadding * 2),
                 Math.max(0, this._availableSize[0] - this._outerWallsPadding * 2),
             ]);
+
         return pad2D(expandedTiles, this._wallConfigReader.getDefaultTile(), this._outerWallsPadding);
     }
 

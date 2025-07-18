@@ -8,6 +8,15 @@ body {
   -webkit-box-sizing: border-box;
 }
 
+@font-face {
+  font-family: BitPotion;
+  src: url(./BitPotion.ttf);
+}
+
+div {
+  font-family: myFirstFont;
+}
+
 #root {
   width: 100vw;
   height: 100vh;
