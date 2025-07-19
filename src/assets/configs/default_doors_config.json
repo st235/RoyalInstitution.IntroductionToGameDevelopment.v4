@@ -1,13 +1,13 @@
 {
     "key": {
-        "variations": [54, 63]
+        "variations": [54, 56, 58, 55]
     },
     "door": {
         "open": {
-            "variations": [46]
+            "variations": [46, 79, 112, 145]
         },
         "closed": {
-            "variations": [40, 41, 42, 43, 44, 45]
+            "variations": [40, 74, 110, 140]
         }
     }
 }

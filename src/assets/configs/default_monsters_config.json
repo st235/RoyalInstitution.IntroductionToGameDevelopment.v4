@@ -24,5 +24,72 @@
             "down",
             "down"
         ]
+    },
+    {
+        "id": 2,
+        "variant": 103,
+        "updateTimeMs": 1000,
+        "path": [
+            "left",
+            "left",
+            "left",
+            "left",
+            "right",
+            "right",
+            "right",
+            "right"
+        ]
+    },
+    {
+        "id": 3,
+        "variant": 80,
+        "updateTimeMs": 1250,
+        "path": [
+            "left",
+            "left",
+            "up",
+            "up",
+            "left",
+            "left",
+            "left",
+            "left",
+            "down",
+            "down",
+            "right",
+            "right",
+            "down",
+            "down",
+            "right",
+            "right",
+            "right",
+            "right",
+            "up",
+            "up"
+        ]
+    },
+    {
+        "id": 4,
+        "variant": 82,
+        "updateTimeMs": 550,
+        "path": [
+            "left",
+            "left",
+            "left",
+            "left",
+            "left",
+            "up",
+            "up",
+            "up",
+            "up",
+            "right",
+            "right",
+            "right",
+            "right",
+            "right",
+            "down",
+            "down",
+            "down",
+            "down"
+        ]
     }
 ]

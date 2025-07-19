@@ -1,5 +1,5 @@
 import "./App.css";
-import gameConfig from "@assets/game.json";
+import riMondayDemoConfig from "@assets/demos/ri_monday_demo.json";
 
 import type { PhaserGameContainerRef } from "@/components/phaser/PhaserGameContainer";
 
@@ -17,7 +17,7 @@ function App() {
         <>
             <PhaserGameContainer
                 viewport={{width: 220, height: 180}}
-                launch={{key: "StartScene", data: gameConfig}}
+                launch={{key: "StartScene", data: riMondayDemoConfig}}
                 scenes={[StartScene, MazeScene, TextDialogScene]}
                 containerRef={phaserRef}
             />

@@ -1,10 +1,42 @@
 {
-    "defaultScore": 5,
+    "defaultScore": 10,
     "coins": [
         {
             "variant": 0,
+            "score": 5
+        },
+        {
+            "variant": 1,
             "score": 10
+        },
+        {
+            "variant": 2,
+            "score": 50
+        },
+        {
+            "variant": 3,
+            "score": 100
+        },
+        {
+            "variant": 4,
+            "score": 150
+        },
+        {
+            "variant": 5,
+            "score": 200
+        },
+        {
+            "variant": 6,
+            "score": 250
+        },
+        {
+            "variant": 7,
+            "score": 300
+        },
+        {
+            "variant": 8,
+            "score": 1000
         }
     ],
-    "variations": [0, 1, 2, 3, 4]
+    "variations": [10, 9, 8, 16, 0, 1, 2, 3, 4]
 }

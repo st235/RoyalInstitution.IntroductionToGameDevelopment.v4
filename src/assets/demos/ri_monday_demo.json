@@ -1,0 +1,183 @@
+{
+    "gameConfig": {
+        "applyCathodRayTubeEffect": true,
+        "configsOverwrites": {
+            "walls": {
+                "variations": [340, 212, 341, 339, 338, 337, 344, 342, 343, 59]
+            }
+        }
+    },
+    "initialLevelId": 1,
+    "levels": [
+        {
+            "id": 1,
+            "title": "Intro",
+            "levelLayout": [
+                "SP .  .  W0 .  W1 .  W1 .  W6 .  W0 .  .  .  W1 .  .  .  .  ",
+                ".  .  .  W1 .  .  .  .  .  W0 .  W0 .  .  .  W1 .  .  W0 .  ",
+                ".  .  .  W1 .  W0 W1 W1 .  W0 .  .  .  W0 .  .  .  .  W1 .  ",
+                ".  W2 W0 W1 .  W0 .  .  .  .  .  .  .  W0 .  .  .  .  W1 .  ",
+                ".  W0 .  .  .  W0 .  W1 W1 W1 W1 W7 W2 W1 W3 W0 W0 .  W1 W0 ",
+                ".  W0 .  W1 W1 W4 .  W1 .  .  .  .  W0 .  W3 .  W0 .  .  .  ",
+                ".  W0 .  W1 .  .  .  W1 .  .  .  .  W0 .  .  .  W0 .  .  W2 ",
+                ".  W0 .  W1 .  W1 W1 W1 W1 W1 W1 .  W0 .  W4 .  W0 .  W1 W1 ",
+                ".  W0 .  W1 .  W1 .  W3 .  .  .  .  W1 .  W4 .  W0 .  .  F0 ",
+                ".  W0 .  W1 .  .  .  .  .  W3 .  .  W1 .  W4 .  W0 .  .  .  ",
+                ".  W0 .  W2 .  W0 W0 W0 W0 W0 W0 W1 W1 .  W4 .  W0 .  W0 .  ",
+                ".  W1 .  .  .  .  .  .  .  .  W0 .  .  .  W1 .  W0 .  .  F0 ",
+                ".  .  .  W1 W1 W1 W1 W1 W1 W1 W1 W1 W1 W1 W1 .  W0 .  W0 .  ",
+                ".  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  W0 .  .  F0 "
+            ],
+            "constraints": {
+                "maxTimeSec": 120
+            },
+            "nextLevelId": 2
+        },
+        {
+            "id": 2,
+            "title": "Gems",
+            "levelLayout": [
+                ".  .  .  SP W0 W0 .  .  .  .  .  .  W0 W0 .  .  .  .  C7 . ",
+                "W0 W0 .  .  W0 .  .  W0 W0 W0 .  .  W0 .  .  W0 W0 W0 .  . ",
+                ".  .  .  .  W0 .  .  .  .  W0 .  .  W0 .  .  .  .  .  .  . ",
+                ".  W0 W0 W0 W0 W0 .  W0 .  W0 .  .  W0 .  W0 W0 W0 .  .  . ",
+                ".  .  .  .  .  W0 .  .  .  W0 C0 .  W0 .  .  .  .  .  .  . ",
+                ".  W0 .  W0 .  W0 .  W0 .  W0 W0 W0 W0 W0 W1 .  W0 W0 .  F3",
+                ".  W0 .  .  C4 W0 .  .  .  .  .  .  .  .  .  .  .  W0 .  . ",
+                ".  W0 .  W0 W0 W0 W0 W0 W0 W0 W0 W0 .  W0 W0 W0 .  W0 .  . ",
+                ".  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  W0 .  . ",
+                ".  W5 W5 W0 .  W0 W0 W0 .  W0 W0 W0 .  W0 W2 W0 .  W0 .  F4",
+                ".  W0 .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  W0 F5 . ",
+                ".  W0 .  W8 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 .  W0 .  . ",
+                ".  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  C5 W0 F2 . ",
+                "W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0"
+            ],
+            "constraints": {
+                "maxMoves": 60
+            },
+            "nextLevelId": 3
+        },
+        {
+            "id": 3,
+            "title": "Doors",
+            "levelLayout": [
+                "W0 W0 SP W0 W0 W0 W0 W0 W0 W0 W0 C1 W0 W0 W0 W0 W0 W0 W0 . ",
+                "W0 SP .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  C6",
+                "W0 .  W0 W0 W0 W0 .  W0 W0 W0 W0 .  W0 W0 W0 W0 .  W0 .  W0",
+                "SP .  W0 .  K0 W0 .  W0 .  .  W0 .  W0 .  C1 W0 .  W0 .  . ",
+                "W5 .  W0 .  W0 W0 .  W0 .  W0 W0 .  W0 .  W0 W0 .  W0 .  W0",
+                "W0 .  D0 .  .  .  .  W0 .  .  .  .  W0 .  .  .  .  W0 .  W5",
+                "W6 .  W0 W0 W0 W0 W2 W0 W0 W0 W0 W7 W0 W0 W0 W0 W0 W0 .  W5",
+                "W6 .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  W0",
+                "W0 .  W0 W0 W0 W0 .  W0 W0 W0 W0 W0 W0 W0 W0 W0 .  W0 .  W0",
+                "W0 .  .  .  .  W0 .  .  .  .  W0 .  .  .  .  W0 .  .  .  W0",
+                "W7 D0 W0 W0 .  W0 W0 W0 W0 .  W0 W0 W0 W0 .  W0 D2 W0 W0 W8",
+                ".  .  .  W0 .  .  .  C0 W0 .  .  .  .  W0 .  .  .  .  .  F0",
+                "W0 W0 .  W0 W0 W0 W0 W0 W0 W0 W0 W0 D2 W0 W0 .  W8 W0 W0 W0",
+                ".  .  .  .  .  .  .  .  .  .  .  .  .  K2 W0 .  .  .  .  F1"
+            ],
+            "constraints": {
+                "maxTimeSec": 60
+            },
+            "nextLevelId": 4
+        },
+        {
+            "id": 4,
+            "title": "AI: Monsters",
+            "levelLayout": [
+                "SP .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . ",
+                ".  W0 W0 W0 W0 .  W0 W0 W0 W0 W0 W0 W0 W1 W0 W0 W0 .  W0 . ",
+                ".  W0 .  .  W0 .  W0 C1 .  .  .  .  W0 K0 .  .  W0 .  W4 . ",
+                ".  W0 .  W0 W0 .  W0 W0 W0 W0 W0 .  W0 W0 W0 .  W0 .  W4 . ",
+                ".  W0 .  .  .  .  .  .  .  .  .  .  .  M2 .  .  W0 .  W0 . ",
+                ".  W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 D0 W0 W0 W0 W0 W0 .  W0 . ",
+                ".  .  .  D0 .  .  .  .  .  .  .  .  .  .  .  D0 .  .  .  . ",
+                "W0 W0 W0 W0 .  W0 W0 W0 .  W0 W0 W0 .  W0 W0 W0 .  W0 W0 W0",
+                ".  .  .  W0 .  .  .  W0 .  .  .  W0 .  .  M3 W0 .  .  .  . ",
+                ".  W0 .  W0 W0 W0 .  W0 W0 W0 .  W0 W0 W0 .  W0 W0 W0 .  . ",
+                ".  W0 .  .  .  W0 .  .  .  .  .  .  .  .  .  .  F4 W0 .  . ",
+                "W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 D0 W5",
+                ".  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  F5",
+                "W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0"
+            ],
+            "constraints": {
+                "maxMoves": 60,
+                "maxTimeSec": 60
+            },
+            "nextLevelId": 5
+        },
+        {
+            "id": 5,
+            "title": "Garniture",
+            "levelLayout": [
+                "W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0",
+                "W0 K2 W0 C4 .  .  .  .  SP SP SP SP .  .  .  .  .  .  G1 W0",
+                "W0 C8 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 .  W0",
+                "W0 G0 W0 C2 W3 G2 .  .  .  .  .  .  .  .  .  .  .  D0 .  W0",
+                "W0 .  W0 .  W0 G2 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 .  W0 .  W0",
+                "W0 .  D1 .  W0 .  .  .  .  .  .  .  .  .  .  W0 .  W0 .  W0",
+                "W0 .  W0 .  W0 .  W0 W0 W0 W0 W0 W0 W0 W0 .  W0 .  W0 .  W0",
+                "W0 .  W0 .  W0 M1 D2 .  .  .  .  .  .  W0 .  W0 .  W0 .  W0",
+                "W0 .  W0 .  W0 .  W0 .  W0 W0 W0 W0 .  W0 .  W0 .  W0 .  W3",
+                "W0 M1 D1 .  D2 .  W0 .  W0 G1 F0 W0 .  W0 .  W0 .  W0 .  W3",
+                "W0 .  W0 .  W0 .  W0 .  W0 G1 W0 W0 .  W0 .  W0 .  W0 .  W3",
+                "W0 .  W1 .  W0 .  W0 .  .  .  .  .  M4 W0 K1 W0 .  W0 K0 W0",
+                "W0 D1 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 D1 W0",
+                "G2 .  .  .  .  .  .  .  .  .  .  C2 .  .  .  .  .  .  .  G7"
+            ],
+            "constraints": {
+                "maxTimeSec": 80,
+                "minScore": 1000
+            },
+            "nextLevelId": 6
+        },
+        {
+            "id": 6,
+            "title": "Fog of War",
+            "applyFogOfWar": true,
+            "levelLayout": [
+                "W0 W0 W0 K2 .  .  .  .  W0 W0 C5 .  .  .  .  K1 W0 W0 W0 W0",
+                "SP .  W0 W0 W0 W0 .  W0 W0 W0 W0 W0 .  W0 W0 W0 W0 C1 .  . ",
+                "W0 .  .  .  .  W0 .  .  .  .  .  W0 .  .  .  .  .  W0 W0 . ",
+                "W0 W0 W0 W0 .  W0 W0 W0 W0 W0 .  W0 W0 W0 W0 .  W0 .  .  . ",
+                "K0 .  .  W0 .  .  .  .  M2 .  .  .  .  .  W0 .  D0 .  W0 W0",
+                "W0 W0 .  W0 W0 W0 W0 .  W0 W0 W0 W0 W0 .  W0 W0 W0 .  W0 C3",
+                "W0 .  .  .  .  .  .  .  .  .  .  .  W0 .  .  .  .  .  W0 . ",
+                "W0 .  W0 W0 W0 W0 W0 W0 W0 W0 W0 .  W0 W0 W0 W0 W0 W0 W0 . ",
+                "W0 .  W0 F2 .  .  .  .  .  F0 W0 .  .  .  .  .  M2 .  .  . ",
+                "W0 .  W0 .  M0 W0 W0 W0 W0 .  W0 W0 W0 W0 W0 W0 W0 W0 W0 W0",
+                ".  .  W0 F2 .  .  .  F4 W0 F0 .  .  .  .  .  .  .  .  F2 W0",
+                "W0 D1 W0 W0 W0 D2 W0 .  W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 .  W0",
+                ".  M1 .  .  .  .  W0 F4 .  .  .  .  .  M2 .  .  .  .  F0 W0",
+                "W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0"
+            ],
+            "constraints": {
+                "maxTimeSec": 65
+            },
+            "nextLevelId": 7
+        },
+        {
+            "id": 7,
+            "title": "Forest",
+            "levelLayout": [
+                "W9 W9 W9 W9 W9 W9 W9 W9 W9 W9 W9 W9 W9 W9 W9 W9 W9 W9 W9 W9",
+                "W9 SP .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  W9",
+                "W9 .  W9 W9 W9 W9 W9 W9 W9 W9 W9 W9 W9 W9 W9 W9 W9 W9 .  W9",
+                "W9 .  .  .  .  .  .  .  K0 .  .  .  .  .  .  .  .  W9 .  W9",
+                "W9 D0 W9 W9 W9 W9 W9 .  W9 W9 W9 W9 W9 W9 W9 .  .  W9 .  W9",
+                ".  .  .  .  .  .  W9 .  .  .  .  .  .  W9 .  W9 W9 W9 .  W9",
+                "W9 W9 W9 W2 W1 .  W9 W9 W9 W9 W9 .  W9 W9 .  .  .  .  .  W9",
+                ".  .  .  .  W9 .  .  .  .  .  W9 .  .  .  W9 W9 W9 W9 W9 W9",
+                "W9 W9 W3 .  W9 W9 W9 W9 W9 .  W9 W9 W9 .  W9 .  .  .  .  . ",
+                ".  .  W9 .  .  .  .  .  W9 .  .  .  .  W9 .  W9 W9 W9 W9 W9",
+                "W9 .  W9 W9 W9 W9 W9 .  W9 W9 W9 W9 .  W9 .  .  .  .  .  . ",
+                "W9 .  .  .  .  .  W9 .  .  .  .  W9 .  W9 W9 W9 W9 W9 W9 W9",
+                "W9 W9 W3 W9 W9 .  W9 W9 W9 W9 W9 W9 .  .  .  .  .  .  .  F6",
+                "W9 W9 W9 W9 W9 W9 W9 W9 W9 W9 W9 W9 W9 W9 W9 W9 W9 W9 W9 W9"
+            ],
+            "constraints": {
+                "maxTimeSec": 30
+            }
+        }
+    ]
+}
