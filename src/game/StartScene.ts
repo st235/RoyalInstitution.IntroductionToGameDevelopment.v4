@@ -26,6 +26,7 @@ class StartScene extends BaseScene {
         }
 
         this.load.image("tileset-main", `tileset${filesColourSuffix}.png`);
+        this.load.image("particle", "particle.png");
 
         const frameConfig = { 
             frameWidth: this._defaultTileSize,

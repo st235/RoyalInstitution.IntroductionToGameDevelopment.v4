@@ -34,6 +34,8 @@ class MazeSubScene {
     private readonly _keys: Phaser.Physics.Arcade.StaticGroup;
     private readonly _monsters: Phaser.Physics.Arcade.Group;
 
+    private readonly _particles: Phaser.GameObjects.Particles.ParticleEmitter;
+
     private _onMovedListener?: OnMovedListener;
     private _onScoreListener?: OnScoreListener;
     private _onReachedFinishListener?: OnReachedFinishListener;
@@ -138,12 +140,24 @@ class MazeSubScene {
             monster.setPath(this._mazeInitialState.getMonsterPath(v!), this._mazeInitialState.getMonsterUpdateTimeMs(v!));
         });
 
+        // Particles.
+        this._particles = this._scene.add.particles(0, 0, "particle", {
+            emitting: false,
+            speed: { min: -100, max: 100 },
+            angle: { min: 0, max: 360 },
+            lifespan: 1000,
+            quantity: 4,
+            frequency: 100,
+            scale: { start: 1, end: 0 },
+            alpha: { start: 1, end: 0 }
+        });
 
         // Ordering.
         this._coins.setDepth(0);
         this._keys.setDepth(1);
         this._monsters.setDepth(2);
         backgroundTilemapLayer.setDepth(3);
+        this._particles.setDepth(3);
         this._player.setDepth(4);
         foregroundTilemapLayer.setDepth(5);
     }
@@ -205,12 +219,13 @@ class MazeSubScene {
         key.destroy(true);
     }
 
-    private _onConsumeCoin(_player: Phaser.Types.Physics.Arcade.GameObjectWithBody,
+    private _onConsumeCoin(player: Phaser.Physics.Arcade.Sprite,
         coin: Phaser.Types.Physics.Arcade.GameObjectWithBody) {
         const variation: number = coin.data.get("variation");
         const score = this._mazeInitialState.getCoinScore(variation);
         coin.destroy(true);
 
+        this._particles.emitParticle(10, player.x, player.y);
         this._onScoreListener?.(score);
     }
 

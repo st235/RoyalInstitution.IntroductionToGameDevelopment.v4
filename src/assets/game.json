@@ -2,7 +2,7 @@
     "gameConfig": {
         "applyCathodRayTubeEffect": true
     },
-    "initialLevelId": 1,
+    "initialLevelId": 2,
     "levels": [
         {
             "id": 1,
@@ -48,7 +48,7 @@
                 ".  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  W0 .  .  F0 "
             ],
             "constraints": {
-                "maxMoves": 20
+                "maxMoves": 200
             }
         }
     ]
