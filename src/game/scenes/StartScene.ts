@@ -1,6 +1,6 @@
 import Phaser from "phaser";
 
-import BaseScene from "@game/BaseScene";
+import BaseScene from "@/game/scenes/BaseScene";
 
 class StartScene extends BaseScene {
 
@@ -54,9 +54,10 @@ class StartScene extends BaseScene {
         super.create();
 
         this.add.rectangle(0, 0,
-            this.game.scale.displaySize.width,
-            this.game.scale.displaySize.height,
-            0x212121);
+            this.game.scale.width,
+            this.game.scale.height,
+            0x212121)
+            .setOrigin(0, 0);
 
         const tiles = [
             [  100,   61,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,  607,  641,  641,  641,  641,  641,  641,  641,  641],
@@ -117,7 +118,15 @@ class StartScene extends BaseScene {
     }
 
     private _onStartGame() {
-        this.scene.start("MazeScene", this._params);
+        this.scene.start("TextDialogScene", {
+            ...this._params,
+            message: {
+                text: "What?!\nA placeholder text?!!!\nNarrative!",
+                height: 60,
+                character: 0,
+            },
+            nextSceneKey: "MazeScene",
+        });
         this.sound.play("select", { volume: 0.5 });
     }
 }

@@ -43,6 +43,7 @@ class BaseScene extends Phaser.Scene {
         this.cameras.main.setPostPipeline(pipeline);
     }
 
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     onModifyPipeline(_pipeline: string[]) {
         // Empty on purpose.
     }

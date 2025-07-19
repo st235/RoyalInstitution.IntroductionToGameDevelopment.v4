@@ -1,9 +1,9 @@
 import Phaser from "phaser";
 
-import type { BaseSceneParams } from "@game/BaseScene";
+import type { BaseSceneParams } from "@/game/scenes/BaseScene";
 import type { LevelConfig } from "@game/config/LevelConfigReader";
 
-import BaseScene from "@game/BaseScene";
+import BaseScene from "@/game/scenes/BaseScene";
 import ConstraintsTracker from "@game/ConstraintsTracker";
 import FogOfWarFXPipeline, { KEY_FX_FOW } from "@game/fx/FogOfWarFXPipeline";
 import LevelConfigReader from "@game/config/LevelConfigReader";
@@ -12,6 +12,7 @@ import MazeSubScene from "@game/MazeSubScene";
 
 type MazeSceneParams = BaseSceneParams & {
     initialLevelId: number;
+    currentLevelId?: number;
     levels: LevelConfig[];
 };
 
@@ -43,7 +44,7 @@ class MazeScene extends BaseScene {
 
     init(data: MazeSceneParams) {
         super.init(data);
-        const currentLevel = data.levels.find(l => l.id == data.initialLevelId);
+        const currentLevel = data.levels.find(l => l.id == (data.currentLevelId ?? data.initialLevelId));
         this._levelConfigReader = LevelConfigReader.create(currentLevel!);
         this._params = data;
     }
@@ -73,9 +74,10 @@ class MazeScene extends BaseScene {
         const background = this._levelConfigReader?.background();
         if (background) {
             this.add.rectangle(0, 0,
-                this.game.scale.displaySize.width,
-                this.game.scale.displaySize.height,
-                background);
+                this.game.scale.width,
+                this.game.scale.height,
+                background)
+                .setOrigin(0, 0);
         }
 
         const fowFXPipeline = this.cameras.main.getPostPipeline(KEY_FX_FOW);
@@ -177,11 +179,24 @@ class MazeScene extends BaseScene {
     }
 
     private _onReachedFinishListener() {
+        this.sound.stopByKey("night");
+
         const nextLevelId = this._levelConfigReader?.getNextLevelId();
         if (nextLevelId) {
             this.game.scene.start("MazeScene", {
                 ...this._params,
-                initialLevelId: nextLevelId,
+                currentLevelId: nextLevelId,
+            });
+        } else {
+            this.sound.play("victory", { volume: 0.1 });
+            this.scene.start("TextDialogScene", {
+                ...this._params,
+                message: {
+                    text: "Congratulations!\nI don't have more\nlevels for you",
+                    height: 60,
+                    character: 0,
+                },
+                nextSceneKey: "StartScene",
             });
         }
     }
@@ -189,7 +204,16 @@ class MazeScene extends BaseScene {
     private _onGameOverListener() {
         this.sound.play("gameover", { volume: 0.1 });
         this.sound.stopByKey("night");
-        this.scene.stop();
+
+        this.scene.start("TextDialogScene", {
+            ...this._params,
+            message: {
+                text: "That's all folks!\nSee you next time",
+                height: 40,
+                character: 0,
+            },
+            nextSceneKey: "StartScene",
+        });
     }
 };
 

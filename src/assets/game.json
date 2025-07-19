@@ -2,7 +2,7 @@
     "gameConfig": {
         "applyCathodRayTubeEffect": true
     },
-    "initialLevelId": 2,
+    "initialLevelId": 1,
     "levels": [
         {
             "id": 1,
