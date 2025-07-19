@@ -25,37 +25,6 @@ class BaseScene extends Phaser.Scene {
         this._gameConfigReader = GameConfigReader.create(data.gameConfig);
     }
 
-    preload() {
-        this.load.setBaseURL(import.meta.env.BASE_URL);
-
-        let filesColourSuffix = "";
-        if (this._gameConfigReader?.isUsingColourTiles()) {
-            filesColourSuffix = "-colour";
-        }
-
-        this.load.image("tileset-main", `tileset${filesColourSuffix}.png`);
-
-        const frameConfig = { 
-            frameWidth: this._defaultTileSize,
-            frameHeight: this._defaultTileSize
-        };
-        this.load.spritesheet("elements", `tileset${filesColourSuffix}.png`, frameConfig);
-        this.load.spritesheet("characters", `characters${filesColourSuffix}.png`, frameConfig);
-        this.load.spritesheet("gems", `gems${filesColourSuffix}.png`, frameConfig);
-        this.load.spritesheet("tools", `tools${filesColourSuffix}.png`, frameConfig);
-        this.load.spritesheet("creatures", `creatures${filesColourSuffix}.png`, frameConfig);
-        
-        this.load.bitmapFont("bitpotion", "BitPotion.png", "BitPotion.xml");
-
-        this.load.audio("levelstart", ["levelstart.wav"]);
-        this.load.audio("timeup", ["timeup.wav"]);
-        this.load.audio("gameover", ["gameover.wav"]);
-        this.load.audio("pickup", ["pickup.wav"]);
-        this.load.audio("night", ["night.wav"]);
-        this.load.audio("victory", ["victory.wav"]);
-        this.load.audio("walk", ["walk.wav"]);
-    }
-
     create() {
         const { width, height } = this.game.scale;
         this.cameras.main.setBounds(0, 0, width, height);

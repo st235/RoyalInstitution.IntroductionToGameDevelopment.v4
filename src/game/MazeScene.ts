@@ -11,7 +11,7 @@ import MazeInitialState from "@/game/state/MazeInitialState";
 import MazeSubScene from "@game/MazeSubScene";
 
 type MazeSceneParams = BaseSceneParams & {
-    currentLevelId: number;
+    initialLevelId: number;
     levels: LevelConfig[];
 };
 
@@ -43,7 +43,7 @@ class MazeScene extends BaseScene {
 
     init(data: MazeSceneParams) {
         super.init(data);
-        const currentLevel = data.levels.find(l => l.id == data.currentLevelId);
+        const currentLevel = data.levels.find(l => l.id == data.initialLevelId);
         this._levelConfigReader = LevelConfigReader.create(currentLevel!);
         this._params = data;
     }
@@ -181,7 +181,7 @@ class MazeScene extends BaseScene {
         if (nextLevelId) {
             this.game.scene.start("MazeScene", {
                 ...this._params,
-                currentLevelId: nextLevelId,
+                initialLevelId: nextLevelId,
             });
         }
     }

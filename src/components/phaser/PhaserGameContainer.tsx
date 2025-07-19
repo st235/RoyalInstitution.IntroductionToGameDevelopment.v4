@@ -18,9 +18,9 @@ type PhaserGameContainerProps = {
     };
     launch: {
         key: string;
-        scene: Phaser.Types.Scenes.SceneType;
         data?: object;
-    }
+    };
+    scenes: Phaser.Types.Scenes.SceneType | Phaser.Types.Scenes.SceneType[];
     containerRef: React.RefObject<PhaserGameContainerRef>;
     onNewScene?: (scene: Phaser.Scene) => void;
 };
@@ -34,7 +34,7 @@ function PhaserGameContainer(props: PhaserGameContainerProps) {
         if (!game.current) {
             game.current = LaunchScene(
                 "game-canvas",
-                props.launch.scene,
+                props.scenes,
                 props.viewport.width,
                 props.viewport.height,
             );

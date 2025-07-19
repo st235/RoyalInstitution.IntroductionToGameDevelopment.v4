@@ -22,7 +22,7 @@ const defaultConfig = {
 
 const LaunchScene = <T extends Phaser.Types.Scenes.SceneType>(
     parent: HTMLElement | string,
-    scene: T,
+    scene: T | T[],
     width: number,
     height: number,
 ): Phaser.Game => {
