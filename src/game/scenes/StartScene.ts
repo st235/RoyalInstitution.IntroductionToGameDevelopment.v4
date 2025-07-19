@@ -121,9 +121,9 @@ class StartScene extends BaseScene {
         this.scene.start("TextDialogScene", {
             ...this._params,
             message: {
-                text: "What?!\nA placeholder text?!!!\nNarrative!",
+                text: this._gameConfigReader?.getMessageOverwrites()?.intro ?? "What?!\nA placeholder text?!!!\nNarrative!",
                 height: 60,
-                character: 0,
+                character: this._gameConfigReader?.getMessageOverwrites()?.character ?? 0,
             },
             nextSceneKey: "MazeScene",
         });

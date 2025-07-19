@@ -7,9 +7,17 @@ import type { DoorsConfig } from "@game/config/DoorsConfigReader";
 import type { GarnitureConfig } from "@game/config/GarnitureConfigReader";
 import type { MonstersConfig } from "@game/config/MonstersConfigReader";
 
+type MessageOverwrites = {
+    character?: number;
+    intro: string;
+    gameOver?: string;
+    victory?: string;
+};
+
 type GameConfig = {
     useColourTiles?: boolean;
     applyCathodRayTubeEffect: boolean;
+    messagesOverwrites?: MessageOverwrites;
     configsOverwrites?: {
         character?: CharacterConfig;
         coins?: CoinsConfig;
@@ -34,6 +42,10 @@ class GameConfigReader {
 
     shouldUseCathodRayTubeEffect(): boolean {
         return this._config.applyCathodRayTubeEffect;
+    }
+
+    getMessageOverwrites(): MessageOverwrites | undefined {
+        return this._config.messagesOverwrites;
     }
 
     getCharacterConfig(): CharacterConfig | undefined {
@@ -70,4 +82,4 @@ class GameConfigReader {
 }
 
 export default GameConfigReader;
-export type { GameConfig };
+export type { GameConfig, MessageOverwrites };

@@ -192,9 +192,9 @@ class MazeScene extends BaseScene {
             this.scene.start("TextDialogScene", {
                 ...this._params,
                 message: {
-                    text: "Congratulations!\nI don't have more\nlevels for you",
+                    text: this._gameConfigReader?.getMessageOverwrites()?.victory ?? "Congratulations!\nI don't have more\nlevels for you",
                     height: 60,
-                    character: 0,
+                    character: this._gameConfigReader?.getMessageOverwrites()?.character ?? 0,
                 },
                 nextSceneKey: "StartScene",
             });
@@ -208,9 +208,9 @@ class MazeScene extends BaseScene {
         this.scene.start("TextDialogScene", {
             ...this._params,
             message: {
-                text: "That's all folks!\nSee you next time",
+                text: this._gameConfigReader?.getMessageOverwrites()?.gameOver ?? "That's all folks!\nSee you next time",
                 height: 40,
-                character: 0,
+                character: this._gameConfigReader?.getMessageOverwrites()?.character ?? 0,
             },
             nextSceneKey: "StartScene",
         });

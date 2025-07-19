@@ -1,6 +1,10 @@
 {
     "gameConfig": {
         "applyCathodRayTubeEffect": true,
+        "messagesOverwrites": {
+            "character": 0,
+            "intro": "This is a message\nfor Royal Insitution\nmeeting on 21.07.25"
+        },
         "configsOverwrites": {
             "walls": {
                 "variations": [340, 212, 341, 339, 338, 337, 344, 342, 343, 59]
