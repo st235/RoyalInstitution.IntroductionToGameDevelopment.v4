@@ -59,6 +59,12 @@ class MazeScene extends BaseScene {
 
     create() {
         super.create();
+        this.sound.play("levelstart", { volume: 0.1 });
+
+        const backgroundMusic = this.sound.add("night", { volume: 0.03 });
+        backgroundMusic.loop = true;
+        backgroundMusic.play();
+
         const { width, height } = this.game.scale;
         const [paddingLeft, paddingTop, paddingRight, paddingBottom] = [0, 2 * this._defaultTileSize, 0, 0];
         const [mazeWidth, mazeHeight] = [width - paddingLeft - paddingRight, height - paddingTop - paddingBottom];
@@ -77,7 +83,6 @@ class MazeScene extends BaseScene {
             (fowFXPipeline as FogOfWarFXPipeline).setPaddings(paddingLeft, paddingTop, paddingRight, paddingBottom);
         }
 
-        console.log([mazeWidth / this._defaultTileSize, mazeHeight / this._defaultTileSize]);
         const mazeInitialState = MazeInitialState.fromConfig(
             [mazeWidth / this._defaultTileSize, mazeHeight / this._defaultTileSize],
             this._levelConfigReader!.getLevelLayout(),
@@ -137,8 +142,12 @@ class MazeScene extends BaseScene {
             this._mazeSubScene?.placeFlag();
         });
 
-        this._constraintsTracker.setOnTimeLeftListener(time => {
+        this._constraintsTracker.setOnTimeLeftListener((time, isTimeUp) => {
             this._timerText?.setText(time);
+            if (isTimeUp) {
+                this._timerText!.tint = 0xff0000;
+                this.sound.play("timeup");
+            }
         });
 
         this._constraintsTracker.setOnMovesLeftListener(moves => {
@@ -155,6 +164,7 @@ class MazeScene extends BaseScene {
 
     private _onMovedListener() {
         this._constraintsTracker?.movePlayer();
+        this.sound.play("walk", { volume: 0.8 });
     }
 
     private _onScoreListener(score: number) {
@@ -163,6 +173,7 @@ class MazeScene extends BaseScene {
             this._scoreText?.setText(`Score: ${this._currentScore}`);
         }
         this._constraintsTracker?.addScore(score);
+        this.sound.play("pickup");
     }
 
     private _onReachedFinishListener() {
@@ -176,6 +187,8 @@ class MazeScene extends BaseScene {
     }
 
     private _onGameOverListener() {
+        this.sound.play("gameover", { volume: 0.1 });
+        this.sound.stopByKey("night");
         this.scene.stop();
     }
 };

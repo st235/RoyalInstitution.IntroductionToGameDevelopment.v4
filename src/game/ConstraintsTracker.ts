@@ -5,7 +5,7 @@ import Timer from "@game/Timer";
 
 type OnFlagReadyListener = () => void;
 type OnMovesLeftListener = (movesLeft: number) => void;
-type OnTimeLeftListener = (time: string) => void;
+type OnTimeLeftListener = (time: string, isTimeUp: boolean) => void;
 type OnGameOverListener = () => void;
 
 class ConstraintsTracker {
@@ -48,7 +48,7 @@ class ConstraintsTracker {
     setOnTimeLeftListener(onTimeLeftListener?: OnTimeLeftListener) {
         this._onTimeLeftListener = onTimeLeftListener;
         if (this._timer) {
-            this._onTimeLeftListener?.(convertMsToFormattedMinSecTime(this._timer.getRemainingTimeMs()));
+            this._onTimeLeftListener?.(convertMsToFormattedMinSecTime(this._timer.getRemainingTimeMs()), false);
         }
     }
 
@@ -90,7 +90,9 @@ class ConstraintsTracker {
     update(dtMs: number) {
         if (this._timer) {
             this._timer.update(dtMs);
-            this._onTimeLeftListener?.(convertMsToFormattedMinSecTime(this._timer.getRemainingTimeMs()));
+            this._onTimeLeftListener?.(
+                convertMsToFormattedMinSecTime(this._timer.getRemainingTimeMs()),
+                this._timer.isTimeUp());
         }
 
         if (this._timer?.isElapsed()) {

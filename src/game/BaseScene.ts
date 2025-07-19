@@ -46,6 +46,14 @@ class BaseScene extends Phaser.Scene {
         this.load.spritesheet("creatures", `creatures${filesColourSuffix}.png`, frameConfig);
         
         this.load.bitmapFont("bitpotion", "BitPotion.png", "BitPotion.xml");
+
+        this.load.audio("levelstart", ["levelstart.wav"]);
+        this.load.audio("timeup", ["timeup.wav"]);
+        this.load.audio("gameover", ["gameover.wav"]);
+        this.load.audio("pickup", ["pickup.wav"]);
+        this.load.audio("night", ["night.wav"]);
+        this.load.audio("victory", ["victory.wav"]);
+        this.load.audio("walk", ["walk.wav"]);
     }
 
     create() {
