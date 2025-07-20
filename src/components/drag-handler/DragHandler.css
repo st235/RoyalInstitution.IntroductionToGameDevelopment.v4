@@ -1,0 +1,43 @@
+.drag-handler {
+    width: 8px;
+    height: 100%;
+    position: relative;
+    display: block;
+}
+
+.drag-handler > .background {
+    width: 6px;
+
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+
+    margin: auto auto;
+
+    background-color: var(--container-secondary);
+
+    transition: height 0.3s ease, border-radius 0.3s ease;
+}
+
+.drag-handler > .background.collapsed {
+    height: 20%;
+    border-radius: 32px;
+    cursor: col-resize;
+}
+
+.drag-handler:hover > .background.collapsed {
+  height: 100%;
+  border-radius: 0;
+}
+
+.drag-handler:active > .background.collapsed {
+  height: 100%;
+  border-radius: 0;
+}
+
+.drag-handler > .background.expanded {
+    height: 100%;
+    cursor: not-allowed;
+}

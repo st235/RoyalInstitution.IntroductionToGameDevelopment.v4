@@ -1,5 +1,6 @@
 body {
   margin: 0;
+  background-color: var(--background);
 }
 
 * {
@@ -13,24 +14,59 @@ body {
   src: url(./BitPotion.ttf);
 }
 
-div {
-  font-family: myFirstFont;
+@font-face {
+  font-family: "Montserrat", sans-serif;
+  font-optical-sizing: auto;
+  font-synthesis-weight: auto;
+  font-style: normal;
+  src: url(./Montserrat-VariableFont_wght.ttf);
+}
+
+@font-face {
+  font-family: "Montserrat", sans-serif;
+  font-optical-sizing: auto;
+  font-synthesis-weight: auto;
+  font-style: italic;
+  src: url(./Montserrat-Italic-VariableFont_wght.ttf);
 }
 
 #root {
   width: 100vw;
   height: 100vh;
 
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+  font-family: "Montserrat", sans-serif;
   line-height: 1.5;
   font-weight: 400;
-
-  margin: 0 0;
-
-  color-scheme: light dark;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
+  /* Primary background colours. */
+  --background: #fdfdfd;
+  --on-background: #2a2a2a;
+
+  /* Primary Container & Content. */
+  --container-primary: #f5f5f5;
+  --container-on-primary: #2a2a2a;
+
+  /* Secondary Container & Content. */
+  --container-secondary: #eeeeee;
+  --container-on-secondary: #333333;
+
+  /* Accent. */
+  --accent-primary: #8da259;         /* Core green. */
+  --accent-secondary: #869365;       /* Lighter green for hovers, borders. */
+  --on-accent: #ffffff;              /* White text on green. */
+
+  /* Typography. */
+  --text-primary: #1e1e1e;           /* For headings, strong. */
+  --text-secondary: #555555;         /* For body text. */
+  --text-caption: #888888;           /* For less important text. */
+
+  /* Identica. */
+  --logo-accent-colour: #8da259;
+  --logo-outline-colour: #fdfdfd;
+  --logo-background-colour: #131c19;
 }
