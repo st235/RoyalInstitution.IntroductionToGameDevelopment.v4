@@ -12,7 +12,8 @@ const testConfig: TileTypeCodeMapping = {
     coin: "D",
     key: "E",
     door: "F",
-    monster: "G"
+    monster: "G",
+    garniture: "H",
 };
 
 describe("TileCodeMapper#constructor", {}, () => {

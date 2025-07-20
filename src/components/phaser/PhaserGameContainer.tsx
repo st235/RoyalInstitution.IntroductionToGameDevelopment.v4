@@ -51,7 +51,7 @@ function PhaserGameContainer(props: PhaserGameContainerProps) {
                 game.current = null;
             }
         };
-    }, [ref, game]);
+    }, [ref, game, props.scenes, props.viewport.width, props.viewport.height, props.launch.key, props.launch.data]);
 
     useEffect(() => {
         EventBus.on("current-scene-ready", (newScene: Phaser.Scene) => {
@@ -64,7 +64,7 @@ function PhaserGameContainer(props: PhaserGameContainerProps) {
         return () => {
             EventBus.removeListener("current-scene-ready");
         };
-    }, [ref]);
+    }, [props, ref]);
 
     return (
         <div id="game-container" />

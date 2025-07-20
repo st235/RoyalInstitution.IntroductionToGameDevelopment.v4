@@ -1,5 +1,3 @@
-import Phaser from "phaser";
-
 import type { MazeSceneParams } from "@game/scenes/MazeScene";
 
 import BaseScene from "@/game/scenes/BaseScene";
