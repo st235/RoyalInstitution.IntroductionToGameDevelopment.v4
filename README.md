@@ -1,69 +1,98 @@
-# React + TypeScript + Vite
+# Legend of Royal Institution: WebIDE
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Welcome to the **Legend of Royal Institution Online IDE**,
+an educational tool designed for introducing students to the world of game development through a hands-on,
+text-configurable maze game.
 
-Currently, two official plugins are available:
+This project is used in workshops delivered in collaboration with [the **Royal Institution**](https://www.rigb.org)
+and built to demystify how games are made - from gameplay mechanics to level design and AI behavior.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+---
 
-## Expanding the ESLint configuration
+## Workshop Learning Plan
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+### 1. What Makes Up a Video Game?
+- **Gameplay** – How the player interacts with the game.
+- **Mechanics** – The rules and systems (e.g., keys open doors, coins increase score).
+- **End Goal** – What does it mean to win or finish the game?
 
-```js
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+### 2. Playthrough & Analysis
+- Play the sample maze and try to understand its rules.
+- Brainstorm 2–3 mechanics you'd like to add that aren't in the game yet.
 
-      // Remove tseslint.configs.recommended and replace with this
-      ...tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      ...tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      ...tseslint.configs.stylisticTypeChecked,
+### 3. Building a Custom Level
+- Learn about config/data-driven design.
+- Understand wall configuration and layout logic.
+- Create your own tile config.
+- Design your own maze.
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+### 4. Adding Mechanics
+- Revisit mechanic ideas and choose a few to implement.
+- Add coin tiles.
+- Assign different point values to different coins.
+- Introduce doors and keys.
+
+### 5. Design Challenge
+- Place doors and keys in a way that makes the level interesting.
+- Refine and test a custom labyrinth.
+
+### 6. Thinking About AI
+- What would a monster do? Where would it go?
+- Prototype custom monster behavior in text config.
+
+### 7. Misc – Spice It Up!
+- Add easter eggs or secret levels.
+- Add additional constraints like a move limit, timer, or collectibles challenge.
+
+
+## Educational Goals
+
+By the end of this workshop, students will:
+
+- Understand the structure of a video game
+- Modify game mechanics and level design using data/config files
+- Explore how games respond to user input and rules
+- Experiment with AI-like behavior and gameplay balance
+- Express creativity through level building and gameplay tweaks
+
+---
+
+## Tech Stack
+
+- **Game Engine:** [Phaser 3](https://phaser.io/)
+- **Frontend:** TypeScript + React + Redux
+- **Deployment:** GitHub Pages
+
+
+## 🚀 Getting Started
+
+### Local Development
+
+```bash
+npm install
+npm run dev
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+> [!TIP]
+> Open your browser at [http://localhost:5173/RoyalInstitution.IntroductionToGameDevelopment.v4](http://localhost:5173/RoyalInstitution.IntroductionToGameDevelopment.v4) to see the Web IDE running
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+### Run Lint, Tests, and Build
 
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+Before pushing changes:
+npm test         # Run unit tests
+npm run lint     # Run ESLint
+npm run build    # Build for production
+
+> [!INFO]
+> CI must be green to contribute!
+
+## Screenshots
+
+### Game
+
+| Title | Dialog system | Maze |
+| ---- | ---- | ---- |
+| ![Title](./assets/title.png) | ![Dialog System](./assets/dialog.png) | ![Maze](./assets/maze_monsters.png) |
+
+
+Created with ❤️ for the Royal Institution.
