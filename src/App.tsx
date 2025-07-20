@@ -9,18 +9,22 @@ import MazeScene from "@/game/scenes/MazeScene";
 import PhaserGameContainer from "./components/phaser/PhaserGameContainer";
 import StartScene from "@/game/scenes/StartScene";
 import TextDialogScene from "@game/scenes/TextDialogScene";
+import SideBarLayout from "@components/sidebar-layout/SideBarLayout";
 
 function App() {
     const phaserRef = useRef<PhaserGameContainerRef>(null);
 
     return (
         <>
-            <PhaserGameContainer
-                viewport={{width: 220, height: 180}}
-                launch={{key: "StartScene", data: riMondayDemoConfig}}
-                scenes={[StartScene, MazeScene, TextDialogScene]}
-                containerRef={phaserRef}
-            />
+            <SideBarLayout
+                sidebar={<p>Hello world</p>}>
+                <PhaserGameContainer
+                    viewport={{width: 220, height: 180}}
+                    launch={{key: "StartScene", data: riMondayDemoConfig}}
+                    scenes={[StartScene, MazeScene, TextDialogScene]}
+                    containerRef={phaserRef}
+                />
+            </SideBarLayout>
         </>
     );
 }
