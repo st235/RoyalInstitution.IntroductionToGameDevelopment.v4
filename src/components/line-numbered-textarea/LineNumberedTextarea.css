@@ -1,0 +1,84 @@
+.line-numbered-textarea {
+    --default-font-size: 16px;
+    --default-line-height: 26px;
+    --default-border-radius: 16px;
+
+    width: 100%;
+    height: max-content;
+
+    margin: 0 0;
+    overflow: hidden;
+
+    border-style: solid;
+    border-width: 4px;
+    border-color: var(--container-primary);
+    border-radius: 12px;
+
+    position: relative;
+    display: flex;
+    flex-direction: row;
+}
+
+.line-numbered-textarea > ul.lines-counter {
+    height: 100%;
+
+    flex-basis: 56px;
+
+    padding: 0;
+    margin: 0;
+    list-style-type: none;
+
+    font-family: monospace;
+    font-size: var(--default-font-size);
+    line-height: var(--default-line-height);
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: right;
+    text-align: right;
+
+    background-color: var(--container-primary);
+
+    &:focus-visible {
+        outline: none;
+    };
+}
+
+.line-numbered-textarea > .lines-counter > li.line {
+    padding-left: 4px;
+    padding-right: 4px;
+    color: var(--container-on-primary);
+    font-family: monospace;
+    font-size: var(--default-font-size);
+    line-height: var(--default-line-height);
+    font-weight: 500;
+}
+
+.line-numbered-textarea > .textarea {
+    flex: 1;
+
+    padding: 0;
+    margin: 0;
+    margin-left: 4px;
+    resize: none;
+
+    font-family: monospace;
+    font-size: var(--default-font-size);
+    line-height: var(--default-line-height);
+    background-color: transparent;
+    border: none;
+    outline: none;
+    overflow: hidden;
+
+    &:focus-visible {
+        outline: none;
+    }
+}
+
+.line-numbered-textarea > .controls {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    margin: 12px;
+}
