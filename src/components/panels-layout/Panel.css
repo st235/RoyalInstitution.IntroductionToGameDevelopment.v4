@@ -1,0 +1,6 @@
+.panels-container > .panel {
+  height: 100%;
+  overflow: auto;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}

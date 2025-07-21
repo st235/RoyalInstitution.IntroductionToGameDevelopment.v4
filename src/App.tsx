@@ -5,8 +5,10 @@ import type { PhaserGameContainerRef } from "@/components/phaser/PhaserGameConta
 
 import { useRef } from "react";
 
+import DragHandler from "@components/drag-handler/DragHandler";
 import MazeScene from "@/game/scenes/MazeScene";
 import NavigationRail from "@components/navigation-rail/NavigationRail";
+import PanelsLayout from "@components/panels-layout/PanelsLayout";
 import PhaserGameContainer from "./components/phaser/PhaserGameContainer";
 import SideBarLayout from "@components/sidebar-layout/SideBarLayout";
 import StartScene from "@/game/scenes/StartScene";
@@ -21,14 +23,23 @@ function App() {
                 sidebar={
                     <NavigationRail
                         header={<p>Header</p>}
-                        footer={<p>Footer</p>}
-                    >{"Content"}</NavigationRail>
+                        footer={<p>Footer</p>}>
+                        {"Content"}
+                    </NavigationRail>
                 }>
-                <PhaserGameContainer
-                    viewport={{width: 220, height: 180}}
-                    launch={{key: "StartScene", data: riMondayDemoConfig}}
-                    scenes={[StartScene, MazeScene, TextDialogScene]}
-                    containerRef={phaserRef}
+                <PanelsLayout
+                    columns={[
+                        { content: (<p>Hello world</p>), defaultWeight: 1, minWidth: 200, },
+                        { content: (
+                            <PhaserGameContainer
+                                viewport={{width: 220, height: 180}}
+                                launch={{key: "StartScene", data: riMondayDemoConfig}}
+                                scenes={[StartScene, MazeScene, TextDialogScene]}
+                                containerRef={phaserRef}
+                            />
+                        ), defaultWeight: 1 },
+                    ]}
+                    resizer={<DragHandler variant="collapsed" />}
                 />
             </SideBarLayout>
         </>

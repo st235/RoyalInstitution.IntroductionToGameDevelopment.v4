@@ -1,0 +1,4 @@
+.panels-container > .resizer {
+  max-width: 32px;
+  height: 100%;
+}
