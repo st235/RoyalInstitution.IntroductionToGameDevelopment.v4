@@ -1,0 +1,28 @@
+.popup-layout {
+    position: relative;
+}
+
+.popup-layout > .popup {
+    visibility: hidden;
+
+    width: max-content;
+    height: max-content;
+
+    position: absolute;
+}
+
+.popup-layout:hover > .popup {
+    visibility: visible;
+    -webkit-animation: fadeIn 0.5s;
+    animation: fadeIn 0.5s;
+}
+
+@-webkit-keyframes fadeIn {
+  from {opacity: 0;} 
+  to {opacity: 1;}
+}
+
+@keyframes fadeIn {
+  from {opacity: 0;}
+  to {opacity:1 ;}
+}
