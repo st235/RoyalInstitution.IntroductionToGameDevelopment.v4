@@ -1,6 +1,5 @@
 import "@/App.css";
 import riMondayDemoConfig from "@assets/demos/ri_monday_demo.json";
-import icLockFill from "@assets/icons/lock-fill.svg";
 
 import type { PhaserGameContainerRef } from "@/components/phaser/PhaserGameContainer";
 
@@ -14,8 +13,13 @@ import PhaserGameContainer from "./components/phaser/PhaserGameContainer";
 import SideBarLayout from "@components/sidebar-layout/SideBarLayout";
 import StartScene from "@/game/scenes/StartScene";
 import TextDialogScene from "@game/scenes/TextDialogScene";
-import Button from "@components/button/Button";
-import TextToggle from "@/components/text-toggle/TextToggle";
+import HtmlContentCard from "@components/html-content-card/HtmlContentCard";
+
+const kText = `
+  <p>Hello world</p>
+  <p>Look at this amazing image below:</p>
+  <img src="@public/gems-colour.png" />
+`;
 
 function App() {
     const phaserRef = useRef<PhaserGameContainerRef>(null);
@@ -32,7 +36,7 @@ function App() {
                 }>
                 <PanelsLayout
                     columns={[
-                        { content: (<div><Button text="Hello" variant="primary" /><TextToggle variant="primary" text="A" background={icLockFill} /></div>), defaultWeight: 1, minWidth: 200, },
+                        { content: (<HtmlContentCard id="1" title="Title" description={kText} />), defaultWeight: 1, minWidth: 200, },
                         { content: (
                             <PhaserGameContainer
                                 viewport={{width: 220, height: 180}}
