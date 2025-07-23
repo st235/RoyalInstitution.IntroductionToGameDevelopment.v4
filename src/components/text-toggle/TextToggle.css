@@ -1,0 +1,83 @@
+.text-toggle {
+    width: 64px;
+    height: 64px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+
+    border-radius: 16px;
+    position: relative;
+
+    overflow: hidden;
+
+    cursor: pointer;
+
+    border-style: solid;
+    border-width: 0px;
+    -webkit-user-select: none; /* Safari */
+    -ms-user-select: none; /* IE 10 and IE 11 */
+    user-select: none; /* Standard syntax */
+
+    transition: border-width 0.3s ease;
+
+    &:hover {
+        border-width: 3px;
+    };
+
+    &.selected {
+        border-width: 3px;
+    };
+}
+
+.text-toggle > .content {
+    font-weight: 800;
+    font-size: 1.6em;
+}
+
+.text-toggle > .background {
+    width: 110px;
+    height: 110px;
+    position: absolute;
+    background-repeat: space space;
+    background-size: 24px;
+    transform: rotate(17deg);
+}
+
+.text-toggle.primary {
+    border-color: var(--container-on-primary);
+    background-color: var(--container-primary);
+    color: var(--container-on-primary);
+}
+
+.text-toggle.primary > .background {
+    opacity: 10%;
+}
+
+.text-toggle.secondary {
+    border-color: var(--container-on-secondary);
+    background-color: var(--container-secondary);
+    color: var(--container-on-secondary);
+    cursor: not-allowed;
+
+    &:hover {
+        border-width: 0px;
+    };
+}
+
+.text-toggle.secondary > .background {
+    opacity: 10%;
+}
+
+.text-toggle.accent {
+    border-color: var(--container-on-primary);
+    background-color: var(--accent-primary);
+    color: var(--on-accent);
+}
+
+.text-toggle.accent > .background {
+    opacity: 30%;
+    filter: invert(100%);
+    -webkit-filter: invert(100%);
+}
