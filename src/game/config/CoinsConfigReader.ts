@@ -1,4 +1,4 @@
-import defaultCoinsConfig from "@assets/configs/default_coins_config.json";
+import defaultCoinsConfig from "@assets/game/configs/default_coins_config.json";
 
 import type { VariableTileAppearance } from "@game/config/TileVariationReader";
 

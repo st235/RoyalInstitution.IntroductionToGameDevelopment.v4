@@ -1,4 +1,4 @@
-import defaultFlagVariationConfig from "@assets/configs/default_flags_config.json";
+import defaultFlagVariationConfig from "@assets/game/configs/default_flags_config.json";
 
 import type { VariableTileAppearance } from "@game/config/TileVariationReader";
 

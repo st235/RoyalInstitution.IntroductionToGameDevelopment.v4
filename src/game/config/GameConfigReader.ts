@@ -1,4 +1,4 @@
-import defaultGameConfig from "@assets/configs/default_game_config.json";
+import defaultGameConfig from "@assets/game/configs/default_game_config.json";
 
 import type { VariableTileAppearance } from "@game/config/TileVariationReader";
 import type { CharacterConfig } from "@game/config/CharacterConfigReader";

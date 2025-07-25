@@ -1,4 +1,4 @@
-import defaultConfig from "@assets/configs/default_tile_symbols_mapping.json";
+import defaultConfig from "@assets/game/configs/default_tile_symbols_mapping.json";
 
 import { assert } from "@/util/Assert";
 import TileCode from "@game/config/TileCode";
