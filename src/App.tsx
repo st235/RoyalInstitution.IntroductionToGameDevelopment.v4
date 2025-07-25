@@ -14,6 +14,8 @@ import SideBarLayout from "@components/sidebar-layout/SideBarLayout";
 import StartScene from "@/game/scenes/StartScene";
 import TextDialogScene from "@game/scenes/TextDialogScene";
 import HtmlContentCard from "@components/html-content-card/HtmlContentCard";
+import LogoPopup from "@/pages/base/components/logo-popup/LogoPopup";
+import InfoFooter from "@/pages/base/components/info-footer/InfoFooter";
 
 const kText = `
   <p>Hello world</p>
@@ -29,8 +31,8 @@ function App() {
             <SideBarLayout
                 sidebar={
                     <NavigationRail
-                        header={<p>Header</p>}
-                        footer={<p>Footer</p>}>
+                        header={<LogoPopup />}
+                        footer={<InfoFooter />}>
                         {"Content"}
                     </NavigationRail>
                 }>

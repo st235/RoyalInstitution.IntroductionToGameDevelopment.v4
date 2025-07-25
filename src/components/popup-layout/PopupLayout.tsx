@@ -22,19 +22,16 @@ function PopupLayout(props: PopupLayoutProps) {
         anchorProperties.left = 0;
     }
 
-    if (props.anchor?.left) {
+    if (props.anchor?.left !== undefined) {
         anchorProperties.left = props.anchor.left;
     }
-
-    if (props.anchor?.top) {
+    if (props.anchor?.top !== undefined) {
         anchorProperties.top = props.anchor.top;
     }
-
-    if (props.anchor?.right) {
+    if (props.anchor?.right !== undefined) {
         anchorProperties.right = props.anchor.right;
     }
-
-    if (props.anchor?.bottom) {
+    if (props.anchor?.bottom !== undefined) {
         anchorProperties.bottom = props.anchor.bottom;
     }
 

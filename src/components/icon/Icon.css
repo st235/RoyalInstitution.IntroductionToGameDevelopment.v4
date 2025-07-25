@@ -1,0 +1,10 @@
+.icon {
+  aspect-ratio: 1;
+}
+
+.icon.square {
+  width: 64px;
+  padding: 16px;
+  border-radius: 16px;
+  background-color: var(--container-primary);
+}

@@ -3,19 +3,19 @@ import "@components/text-toggle/TextToggle.css";
 type TextToggleProps = {
     text: string;
     variant: "primary" | "secondary" | "accent";
-    isSelected?: boolean;
+    isChecked?: boolean;
     background?: string;
-    onClick?: () => void;
+    onToggle?: (check: boolean) => void;
 };
 
 function TextToggle(props: TextToggleProps) {
     return (
-        <span
-            className={`text-toggle ${props.variant} ${props.isSelected ? "selected" : ""}`}
-            onClick={props.onClick}>
+        <div
+            className={`text-toggle ${props.variant} ${props.isChecked ? "checked" : ""}`}
+            onClick={() => props.onToggle?.(!props.isChecked)}>
             <span className="content">{props.text}</span>
             <div className="background" style={{backgroundImage: `url("${props.background}")`,}} />
-        </span>
+        </div>
     );
 }
 

@@ -26,7 +26,7 @@
         border-width: 3px;
     };
 
-    &.selected {
+    &.checked {
         border-width: 3px;
     };
 }
