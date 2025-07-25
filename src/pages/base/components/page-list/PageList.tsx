@@ -3,7 +3,7 @@ import "@/pages/base/components/page-list/PageList.css";
 import IconLockFill from "@assets/icons/lock-fill.svg";
 import IconCheckLg from "@assets/icons/check-lg.svg";
 
-import { type PageWithExercise } from "../../types/Page";
+import { type PageWithExercise } from "@/models/Page";
 import TextToggle from "@components/text-toggle/TextToggle";
 
 type PageListProps = {
