@@ -1,4 +1,4 @@
-import defaultCharacterConfig from "@assets/configs/default_character_config.json";
+import defaultCharacterConfig from "@assets/game/configs/default_character_config.json";
 
 type CharacterConfig = {
     tile: number;

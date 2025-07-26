@@ -1,4 +1,4 @@
-import defaultMonstersConfig from "@assets/configs/default_monsters_config.json";
+import defaultMonstersConfig from "@assets/game/configs/default_monsters_config.json";
 
 /**
  * [di, dj]

@@ -1,4 +1,4 @@
-import defaultGarnitureConfig from "@assets/configs/default_garniture_config.json";
+import defaultGarnitureConfig from "@assets/game/configs/default_garniture_config.json";
 
 import type { VariableTileAppearance } from "@game/config/TileVariationReader";
 

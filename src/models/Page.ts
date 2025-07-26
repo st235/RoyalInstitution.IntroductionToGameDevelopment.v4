@@ -1,6 +1,6 @@
 type PageState = "locked" | "in-progress" | "completed";
 
-type PageStatic = {
+type Page = {
     id: string;
     ordinal: number;
     title: string;
@@ -9,8 +9,8 @@ type PageStatic = {
     sandboxPlaceholder?: string;
 };
 
-type PageWithExercise = PageStatic & {
+type StatefulPage = Page & {
     state: PageState;
 };
 
-export type { PageStatic, PageWithExercise, PageState };
+export type { Page, StatefulPage, PageState };

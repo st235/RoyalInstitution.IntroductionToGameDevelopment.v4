@@ -1,4 +1,4 @@
-import defaultDoorsConfig from "@assets/configs/default_doors_config.json";
+import defaultDoorsConfig from "@assets/game/configs/default_doors_config.json";
 
 import type { VariableTileAppearance } from "@game/config/TileVariationReader";
 
