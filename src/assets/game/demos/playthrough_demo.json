@@ -1,0 +1,44 @@
+{
+    "gameConfig": {
+        "applyCathodRayTubeEffect": false,
+        "messagesOverwrites": {
+            "character": 0,
+            "intro": "Greetings,\nfearless students!\nEscape the maze...\nor at least debug it.",
+            "introHeight": 80,
+            "gameOver": "Mistakes happen...\nGive it another go",
+            "victory": "Great job!\nYou've completed\nthe first step.\nMore challenges\nlie ahead!",
+            "victoryHeight": 90
+        },
+        "configsOverwrites": {
+            "walls": {
+                "variations": [340, 212, 341, 339, 338, 337, 344, 342, 343, 59]
+            }
+        }
+    },
+    "initialLevelId": 1,
+    "levels": [
+        {
+            "id": 1,
+            "title": "Workshop demo",
+            "levelLayout": [
+                "SP .  W0 .  .  W0 .  .  .  W0 .  .  .  W0 .  W3 .  .  .  W0",
+                ".  W0 W2 .  W0 W0 .  W0 .  W0 .  W0 .  .  .  .  W2 .  W0 . ",
+                ".  .  .  .  .  .  .  W0 .  W0 .  W0 W0 W0 .  .  .  .  W0 . ",
+                ".  W7 W7 W7 W7 .  W0 .  .  .  .  .  .  W0 W0 W0 .  W4 W0 . ",
+                ".  .  .  .  W0 .  W0 W0 W0 .  W0 W0 .  .  .  .  .  .  .  . ",
+                "W0 W0 W0 .  W0 .  .  .  .  .  W0 .  W0 W0 W0 W0 W7 W3 W7 W0",
+                ".  .  .  .  W0 W0 W0 .  W0 .  W0 .  .  .  .  W1 .  .  .  . ",
+                ".  W0 W0 .  .  .  .  .  W0 .  W0 W0 W7 .  W0 W0 W0 W0 W0 . ",
+                ".  .  .  W0 W0 W0 W0 .  W0 .  .  .  .  .  W0 .  .  .  .  F0",
+                ".  W0 .  .  .  .  .  .  W0 W0 W1 .  W7 .  W0 .  W0 W0 .  . ",
+                ".  W0 W0 W0 W0 .  W0 W0 W0 .  .  .  W1 .  .  .  .  W2 W0 . ",
+                ".  .  .  .  .  .  .  .  .  .  W1 W8 .  W0 W0 .  .  .  .  F0",
+                ".  W3 W3 W3 W3 W3 W3 W3 W3 .  .  .  .  .  .  W0 W2 W0 W0 . ",
+                ".  .  .  .  .  .  .  .  W0 W0 .  W0 W0 W0 .  .  .  .  .  . "
+            ],
+            "constraints": {
+                "maxTimeSec": 45
+            }
+        }
+    ]
+}
