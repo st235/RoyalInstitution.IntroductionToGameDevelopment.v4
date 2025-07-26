@@ -8,7 +8,7 @@ type LineNumberedTextareaProps = {
     value?: string;
     minLines: number;
     extraLinesOffset?: number;
-    controlsContent: React.ReactNode;
+    controlsContent?: React.ReactNode;
     onValueChanged?: (value: string) => void;
 };
 
@@ -52,7 +52,7 @@ function LineNumberedTextarea(props: LineNumberedTextareaProps) {
                 }}
                 wrap="off"
             />
-            <div className="controls">{props.controlsContent}</div>
+            {props.controlsContent && <div className="controls">{props.controlsContent}</div>}
         </div>
     );
 }
