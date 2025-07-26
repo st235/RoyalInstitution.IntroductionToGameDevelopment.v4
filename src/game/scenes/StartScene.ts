@@ -120,7 +120,7 @@ class StartScene extends BaseScene {
             ...this._params,
             message: {
                 text: this._gameConfigReader?.getMessageOverwrites()?.intro ?? "What?!\nA placeholder text?!!!\nNarrative!",
-                height: 60,
+                height: this._gameConfigReader?.getMessageOverwrites()?.introHeight ?? 60,
                 character: this._gameConfigReader?.getMessageOverwrites()?.character ?? 0,
             },
             nextSceneKey: "MazeScene",

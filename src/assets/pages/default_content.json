@@ -1,5 +1,6 @@
 {
     "defaultPageId": "1",
+    "openByDefault": ["1"],
     "pages": [
         {
             "id": "1",
@@ -57,6 +58,5 @@
             "sandboxPlaceholder": "function MoveSnake(snakePosition, foodPosition, cellsAround, lastDirection) {\n    …\n}\n",
             "shouldOpen": ["8"]
         }
-    ],
-    "openByDefault": ["1"]
+    ]
 }

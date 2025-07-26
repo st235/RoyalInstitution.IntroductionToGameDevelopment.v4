@@ -10,8 +10,11 @@ import type { MonstersConfig } from "@game/config/MonstersConfigReader";
 type MessageOverwrites = {
     character?: number;
     intro: string;
+    introHeight?: number;
     gameOver?: string;
+    gameOverHeight?: number;
     victory?: string;
+    victoryHeight?: number;
 };
 
 type GameConfig = {
