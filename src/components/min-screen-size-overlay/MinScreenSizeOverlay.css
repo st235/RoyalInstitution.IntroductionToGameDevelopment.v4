@@ -1,0 +1,12 @@
+.min-screen-size-overlay-banner {
+    width: 100%;
+    height: 100%;
+
+    color: var(--logo-outline-colour);
+    background-color: var(--logo-background-colour);
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}

@@ -8,13 +8,13 @@ function SaveToLocalStorage<T>(key: string, value: T): boolean {
     }
 }
 
-function ReadFromLocalStorage<T>(key: string): T | undefined {
+function ReadFromLocalStorage<T>(key: string, defaultValue: T): T {
     try {
         const item = window.localStorage.getItem(key);
-        return item ? JSON.parse(item) as T : undefined;
+        return item ? (JSON.parse(item) as T) : defaultValue;
     } catch (error) {
         console.error(error);
-        return undefined;
+        return defaultValue;
     }
 }
 

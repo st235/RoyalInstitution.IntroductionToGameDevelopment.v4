@@ -1,0 +1,67 @@
+.window {
+    width: fit-content;
+    height: fit-content;
+
+    border-style: solid;
+    border-radius: 16px;
+    border-color: var(--container-primary);
+
+    margin: 32px;
+
+    padding-top: 64px;
+    padding-bottom: 32px;
+    padding-left: 32px;
+    padding-right: 32px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    row-gap: 16px;
+
+    position: relative;
+}
+
+.window > .fake-controls {
+    display: flex;
+    flex-direction: row;
+
+    position: absolute;
+    top: 8px;
+    left: 12px;
+    column-gap: 8px;
+
+}
+
+.window > .fake-controls > .control {
+    width: 12px;
+    height: 12px;
+    border-radius: 12px;
+}
+
+.window > .fake-controls > .red {
+    background: #ff5c5c;
+}
+
+.window > .fake-controls > .orange {
+    background: #ffbd4c;
+}
+
+.window > .fake-controls > .green {
+    background: #00ca56;
+}
+
+@media only screen and (min-width: 1250px) {
+    .min-screen-size-overlay-banner { display: none; }
+}
+
+.window > img {
+    max-width: 128px;
+    max-height: 128px;
+}
+
+.window > p {
+    font-weight: 600;
+    font-size: 1.6em;
+    text-align: center;
+}

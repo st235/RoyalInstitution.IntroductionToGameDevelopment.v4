@@ -9,12 +9,17 @@ type TextToggleProps = {
 };
 
 function TextToggle(props: TextToggleProps) {
+    const backgroundCssProperties: React.CSSProperties = {};
+    if (props.background) {
+        backgroundCssProperties.backgroundImage = `url("${props.background}")`;
+    }
+
     return (
         <div
             className={`text-toggle ${props.variant} ${props.isChecked ? "checked" : ""}`}
             onClick={() => props.onToggle?.(!props.isChecked)}>
             <span className="content">{props.text}</span>
-            <div className="background" style={{backgroundImage: `url("${props.background}")`,}} />
+            <div className="background" style={backgroundCssProperties} />
         </div>
     );
 }

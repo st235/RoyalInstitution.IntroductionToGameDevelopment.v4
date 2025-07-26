@@ -3,13 +3,13 @@ import "@/pages/base/components/page-list/PageList.css";
 import IconLockFill from "@assets/icons/lock-fill.svg";
 import IconCheckLg from "@assets/icons/check-lg.svg";
 
-import { type PageWithExercise } from "@/models/Page";
 import TextToggle from "@components/text-toggle/TextToggle";
+import type { StatefulPage } from "@/models/Page";
 
 type PageListProps = {
     selectedPageId?: string;
-    pages: PageWithExercise[];
-    onPageSelected: (exercise: PageWithExercise) => void;
+    pages: StatefulPage[];
+    onPageSelected: (exercise: StatefulPage) => void;
 };
 
 function PageList(props: PageListProps) {
