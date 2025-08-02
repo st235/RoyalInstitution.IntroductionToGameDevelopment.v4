@@ -1,16 +1,20 @@
 type PageState = "locked" | "in-progress" | "completed";
 
+type PageComponent = {
+    id: string;
+    type: string;
+    data?: object;
+}
+
 type Page = {
     id: string;
     ordinal: number;
-    title: string;
-    description: string;
+    components: PageComponent[];
     shoudOpen: string[];
-    sandboxPlaceholder?: string;
-};
+}
 
 type StatefulPage = Page & {
     state: PageState;
-};
+}
 
-export type { Page, StatefulPage, PageState };
+export type { Page, StatefulPage, PageState, PageComponent };

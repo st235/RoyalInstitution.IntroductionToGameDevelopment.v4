@@ -1,6 +1,9 @@
 import defaultPagesContent from "@assets/pages/default_content.json";
 
 import type { Page, StatefulPage, PageState } from "@/models/Page";
+import type { PersistentData } from "@/models/ui-data/PersistentData";
+
+type PageComponentsState = {[Key: string]: {[Key: string]: { persistencyId: string, state: object | undefined }}};
 
 const pagesLookup: { [id: string]: Page } =
     Object.fromEntries(
@@ -8,10 +11,8 @@ const pagesLookup: { [id: string]: Page } =
             return {
                 id: page.id,
                 ordinal: page.ordinal,
-                title: page.title,
-                description: page.description,
                 shoudOpen: page.shouldOpen ?? [],
-                sandboxPlaceholder: page.sandboxPlaceholder,
+                components: page.components,
             };
         }).map(page => [page.id, page])
     );
@@ -58,8 +59,64 @@ function AppendCompletedPageId(completedExerciseIds: string[], id: string): stri
     return Array.from(completedExerciseIdsLookup.values());
 }
 
+function AssociateStateAndPersistencyId(
+    stateLookup: PageComponentsState,
+    targetPageId?: string
+): {[Key: string]: object} {
+    if (targetPageId) {
+        return _AssociateStateAndPersistencyIdWithinPage(targetPageId, stateLookup);
+    }
+
+    const outObject = {};
+
+    for (const pageId of Object.keys(stateLookup)) {
+        const pageObject = _AssociateStateAndPersistencyIdWithinPage(pageId, stateLookup);
+        Object.assign(outObject, pageObject);
+    }
+
+    return outObject;
+}
+
+function _AssociateStateAndPersistencyIdWithinPage(
+    pageId: string,
+    stateLookup: PageComponentsState,
+): {[Key: string]: object} {
+    const pageComponents = stateLookup[pageId];
+    if (!pageComponents) {
+        return {};
+    }
+
+    const outObject: {[Key: string]: object} = {};
+    for (const component of Object.values(pageComponents)) {
+        if (component.state) {
+            outObject[component.persistencyId] = component.state;
+        }
+    }
+
+    return outObject;
+}
+
+function CanCompletePage(
+    page: Page,
+    stateLookup: PageComponentsState,
+): boolean {
+    for (const component of Object.values(page.components)) {
+        if (!(component.data as PersistentData | undefined)?.persistencyId) {
+            continue;
+        }
+
+        if (!stateLookup[page.id] || !stateLookup[page.id][component.id]) {
+            return false;
+        }
+    }
+
+    return true;
+}
+
 export {
     AppendCompletedPageId,
+    CanCompletePage,
     GetDefaultPageId,
     GetDefaultStatefulPages,
+    AssociateStateAndPersistencyId,
 };

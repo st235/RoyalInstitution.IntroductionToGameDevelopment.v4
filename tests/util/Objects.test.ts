@@ -37,6 +37,10 @@ describe("isObject", {}, () => {
 
 describe("flatten", {}, () => {
     it.each([
+        // Edge cases.
+        [null, {}],
+        [undefined, {}],
+
         // Flat objects.
         [{}, {}],
         [{a: 5}, {a: 5}],
@@ -49,7 +53,8 @@ describe("flatten", {}, () => {
         [{a:{b: 5, c: [0, false, "e"], d: {g: "world"}},}, {b: 5, c: [0, false, "e"], g: "world"}],
         [{d:{a:{b:{a:{w: "inner"}}}}, e: {b: ["hello"]}}, {w: "inner", b: ["hello"]}],
     ])("returns flattened object",
-        (obj: {[Key: string]: unknown}, expectedFlattenedObj: {[Key: string]: unknown}) => {
+        (obj: {[Key: string]: unknown} | undefined | null,
+            expectedFlattenedObj: {[Key: string]: unknown}) => {
             expect(flatten(obj)).toStrictEqual(expectedFlattenedObj);
         });
 });

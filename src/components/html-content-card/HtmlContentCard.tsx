@@ -8,7 +8,7 @@ type RawHtmlString = string;
 
 type HtmlContentCardProps = {
     id: string;
-    title: string;
+    title?: string;
     description: RawHtmlString;
 };
 
@@ -23,7 +23,7 @@ function HtmlContentCard(props: HtmlContentCardProps) {
         <div className="html-content-card">
             <div className="row-heading">
                 <span className="id">{props.id}</span>
-                <h1 className="title">{props.title}</h1>
+                {props.title && <h1 className="title">{props.title}</h1>}
             </div>
             <p className="description"
                 dangerouslySetInnerHTML={sanitizeHtmlContent(props.description)}

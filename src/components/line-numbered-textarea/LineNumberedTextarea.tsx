@@ -3,17 +3,17 @@ import "@components/line-numbered-textarea/LineNumberedTextarea.css";
 import { useMemo, useState } from "react";
 
 type LineNumberedTextareaProps = {
-    placeholder?: string;
-    name?: string;
-    value?: string;
     minLines: number;
+    placeholder?: string;
+    initialValue?: string;
+    name?: string;
     extraLinesOffset?: number;
     controlsContent?: React.ReactNode;
     onValueChanged?: (value: string) => void;
 };
 
 function LineNumberedTextarea(props: LineNumberedTextareaProps) {
-    const [value, setValue] = useState(props.value ?? "");
+    const [value, setValue] = useState(props.initialValue ?? "");
 
     const lineCount = useMemo(() => {
         const extraLinesOffset = props.extraLinesOffset ?? 0;

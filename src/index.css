@@ -56,9 +56,9 @@ body {
   --container-on-secondary: #333333;
 
   /* Accent. */
-  --accent-primary: #8da259;         /* Core green. */
-  --accent-secondary: #869365;       /* Lighter green for hovers, borders. */
-  --on-accent: #ffffff;              /* White text on green. */
+  --accent-primary: #c37835;         /* Warm pumpkin orange (for highlights) */
+  --accent-secondary: #aa5a2f;       /* Darker variant for borders, hover */
+  --on-accent: #1a1a1a;              /* Dark text for contrast on warm colors */
 
   /* Typography. */
   --text-primary: #1e1e1e;           /* For headings, strong. */
@@ -66,7 +66,7 @@ body {
   --text-caption: #888888;           /* For less important text. */
 
   /* Identica. */
-  --logo-accent-colour: #8da259;
+  --logo-accent-colour: #c37835;
   --logo-outline-colour: #fdfdfd;
   --logo-background-colour: #131c19;
 }
