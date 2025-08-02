@@ -39,7 +39,7 @@ function Sandbox(props: SandboxProxyProps) {
 
     return (
         <LineNumberedTextarea
-            minLines={7}
+            minLines={props.data.minLinesCount ?? 10}
             placeholder={props.data.placeholder}
             initialValue={value}
             controlsContent={

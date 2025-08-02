@@ -4,6 +4,7 @@ import type { LevelConfig } from "@game/config/LevelConfigReader";
 type ConfigProvider = {
     messageOverwrites?: MessageOverwrites,
     configOverwrites?: ConfigOverwrites,
+    levelLayout?: string[],
 };
 
 type ConfigOverwriteMapperFunction = (data: unknown, outConfigProvider: ConfigProvider) => void;
@@ -32,6 +33,10 @@ const configOverwritesMappers: {[Key: string]: ConfigOverwriteMapperFunction} = 
             outConfigProvider.messageOverwrites = {};
         }
         outConfigProvider.messageOverwrites.victory = data.value;
+    }),
+    "level.layout": _WrapOverwriteMapper((data: {value: string}, outConfigProvider: ConfigProvider) => {
+        outConfigProvider.levelLayout = data.value
+            .split(/\r?\n/);
     }),
     "config.walls": _WrapOverwriteMapper((data: {value: string}, outConfigProvider: ConfigProvider) => {
         if (!outConfigProvider.configOverwrites) {
@@ -69,7 +74,17 @@ function ObtainGameAndLevelConfigsOverwrites(
         };
     }
 
-    return [gameConfig, undefined];
+    let levelConfig: LevelConfig | undefined = undefined;
+    if (configProvider.levelLayout) {
+        levelConfig = {
+            id: 0,
+            title: "My first level",
+            levelLayout: configProvider.levelLayout,
+            constraints: {},
+        };
+    }
+
+    return [gameConfig, levelConfig];
 }
 
 

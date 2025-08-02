@@ -1,6 +1,6 @@
 import "@components/label/Label.css";
 
-type LabelVariant = "primary" | "secondary" | "caption";
+type LabelVariant = "primary" | "secondary" | "tertiary" | "caption";
 
 type LabelProps = {
     title: string;
@@ -11,7 +11,8 @@ function Label(props: LabelProps) {
     switch (props.variant) {
     case "primary": return (<h1 className="label">{props.title}</h1>);
     case "secondary": return (<h2 className="label">{props.title}</h2>);
-    case "caption": return (<p className="label">{props.title}</p>);
+    case "tertiary": return (<h3 className="label">{props.title}</h3>);
+    case "caption": return (<p className="label caption">{props.title}</p>);
     }
 }
 

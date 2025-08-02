@@ -11,15 +11,15 @@
                     "type": "info-card",
                     "data": {
                         "title": "Exercise 1: Learn and Play",
-                        "description": "<p>Welcome to your very first activity!</p><p>Before we dive into creating anything, let's take a moment to explore how the game works. In this step, you will play <span class=\"highlight\">the Legend of Royal Institution</span> (a maze game) and observe how it behaves.</p><p>Put on your game designer hat and answer the following questions:</p><ul><li>What are the rules of the maze?</li><li>How does the player move through it?</li><li>What happens when the player hits a wall?</li><li>What marks the end of the game?</li></ul><p>Use the <strong>text box below</strong> to jot down any rules, patterns, or interesting game mechanics you notice.There are no wrong answers - this is all about being curious and observant.</p><p>As you explore the Maze game, start thinking creatively about how you could make it more interesting or challenging. What new <strong>game mechanics</strong> could you add? Think about how these elements could change the way the game is played and how they might make it more fun or challenging. Write down any ideas that come to mind!</p><p>When you're ready, click the <strong>Save</strong> button to move on to the next step, where we will start shaping and modifying the maze game together!</p>"
+                        "description": "<p>Welcome to your very first activity!</p><p>Before we dive into creating anything, let's take a moment to explore how the game works. In this step, you will play <span class=\"highlight\">the Legend of Royal Institution</span> (a maze game) and observe how it behaves.</p><p>Put on your game designer hat and figure out how the game works. The following questions will help you to start:</p><ul><li>What are the rules of the maze?</li><li>How does the player move through it?</li><li>What marks the end of the game?</li></ul><p>Use the <strong>text boxes below</strong> to jot down any rules, patterns, or interesting game mechanics you notice.</p><p>As you explore the game, start thinking about how you could make it more interesting or challenging. What new <strong>game mechanics</strong> could you add? Think about how these elements could change the way the game is played and how they might make it more fun or challenging. Write down any ideas that come to mind!</p><p>Don't forget to click the <strong>Save</strong> button whenever you are ready to record your answer.</p><p>P.S.: There are no wrong answers! This is all about being curious and observant.</p><p>P.P.S.: After clicking the <strong>Save</strong> button the game will refresh.</p>"
                     }
                 },
                 {
-                    "id": "id.rules.label",
+                    "id": "id.label.rules",
                     "type": "label",
                     "data": {
-                        "title": "Game rules:",
-                        "variant": "primary"
+                        "title": "Observed game behaviour:",
+                        "variant": "secondary"
                     }
                 },
                 {
@@ -27,15 +27,16 @@
                     "type": "sandbox",
                     "data": {
                         "persistencyId": "temp.rules",
-                        "placeholder": "Here are a few ideas for the game rules:\nThe snake moves in the chosen direction\nFood items spawn at random locations\n…"
+                        "placeholder": "Here are a few ideas for the game rules:\nThe character moves when user clicks a button\nGame starts with a dialog\n…",
+                        "minLinesCount": 5
                     }
                 },
                 {
-                    "id": "id.features.label",
+                    "id": "id.label.features",
                     "type": "label",
                     "data": {
-                        "title": "Improvements:",
-                        "variant": "primary"
+                        "title": "Mechanics to add:",
+                        "variant": "secondary"
                     }
                 },
                 {
@@ -43,7 +44,8 @@
                     "type": "sandbox",
                     "data": {
                         "persistencyId": "temp.features",
-                        "placeholder": "Here are a few ideas for the game rules:\nThe snake moves in the chosen direction\nFood items spawn at random locations\n…"
+                        "placeholder": "Spawn the character randomly at some pre-defined start point\n…",
+                        "minLinesCount": 5
                     }
                 }
             ],
@@ -58,15 +60,15 @@
                     "id": "id.infocard",
                     "type": "info-card",
                     "data": {
-                        "title": "Exercise 2: Changing the plot",
-                        "description": "<p>Great job exploring the maze game! Now, let's move on to your next activity—this time, you're stepping into the role of a <span class=\"highlight\">narrative designer</span>.</p> <p>In this step, you'll get to change the <strong>dialogues</strong> that appear in three important moments of the game:</p> <ul><li><strong>Game Intro</strong>: The message players see when they first start the game.</li> <li><strong>Game Over</strong>: What the game says when the player hits a wall or fails.</li> <li><strong>Victory</strong>: The celebratory message when the player finishes the maze!</li></ul> <p>Take a few moments to play the maze game again and pay close attention to the text that appears during these three moments. Then, think about how you would change it. Do you want to make it more dramatic, silly, mysterious, or even motivational? It’s totally up to you!</p> <p>Use the <strong>text boxes below</strong> to rewrite each of the three dialogues in your own style.</p><p>Be creative and have fun with it! Whether you want your game to feel like a fantasy quest, a sci-fi mission, or a comedy maze is totally your choice.</p> <p>Once you're happy with your new dialogues, click <strong>Save</strong> to continue. Up next: we'll look at how to bring your custom dialogues into the actual game!</p>"
+                        "title": "Exercise 2: Kicking off the plot!",
+                        "description": "<p>Great job exploring the game! Now, let's move on to your next activity. This time, you're stepping into the role of a <span class=\"highlight\">narrative designer</span>.</p> <p>In this step, you'll get a chance to change the <strong>dialogues</strong> that appear in three important moments of the game:</p><ul><li><strong>Game Intro</strong>: the message players see when before the gameplay begins.</li><li><strong>Game Over</strong>: a message that is shown to the player fails to complete a level.</li> <li><strong>Victory</strong>: the celebratory message when the player finishes the maze!</li></ul><p>Take a few moments to play the maze game again and pay close attention to the text that appears during these scenarios. Then, think about how you would change it to justify the gameplay.</p><p>Do you want to make it more dramatic, silly, mysterious, or even motivational? Use the <strong>text boxes below</strong> to rewrite each of the three dialogues in your own style. Be creative and have fun with it!</p> <p>Once you're happy with your new dialogues, click <strong>Save</strong> to see how the game changes.</p>"
                     }
                 },
                 {
                     "id": "id.label.intro",
                     "type": "label",
                     "data": {
-                        "title": "Intro:",
+                        "title": "\"Game Intro\" message:",
                         "variant": "caption"
                     }
                 },
@@ -75,14 +77,15 @@
                     "type": "sandbox",
                     "data": {
                         "persistencyId": "message.intro",
-                        "placeholder": "Here are a few ideas for the game rules:\nThe snake moves in the chosen direction\nFood items spawn at random locations\n…"
+                        "placeholder": "I am a template message,\nI am required to setup the gameplay",
+                        "minLinesCount": 3
                     }
                 },
                 {
                     "id": "id.label.gameOver",
                     "type": "label",
                     "data": {
-                        "title": "Game over:",
+                        "title": "\"Game Over\" message:",
                         "variant": "caption"
                     }
                 },
@@ -91,14 +94,15 @@
                     "type": "sandbox",
                     "data": {
                         "persistencyId": "message.gameOver",
-                        "placeholder": "Here are a few ideas for the game rules:\nThe snake moves in the chosen direction\nFood items spawn at random locations\n…"
+                        "placeholder": "Haha!\nI knew it would be hard\nto finish the maze!",
+                        "minLinesCount": 3
                     }
                 },
                 {
                     "id": "id.label.victory",
                     "type": "label",
                     "data": {
-                        "title": "Improvements:",
+                        "title": "\"Victory\" message:",
                         "variant": "caption"
                     }
                 },
@@ -107,22 +111,104 @@
                     "type": "sandbox",
                     "data": {
                         "persistencyId": "message.victory",
-                        "placeholder": "Here are a few ideas for the game rules:\nThe snake moves in the chosen direction\nFood items spawn at random locations\n…"
+                        "placeholder": "Congratulations!\nWell done.",
+                        "minLinesCount": 3
                     }
                 }
             ],
-            "shouldOpen": []
+            "shouldOpen": ["3"]
         },
         {
-            "id": "ri-monday-demo",
+            "id": "3",
+            "ordinal": 3,
+            "components": [
+                {
+                    "id": "id.infocard",
+                    "type": "info-card",
+                    "data": {
+                        "title": "Exercise 3: Designing your first level layout",
+                        "description": "<p>Time to put your design skills to work.</p><p>In this exercise, you'll be designing your very first custom maze layout.</p><p>Your maze should be <strong>30 tiles wide</strong> and <strong>15 tiles high</strong>, but don't worry if it is bigger or smaller than <strong>30x15</strong> the layout will be expanded or cropped depending on the provided size.</p><p>You should use the next symbols to build a successful layout:<ul><li><code>W0</code> to represent walls</li><li><code>.</code> (a dot) to represent empty spaces that the player can walk through</li><li><code>SP</code> starting point. You can place a few of them around the maze, then the random will be chosen.</li><li><code>F0</code> for the finish point. You can also have a few of them in your layout.</li></ul></p><p>Focus on building a clear, playable layout. Think about where the player might start, where they could go, and how the maze flows.</p><p>Treat it like the skeleton of your level!</p><p>Once you're happy with your layout, click the <strong>Save</strong> button to record your design.</p><p>P.S.: If your game is stuck at some point, just refresh the page. Don't worry all saved data will be restored.</p>"
+                    }
+                },
+                {
+                    "id": "id.label.level",
+                    "type": "label",
+                    "data": {
+                        "title": "Level layout:",
+                        "variant": "caption"
+                    }
+                },
+                {
+                    "id": "id.sandbox.level",
+                    "type": "sandbox",
+                    "data": {
+                        "persistencyId": "level.layout",
+                        "placeholder": "W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0\nW0 SP .  .  .  .  .  .  .  .  .  .  .  W0 SP .  .  .  .  .  .  .  .  .  .  .  .  .  .  W0\nW0 W0 W0 W0 W0 .  W0 W0 W0 W0 W0 W0 W0 .  W0 W0 W0 W0 W0 W0 W0 .  W0 W0 W0 W0 .  W0 W0 W0\nW0 W0 .  .  .  .  W0 .  .  .  .  .  .  W0 .  .  .  .  .  .  .  .  W0 W0 .  .  .  .  .  W0\nW0 W0 W0 W0 W0 .  W0 W0 W0 W0 W0 W0 W0 .  W0 W0 W0 W0 W0 W0 W0 .  W0 W0 W0 W0 .  W0 W0 W0\nW0 W0 W0 .  .  .  .  W0 .  .  .  .  .  W0 .  .  .  .  .  .  .  .  W0 W0 .  .  .  .  .  W0\nW0 W0 W0 W0 W0 W0 .  W0 W0 W0 W0 .  W0 W0 W0 W0 .  W0 W0 .  W0 W0 W0 W0 W0 .  W0 W0 .  W0\nW0 .  .  .  .  .  W0 .  .  .  .  .  W0 .  .  .  .  .  .  .  W0 .  .  .  .  .  W0 W0 .  W0\nW0 W0 W0 W0 W0 .  W0 W0 W0 W0 W0 W0 W0 .  W0 W0 W0 W0 W0 .  W0 W0 W0 W0 W0 W0 .  W0 W0 W0\nW0 .  .  .  .  .  .  W0 .  .  .  .  .  .  W0 .  .  .  .  .  W0 .  .  .  .  .  .  W0 .  W0\nW0 W0 W0 W0 W0 .  W0 W0 W0 W0 W0 W0 W0 .  W0 W0 W0 W0 W0 W0 .  W0 W0 W0 W0 W0 .  W0 W0 W0\nW0 .  .  .  .  .  .  .  W0 .  .  .  .  .  W0 .  .  .  .  .  .  .  W0 .  .  .  .  .  .  W0\nW0 W0 W0 W0 W0 .  W0 W0 W0 W0 W0 W0 W0 .  W0 W0 W0 W0 W0 W0 .  W0 W0 W0 W0 W0 .  W0 W0 W0\nW0 .  .  .  .  .  .  .  W0 .  .  .  .  .  W0 .  .  .  .  .  .  .  W0 .  .  .  .  .  .  W0\nW0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0",
+                        "minLinesCount": 18
+                    }
+                }
+            ],
+            "shouldOpen": ["4"]
+        },
+                {
+            "id": "4",
+            "ordinal": 4,
+            "components": [
+                {
+                    "id": "id.infocard",
+                    "type": "info-card",
+                    "data": {
+                        "title": "Exercise 4: Improving the visual appearance",
+                        "description": "<p>Now that your level structure is in place, it's time to enhance its visual appearance using custom tile mapping.</p><p>In this exercise, you'll define how each tile should look by providing a list of <strong>tile IDs</strong> (ordinal values) that will be mapped to specific tile types in your maze.</p><p>Each tile ID you enter will be automatically assigned to a corresponding tile code: the first value becomes <code>W0</code>, the second <code>W1</code>, and so on—up to <code>WN</code>, where <strong>N</strong> is the index of the last value you provide.</p><p>Please enter your tile IDs in the text box below, separated by commas (e.g., <code>17, 21, 34, 56</code>). These values will control how each wall tile appears in the final rendered game.</p><p>You can be creative here! Think of these tile IDs as different styles or textures—maybe cracked stone, mossy brick, or glowing tiles. Just be sure to keep the order consistent with how you'll use <code>W0</code>, <code>W1</code>, etc., in your maze layout.</p><p>Once you've added your tile mapping, click the <strong>Save</strong> button to apply your changes.</p><p>This is an image to help you with the tile ids.</p><img src=\"@public/tiles-examples-walls.png\" width=\"400\"></img>"
+                    }
+                },
+                {
+                    "id": "id.label.walls",
+                    "type": "label",
+                    "data": {
+                        "title": "Walls variants:",
+                        "variant": "caption"
+                    }
+                },
+                {
+                    "id": "id.sandbox.walls",
+                    "type": "sandbox",
+                    "data": {
+                        "persistencyId": "config.walls",
+                        "placeholder": "340, 212",
+                        "minLinesCount": 3
+                    }
+                },
+                {
+                    "id": "id.label.level",
+                    "type": "label",
+                    "data": {
+                        "title": "Level layout:",
+                        "variant": "caption"
+                    }
+                },
+                {
+                    "id": "id.sandbox.level",
+                    "type": "sandbox",
+                    "data": {
+                        "persistencyId": "level.layout",
+                        "placeholder": "W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0\nW0 SP .  .  .  .  .  .  .  .  .  .  .  W0 SP .  .  .  .  .  .  .  .  .  .  .  .  .  .  W0\nW0 W0 W0 W0 W0 .  W0 W0 W0 W0 W0 W0 W0 .  W0 W0 W0 W0 W0 W0 W0 .  W0 W0 W0 W0 .  W0 W0 W0\nW0 W0 .  .  .  .  W0 .  .  .  .  .  .  W0 .  .  .  .  .  .  .  .  W0 W0 .  .  .  .  .  W0\nW0 W0 W0 W0 W0 .  W0 W0 W0 W0 W0 W0 W0 .  W0 W0 W0 W0 W0 W0 W0 .  W0 W0 W0 W0 .  W0 W0 W0\nW0 W0 W0 .  .  .  .  W0 .  .  .  .  .  W0 .  .  .  .  .  .  .  .  W0 W0 .  .  .  .  .  W0\nW0 W0 W0 W0 W0 W0 .  W0 W0 W0 W0 .  W0 W0 W0 W0 .  W0 W0 .  W0 W0 W0 W0 W0 .  W0 W0 .  W0\nW0 .  .  .  .  .  W0 .  .  .  .  .  W0 .  .  .  .  .  .  .  W0 .  .  .  .  .  W0 W0 .  W0\nW0 W0 W0 W0 W0 .  W0 W0 W0 W0 W0 W0 W0 .  W0 W0 W0 W0 W0 .  W0 W0 W0 W0 W0 W0 .  W0 W0 W0\nW0 .  .  .  .  .  .  W0 .  .  .  .  .  .  W0 .  .  .  .  .  W0 .  .  .  .  .  .  W0 .  W0\nW0 W0 W0 W0 W0 .  W0 W0 W0 W0 W0 W0 W0 .  W0 W0 W0 W0 W0 W0 .  W0 W0 W0 W0 W0 .  W0 W0 W0\nW0 .  .  .  .  .  .  .  W0 .  .  .  .  .  W0 .  .  .  .  .  .  .  W0 .  .  .  .  .  .  W0\nW0 W0 W0 W0 W0 .  W0 W0 W0 W0 W0 W0 W0 .  W0 W0 W0 W0 W0 W0 .  W0 W0 W0 W0 W0 .  W0 W0 W0\nW0 .  .  .  .  .  .  .  W0 .  .  .  .  .  W0 .  .  .  .  .  .  .  W0 .  .  .  .  .  .  W0\nW0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0",
+                        "minLinesCount": 18
+                    }
+                }
+            ],
+            "shouldOpen": ["5"]
+        },
+        {
+            "id": "demo-ri-monday",
             "ordinal": 100,
             "components": [
                 {
                     "id": "id.infocard",
                     "type": "info-card",
                     "data": {
-                        "title": "Exercise 2: Changing the plot",
-                        "description": "<p>Great job exploring the maze game! Now, let's move on to your next activity—this time, you're stepping into the role of a <span class=\"highlight\">narrative designer</span>.</p> <p>In this step, you'll get to change the <strong>dialogues</strong> that appear in three important moments of the game:</p> <ul><li><strong>Game Intro</strong>: The message players see when they first start the game.</li> <li><strong>Game Over</strong>: What the game says when the player hits a wall or fails.</li> <li><strong>Victory</strong>: The celebratory message when the player finishes the maze!</li></ul> <p>Take a few moments to play the maze game again and pay close attention to the text that appears during these three moments. Then, think about how you would change it. Do you want to make it more dramatic, silly, mysterious, or even motivational? It’s totally up to you!</p> <p>Use the <strong>text boxes below</strong> to rewrite each of the three dialogues in your own style.</p><p>Be creative and have fun with it! Whether you want your game to feel like a fantasy quest, a sci-fi mission, or a comedy maze is totally your choice.</p> <p>Once you're happy with your new dialogues, click <strong>Save</strong> to continue. Up next: we'll look at how to bring your custom dialogues into the actual game!</p>"
+                        "title": "Monday Meeting Demo",
+                        "description": "<p>Welcome to the Monday demo presented on <strong>21.07.25</strong></p><p>This demonstration showcases the full progression of potential exercises within the workshop experience. Students begin by exploring what makes up a video game its gameplay, mechanics, and end goals before diving into an analytical playthrough of a sample maze to identify existing rules and brainstorm new mechanics.</p><p>Next, they'll learn how to build their own custom level using data-driven design principles: configure wall layouts, define tile types, and bring their mazes to life.</p><p>Once a level is set, we'll implement mechanics like coins with varying point values, doors, and keys, then take on a design challenge to place those elements thoughtfully for an engaging gameplay experience.</p><p>From there, they'll explore simple AI concepts by imagining and prototyping monster behavior using text-based config files.</p><p>Finally, we'll spice things up with creative ideas—think secret levels, easter eggs, move limits, timers, and collectible challenges to make the game unique and fun.</p><p>This demo is a comprehensive journey through game design fundamentals using a hands-on, iterative approach. Have fun exploring and creating!</p><p>The levels included into this version are:<ol><li>Intro with basic mechanices</li><li>Gems</li><li>Doors</li><li>Monsters AI</li><li>Garniture: easter eggs</li><li>FX: Fog of War</li><li>Custom wall asset</li></ol><p>The game config can be found <a href=\"https://github.com/st235/RoyalInstitution.IntroductionToGameDevelopment.v4/blob/main/src/assets/game/demos/ri_monday_demo.json\" target=\"_blank\">here</a>.</p>"
                     }
                 }
             ],

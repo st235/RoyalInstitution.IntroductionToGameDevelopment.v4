@@ -15,9 +15,34 @@ import PageInteractiveContainer from "@/pages/base/components/page-interactive-c
 import PanelsLayout from "@components/panels-layout/PanelsLayout";
 import type { MazeSceneParams } from "@game/scenes/MazeScene";
 import type { Page } from "@/models/Page";
+import type { LevelConfig } from "@game/config/LevelConfigReader";
 
 type PlaythroughPageProps = {
     page: Page;
+};
+
+const defaultLevelLayout = [
+    "SP .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . ",
+    ".  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . ",
+    ".  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . ",
+    ".  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . ",
+    ".  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . ",
+    ".  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . ",
+    ".  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . ",
+    ".  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . ",
+    ".  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  F0",
+    ".  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . ",
+    ".  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . ",
+    ".  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  F0",
+    ".  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . ",
+    ".  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . "
+];
+
+const defaultLevelConfig: LevelConfig = {
+    id: 0,
+    title: "No Level",
+    levelLayout: defaultLevelLayout,
+    constraints: {},
 };
 
 function PlaythroughPage(props: PlaythroughPageProps) {
@@ -49,16 +74,9 @@ function PlaythroughPage(props: PlaythroughPageProps) {
         return {
             initialLevelId: levelConfig?.id ?? 0,
             gameConfig: gameConfig,
-            levels: [
-                {
-                    id: levelConfig?.id ?? 0,
-                    title: levelConfig?.title ?? "Workshop level",
-                    levelLayout: levelConfig?.levelLayout ?? [],
-                    constraints: levelConfig?.constraints ?? {},
-                }
-            ]
+            levels: [levelConfig ?? defaultLevelConfig],
         };
-    }, [gameConfig, levelConfig?.constraints, levelConfig?.id, levelConfig?.levelLayout, levelConfig?.title, page.asset]);
+    }, [gameConfig, levelConfig, page.asset]);
 
     return (
         <>

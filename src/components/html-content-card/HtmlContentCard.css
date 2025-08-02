@@ -28,7 +28,6 @@
 
 .html-content-card > .row-heading > .id {
     min-width: max-content;
-    aspect-ratio: 1;
 
     margin: 0;
     font-weight: 700;

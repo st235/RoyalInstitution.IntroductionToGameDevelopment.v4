@@ -152,12 +152,6 @@ class LayoutConfigReader {
             return undefined;
         }
 
-        for (let row = 0; row < tiles.length; row++) {
-            if (tiles[row].length != width) {
-                return undefined;
-            }
-        }
-
         return new LayoutConfigReader([width, height], tiles, mapper);
     }
 };
