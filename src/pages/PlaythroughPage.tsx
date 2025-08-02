@@ -1,9 +1,12 @@
+import playthroughDemoConfig from "@assets/game/demos/playthrough_demo.json";
+import riMondayDemoConfig from "@assets/game/demos/ri_monday_demo.json";
+
 import { useAppSelector, useAppDispatch } from "@/hooks/redux";
 
 import { AssociateStateAndPersistencyId, CanCompletePage } from "@/util/PageUtil";
 import { completePage } from "@/reducers/pagesSlice";
 import { ObtainGameAndLevelConfigsOverwrites } from "@/util/GameConfigUtil";
-import { useEffect } from "react";
+import { useEffect, useMemo } from "react";
 import ComponentFactory from "@/pages/base/components/component-factory/ComponentFactory";
 import DragHandler from "@components/drag-handler/DragHandler";
 import GameControlsLayout from "@/pages/base/components/game-controls-layout/GameControlsLayout";
@@ -37,18 +40,25 @@ function PlaythroughPage(props: PlaythroughPageProps) {
         }
     }, [completedPagesIds, dispatch, globalComponentsState.pageToComponentsLookup, page]);
 
-    const mazeSceneProps: MazeSceneParams = {
-        initialLevelId: levelConfig?.id ?? 0,
-        gameConfig: gameConfig,
-        levels: [
-            {
-                id: levelConfig?.id ?? 0,
-                title: levelConfig?.title ?? "Workshop level",
-                levelLayout: levelConfig?.levelLayout ?? [],
-                constraints: levelConfig?.constraints ?? {},
-            }
-        ]
-    };
+    const mazeSceneProps = useMemo<MazeSceneParams>(() => {
+        switch (page.asset) {
+        case "ri_monday_demo.json": return riMondayDemoConfig;
+        case "playthrough_demo.json": return playthroughDemoConfig;
+        }
+
+        return {
+            initialLevelId: levelConfig?.id ?? 0,
+            gameConfig: gameConfig,
+            levels: [
+                {
+                    id: levelConfig?.id ?? 0,
+                    title: levelConfig?.title ?? "Workshop level",
+                    levelLayout: levelConfig?.levelLayout ?? [],
+                    constraints: levelConfig?.constraints ?? {},
+                }
+            ]
+        };
+    }, [gameConfig, levelConfig?.constraints, levelConfig?.id, levelConfig?.levelLayout, levelConfig?.title, page.asset]);
 
     return (
         <>

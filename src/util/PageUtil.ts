@@ -13,6 +13,9 @@ const pagesLookup: { [id: string]: Page } =
                 ordinal: page.ordinal,
                 shoudOpen: page.shouldOpen ?? [],
                 components: page.components,
+                asset: page.asset,
+                isHidden: page.isHidden,
+                isOpenByDefault: page.isOpenByDefault,
             };
         }).map(page => [page.id, page])
     );
@@ -37,7 +40,8 @@ function GetDefaultStatefulPages(completedExerciseIds: string[]): StatefulPage[]
 
     return Object.values(pagesLookup).map(exercise => {
         const isCompleted: boolean = completedExerciseIdsLookup.has(exercise.id);
-        const isOpened: boolean = openedExerciseIds.has(exercise.id);
+        const isOpened: boolean = openedExerciseIds.has(exercise.id) || 
+            (exercise.isOpenByDefault ?? false);
 
         let state: PageState = "locked";
         if (isCompleted) {

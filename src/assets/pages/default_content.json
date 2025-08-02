@@ -47,6 +47,7 @@
                     }
                 }
             ],
+            "asset": "playthrough_demo.json",
             "shouldOpen": ["2"]
         },
         {
@@ -97,7 +98,7 @@
                     "id": "id.label.victory",
                     "type": "label",
                     "data": {
-                        "title": "Victory:",
+                        "title": "Improvements:",
                         "variant": "caption"
                     }
                 },
@@ -110,6 +111,24 @@
                     }
                 }
             ],
+            "shouldOpen": []
+        },
+        {
+            "id": "ri-monday-demo",
+            "ordinal": 100,
+            "components": [
+                {
+                    "id": "id.infocard",
+                    "type": "info-card",
+                    "data": {
+                        "title": "Exercise 2: Changing the plot",
+                        "description": "<p>Great job exploring the maze game! Now, let's move on to your next activity—this time, you're stepping into the role of a <span class=\"highlight\">narrative designer</span>.</p> <p>In this step, you'll get to change the <strong>dialogues</strong> that appear in three important moments of the game:</p> <ul><li><strong>Game Intro</strong>: The message players see when they first start the game.</li> <li><strong>Game Over</strong>: What the game says when the player hits a wall or fails.</li> <li><strong>Victory</strong>: The celebratory message when the player finishes the maze!</li></ul> <p>Take a few moments to play the maze game again and pay close attention to the text that appears during these three moments. Then, think about how you would change it. Do you want to make it more dramatic, silly, mysterious, or even motivational? It’s totally up to you!</p> <p>Use the <strong>text boxes below</strong> to rewrite each of the three dialogues in your own style.</p><p>Be creative and have fun with it! Whether you want your game to feel like a fantasy quest, a sci-fi mission, or a comedy maze is totally your choice.</p> <p>Once you're happy with your new dialogues, click <strong>Save</strong> to continue. Up next: we'll look at how to bring your custom dialogues into the actual game!</p>"
+                    }
+                }
+            ],
+            "asset": "ri_monday_demo.json",
+            "isHidden": true,
+            "isOpenByDefault": true,
             "shouldOpen": []
         }
     ]

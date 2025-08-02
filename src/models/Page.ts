@@ -11,6 +11,9 @@ type Page = {
     ordinal: number;
     components: PageComponent[];
     shoudOpen: string[];
+    asset?: string;
+    isHidden?: boolean;
+    isOpenByDefault?: boolean;
 }
 
 type StatefulPage = Page & {
