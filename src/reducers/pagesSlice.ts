@@ -14,14 +14,18 @@ type PagesState = {
     pagesLookup: { [id: string] : StatefulPage };
 };
 
-const initialState: PagesState = {
-    selectedPageId: ReadFromLocalStorage<string>(_LOCAL_STORAGE_KEY_SELECTED_PAGE_ID, GetDefaultPageId()),
-    completedPageIds: ReadFromLocalStorage<string[]>(_LOCAL_STORAGE_KEY_COMPLETED_PAGES_LIST, []),
-    pagesLookup: Object.fromEntries(
+function _GetPagesLookup(): { [id: string] : StatefulPage } {
+    return Object.fromEntries(
         GetDefaultStatefulPages(
             ReadFromLocalStorage<string[]>(_LOCAL_STORAGE_KEY_COMPLETED_PAGES_LIST, [])
         ).map(page => [page.id, page])
-    ),
+    );
+}
+
+const initialState: PagesState = {
+    selectedPageId: ReadFromLocalStorage<string>(_LOCAL_STORAGE_KEY_SELECTED_PAGE_ID, GetDefaultPageId()),
+    completedPageIds: ReadFromLocalStorage<string[]>(_LOCAL_STORAGE_KEY_COMPLETED_PAGES_LIST, []),
+    pagesLookup: _GetPagesLookup(),
 };
 
 const pagesSlice = createSlice({
@@ -40,7 +44,7 @@ const pagesSlice = createSlice({
             SaveToLocalStorage(_LOCAL_STORAGE_KEY_COMPLETED_PAGES_LIST, newCompletedPageIds);
 
             state.completedPageIds = newCompletedPageIds;
-            state.pagesLookup[completedPageId].state = "completed";
+            state.pagesLookup = _GetPagesLookup();
         },
     },
 });

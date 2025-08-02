@@ -1,18 +1,19 @@
 import "@/pages/base/RootNavigator.css";
 
+import { useParams, useNavigate } from "react-router";
 import { useAppSelector, useAppDispatch } from "@/hooks/redux";
 
 import { selectPage } from "@/reducers/pagesSlice";
-import DemoPage from "@/pages/base/DemoPage";
-import PlaythroughPage from "@/pages/playthrough/PlaythroughPage";
+import PlaythroughPage from "@/pages/PlaythroughPage";
 import InfoFooter from "@/pages/base/components/info-footer/InfoFooter";
 import LogoPopup from "@/pages/base/components/logo-popup/LogoPopup";
 import MinScreenSizeOverlay from "@/components/min-screen-size-overlay/MinScreenSizeOverlay";
 import NavigationRail from "@/components/navigation-rail/NavigationRail";
 import PageList from "@/pages/base/components/page-list/PageList";
 import SideBarLayout from "@/components/sidebar-layout/SideBarLayout";
-import type { Page, StatefulPage } from "@/models/Page";
+import type { StatefulPage } from "@/models/Page";
 import WindowSizeWarning from "@/pages/base/components/window-size-warning/WindowSizeWarning";
+import { useEffect } from "react";
 
 type SidebarRailProps = {
   selectedPageId: string;
@@ -27,29 +28,44 @@ function SidebarRail(props: SidebarRailProps) {
             footer={<InfoFooter />}>
             <PageList
                 selectedPageId={props.selectedPageId}
-                pages={props.pages}
+                pages={props.pages.filter(page => !page.isHidden)}
                 onPageSelected={props.onPageSelected}/>
         </NavigationRail>
     );
 }
 
-function navigationFactory(selectedPage: Page): React.ReactNode {
-    if (selectedPage.id === "1") return (<PlaythroughPage page={selectedPage} />);
-    return (<DemoPage page={selectedPage} />);
-}
-
 function RootNavigator() {
+    const params = useParams();
+    const navigate = useNavigate();
+    const navigationPageId = params.pageId;
+
     const dispatch = useAppDispatch();
     const pagesState = useAppSelector(state => state.pagesState);
 
     const selectedPage = pagesState.pagesLookup[pagesState.selectedPageId];
+
+    useEffect(() => {
+        if (navigationPageId === "default" || 
+            (navigationPageId && (
+                !pagesState.pagesLookup[navigationPageId] || 
+                pagesState.pagesLookup[navigationPageId].state === "locked")
+            )
+        ) {
+            navigate(`${import.meta.env.BASE_URL}/${pagesState.selectedPageId}`);
+            return;
+        }
+
+        if (navigationPageId && pagesState.selectedPageId !== navigationPageId) {
+            dispatch(selectPage(navigationPageId));
+        }
+    }, [dispatch, navigate, navigationPageId, pagesState.pagesLookup, pagesState.selectedPageId, selectedPage, selectedPage.state]);
 
     function onPageSelected(e: StatefulPage) {
         if (e.state === "locked" || e.id === pagesState.selectedPageId) {
             return;
         }
 
-        dispatch(selectPage(e.id));
+        navigate(`${import.meta.env.BASE_URL}/${e.id}`);
     }
 
     return (
@@ -58,11 +74,11 @@ function RootNavigator() {
             <SideBarLayout
                 sidebar={
                     <SidebarRail
-                        selectedPageId={pagesState.selectedPageId}
+                        selectedPageId={params.pageId ?? pagesState.selectedPageId}
                         pages={Object.values(pagesState.pagesLookup)}
                         onPageSelected={onPageSelected} />
                 }>
-                {navigationFactory(selectedPage)}
+                <PlaythroughPage page={selectedPage} />
             </SideBarLayout>
         </div>
     );

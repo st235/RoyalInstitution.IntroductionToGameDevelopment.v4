@@ -68,3 +68,8 @@
     text-align: justify;
     font-size: 1.2em;
 }
+
+.html-content-card > .description > * > span.highlight {
+    font-weight: 600;
+    color: var(--logo-accent-colour);
+}

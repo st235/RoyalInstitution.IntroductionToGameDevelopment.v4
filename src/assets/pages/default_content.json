@@ -5,58 +5,131 @@
         {
             "id": "1",
             "ordinal": 1,
-            "title": "Exercise 1: Learn and Play",
-            "description": "<p>Welcome to your first exercise!</p><p>Before we start building anything, it's important to understand how the game works. In this step, you'll <strong>play the Snake game</strong> and observe its behavior.</p><p>Think like a game designer or detective:<ul><li>What rules control the game?</li><li>What happens when the snake eats something?</li><li>How does the snake move?</li><li>What causes the game to end?</ul></p><p>Use the <strong>text field below</strong> to write down all the rules and patterns you notice. There are no wrong answers - this is about observation and curiosity.</p><p>Once you're done, click the <strong>Save</strong> button to continue to the next exercise, where we'll start designing and tweaking the game together!</p>",
-            "sandboxPlaceholder": "Here are a few ideas for the game rules:\nThe snake moves in the chosen direction\nFood items spawn at random locations\n…",
+            "components": [
+                {
+                    "id": "id.infocard",
+                    "type": "info-card",
+                    "data": {
+                        "title": "Exercise 1: Learn and Play",
+                        "description": "<p>Welcome to your very first activity!</p><p>Before we dive into creating anything, let's take a moment to explore how the game works. In this step, you will play <span class=\"highlight\">the Legend of Royal Institution</span> (a maze game) and observe how it behaves.</p><p>Put on your game designer hat and answer the following questions:</p><ul><li>What are the rules of the maze?</li><li>How does the player move through it?</li><li>What happens when the player hits a wall?</li><li>What marks the end of the game?</li></ul><p>Use the <strong>text box below</strong> to jot down any rules, patterns, or interesting game mechanics you notice.There are no wrong answers - this is all about being curious and observant.</p><p>As you explore the Maze game, start thinking creatively about how you could make it more interesting or challenging. What new <strong>game mechanics</strong> could you add? Think about how these elements could change the way the game is played and how they might make it more fun or challenging. Write down any ideas that come to mind!</p><p>When you're ready, click the <strong>Save</strong> button to move on to the next step, where we will start shaping and modifying the maze game together!</p>"
+                    }
+                },
+                {
+                    "id": "id.rules.label",
+                    "type": "label",
+                    "data": {
+                        "title": "Game rules:",
+                        "variant": "primary"
+                    }
+                },
+                {
+                    "id": "id.sandbox.rules",
+                    "type": "sandbox",
+                    "data": {
+                        "persistencyId": "temp.rules",
+                        "placeholder": "Here are a few ideas for the game rules:\nThe snake moves in the chosen direction\nFood items spawn at random locations\n…"
+                    }
+                },
+                {
+                    "id": "id.features.label",
+                    "type": "label",
+                    "data": {
+                        "title": "Improvements:",
+                        "variant": "primary"
+                    }
+                },
+                {
+                    "id": "id.sandbox.features",
+                    "type": "sandbox",
+                    "data": {
+                        "persistencyId": "temp.features",
+                        "placeholder": "Here are a few ideas for the game rules:\nThe snake moves in the chosen direction\nFood items spawn at random locations\n…"
+                    }
+                }
+            ],
+            "asset": "playthrough_demo.json",
             "shouldOpen": ["2"]
         },
         {
             "id": "2",
             "ordinal": 2,
-            "title": "Exercise 2: Design Your Own Level",
-            "description": "<p>Awesome! Now that you understand the game rules, it's time to shape the game world yourself.</p><p>In this exercise, you'll define a custom <strong>obstacle layout</strong> using a simple text configuration format. This layout will determine where the snake can move - and where it can't!</p><p>Use the following format for your configuration:</p><pre>&lt;number of rows&gt;,&lt;number of columns&gt;<br>&lt;symbol for empty cells&gt;,&lt;symbol for obstacles&gt;<br>&lt;map layout with obstacles&gt;</pre> <p><strong>Example:</strong></p> <pre>10,10<br>0,X<br>0000000000<br>00X0000000<br>0000000000<br>0000XXX000<br>0000000000<br>00X0000000<br>0000000000<br>0000000000<br>0000000000<br>0000000000</pre><p><strong>Legend:</strong></p> <ul> <li><code>0</code> = empty space (the snake can move here)</li> <li><code>X</code> = obstacle (the snake cannot move here)</li> </ul> <p><strong>Make sure:</strong></p> <ul> <li>The number of rows and columns matches your actual map layout.</li> <li>Every row contains exactly the number of columns you specified.</li> <li>You experiment with different obstacle placements to create fun or tricky paths!</li> </ul> <p>When you're done, click <strong>Save</strong> to try it out and continue to the next part.</p><p>P.S. If the game didn't load your configuration, try clicking the <strong>Restart</strong> button.</p>",
-            "sandboxPlaceholder": "20,15\n0,X\n000000000000000\n000000000000000\n00XXXX00000XXXX\n000000000000000\n000000X00000000\n000000X00000000\n000000X00000000\n000000XXXXX0000\n000000000000000\n000X00000000X00\n000X00000000X00\n000XXXXX0000X00\n000000000000X00\n000000000000000\nXXXXX0000000000\n000000000000000\n000000000000000\n00XXX000000XXX0\n000000000000000\n000000000000000",
-            "shouldOpen": ["3"]
+            "components": [
+                {
+                    "id": "id.infocard",
+                    "type": "info-card",
+                    "data": {
+                        "title": "Exercise 2: Changing the plot",
+                        "description": "<p>Great job exploring the maze game! Now, let's move on to your next activity—this time, you're stepping into the role of a <span class=\"highlight\">narrative designer</span>.</p> <p>In this step, you'll get to change the <strong>dialogues</strong> that appear in three important moments of the game:</p> <ul><li><strong>Game Intro</strong>: The message players see when they first start the game.</li> <li><strong>Game Over</strong>: What the game says when the player hits a wall or fails.</li> <li><strong>Victory</strong>: The celebratory message when the player finishes the maze!</li></ul> <p>Take a few moments to play the maze game again and pay close attention to the text that appears during these three moments. Then, think about how you would change it. Do you want to make it more dramatic, silly, mysterious, or even motivational? It’s totally up to you!</p> <p>Use the <strong>text boxes below</strong> to rewrite each of the three dialogues in your own style.</p><p>Be creative and have fun with it! Whether you want your game to feel like a fantasy quest, a sci-fi mission, or a comedy maze is totally your choice.</p> <p>Once you're happy with your new dialogues, click <strong>Save</strong> to continue. Up next: we'll look at how to bring your custom dialogues into the actual game!</p>"
+                    }
+                },
+                {
+                    "id": "id.label.intro",
+                    "type": "label",
+                    "data": {
+                        "title": "Intro:",
+                        "variant": "caption"
+                    }
+                },
+                {
+                    "id": "id.sandbox.intro",
+                    "type": "sandbox",
+                    "data": {
+                        "persistencyId": "message.intro",
+                        "placeholder": "Here are a few ideas for the game rules:\nThe snake moves in the chosen direction\nFood items spawn at random locations\n…"
+                    }
+                },
+                {
+                    "id": "id.label.gameOver",
+                    "type": "label",
+                    "data": {
+                        "title": "Game over:",
+                        "variant": "caption"
+                    }
+                },
+                {
+                    "id": "id.sandbox.gameOver",
+                    "type": "sandbox",
+                    "data": {
+                        "persistencyId": "message.gameOver",
+                        "placeholder": "Here are a few ideas for the game rules:\nThe snake moves in the chosen direction\nFood items spawn at random locations\n…"
+                    }
+                },
+                {
+                    "id": "id.label.victory",
+                    "type": "label",
+                    "data": {
+                        "title": "Improvements:",
+                        "variant": "caption"
+                    }
+                },
+                {
+                    "id": "id.sandbox.victory",
+                    "type": "sandbox",
+                    "data": {
+                        "persistencyId": "message.victory",
+                        "placeholder": "Here are a few ideas for the game rules:\nThe snake moves in the chosen direction\nFood items spawn at random locations\n…"
+                    }
+                }
+            ],
+            "shouldOpen": []
         },
         {
-            "id": "3",
-            "ordinal": 3,
-            "title": "Exercise 3: Manual maze solver",
-            "description": "<p>In this exercise, you're going to take direct control of the snake and guide it through the obstacle-filled field to reach the food!</p> <p>This time, the game is in <strong>manual advancement mode</strong> - it won't play automatically. Instead, you will issue a series of commands and then step through each move one at a time.</p> <p><strong>How it works:</strong></p> <ul> <li>Use the <code>left</code>, <code>right</code>, <code>up</code>, and <code>down</code> commands and optional repeat counter to create your movement plan.</li> <li>Each command corresponds to one movement by the snake.</li> <li>If your command list is shorter than the number of required steps, the snake will continue repeating the <strong>last entered command</strong>.</li> <li>Click the <strong>\"Step\"</strong> button to move the snake one step forward.</li> <li>You can also use the <strong>\"Advance Automatically\"</strong> button to let the game play out the rest of your command sequence.</li> </ul> <p><strong>Goal:</strong> Reach the food item without crashing into any obstacles!</p> <p><strong>Example:</strong></p> <pre>down<br/>right 2<br/>down 2</pre> <p>Take your time and help the snake to reach the food item. When the snake reaches the food, you'll complete the exercise and be ready to proceed next!</p>",
-            "sandboxPlaceholder": "left\nup\nup\ndown\n…",
-            "shouldOpen": ["4"]
-        },
-        {
-            "id": "4",
-            "ordinal": 4,
-            "title": "Exercise 4: Write Your First Snake Controller",
-            "description": "<p>Now it's time to start thinking like a game AI! In this exercise, you'll write the logic that controls how the snake moves on its own.</p> <p>You're provided with a function called <code>MoveSnake</code>, and it's your job to implement it. This function takes in two arguments:</p> <ul> <li><code>snakeHead</code>: the current position of the snake's head, e.g. <code>[row, column]</code></li> <li><code>food</code>: the position of the food on the grid, also a <code>[row, column]</code> tuple</li> </ul> <p><strong>Your task:</strong> Return a string indicating the next direction the snake should move - <code>left</code>, <code>right</code>, <code>top</code>, or <code>bottom</code>.</p> <p>There are no obstacles on the field in this exercise, so you can focus purely on chasing the food. However, the snake will grow as it eats, and in some cases it might accidentally collide with its own body. That's okay! For now, we're not handling self-collision logic - we'll cover that in the next exercise.</p> <p><strong>Important:</strong></p> <ul> <li>You can use basic arithmetic and <code>if</code>/<code>else</code> logic inside the <code>MoveSnake</code> function.</li> <li>If the snake crashes into itself, feel free to restart the game - but don't forget to click <strong>\"Save\"</strong> first to preserve your code!</li> </ul> <p><strong>Goal:</strong> Write a <code>MoveSnake</code> function that can score <strong>50 points or more</strong> by reaching the food repeatedly.</p> <p>Good luck, and have fun teaching your snake how to hunt!</p>",
-            "sandboxPlaceholder": "function MoveSnake(snakePosition, foodPosition) {\n    …\n}\n",
-            "shouldOpen": ["5"]
-        },
-        {
-            "id": "5",
-            "ordinal": 5,
-            "title": "Exercise 5: Cross the Barrier",
-            "description": "<p>In this exercise, you'll implement the <code>MoveSnake</code> method to control the snake's movement programmatically.</p> <p>The method receives the following inputs:</p> <ul> <li><strong>Current snake position</strong></li> <li><strong>Current food item position</strong></li> <li><strong>Local cell occupancy</strong>: an array of 4 booleans representing whether the <code>left</code>, <code>top</code>, <code>right</code>, and <code>bottom</code> cells around the snake's head are blocked</li> <li><strong>Last known direction</strong></li> </ul> <p>You can also use the <strong>debugger</strong> at any time to inspect the values and step through your code.</p> <p><strong>Challenge:</strong> Guide the snake to reach the food while avoiding a single horizontal obstacle in a <code>20×15</code> area.</p> <p><strong>Objective:</strong> Reach the food item without hitting any obstacles or the wall.</p> <p>Once completed, this exercise unlocks both Exercise 6 and Exercise 7. Choose either to continue!</p>",
-            "sandboxPlaceholder": "function MoveSnake(snakePosition, foodPosition, cellsAround, lastDirection) {\n    …\n}\n",
-            "shouldOpen": ["6", "7"]
-        },
-        {
-            "id": "6",
-            "ordinal": 6,
-            "title": "Exercise 6: The Boxed-In Search",
-            "description": "<p>Just like before, your task is to write the <code>MoveSnake</code> method that drives the snake toward food.</p> <p>The method takes the following inputs:</p> <ul> <li><strong>Current snake position</strong></li> <li><strong>Current food item position</strong></li> <li><strong>Local cell occupancy</strong>: an array of 4 booleans for <code>left</code>, <code>top</code>, <code>right</code>, and <code>bottom</code></li> <li><strong>Last known direction</strong></li> </ul> <p>Use the <strong>debugger</strong> at your convenience to trace and refine your logic.</p> <p><strong>Challenge:</strong> The snake is surrounded by a box-shaped wall of obstacles. You must stay inside this space and find all the food needed to reach a score of <strong>50</strong>.</p> <p><strong>Objective:</strong> Stay within the box and collect multiple food items without crashing.</p> <p>Make sure your strategy avoids hitting the boundaries and prevents the snake from trapping itself!</p>",
-            "sandboxPlaceholder": "function MoveSnake(snakePosition, foodPosition, cellsAround, lastDirection) {\n    …\n}\n",
-            "shouldOpen": ["8"]
-        },
-        {
-            "id": "7",
-            "ordinal": 7,
-            "title": "Exercise 7: Chaos Control",
-            "description": "<p>As with the previous challenges, you will implement the <code>MoveSnake</code> method to control your snake.</p> <p>The method provides you with:</p> <ul> <li><strong>Current snake position</strong></li> <li><strong>Current food item position</strong></li> <li><strong>Local cell occupancy</strong>: 4 booleans (<code>left</code>, <code>top</code>, <code>right</code>, <code>bottom</code>)</li> <li><strong>Last known direction</strong></li> </ul> <p>The <strong>debugger</strong> is available to help you explore and test your solution as needed.</p> <p><strong>Challenge:</strong> This is the most complex level so far. The snake must navigate a challenging and dynamic layout to reach a score of <strong>30</strong>.</p> <p>Make use of all the parameters given. You can even define helper functions to simplify your strategy. For example:</p> <pre>function getRandomInt(min, max) {<br/>\tconst minCeiled = Math.ceil(min);<br/>\tconst maxFloored = Math.floor(max);<br/>\treturn Math.floor(Math.random() * (maxFloored - minCeiled) + minCeiled);<br/>} </pre> <p><strong>Objective:</strong> Survive, adapt, and collect enough food to reach the goal. Use randomness, logic, or both to craft a winning solution!</p>",
-            "sandboxPlaceholder": "function MoveSnake(snakePosition, foodPosition, cellsAround, lastDirection) {\n    …\n}\n",
-            "shouldOpen": ["8"]
+            "id": "ri-monday-demo",
+            "ordinal": 100,
+            "components": [
+                {
+                    "id": "id.infocard",
+                    "type": "info-card",
+                    "data": {
+                        "title": "Exercise 2: Changing the plot",
+                        "description": "<p>Great job exploring the maze game! Now, let's move on to your next activity—this time, you're stepping into the role of a <span class=\"highlight\">narrative designer</span>.</p> <p>In this step, you'll get to change the <strong>dialogues</strong> that appear in three important moments of the game:</p> <ul><li><strong>Game Intro</strong>: The message players see when they first start the game.</li> <li><strong>Game Over</strong>: What the game says when the player hits a wall or fails.</li> <li><strong>Victory</strong>: The celebratory message when the player finishes the maze!</li></ul> <p>Take a few moments to play the maze game again and pay close attention to the text that appears during these three moments. Then, think about how you would change it. Do you want to make it more dramatic, silly, mysterious, or even motivational? It’s totally up to you!</p> <p>Use the <strong>text boxes below</strong> to rewrite each of the three dialogues in your own style.</p><p>Be creative and have fun with it! Whether you want your game to feel like a fantasy quest, a sci-fi mission, or a comedy maze is totally your choice.</p> <p>Once you're happy with your new dialogues, click <strong>Save</strong> to continue. Up next: we'll look at how to bring your custom dialogues into the actual game!</p>"
+                    }
+                }
+            ],
+            "asset": "ri_monday_demo.json",
+            "isHidden": true,
+            "isOpenByDefault": true,
+            "shouldOpen": []
         }
     ]
 }

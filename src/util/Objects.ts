@@ -28,7 +28,11 @@ function deepMerge(target: {[Key: string]: unknown}, ...sources: unknown[]): {[K
     return target;
 }
 
-function flatten(value: {[Key: string]: unknown}): {[Key: string]: unknown} {
+function flatten(value: {[Key: string]: unknown} | undefined | null): {[Key: string]: unknown} {
+    if (value === null || value === undefined) {
+        return {};
+    }
+
     const flattenedObject: {[Key: string]: unknown} = {};
 
     for (const [key, child] of Object.entries(value)) {

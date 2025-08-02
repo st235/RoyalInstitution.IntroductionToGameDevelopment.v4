@@ -11,4 +11,9 @@ function assert(condition: boolean | undefined | null, message?: string) {
     }
 }
 
-export { assert };
+function require<T>(value: T | undefined): T {
+    assert(value !== undefined, "Value should not be undefined.");
+    return value!;
+}
+
+export { assert, require };

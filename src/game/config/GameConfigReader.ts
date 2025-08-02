@@ -7,9 +7,19 @@ import type { DoorsConfig } from "@game/config/DoorsConfigReader";
 import type { GarnitureConfig } from "@game/config/GarnitureConfigReader";
 import type { MonstersConfig } from "@game/config/MonstersConfigReader";
 
+type ConfigOverwrites = {
+    character?: CharacterConfig;
+    coins?: CoinsConfig;
+    doors?: DoorsConfig;
+    flags?: VariableTileAppearance;
+    garnitures?: GarnitureConfig;
+    monsters?: MonstersConfig[];
+    walls?: VariableTileAppearance;
+};
+
 type MessageOverwrites = {
     character?: number;
-    intro: string;
+    intro?: string;
     introHeight?: number;
     gameOver?: string;
     gameOverHeight?: number;
@@ -19,17 +29,9 @@ type MessageOverwrites = {
 
 type GameConfig = {
     useColourTiles?: boolean;
-    applyCathodRayTubeEffect: boolean;
+    applyCathodRayTubeEffect?: boolean;
     messagesOverwrites?: MessageOverwrites;
-    configsOverwrites?: {
-        character?: CharacterConfig;
-        coins?: CoinsConfig;
-        doors?: DoorsConfig;
-        flags?: VariableTileAppearance;
-        garnitures?: GarnitureConfig;
-        monsters?: MonstersConfig[];
-        walls?: VariableTileAppearance;
-    };
+    configOverwrites?: ConfigOverwrites;
 };
 
 class GameConfigReader {
@@ -44,7 +46,7 @@ class GameConfigReader {
     }
 
     shouldUseCathodRayTubeEffect(): boolean {
-        return this._config.applyCathodRayTubeEffect;
+        return this._config.applyCathodRayTubeEffect ?? false;
     }
 
     getMessageOverwrites(): MessageOverwrites | undefined {
@@ -52,31 +54,31 @@ class GameConfigReader {
     }
 
     getCharacterConfig(): CharacterConfig | undefined {
-        return this._config.configsOverwrites?.character;
+        return this._config.configOverwrites?.character;
     }
 
     getCoinsConfig(): CoinsConfig | undefined {
-        return this._config.configsOverwrites?.coins;
+        return this._config.configOverwrites?.coins;
     }
 
     getDoorsConfig(): DoorsConfig | undefined {
-        return this._config.configsOverwrites?.doors;
+        return this._config.configOverwrites?.doors;
     }
 
     getFlagsConfig(): VariableTileAppearance | undefined {
-        return this._config.configsOverwrites?.flags;
+        return this._config.configOverwrites?.flags;
     }
 
     getGarnitureConfig(): GarnitureConfig | undefined {
-        return this._config.configsOverwrites?.garnitures;
+        return this._config.configOverwrites?.garnitures;
     }
 
     getMonstersConfig(): MonstersConfig[] | undefined {
-        return this._config.configsOverwrites?.monsters;
+        return this._config.configOverwrites?.monsters;
     }
 
     getWallsConfig(): VariableTileAppearance | undefined {
-        return this._config.configsOverwrites?.walls;
+        return this._config.configOverwrites?.walls;
     }
 
     public static create(config: GameConfig = defaultGameConfig): GameConfigReader {
@@ -85,4 +87,4 @@ class GameConfigReader {
 }
 
 export default GameConfigReader;
-export type { GameConfig, MessageOverwrites };
+export type { GameConfig, ConfigOverwrites, MessageOverwrites, };
