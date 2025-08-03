@@ -2,18 +2,16 @@ import { UI_KEY_INFO_CARD, UI_KEY_SANDBOX, UI_KEY_LABEL } from "@/models/ui-data
 import InfoCardProxy from "@/pages/base/components/component-factory/InfoCardProxy";
 import LabelProxy from "@/pages/base/components/component-factory/LabelProxy";
 import SandboxProxy, { type SandboxSavedState } from "@/pages/base/components/component-factory/SandboxProxy";
+import type { ComponentPersistentState } from "@/models/ui-data/ComponentPersistentState";
 import type { InfoCardData } from "@/models/ui-data/InfoCardData";
+import type { LabelData } from "@/models/ui-data/LabelData";
 import type { PageComponent } from "@/models/Page";
 import type { SandboxData } from "@/models/ui-data/SandboxData";
-import type { LabelData } from "@/models/ui-data/LabelData";
 
 type ComponentFactoryProps = {
     pageId: string;
     component: PageComponent;
-    savedState?: {
-        persistencyId: string;
-        state: object | undefined;
-    };
+    savedState?: ComponentPersistentState;
 }
 
 function ComponentFactory(props: ComponentFactoryProps) {

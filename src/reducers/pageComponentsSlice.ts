@@ -2,10 +2,11 @@ import { createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
 
 import { ReadFromLocalStorage, SaveToLocalStorage } from "@/util/LocalStorageUtil";
+import type { ComponentPersistentState } from "@/models/ui-data/ComponentPersistentState";
 
 const _LOCAL_STORAGE_KEY_GLOBAL_PLAGE_CONTENT_STATE = "page-content-state.page-to-components-lookup";
 
-type GlobalStatesLookup = {[Key: string]: {[Key: string]: { persistencyId: string, state: object | undefined }}};
+type GlobalStatesLookup = {[Key: string]: {[Key: string]: ComponentPersistentState}};
 
 type pageComponentsState = {
     pageToComponentsLookup: GlobalStatesLookup;
