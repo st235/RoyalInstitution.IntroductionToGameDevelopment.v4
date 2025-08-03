@@ -1,10 +1,19 @@
-import type { GameConfig, ConfigOverwrites, MessageOverwrites } from "@game/config/GameConfigReader";
+import type { GameConfig } from "@game/config/GameConfigReader";
 import type { LevelConfig } from "@game/config/LevelConfigReader";
+import type { CoinInfo } from "@/game/config/CoinsConfigReader";
 
 type ConfigProvider = {
-    messageOverwrites?: MessageOverwrites,
-    configOverwrites?: ConfigOverwrites,
-    levelLayout?: string[],
+    messageIntro?: string;
+    messageGameOver?: string;
+    messageVictory?: string;
+    wallTiles?: number[];
+    levelLayout?: string[];
+    coinDefaultScore?: number;
+    coinValues?: CoinInfo[];
+    coinTiles?: number[];
+    keys?: number[];
+    closeDoors?: number[];
+    openDoors?: number[];
 };
 
 type ConfigOverwriteMapperFunction = (data: unknown, outConfigProvider: ConfigProvider) => void;
@@ -15,37 +24,49 @@ function _WrapOverwriteMapper<T>(calculation: (data: T, outConfigProvider: Confi
     };
 }
 
+function _ParseVariations(value: string): number[] {
+    return value.split(/,\s*/).map(v => parseInt(v));
+}
+
 const configOverwritesMappers: {[Key: string]: ConfigOverwriteMapperFunction} = {
     "message.intro": _WrapOverwriteMapper((data: {value: string}, outConfigProvider: ConfigProvider) => {
-        if (!outConfigProvider.messageOverwrites) {
-            outConfigProvider.messageOverwrites = {};
-        }
-        outConfigProvider.messageOverwrites.intro = data.value;
+        outConfigProvider.messageIntro = data.value;
     }),
     "message.gameOver": _WrapOverwriteMapper((data: {value: string}, outConfigProvider: ConfigProvider) => {
-        if (!outConfigProvider.messageOverwrites) {
-            outConfigProvider.messageOverwrites = {};
-        }
-        outConfigProvider.messageOverwrites.gameOver = data.value;
+        outConfigProvider.messageGameOver = data.value;
     }),
     "message.victory": _WrapOverwriteMapper((data: {value: string}, outConfigProvider: ConfigProvider) => {
-        if (!outConfigProvider.messageOverwrites) {
-            outConfigProvider.messageOverwrites = {};
-        }
-        outConfigProvider.messageOverwrites.victory = data.value;
+        outConfigProvider.messageVictory = data.value;
     }),
     "level.layout": _WrapOverwriteMapper((data: {value: string}, outConfigProvider: ConfigProvider) => {
-        outConfigProvider.levelLayout = data.value
-            .split(/\r?\n/);
+        outConfigProvider.levelLayout = data.value.split(/\r?\n/);
     }),
     "config.walls": _WrapOverwriteMapper((data: {value: string}, outConfigProvider: ConfigProvider) => {
-        if (!outConfigProvider.configOverwrites) {
-            outConfigProvider.configOverwrites = {};
-        }
-
-        outConfigProvider.configOverwrites.walls = {
-            variations: data.value.split(/,\s*/).map(v => parseInt(v)),
-        };
+        outConfigProvider.wallTiles = _ParseVariations(data.value);
+    }),
+    "config.coins.default-score": _WrapOverwriteMapper((data: {value: string}, outConfigProvider: ConfigProvider) => {
+        outConfigProvider.coinDefaultScore = parseInt(data.value);
+    }),
+    "config.coins.values": _WrapOverwriteMapper((data: {value: string}, outConfigProvider: ConfigProvider) => {
+        outConfigProvider.coinValues = data.value.split(/\r?\n/).map(line => {
+            const splits = line.split(/\s+/).map(v => parseInt(v));
+            return {
+                variant: splits[0],
+                score: splits[1],
+            };
+        });
+    }),
+    "config.coins.tiles": _WrapOverwriteMapper((data: {value: string}, outConfigProvider: ConfigProvider) => {
+        outConfigProvider.coinTiles = _ParseVariations(data.value);
+    }),
+    "config.keys": _WrapOverwriteMapper((data: {value: string}, outConfigProvider: ConfigProvider) => {
+        outConfigProvider.keys = _ParseVariations(data.value);
+    }),
+    "config.doors.close": _WrapOverwriteMapper((data: {value: string}, outConfigProvider: ConfigProvider) => {
+        outConfigProvider.closeDoors = _ParseVariations(data.value);
+    }),
+    "config.doors.open": _WrapOverwriteMapper((data: {value: string}, outConfigProvider: ConfigProvider) => {
+        outConfigProvider.openDoors = _ParseVariations(data.value);
     }),
 };
 
@@ -66,13 +87,25 @@ function ObtainGameAndLevelConfigsOverwrites(
 ): [GameConfig | undefined, LevelConfig | undefined] {
     const configProvider = _GetConfigProvider(persistencyStateLookup);
 
-    let gameConfig: GameConfig | undefined = undefined;
-    if (configProvider.messageOverwrites || configProvider.configOverwrites) {
-        gameConfig = {
-            messagesOverwrites: configProvider.messageOverwrites,
-            configOverwrites: configProvider.configOverwrites,
-        };
-    }
+    const gameConfig: GameConfig = {
+        messagesOverwrites: {
+            intro: configProvider.messageIntro,
+            gameOver: configProvider.messageGameOver,
+            victory: configProvider.messageVictory,
+        },
+        configOverwrites: {
+            ...(configProvider.wallTiles && { walls: { variations: configProvider.wallTiles } }),
+            ...(configProvider.coinTiles && { coins: { defaultScore: configProvider.coinDefaultScore, coins: configProvider.coinValues, variations: configProvider.coinTiles, }}),
+            ...((configProvider.keys && configProvider.closeDoors && configProvider.openDoors) && {
+                doors: { key: { variations: configProvider.keys },
+                    door: { 
+                        closed: { variations: configProvider.closeDoors },
+                        open: { variations: configProvider.openDoors }
+                    }
+                }
+            }),
+        }
+    };
 
     let levelConfig: LevelConfig | undefined = undefined;
     if (configProvider.levelLayout) {

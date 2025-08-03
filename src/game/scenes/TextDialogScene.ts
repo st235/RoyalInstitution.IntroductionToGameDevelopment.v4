@@ -5,7 +5,7 @@ import BaseScene from "@/game/scenes/BaseScene";
 type DialogInfo = {
     text: string;
     character?: number;
-    height: number;
+    height?: number;
 };
 
 type TextDialogSceneParams = MazeSceneParams & {
@@ -36,23 +36,27 @@ class TextDialogScene extends BaseScene {
         // eslint-disable-next-line @typescript-eslint/no-unused-vars
         const [paddingLeft, _paddingTop, paddingRight, paddingBottom] = [10, 10, 10, 30];
 
+        const dialogInfo = this._dialogInfo!;
+
+        const dialogHeight = dialogInfo.height ?? Math.max(40, (20 + 15 * ((dialogInfo.text.match(/\r?\n/g) || []).length + 1)));
+
         this.add.rectangle(paddingLeft, this.game.scale.height - paddingBottom,
             this.game.scale.width - paddingLeft - paddingRight,
-            this._dialogInfo!.height, 0x000000, 0.0)
+            dialogHeight, 0x000000, 0.0)
             .setStrokeStyle(4, 0xffffff)
             .setOrigin(0, 1);
 
         let characterOffset = 10;
 
         if (this._dialogInfo?.character !== undefined) {
-            this.add.image(paddingLeft, this.game.scale.height - this._dialogInfo!.height / 2 - paddingBottom - 4, "characters", this._dialogInfo.character)
+            this.add.image(paddingLeft, this.game.scale.height - dialogHeight / 2 - paddingBottom - 4, "characters", this._dialogInfo.character)
                 .setScale(5)
                 .setOrigin(0, 0.5);
             characterOffset += 55;
         }
 
-        this.add.bitmapText(paddingLeft + characterOffset, this.game.scale.height - this._dialogInfo!.height - paddingBottom + 2,
-            "bitpotion", this._dialogInfo!.text, 9)
+        this.add.bitmapText(paddingLeft + characterOffset, this.game.scale.height - dialogHeight - paddingBottom + 2,
+            "bitpotion", dialogInfo.text, 9)
             .setLeftAlign()
             .setOrigin(0, 0);
 

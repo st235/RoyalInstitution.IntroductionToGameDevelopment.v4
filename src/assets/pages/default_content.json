@@ -69,6 +69,7 @@
                     "type": "label",
                     "data": {
                         "title": "\"Game Intro\" message:",
+                        "description": "Tip: max 7 lines",
                         "variant": "caption"
                     }
                 },
@@ -86,6 +87,7 @@
                     "type": "label",
                     "data": {
                         "title": "\"Game Over\" message:",
+                        "description": "Tip: max 7 lines",
                         "variant": "caption"
                     }
                 },
@@ -103,6 +105,7 @@
                     "type": "label",
                     "data": {
                         "title": "\"Victory\" message:",
+                        "description": "Tip: max 7 lines",
                         "variant": "caption"
                     }
                 },
@@ -159,7 +162,7 @@
                     "type": "info-card",
                     "data": {
                         "title": "Exercise 4: Improving the visual appearance",
-                        "description": "<p>Now that your level structure is in place, it's time to enhance its visual appearance using custom tile mapping.</p><p>In this exercise, you'll define how each tile should look by providing a list of <strong>tile IDs</strong> (ordinal values) that will be mapped to specific tile types in your maze.</p><p>Each tile ID you enter will be automatically assigned to a corresponding tile code: the first value becomes <code>W0</code>, the second <code>W1</code>, and so on—up to <code>WN</code>, where <strong>N</strong> is the index of the last value you provide.</p><p>Please enter your tile IDs in the text box below, separated by commas (e.g., <code>17, 21, 34, 56</code>). These values will control how each wall tile appears in the final rendered game.</p><p>You can be creative here! Think of these tile IDs as different styles or textures—maybe cracked stone, mossy brick, or glowing tiles. Just be sure to keep the order consistent with how you'll use <code>W0</code>, <code>W1</code>, etc., in your maze layout.</p><p>Once you've added your tile mapping, click the <strong>Save</strong> button to apply your changes.</p><p>This is an image to help you with the tile ids.</p><img src=\"@public/tiles-examples-walls.png\" width=\"400\"></img>"
+                        "description": "<p>Now that your level structure is in place, it's time to enhance its visual appearance using custom tile mapping.</p><p>In this exercise, you'll define how each tile should look by providing a list of <strong>tile IDs</strong> (ordinal values) that will be mapped to specific tile types in your maze.</p><p>Each tile ID you enter will be automatically assigned to a corresponding tile code: the first value becomes <code>W0</code>, the second <code>W1</code>, and so on—up to <code>WN</code>, where <strong>N</strong> is the index of the last value you provide.</p><p>Enter your tile IDs in the text box below, separated by commas (e.g., <code>17, 21, 34, 56</code>). These values will control how each wall tile appears in the final rendered game.</p><p>You can be creative here! Think of these tile IDs as different styles or textures: cracked stone, mossy brick, or a broken piece of wall. Just be sure to keep the order consistent with how you'll use <code>W0</code>, <code>W1</code>, etc., in your maze layout.</p><p>Once you've added your tile mapping, click the <strong>Save</strong> button to apply your changes.</p><p>Below is an image to help you identify tiles in your game.</p><img src=\"@public/tiles-examples-walls.png\" width=\"500\"></img>"
                     }
                 },
                 {
@@ -167,6 +170,7 @@
                     "type": "label",
                     "data": {
                         "title": "Walls variants:",
+                        "description": "Tip: comma-separated list of numbers",
                         "variant": "caption"
                     }
                 },
@@ -208,7 +212,78 @@
                     "type": "info-card",
                     "data": {
                         "title": "Exercise 5: Adding coins",
-                        "description": "<p>Now that your level structure is in place, it's time to enhance its visual appearance using custom tile mapping.</p><p>In this exercise, you'll define how each tile should look by providing a list of <strong>tile IDs</strong> (ordinal values) that will be mapped to specific tile types in your maze.</p><p>Each tile ID you enter will be automatically assigned to a corresponding tile code: the first value becomes <code>W0</code>, the second <code>W1</code>, and so on—up to <code>WN</code>, where <strong>N</strong> is the index of the last value you provide.</p><p>Please enter your tile IDs in the text box below, separated by commas (e.g., <code>17, 21, 34, 56</code>). These values will control how each wall tile appears in the final rendered game.</p><p>You can be creative here! Think of these tile IDs as different styles or textures—maybe cracked stone, mossy brick, or glowing tiles. Just be sure to keep the order consistent with how you'll use <code>W0</code>, <code>W1</code>, etc., in your maze layout.</p><p>Once you've added your tile mapping, click the <strong>Save</strong> button to apply your changes.</p><p>This is an image to help you with the tile ids.</p><img src=\"@public/tiles-examples-walls.png\" width=\"400\"></img>"
+                        "description": "<p>Now it's time to populate the maze with collectible <strong>coins</strong> to make gameplay more rewarding.</p><p>In this exercise, you'll define the coin tiles that players can collect by providing a list of <strong>tile IDs</strong> (ordinal values) and optionally assigning them different scores. Each coin tile ID will be mapped to a code starting from <code>C0</code>, <code>C1</code>, and so on—up to <code>CN</code>, where <strong>N</strong> is the index of the last coin you define (similar to what you already achieved with the walls config).</p><p>There are three parts to this setup:</p><ol><li><strong>Default Coin Score:</strong> a positive number that is used as the score for any coin tile that doesn't have a custom score assigned.</li> <li><strong>Scores List</strong> a list of specific scores assigned to every coin. Each line should be in the format <code>X Y</code>, where <code>X</code> is the coin code (a number in <code>C0</code>, <code>C1</code>, ... <code>CN</code>), and <code>Y</code> is the score. Example: <pre>0 5</pre><pre>2 10</pre></li><li><strong>Coin Tile IDs list</strong> a list of tile IDs (e.g., <code>12, 23, 45</code>) that will be used for coins. These values correspond to the tiles shown in the image below and will be mapped to <code>C0</code>, <code>C1</code>, etc.</li></ol><p>Once you've defined your coins and scores, you'll be able to place them directly into your maze layout using the <code>CX</code> codes.</p><p>Below is an image to help you select the coin tile IDs:</p><img src=\"@public/tiles-examples-gems.png\" width=\"500\" /><p>Add your coins using the fields below, and then update your maze layout accordingly. Have fun designing your collectible paths!</p>"
+                    }
+                },
+                {
+                    "id": "id.label.coins.default-score",
+                    "type": "label",
+                    "data": {
+                        "title": "Default score:",
+                        "description": "Tip: a single positive number",
+                        "variant": "caption"
+                    }
+                },
+                {
+                    "id": "id.sandbox.coins.default-score",
+                    "type": "sandbox",
+                    "data": {
+                        "persistencyId": "config.coins.default-score",
+                        "placeholder": "50",
+                        "minLinesCount": 3
+                    }
+                },
+                {
+                    "id": "id.label.coins.values",
+                    "type": "label",
+                    "data": {
+                        "title": "Values:",
+                        "description": "Tip: a list of pairs separated by a new line. Every pair consists of coin id and score separated by space.",
+                        "variant": "caption"
+                    }
+                },
+                {
+                    "id": "id.sandbox.coins.values",
+                    "type": "sandbox",
+                    "data": {
+                        "persistencyId": "config.coins.values",
+                        "placeholder": "0 10\n1 20\n…",
+                        "minLinesCount": 10
+                    }
+                },
+                {
+                    "id": "id.label.coins.tiles",
+                    "type": "label",
+                    "data": {
+                        "title": "Coin tiles:",
+                        "description": "Tip: comma-separated list of numbers",
+                        "variant": "caption"
+                    }
+                },
+                {
+                    "id": "id.sandbox.coins.tiles",
+                    "type": "sandbox",
+                    "data": {
+                        "persistencyId": "config.coins.tiles",
+                        "placeholder": "101, 202, 303, 404",
+                        "minLinesCount": 3
+                    }
+                },
+                {
+                    "id": "id.label.level",
+                    "type": "label",
+                    "data": {
+                        "title": "Level layout:",
+                        "variant": "caption"
+                    }
+                },
+                {
+                    "id": "id.sandbox.level",
+                    "type": "sandbox",
+                    "data": {
+                        "persistencyId": "level.layout",
+                        "placeholder": "W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0\nW0 SP .  .  .  .  .  .  .  .  .  .  .  W0 SP .  .  .  .  .  .  .  .  .  .  .  .  .  .  W0\nW0 W0 W0 W0 W0 .  W0 W0 W0 W0 W0 W0 W0 .  W0 W0 W0 W0 W0 W0 W0 .  W0 W0 W0 W0 .  W0 W0 W0\nW0 W0 .  .  .  .  W0 .  .  .  .  .  .  W0 .  .  .  .  .  .  .  .  W0 W0 .  .  .  .  .  W0\nW0 W0 W0 W0 W0 .  W0 W0 W0 W0 W0 W0 W0 .  W0 W0 W0 W0 W0 W0 W0 .  W0 W0 W0 W0 .  W0 W0 W0\nW0 W0 W0 .  .  .  .  W0 .  .  .  .  .  W0 .  .  .  .  .  .  .  .  W0 W0 .  .  .  .  .  W0\nW0 W0 W0 W0 W0 W0 .  W0 W0 W0 W0 .  W0 W0 W0 W0 .  W0 W0 .  W0 W0 W0 W0 W0 .  W0 W0 .  W0\nW0 .  .  .  .  .  W0 .  .  .  .  .  W0 .  .  .  .  .  .  .  W0 .  .  .  .  .  W0 W0 .  W0\nW0 W0 W0 W0 W0 .  W0 W0 W0 W0 W0 W0 W0 .  W0 W0 W0 W0 W0 .  W0 W0 W0 W0 W0 W0 .  W0 W0 W0\nW0 .  .  .  .  .  .  W0 .  .  .  .  .  .  W0 .  .  .  .  .  W0 .  .  .  .  .  .  W0 .  W0\nW0 W0 W0 W0 W0 .  W0 W0 W0 W0 W0 W0 W0 .  W0 W0 W0 W0 W0 W0 .  W0 W0 W0 W0 W0 .  W0 W0 W0\nW0 .  .  .  .  .  .  .  W0 .  .  .  .  .  W0 .  .  .  .  .  .  .  W0 .  .  .  .  .  .  W0\nW0 W0 W0 W0 W0 .  W0 W0 W0 W0 W0 W0 W0 .  W0 W0 W0 W0 W0 W0 .  W0 W0 W0 W0 W0 .  W0 W0 W0\nW0 .  .  .  .  .  .  .  W0 .  .  .  .  .  W0 .  .  .  .  .  .  .  W0 .  .  .  .  .  .  W0\nW0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0",
+                        "minLinesCount": 18
                     }
                 }
             ],
@@ -222,8 +297,79 @@
                     "id": "id.infocard",
                     "type": "info-card",
                     "data": {
-                        "title": "Exercise 6: Adding keys and doors",
-                        "description": "<p>Now that your level structure is in place, it's time to enhance its visual appearance using custom tile mapping.</p><p>In this exercise, you'll define how each tile should look by providing a list of <strong>tile IDs</strong> (ordinal values) that will be mapped to specific tile types in your maze.</p><p>Each tile ID you enter will be automatically assigned to a corresponding tile code: the first value becomes <code>W0</code>, the second <code>W1</code>, and so on—up to <code>WN</code>, where <strong>N</strong> is the index of the last value you provide.</p><p>Please enter your tile IDs in the text box below, separated by commas (e.g., <code>17, 21, 34, 56</code>). These values will control how each wall tile appears in the final rendered game.</p><p>You can be creative here! Think of these tile IDs as different styles or textures—maybe cracked stone, mossy brick, or glowing tiles. Just be sure to keep the order consistent with how you'll use <code>W0</code>, <code>W1</code>, etc., in your maze layout.</p><p>Once you've added your tile mapping, click the <strong>Save</strong> button to apply your changes.</p><p>This is an image to help you with the tile ids.</p><img src=\"@public/tiles-examples-walls.png\" width=\"400\"></img>"
+                        "title": "Exercise 6: dynamic maze layout",
+                        "description": "<p>Now let's turn around our core game mechanic: make the layout dynamic by introducing <strong>keys and doors</strong>. This feature adds challenge and progression to your level by requiring players to collect specific keys to unlock matching doors.</p><p>In this exercise, you'll define which tile IDs represent <strong>keys</strong>, <strong>doors</strong>, and optionally, the <strong>closed versions of doors</strong>. Each key and door pair will be mapped with a unique code: <code>K0</code>/<code>D0</code>, <code>K1</code>/<code>D1</code>, and so on.</p> <p>Here's how to set it up:</p><ol><li><strong>Keys:</strong> enter the tile IDs for all the keys in your level (e.g., <code>14, 33, 47</code>). Similar to what we worked with before: the first ID becomes <code>K0</code>, the second <code>K1</code>, and so on.</li><li><strong>Doors:</strong> the corresponding tile IDs for doors (e.g., <code>28, 39, 52</code>). These will be assigned as <code>D0</code>, <code>D1</code>, etc. There must be exactly one door tile per key tile.</li> <li><strong>Open Door Tile IDs:</strong> a list of tiles to use for unblocked doors. Character can travel through the open doors. If you only provide one value, all doors will use that tile. If you provide more than one, the number of open door tiles must exactly match the number of doors (aka closed doors) and be listed in the same order.</li></ol><p>Once you've defined your keys and doors, you can use <code>K0</code>, <code>K1</code>, ... and <code>D0</code>, <code>D1</code>, ... directly in your maze layout to place them where needed.</p><p>These images will help you identify the correct tile IDs for keys and doors:</p> <p><strong>Key Tile IDs:</strong></p><img src=\"@public/tiles-examples-keys.png\" width=\"500\" /><p><strong>Door Tile IDs:</strong></p> <img src=\"@public/tiles-examples-doors.png\" width=\"500\" /><p>Once you're ready, fill in the fields below and place your keys and doors into the level layout. This will make your maze more interactive and strategic!</p>"
+                    }
+                },
+                {
+                    "id": "id.label.keys",
+                    "type": "label",
+                    "data": {
+                        "title": "Key tiles:",
+                        "description": "Tip: comma-separated list of numbers",
+                        "variant": "caption"
+                    }
+                },
+                {
+                    "id": "id.sandbox.keys",
+                    "type": "sandbox",
+                    "data": {
+                        "persistencyId": "config.keys",
+                        "placeholder": "101, 202, 303, 404",
+                        "minLinesCount": 3
+                    }
+                },
+                {
+                    "id": "id.label.doors.close",
+                    "type": "label",
+                    "data": {
+                        "title": "Close door tiles:",
+                        "description": "Tip: comma-separated list of numbers",
+                        "variant": "caption"
+                    }
+                },
+                {
+                    "id": "id.sandbox.doors.close",
+                    "type": "sandbox",
+                    "data": {
+                        "persistencyId": "config.doors.close",
+                        "placeholder": "101, 202, 303, 404",
+                        "minLinesCount": 3
+                    }
+                },
+                {
+                    "id": "id.label.doors.open",
+                    "type": "label",
+                    "data": {
+                        "title": "Open door tiles:",
+                        "description": "Tip: a single number or comma-separated list of numbers",
+                        "variant": "caption"
+                    }
+                },
+                {
+                    "id": "id.sandbox.doors.open",
+                    "type": "sandbox",
+                    "data": {
+                        "persistencyId": "config.doors.open",
+                        "placeholder": "101",
+                        "minLinesCount": 3
+                    }
+                },
+                {
+                    "id": "id.label.level",
+                    "type": "label",
+                    "data": {
+                        "title": "Level layout:",
+                        "variant": "caption"
+                    }
+                },
+                {
+                    "id": "id.sandbox.level",
+                    "type": "sandbox",
+                    "data": {
+                        "persistencyId": "level.layout",
+                        "placeholder": "W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0\nW0 SP .  .  .  .  .  .  .  .  .  .  .  W0 SP .  .  .  .  .  .  .  .  .  .  .  .  .  .  W0\nW0 W0 W0 W0 W0 .  W0 W0 W0 W0 W0 W0 W0 .  W0 W0 W0 W0 W0 W0 W0 .  W0 W0 W0 W0 .  W0 W0 W0\nW0 W0 .  .  .  .  W0 .  .  .  .  .  .  W0 .  .  .  .  .  .  .  .  W0 W0 .  .  .  .  .  W0\nW0 W0 W0 W0 W0 .  W0 W0 W0 W0 W0 W0 W0 .  W0 W0 W0 W0 W0 W0 W0 .  W0 W0 W0 W0 .  W0 W0 W0\nW0 W0 W0 .  .  .  .  W0 .  .  .  .  .  W0 .  .  .  .  .  .  .  .  W0 W0 .  .  .  .  .  W0\nW0 W0 W0 W0 W0 W0 .  W0 W0 W0 W0 .  W0 W0 W0 W0 .  W0 W0 .  W0 W0 W0 W0 W0 .  W0 W0 .  W0\nW0 .  .  .  .  .  W0 .  .  .  .  .  W0 .  .  .  .  .  .  .  W0 .  .  .  .  .  W0 W0 .  W0\nW0 W0 W0 W0 W0 .  W0 W0 W0 W0 W0 W0 W0 .  W0 W0 W0 W0 W0 .  W0 W0 W0 W0 W0 W0 .  W0 W0 W0\nW0 .  .  .  .  .  .  W0 .  .  .  .  .  .  W0 .  .  .  .  .  W0 .  .  .  .  .  .  W0 .  W0\nW0 W0 W0 W0 W0 .  W0 W0 W0 W0 W0 W0 W0 .  W0 W0 W0 W0 W0 W0 .  W0 W0 W0 W0 W0 .  W0 W0 W0\nW0 .  .  .  .  .  .  .  W0 .  .  .  .  .  W0 .  .  .  .  .  .  .  W0 .  .  .  .  .  .  W0\nW0 W0 W0 W0 W0 .  W0 W0 W0 W0 W0 W0 W0 .  W0 W0 W0 W0 W0 W0 .  W0 W0 W0 W0 W0 .  W0 W0 W0\nW0 .  .  .  .  .  .  .  W0 .  .  .  .  .  W0 .  .  .  .  .  .  .  W0 .  .  .  .  .  .  W0\nW0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0",
+                        "minLinesCount": 18
                     }
                 }
             ],

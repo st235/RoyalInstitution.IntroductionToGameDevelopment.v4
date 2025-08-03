@@ -7,3 +7,10 @@
     font-size: 1.1em;
     color: var(--text-caption);
 }
+
+.label.footnote {
+    font-weight: 500;
+    font-size: 1.0em;
+    color: var(--text-caption);
+}
+
