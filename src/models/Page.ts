@@ -10,7 +10,7 @@ type Page = {
     id: string;
     ordinal: number;
     components: PageComponent[];
-    shoudOpen: string[];
+    shouldOpen: string[];
     asset?: string;
     isHidden?: boolean;
     isOpenByDefault?: boolean;
