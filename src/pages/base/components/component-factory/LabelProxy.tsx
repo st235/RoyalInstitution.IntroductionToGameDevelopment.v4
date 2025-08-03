@@ -11,10 +11,18 @@ type LabelProxyProps = {
 
 function LabelProxy(props: LabelProxyProps): React.ReactNode {
     return (
-        <Label
-            title={props.data.title}
-            variant={props.data.variant}
-        />
+        <div>
+            <Label
+                title={props.data.title}
+                variant={props.data.variant}
+            />
+            {props.data.description && 
+                <Label
+                    title={props.data.description}
+                    variant="footnote"
+                />
+            }
+        </div>
     );
 }
 

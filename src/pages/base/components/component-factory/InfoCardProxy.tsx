@@ -11,7 +11,10 @@ type InfoCardProxyProps = {
 
 function InfoCardProxy(props: InfoCardProxyProps): React.ReactNode {
     return (
-        <HtmlContentCard id={props.pageId} title={props.data.title} description={props.data.description} />
+        <HtmlContentCard
+            id={props.pageId}
+            title={props.data.title}
+            description={props.data.description} />
     );
 }
 

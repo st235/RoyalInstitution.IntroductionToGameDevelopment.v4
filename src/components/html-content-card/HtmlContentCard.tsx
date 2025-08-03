@@ -1,5 +1,6 @@
 import "@components/html-content-card/HtmlContentCard.css";
 
+import { useMemo } from "react";
 import DOMPurify from "dompurify";
 
 const baseUrlAlias = "@public";
@@ -19,14 +20,30 @@ function HtmlContentCard(props: HtmlContentCardProps) {
         return {__html: DOMPurify.sanitize(baseUrlAliasSubstitutedContent)};
     }
 
+    function generateHash(value: string): number {
+        let hash = 0;
+        for (const char of value) {
+            hash = (hash << 5) - hash + char.charCodeAt(0);
+            hash |= 0;
+        }
+        return hash;
+    }
+
+    const htmlContent = useMemo(() => sanitizeHtmlContent(props.description),
+        [props.description]);
+
+    const key = useMemo(() => generateHash(props.description),
+        [props.description]);
+
     return (
         <div className="html-content-card">
             <div className="row-heading">
                 <span className="id">{props.id}</span>
                 {props.title && <h1 className="title">{props.title}</h1>}
             </div>
-            <p className="description"
-                dangerouslySetInnerHTML={sanitizeHtmlContent(props.description)}
+            <div className="description"
+                key={key}
+                dangerouslySetInnerHTML={htmlContent}
             />
         </div>
     );

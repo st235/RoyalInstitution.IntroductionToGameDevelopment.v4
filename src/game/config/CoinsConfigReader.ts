@@ -5,8 +5,8 @@ import type { VariableTileAppearance } from "@game/config/TileVariationReader";
 import TileVariationReader from "@game/config/TileVariationReader";
 
 type CoinInfo = {
-    variant: number,
-    score: number,
+    variant: number;
+    score: number;
 };
 
 type CoinsConfig = VariableTileAppearance & {
@@ -53,4 +53,4 @@ class CoinsConfigReader {
 }
 
 export default CoinsConfigReader;
-export type { CoinsConfig };
+export type { CoinsConfig, CoinInfo };
