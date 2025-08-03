@@ -150,7 +150,7 @@
             ],
             "shouldOpen": ["4"]
         },
-                {
+        {
             "id": "4",
             "ordinal": 4,
             "components": [
@@ -198,6 +198,36 @@
                 }
             ],
             "shouldOpen": ["5"]
+        },
+        {
+            "id": "5",
+            "ordinal": 5,
+            "components": [
+                {
+                    "id": "id.infocard",
+                    "type": "info-card",
+                    "data": {
+                        "title": "Exercise 5: Adding coins",
+                        "description": "<p>Now that your level structure is in place, it's time to enhance its visual appearance using custom tile mapping.</p><p>In this exercise, you'll define how each tile should look by providing a list of <strong>tile IDs</strong> (ordinal values) that will be mapped to specific tile types in your maze.</p><p>Each tile ID you enter will be automatically assigned to a corresponding tile code: the first value becomes <code>W0</code>, the second <code>W1</code>, and so on—up to <code>WN</code>, where <strong>N</strong> is the index of the last value you provide.</p><p>Please enter your tile IDs in the text box below, separated by commas (e.g., <code>17, 21, 34, 56</code>). These values will control how each wall tile appears in the final rendered game.</p><p>You can be creative here! Think of these tile IDs as different styles or textures—maybe cracked stone, mossy brick, or glowing tiles. Just be sure to keep the order consistent with how you'll use <code>W0</code>, <code>W1</code>, etc., in your maze layout.</p><p>Once you've added your tile mapping, click the <strong>Save</strong> button to apply your changes.</p><p>This is an image to help you with the tile ids.</p><img src=\"@public/tiles-examples-walls.png\" width=\"400\"></img>"
+                    }
+                }
+            ],
+            "shouldOpen": ["6"]
+        },
+        {
+            "id": "6",
+            "ordinal": 6,
+            "components": [
+                {
+                    "id": "id.infocard",
+                    "type": "info-card",
+                    "data": {
+                        "title": "Exercise 6: Adding keys and doors",
+                        "description": "<p>Now that your level structure is in place, it's time to enhance its visual appearance using custom tile mapping.</p><p>In this exercise, you'll define how each tile should look by providing a list of <strong>tile IDs</strong> (ordinal values) that will be mapped to specific tile types in your maze.</p><p>Each tile ID you enter will be automatically assigned to a corresponding tile code: the first value becomes <code>W0</code>, the second <code>W1</code>, and so on—up to <code>WN</code>, where <strong>N</strong> is the index of the last value you provide.</p><p>Please enter your tile IDs in the text box below, separated by commas (e.g., <code>17, 21, 34, 56</code>). These values will control how each wall tile appears in the final rendered game.</p><p>You can be creative here! Think of these tile IDs as different styles or textures—maybe cracked stone, mossy brick, or glowing tiles. Just be sure to keep the order consistent with how you'll use <code>W0</code>, <code>W1</code>, etc., in your maze layout.</p><p>Once you've added your tile mapping, click the <strong>Save</strong> button to apply your changes.</p><p>This is an image to help you with the tile ids.</p><img src=\"@public/tiles-examples-walls.png\" width=\"400\"></img>"
+                    }
+                }
+            ],
+            "shouldOpen": ["7"]
         },
         {
             "id": "demo-ri-monday",

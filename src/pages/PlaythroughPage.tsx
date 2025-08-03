@@ -3,7 +3,7 @@ import riMondayDemoConfig from "@assets/game/demos/ri_monday_demo.json";
 
 import { useAppSelector, useAppDispatch } from "@/hooks/redux";
 
-import { AssociateStateAndPersistencyId, CanCompletePage } from "@/util/PageUtil";
+import { AssociateStateAndPersistencyId, CanCompletePage, GetPageTraversalContext, MergeComponentStates } from "@/util/PageUtil";
 import { completePage } from "@/reducers/pagesSlice";
 import { ObtainGameAndLevelConfigsOverwrites } from "@/util/GameConfigUtil";
 import { useEffect, useMemo } from "react";
@@ -51,10 +51,13 @@ function PlaythroughPage(props: PlaythroughPageProps) {
 
     const pagesState = useAppSelector(state => state.pagesState);
     const globalComponentsState = useAppSelector(state => state.pageComponentsState);
-    const pageComponentsState = globalComponentsState.pageToComponentsLookup[page.id] ?? {};
 
+    const pageTraversalContext = GetPageTraversalContext(page.id);
     const [gameConfig, levelConfig] = ObtainGameAndLevelConfigsOverwrites(
-        AssociateStateAndPersistencyId(globalComponentsState.pageToComponentsLookup)
+        AssociateStateAndPersistencyId(
+            globalComponentsState.pageToComponentsLookup,
+            pageTraversalContext
+        )
     );
 
     const completedPagesIds = pagesState.completedPageIds;
@@ -87,10 +90,10 @@ function PlaythroughPage(props: PlaythroughPageProps) {
                             <PageInteractiveContainer>
                                 {page.components.map(component => (
                                     <ComponentFactory
-                                        key={component.id}
+                                        key={`${page.id}-${component.id}`}
                                         pageId={page.id}
                                         component={component}
-                                        savedState={pageComponentsState[component.id]}
+                                        savedState={MergeComponentStates(component.id, globalComponentsState.pageToComponentsLookup, pageTraversalContext)}
                                     />
                                 ))}
                             </PageInteractiveContainer>

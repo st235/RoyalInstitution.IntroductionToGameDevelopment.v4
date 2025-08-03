@@ -2,6 +2,7 @@ import defaultPagesContent from "@assets/pages/default_content.json";
 
 import type { Page, StatefulPage, PageState } from "@/models/Page";
 import type { PersistentData } from "@/models/ui-data/PersistentData";
+import type { ComponentPersistentState } from "@/models/ui-data/ComponentPersistentState";
 
 type PageComponentsState = {[Key: string]: {[Key: string]: { persistencyId: string, state: object | undefined }}};
 
@@ -20,8 +21,45 @@ const pagesLookup: { [id: string]: Page } =
         }).map(page => [page.id, page])
     );
 
+const pageTraversalContextLookup: { [id: string]: string[] } = {};
+
 function GetDefaultPageId(): string {
     return defaultPagesContent.defaultPageId;
+}
+
+function GetPageTraversalContext(pageId: string): string[] {
+    if (pageTraversalContextLookup[pageId]) {
+        return pageTraversalContextLookup[pageId];
+    }
+
+    const visitedIds = new Set<string>();
+    const outPages: string[] = [];
+    const queue: string[] = [];
+
+    queue.push(defaultPagesContent.defaultPageId);
+    while (queue.length > 0) {
+        const currentPageId = queue.shift();
+        if (!currentPageId) {
+            continue;
+        }
+
+        outPages.push(currentPageId);
+        visitedIds.add(currentPageId);
+
+        if (currentPageId === pageId) {
+            break;
+        }
+
+        for (const childPageId of pagesLookup[currentPageId].shoudOpen) {
+            if (!visitedIds.has(childPageId)) {
+                visitedIds.add(childPageId);
+                queue.push(childPageId);
+            }
+        }
+    }
+
+    pageTraversalContextLookup[pageId]= outPages;
+    return outPages;
 }
 
 function GetDefaultStatefulPages(completedExerciseIds: string[]): StatefulPage[] {
@@ -65,15 +103,14 @@ function AppendCompletedPageId(completedExerciseIds: string[], id: string): stri
 
 function AssociateStateAndPersistencyId(
     stateLookup: PageComponentsState,
-    targetPageId?: string
+    traversalContext?: string[],
 ): {[Key: string]: object} {
-    if (targetPageId) {
-        return _AssociateStateAndPersistencyIdWithinPage(targetPageId, stateLookup);
-    }
+    const defaultTraversalContext = Object.keys(stateLookup);
+    const currentTraversalContext = traversalContext ?? defaultTraversalContext;
 
     const outObject = {};
 
-    for (const pageId of Object.keys(stateLookup)) {
+    for (const pageId of currentTraversalContext) {
         const pageObject = _AssociateStateAndPersistencyIdWithinPage(pageId, stateLookup);
         Object.assign(outObject, pageObject);
     }
@@ -117,10 +154,26 @@ function CanCompletePage(
     return true;
 }
 
+function MergeComponentStates(
+    componentId: string,
+    componentStatesLookup: PageComponentsState,
+    traversalContext: string[],
+): ComponentPersistentState {
+    const outObject = {};
+    for (const pageId of traversalContext) {
+        if (componentStatesLookup[pageId] && componentStatesLookup[pageId][componentId]) {
+            Object.assign(outObject, componentStatesLookup[pageId][componentId]);
+        }
+    }
+    return outObject as ComponentPersistentState;
+}
+
 export {
     AppendCompletedPageId,
+    AssociateStateAndPersistencyId,
     CanCompletePage,
     GetDefaultPageId,
     GetDefaultStatefulPages,
-    AssociateStateAndPersistencyId,
+    GetPageTraversalContext,
+    MergeComponentStates,
 };
