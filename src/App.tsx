@@ -7,8 +7,8 @@ import RootNavigator from "@/pages/base/RootNavigator";
 function App() {
     return (
         <Routes>
-            <Route path={`${import.meta.env.BASE_URL}/:pageId`} element={<RootNavigator />} />
-            <Route path="*" element={<Navigate to={`${import.meta.env.BASE_URL}/default`} replace />} />
+            <Route path="/:pageId" element={<RootNavigator />} />
+            <Route path="*" element={<Navigate to="/default" replace />} />
         </Routes>
     );
 }

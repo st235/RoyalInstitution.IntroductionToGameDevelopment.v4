@@ -51,7 +51,7 @@ function RootNavigator() {
                 pagesState.pagesLookup[navigationPageId].state === "locked")
             )
         ) {
-            navigate(`${import.meta.env.BASE_URL}/${pagesState.selectedPageId}`);
+            navigate(`/${pagesState.selectedPageId}`);
             return;
         }
 
@@ -65,7 +65,7 @@ function RootNavigator() {
             return;
         }
 
-        navigate(`${import.meta.env.BASE_URL}/${e.id}`);
+        navigate(`/${e.id}`);
     }
 
     return (

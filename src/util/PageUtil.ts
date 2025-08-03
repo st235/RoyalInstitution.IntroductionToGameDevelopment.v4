@@ -12,7 +12,7 @@ const pagesLookup: { [id: string]: Page } =
             return {
                 id: page.id,
                 ordinal: page.ordinal,
-                shoudOpen: page.shouldOpen ?? [],
+                shouldOpen: page.shouldOpen ?? [],
                 components: page.components,
                 asset: page.asset,
                 isHidden: page.isHidden,
@@ -36,6 +36,8 @@ function GetPageTraversalContext(pageId: string): string[] {
     const outPages: string[] = [];
     const queue: string[] = [];
 
+    let traversalFound = false;
+
     queue.push(defaultPagesContent.defaultPageId);
     while (queue.length > 0) {
         const currentPageId = queue.shift();
@@ -47,10 +49,16 @@ function GetPageTraversalContext(pageId: string): string[] {
         visitedIds.add(currentPageId);
 
         if (currentPageId === pageId) {
+            traversalFound = true;
             break;
         }
 
-        for (const childPageId of pagesLookup[currentPageId].shoudOpen) {
+        // In case if the element is not reachable (hidden pages),
+        // there is no traversal from root to open it.
+        const children = pagesLookup[currentPageId] ?
+            pagesLookup[currentPageId].shouldOpen : [];
+
+        for (const childPageId of children) {
             if (!visitedIds.has(childPageId)) {
                 visitedIds.add(childPageId);
                 queue.push(childPageId);
@@ -58,7 +66,12 @@ function GetPageTraversalContext(pageId: string): string[] {
         }
     }
 
-    pageTraversalContextLookup[pageId]= outPages;
+    if (!traversalFound) {
+        pageTraversalContextLookup[pageId] = [];
+        return [];
+    }
+
+    pageTraversalContextLookup[pageId] = outPages;
     return outPages;
 }
 
@@ -70,7 +83,7 @@ function GetDefaultStatefulPages(completedExerciseIds: string[]): StatefulPage[]
     );
 
     for (const completedId of completedExerciseIdsLookup) {
-        const openedIds = pagesLookup[completedId].shoudOpen;
+        const openedIds = pagesLookup[completedId].shouldOpen;
         for (const openedId of openedIds) {
             openedExerciseIds.add(openedId);
         }
