@@ -1,3 +1,5 @@
+![Legend of Royal Institution Web IDE Cover](./assets/cover.png)
+
 # Legend of Royal Institution: WebIDE
 
 Welcome to the **Legend of Royal Institution Online IDE**,

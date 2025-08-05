@@ -71,7 +71,7 @@
 }
 
 .text-toggle.accent {
-    border-color: var(--container-on-primary);
+    border-color: var(--accent-secondary);
     background-color: var(--accent-primary);
     color: var(--on-accent);
 }

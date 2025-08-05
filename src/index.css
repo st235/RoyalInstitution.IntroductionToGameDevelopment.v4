@@ -56,17 +56,17 @@ body {
   --container-on-secondary: #333333;
 
   /* Accent. */
-  --accent-primary: #c37835;         /* Warm pumpkin orange (for highlights) */
-  --accent-secondary: #aa5a2f;       /* Darker variant for borders, hover */
-  --on-accent: #1a1a1a;              /* Dark text for contrast on warm colors */
+  --accent-primary: #f0bb2d;
+  --accent-secondary: #b0964d;
+  --on-accent: #fdfdfd;
 
   /* Typography. */
-  --text-primary: #1e1e1e;           /* For headings, strong. */
-  --text-secondary: #555555;         /* For body text. */
-  --text-caption: #888888;           /* For less important text. */
+  --text-primary: #1e1e1e;
+  --text-secondary: #555555;
+  --text-caption: #888888;
 
   /* Identica. */
-  --logo-accent-colour: #c37835;
+  --logo-accent-colour: #f0bb2d;
   --logo-outline-colour: #fdfdfd;
-  --logo-background-colour: #131c19;
+  --logo-background-colour: #020110;
 }

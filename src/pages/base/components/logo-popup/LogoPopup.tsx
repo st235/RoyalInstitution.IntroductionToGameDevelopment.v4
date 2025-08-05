@@ -1,14 +1,8 @@
 import "@/pages/base/components/logo-popup/LogoPopup.css";
 
-import PopupLayout from "@components/popup-layout/PopupLayout";
+import LogoLegendOfRoyalInstitution from "@assets/images/logo-legend-of-royal-institution.jpeg";
 
-function IdeLogo() {
-    return (
-        <div className="logo-image">
-            {/* <img src={LogoIde} /> */}
-        </div>
-    );
-}
+import PopupLayout from "@components/popup-layout/PopupLayout";
 
 function LogoPopup() {
     return (
@@ -34,7 +28,7 @@ function LogoPopup() {
                     <span className="footer">Made with ❤️ by <a href="https://github.com/st235">st235</a></span>
                 </div>
             }>
-            <IdeLogo />
+            <img className="logo-image" src={LogoLegendOfRoyalInstitution} />
         </PopupLayout>
     );
 }
