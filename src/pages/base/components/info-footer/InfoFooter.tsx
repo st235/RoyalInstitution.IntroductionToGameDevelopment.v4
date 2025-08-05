@@ -1,5 +1,6 @@
 import "@/pages/base/components/info-footer/InfoFooter.css";
 
+import IconBootstrapFill from "@assets/icons/bootstrap-fill.svg";
 import IconGithub from "@assets/icons/github.svg";
 import IconInfoLg from "@assets/icons/info-lg.svg";
 
@@ -17,7 +18,12 @@ function InfoFooter() {
             anchor={{bottom: 0, left: 0}}
             popupContent={
                 <div className="info-footer-popup">
-                    <span className="title">Game Assets:</span>
+                    <span className="title">Assets used in IDE interface:</span>
+                    <a className="link common-container" target="_blank" href="https://icons.getbootstrap.com/">
+                        <img className="logo small" src={IconBootstrapFill} />
+                        <span className="text small">Bootstrap Icons</span>
+                    </a>
+                    <span className="title">Assets used in game:</span>
                     <a className="link common-container" target="_blank" href="https://v3x3d.itch.io/bountiful-bits">
                         <img className="logo small" src={ImageLogoItchIo} />
                         <span className="text small">"Bountiful Bits" by <b>VEXED</b></span>
