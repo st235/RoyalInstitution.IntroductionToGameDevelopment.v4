@@ -9,8 +9,6 @@ text-configurable maze game.
 This project is used in workshops delivered in collaboration with [the **Royal Institution**](https://www.rigb.org)
 and built to demystify how games are made - from gameplay mechanics to level design and AI behavior.
 
----
-
 ## Workshop Learning Plan
 
 ### 1. What Makes Up a Video Game?
@@ -57,16 +55,12 @@ By the end of this workshop, students will:
 - Experiment with AI-like behavior and gameplay balance
 - Express creativity through level building and gameplay tweaks
 
----
+## Getting Started
 
-## Tech Stack
+### Stack
 
 - **Game Engine:** [Phaser 3](https://phaser.io/)
 - **Frontend:** TypeScript + React + Redux
-- **Deployment:** GitHub Pages
-
-
-## 🚀 Getting Started
 
 ### Local Development
 
@@ -76,16 +70,20 @@ npm run dev
 ```
 
 > [!TIP]
-> Open your browser at [http://localhost:5173/RoyalInstitution.IntroductionToGameDevelopment.v4](http://localhost:5173/RoyalInstitution.IntroductionToGameDevelopment.v4) to see the Web IDE running
+> Open your browser at [http://localhost:5173/RoyalInstitution.IntroductionToGameDevelopment.v4](http://localhost:5173/RoyalInstitution.IntroductionToGameDevelopment.v4)
+> to see the Web IDE running.
 
 ### Run Lint, Tests, and Build
 
 Before pushing changes:
-npm test         # Run unit tests
-npm run lint     # Run ESLint
-npm run build    # Build for production
 
-> [!INFO]
+```bash
+npm test
+npm run lint
+npm run build
+```
+
+> [!TIP]
 > CI must be green to contribute!
 
 ## Screenshots
