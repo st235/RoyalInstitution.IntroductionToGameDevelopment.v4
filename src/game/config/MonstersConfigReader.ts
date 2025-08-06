@@ -62,7 +62,7 @@ class MonstersConfigReader {
     }
 
     private static _checkCycleExists(path: [number, number][]): boolean {
-        if (path.length == 0) {
+        if (path.length === 0) {
             return false;
         }
 
@@ -71,7 +71,7 @@ class MonstersConfigReader {
             point[0] += direction[0];
             point[1] += direction[1];
         }
-        return point[0] == 0 && point[1] == 0;
+        return point[0] === 0 && point[1] === 0;
     }
 
     public static create(config: MonstersConfig[] = defaultMonstersConfig): MonstersConfigReader | undefined {

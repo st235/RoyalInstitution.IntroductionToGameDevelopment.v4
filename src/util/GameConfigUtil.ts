@@ -1,6 +1,7 @@
+import type { CoinInfo } from "@game/config/CoinsConfigReader";
 import type { GameConfig } from "@game/config/GameConfigReader";
 import type { LevelConfig } from "@game/config/LevelConfigReader";
-import type { CoinInfo } from "@/game/config/CoinsConfigReader";
+import type { MonstersConfig } from "@game/config/MonstersConfigReader";
 
 type ConfigProvider = {
     messageIntro?: string;
@@ -14,6 +15,7 @@ type ConfigProvider = {
     keys?: number[];
     closeDoors?: number[];
     openDoors?: number[];
+    monsters?: MonstersConfig[];
 };
 
 type ConfigOverwriteMapperFunction = (data: unknown, outConfigProvider: ConfigProvider) => void;
@@ -68,6 +70,19 @@ const configOverwritesMappers: {[Key: string]: ConfigOverwriteMapperFunction} = 
     "config.doors.open": _WrapOverwriteMapper((data: {value: string}, outConfigProvider: ConfigProvider) => {
         outConfigProvider.openDoors = _ParseVariations(data.value);
     }),
+    "config.monsters": _WrapOverwriteMapper((data: {value: string}, outConfigProvider: ConfigProvider) => {
+        outConfigProvider.monsters = data.value.split(/\r?\n/)
+            .map((line, index) => {
+                const raws = line.split(/\s+/);
+
+                return {
+                    id: index,
+                    variant: parseInt(raws[0]),
+                    updateTimeMs: parseInt(raws[1]),
+                    path: raws.slice(2),
+                };
+            });
+    }),
 };
 
 function _GetConfigProvider(
@@ -104,6 +119,7 @@ function ObtainGameAndLevelConfigsOverwrites(
                     }
                 }
             }),
+            ...(configProvider.monsters && { monsters: configProvider.monsters }),
         }
     };
 
