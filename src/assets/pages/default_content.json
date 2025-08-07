@@ -473,7 +473,143 @@
                     }
                 }
             ],
-            "shouldOpen": ["8"]
+            "shouldOpen": ["9"]
+        },
+        {
+            "id": "9",
+            "ordinal": 9,
+            "components": [
+                {
+                    "id": "id.infocard",
+                    "type": "info-card",
+                    "data": {
+                        "title": "Exercise 9: polishing level layout",
+                        "description": "<p>Great work so far! Now let's give your <strong>flag</strong> a bit of extra flair by defining different <strong>appearances</strong>.</p><p>In this exercise, you'll provide a list of <strong>tile IDs</strong> that represent the different flags. These tiles will be automatically assigned as <code>F0</code>, <code>F1</code>, <code>F2</code>, and so on, in the order you list them.</p> <p>This allows your flag to have different appearance within the same level to make the layout harder to memorise and add some customisation to your design.</p><p><strong>Instructions:</strong></p><ul><li>Enter a comma-separated list of tile IDs (e.g., <code>120, 121, 122</code>).</li> <li>The first tile becomes <code>F0</code>, the second <code>F1</code>, and so on.</li></ul><p>Once assigned, you can reference <code>F0</code>, <code>F1</code>, etc. in your level layout.</p><img src=\"@public/tiles-examples-flags.png\" width=\"500\"></img><p>Time to make that flag wave proudly!</p>"
+                    }
+                },
+                {
+                    "id": "id.label.flags",
+                    "type": "label",
+                    "data": {
+                        "title": "Flag tiles:",
+                        "description": "Tip: comma-separated list of numbers",
+                        "variant": "caption"
+                    }
+                },
+                {
+                    "id": "id.sandbox.flags",
+                    "type": "sandbox",
+                    "data": {
+                        "persistencyId": "config.flags",
+                        "placeholder": "101, 202, 303, 404",
+                        "minLinesCount": 3
+                    }
+                },
+                {
+                    "id": "id.label.level",
+                    "type": "label",
+                    "data": {
+                        "title": "Level layout:",
+                        "variant": "caption"
+                    }
+                },
+                {
+                    "id": "id.sandbox.level",
+                    "type": "sandbox",
+                    "data": {
+                        "persistencyId": "level.layout",
+                        "placeholder": "W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0\nW0 SP .  .  .  .  .  .  .  .  .  .  .  W0 SP .  .  .  .  .  .  .  .  .  .  .  .  .  .  W0\nW0 W0 W0 W0 W0 .  W0 W0 W0 W0 W0 W0 W0 .  W0 W0 W0 W0 W0 W0 W0 .  W0 W0 W0 W0 .  W0 W0 W0\nW0 W0 .  .  .  .  W0 .  .  .  .  .  .  W0 .  .  .  .  .  .  .  .  W0 W0 .  .  .  .  .  W0\nW0 W0 W0 W0 W0 .  W0 W0 W0 W0 W0 W0 W0 .  W0 W0 W0 W0 W0 W0 W0 .  W0 W0 W0 W0 .  W0 W0 W0\nW0 W0 W0 .  .  .  .  W0 .  .  .  .  .  W0 .  .  .  .  .  .  .  .  W0 W0 .  .  .  .  .  W0\nW0 W0 W0 W0 W0 W0 .  W0 W0 W0 W0 .  W0 W0 W0 W0 .  W0 W0 .  W0 W0 W0 W0 W0 .  W0 W0 .  W0\nW0 .  .  .  .  .  W0 .  .  .  .  .  W0 .  .  .  .  .  .  .  W0 .  .  .  .  .  W0 W0 .  W0\nW0 W0 W0 W0 W0 .  W0 W0 W0 W0 W0 W0 W0 .  W0 W0 W0 W0 W0 .  W0 W0 W0 W0 W0 W0 .  W0 W0 W0\nW0 .  .  .  .  .  .  W0 .  .  .  .  .  .  W0 .  .  .  .  .  W0 .  .  .  .  .  .  W0 .  W0\nW0 W0 W0 W0 W0 .  W0 W0 W0 W0 W0 W0 W0 .  W0 W0 W0 W0 W0 W0 .  W0 W0 W0 W0 W0 .  W0 W0 W0\nW0 .  .  .  .  .  .  .  W0 .  .  .  .  .  W0 .  .  .  .  .  .  .  W0 .  .  .  .  .  .  W0\nW0 W0 W0 W0 W0 .  W0 W0 W0 W0 W0 W0 W0 .  W0 W0 W0 W0 W0 W0 .  W0 W0 W0 W0 W0 .  W0 W0 W0\nW0 .  .  .  .  .  .  .  W0 .  .  .  .  .  W0 .  .  .  .  .  .  .  W0 .  .  .  .  .  .  W0\nW0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0",
+                        "minLinesCount": 18
+                    }
+                }
+            ],
+            "shouldOpen": ["10"]
+        },
+        {
+            "id": "10",
+            "ordinal": 10,
+            "components": [
+                {
+                    "id": "id.infocard",
+                    "type": "info-card",
+                    "data": {
+                        "title": "Exercise 10: level constraints",
+                        "description": "<p>Now that your level is built and decorated, let's make it more challenging by defining the <strong>constraints and win conditions</strong>.</p><p>In this exercise, you'll configure how the level behaves in terms of time, movement, and scoring. These constraints help shape the difficulty and strategy of your level—forcing players to plan carefully, move efficiently, or collect more before they can win.</p><p>You can adjust the following values:</p><ol><li><strong>Max time (in seconds)</strong> the total amount of time a player has to complete the level.</li><li><strong>Max moves</strong> the maximum number of moves the player can make.</li><li><strong>Minimum score</strong> the minimum score the player must collect before the flag appears in the level.</li></ol><p>Set an empty field and save to remove the constraint.</p><p>Here's an example configuration:</p> <pre> Max time: 60<br>Max steps: 200</pre><p>With this setup, the player has 60 seconds and 200 moves availableto completel the level.</p> <p>Ready to tweak your level's challenge? Enter your constraint values below and test how they change the gameplay experience!</p>"
+                    }
+                },
+                {
+                    "id": "id.label.max-time",
+                    "type": "label",
+                    "data": {
+                        "title": "Max time:",
+                        "description": "Tip: a positive integer in seconds",
+                        "variant": "caption"
+                    }
+                },
+                {
+                    "id": "id.sandbox.max-time",
+                    "type": "sandbox",
+                    "data": {
+                        "persistencyId": "constraint.time",
+                        "placeholder": "101, 202, 303, 404",
+                        "minLinesCount": 3
+                    }
+                },
+                {
+                    "id": "id.label.max-moves",
+                    "type": "label",
+                    "data": {
+                        "title": "Max moves:",
+                        "description": "Tip: a positive integer",
+                        "variant": "caption"
+                    }
+                },
+                {
+                    "id": "id.sandbox.max-moves",
+                    "type": "sandbox",
+                    "data": {
+                        "persistencyId": "constraint.max-moves",
+                        "placeholder": "101, 202, 303, 404",
+                        "minLinesCount": 3
+                    }
+                },
+                {
+                    "id": "id.label.min-score",
+                    "type": "label",
+                    "data": {
+                        "title": "Min score:",
+                        "description": "Tip: a positive integer, defines when flag appears on the level",
+                        "variant": "caption"
+                    }
+                },
+                {
+                    "id": "id.sandbox.min-score",
+                    "type": "sandbox",
+                    "data": {
+                        "persistencyId": "constraint.min-score",
+                        "placeholder": "101, 202, 303, 404",
+                        "minLinesCount": 3
+                    }
+                },
+                {
+                    "id": "id.label.level",
+                    "type": "label",
+                    "data": {
+                        "title": "Level layout:",
+                        "variant": "caption"
+                    }
+                },
+                {
+                    "id": "id.sandbox.level",
+                    "type": "sandbox",
+                    "data": {
+                        "persistencyId": "level.layout",
+                        "placeholder": "W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0\nW0 SP .  .  .  .  .  .  .  .  .  .  .  W0 SP .  .  .  .  .  .  .  .  .  .  .  .  .  .  W0\nW0 W0 W0 W0 W0 .  W0 W0 W0 W0 W0 W0 W0 .  W0 W0 W0 W0 W0 W0 W0 .  W0 W0 W0 W0 .  W0 W0 W0\nW0 W0 .  .  .  .  W0 .  .  .  .  .  .  W0 .  .  .  .  .  .  .  .  W0 W0 .  .  .  .  .  W0\nW0 W0 W0 W0 W0 .  W0 W0 W0 W0 W0 W0 W0 .  W0 W0 W0 W0 W0 W0 W0 .  W0 W0 W0 W0 .  W0 W0 W0\nW0 W0 W0 .  .  .  .  W0 .  .  .  .  .  W0 .  .  .  .  .  .  .  .  W0 W0 .  .  .  .  .  W0\nW0 W0 W0 W0 W0 W0 .  W0 W0 W0 W0 .  W0 W0 W0 W0 .  W0 W0 .  W0 W0 W0 W0 W0 .  W0 W0 .  W0\nW0 .  .  .  .  .  W0 .  .  .  .  .  W0 .  .  .  .  .  .  .  W0 .  .  .  .  .  W0 W0 .  W0\nW0 W0 W0 W0 W0 .  W0 W0 W0 W0 W0 W0 W0 .  W0 W0 W0 W0 W0 .  W0 W0 W0 W0 W0 W0 .  W0 W0 W0\nW0 .  .  .  .  .  .  W0 .  .  .  .  .  .  W0 .  .  .  .  .  W0 .  .  .  .  .  .  W0 .  W0\nW0 W0 W0 W0 W0 .  W0 W0 W0 W0 W0 W0 W0 .  W0 W0 W0 W0 W0 W0 .  W0 W0 W0 W0 W0 .  W0 W0 W0\nW0 .  .  .  .  .  .  .  W0 .  .  .  .  .  W0 .  .  .  .  .  .  .  W0 .  .  .  .  .  .  W0\nW0 W0 W0 W0 W0 .  W0 W0 W0 W0 W0 W0 W0 .  W0 W0 W0 W0 W0 W0 .  W0 W0 W0 W0 W0 .  W0 W0 W0\nW0 .  .  .  .  .  .  .  W0 .  .  .  .  .  W0 .  .  .  .  .  .  .  W0 .  .  .  .  .  .  W0\nW0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0",
+                        "minLinesCount": 18
+                    }
+                }
+            ],
+            "shouldOpen": ["11"]
         },
         {
             "id": "demo-ri-monday",

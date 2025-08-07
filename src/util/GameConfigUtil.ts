@@ -61,13 +61,19 @@ const configOverwritesMappers: {[Key: string]: ConfigOverwriteMapperFunction} = 
 
     // Level constraints.
     "constraint.time": _WrapOverwriteMapper((data: {value: string}, outConfigProvider: ConfigProvider) => {
-        outConfigProvider.constraintTime = parseInt(data.value);
+        if (data.value && data.value.trim().length > 0) {
+            outConfigProvider.constraintTime = parseInt(data.value);
+        }
     }),
-    "constraint.max-steps": _WrapOverwriteMapper((data: {value: string}, outConfigProvider: ConfigProvider) => {
-        outConfigProvider.constraintMaxSteps = parseInt(data.value);
+    "constraint.max-moves": _WrapOverwriteMapper((data: {value: string}, outConfigProvider: ConfigProvider) => {
+        if (data.value && data.value.trim().length > 0) {
+            outConfigProvider.constraintMaxSteps = parseInt(data.value);
+        }
     }),
     "constraint.min-score": _WrapOverwriteMapper((data: {value: string}, outConfigProvider: ConfigProvider) => {
-        outConfigProvider.constraintMinScore = parseInt(data.value);
+        if (data.value && data.value.trim().length > 0) {
+            outConfigProvider.constraintMinScore = parseInt(data.value);
+        }
     }),
 
     // Dialogs.
