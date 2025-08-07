@@ -1,21 +1,41 @@
+import { parseBoolean } from "@/util/Booleans";
+import { splitByNewLine, splitByWhitespace } from "@/util/Strings";
 import type { CoinInfo } from "@game/config/CoinsConfigReader";
 import type { GameConfig } from "@game/config/GameConfigReader";
+import type { GarnitureConfig } from "@game/config/GarnitureConfigReader";
 import type { LevelConfig } from "@game/config/LevelConfigReader";
 import type { MonstersConfig } from "@game/config/MonstersConfigReader";
 
 type ConfigProvider = {
-    messageIntro?: string;
-    messageGameOver?: string;
-    messageVictory?: string;
-    wallTiles?: number[];
+    // Level info.
+    levelTitle?: string;
     levelLayout?: string[];
-    coinDefaultScore?: number;
-    coinValues?: CoinInfo[];
-    coinTiles?: number[];
-    keys?: number[];
+
+    // Level constraints.
+    constraintTime?: number;
+    constraintMaxSteps?: number;
+    constraintMinScore?: number;
+
+    // Dialogs.
+    dialogIntro?: string;
+    dialogGameOver?: string;
+    dialogVictory?: string;
+
+    // Config overwrites.
     closeDoors?: number[];
-    openDoors?: number[];
+    coinDefaultScore?: number;
+    coinTiles?: number[];
+    coinValues?: CoinInfo[];
+    flags?: number[];
+    garniture?: GarnitureConfig;
+    keys?: number[];
     monsters?: MonstersConfig[];
+    openDoors?: number[];
+    wallTiles?: number[];
+
+    // FX.
+    applyFogOfWar?: boolean;
+    applyCathodRayTube?: boolean;
 };
 
 type ConfigOverwriteMapperFunction = (data: unknown, outConfigProvider: ConfigProvider) => void;
@@ -31,18 +51,37 @@ function _ParseVariations(value: string): number[] {
 }
 
 const configOverwritesMappers: {[Key: string]: ConfigOverwriteMapperFunction} = {
-    "message.intro": _WrapOverwriteMapper((data: {value: string}, outConfigProvider: ConfigProvider) => {
-        outConfigProvider.messageIntro = data.value;
-    }),
-    "message.gameOver": _WrapOverwriteMapper((data: {value: string}, outConfigProvider: ConfigProvider) => {
-        outConfigProvider.messageGameOver = data.value;
-    }),
-    "message.victory": _WrapOverwriteMapper((data: {value: string}, outConfigProvider: ConfigProvider) => {
-        outConfigProvider.messageVictory = data.value;
+    // Level info.
+    "level.title": _WrapOverwriteMapper((data: {value: string}, outConfigProvider: ConfigProvider) => {
+        outConfigProvider.levelTitle = data.value;
     }),
     "level.layout": _WrapOverwriteMapper((data: {value: string}, outConfigProvider: ConfigProvider) => {
-        outConfigProvider.levelLayout = data.value.split(/\r?\n/);
+        outConfigProvider.levelLayout = splitByNewLine(data.value);
     }),
+
+    // Level constraints.
+    "constraint.time": _WrapOverwriteMapper((data: {value: string}, outConfigProvider: ConfigProvider) => {
+        outConfigProvider.constraintTime = parseInt(data.value);
+    }),
+    "constraint.max-steps": _WrapOverwriteMapper((data: {value: string}, outConfigProvider: ConfigProvider) => {
+        outConfigProvider.constraintMaxSteps = parseInt(data.value);
+    }),
+    "constraint.min-score": _WrapOverwriteMapper((data: {value: string}, outConfigProvider: ConfigProvider) => {
+        outConfigProvider.constraintMinScore = parseInt(data.value);
+    }),
+
+    // Dialogs.
+    "dialog.intro": _WrapOverwriteMapper((data: {value: string}, outConfigProvider: ConfigProvider) => {
+        outConfigProvider.dialogIntro = data.value;
+    }),
+    "dialog.game-over": _WrapOverwriteMapper((data: {value: string}, outConfigProvider: ConfigProvider) => {
+        outConfigProvider.dialogGameOver = data.value;
+    }),
+    "dialog.victory": _WrapOverwriteMapper((data: {value: string}, outConfigProvider: ConfigProvider) => {
+        outConfigProvider.dialogVictory = data.value;
+    }),
+
+    // Config overwrites.
     "config.walls": _WrapOverwriteMapper((data: {value: string}, outConfigProvider: ConfigProvider) => {
         outConfigProvider.wallTiles = _ParseVariations(data.value);
     }),
@@ -50,8 +89,8 @@ const configOverwritesMappers: {[Key: string]: ConfigOverwriteMapperFunction} = 
         outConfigProvider.coinDefaultScore = parseInt(data.value);
     }),
     "config.coins.values": _WrapOverwriteMapper((data: {value: string}, outConfigProvider: ConfigProvider) => {
-        outConfigProvider.coinValues = data.value.split(/\r?\n/).map(line => {
-            const splits = line.split(/\s+/).map(v => parseInt(v));
+        outConfigProvider.coinValues = splitByNewLine(data.value).map(line => {
+            const splits = splitByWhitespace(line).map(v => parseInt(v));
             return {
                 variant: splits[0],
                 score: splits[1],
@@ -71,9 +110,9 @@ const configOverwritesMappers: {[Key: string]: ConfigOverwriteMapperFunction} = 
         outConfigProvider.openDoors = _ParseVariations(data.value);
     }),
     "config.monsters": _WrapOverwriteMapper((data: {value: string}, outConfigProvider: ConfigProvider) => {
-        outConfigProvider.monsters = data.value.split(/\r?\n/)
+        outConfigProvider.monsters = splitByNewLine(data.value)
             .map((line, index) => {
-                const raws = line.split(/\s+/);
+                const raws = splitByWhitespace(line);
 
                 return {
                     id: index,
@@ -82,6 +121,29 @@ const configOverwritesMappers: {[Key: string]: ConfigOverwriteMapperFunction} = 
                     path: raws.slice(2),
                 };
             });
+    }),
+    "config.garniture": _WrapOverwriteMapper((data: {value: string}, outConfigProvider: ConfigProvider) => {
+        const flat: [number, number | undefined][] = splitByNewLine(data.value)
+            .map((line, index) => {
+                const raws = splitByWhitespace(line);
+                return [parseInt(raws[0]), parseBoolean(raws[1]) ? index : undefined];
+            });
+
+        outConfigProvider.garniture = {
+            variations: flat.map(v => v[0]),
+            collides: flat.map(v => v[1]).filter(v => v !== undefined),
+        };
+    }),
+    "config.flags": _WrapOverwriteMapper((data: {value: string}, outConfigProvider: ConfigProvider) => {
+        outConfigProvider.flags = _ParseVariations(data.value);
+    }),
+
+    // FX.
+    "fx.fog-of-war": _WrapOverwriteMapper((data: {value: string}, outConfigProvider: ConfigProvider) => {
+        outConfigProvider.applyFogOfWar = parseBoolean(data.value);
+    }),
+    "fx.cathod-ray-tube": _WrapOverwriteMapper((data: {value: string}, outConfigProvider: ConfigProvider) => {
+        outConfigProvider.applyCathodRayTube = parseBoolean(data.value);
     }),
 };
 
@@ -103,10 +165,11 @@ function ObtainGameAndLevelConfigsOverwrites(
     const configProvider = _GetConfigProvider(persistencyStateLookup);
 
     const gameConfig: GameConfig = {
+        applyCathodRayTubeEffect: configProvider.applyCathodRayTube ?? false,
         messagesOverwrites: {
-            intro: configProvider.messageIntro,
-            gameOver: configProvider.messageGameOver,
-            victory: configProvider.messageVictory,
+            intro: configProvider.dialogIntro,
+            gameOver: configProvider.dialogGameOver,
+            victory: configProvider.dialogVictory,
         },
         configOverwrites: {
             ...(configProvider.wallTiles && { walls: { variations: configProvider.wallTiles } }),
@@ -120,6 +183,8 @@ function ObtainGameAndLevelConfigsOverwrites(
                 }
             }),
             ...(configProvider.monsters && { monsters: configProvider.monsters }),
+            ...(configProvider.garniture && { garnitures: configProvider.garniture }),
+            ...(configProvider.flags && { flags: { variations: configProvider.flags } }),
         }
     };
 
@@ -127,9 +192,14 @@ function ObtainGameAndLevelConfigsOverwrites(
     if (configProvider.levelLayout) {
         levelConfig = {
             id: 0,
-            title: "My first level",
+            title: configProvider.levelTitle ?? "My first level",
+            applyFogOfWar: configProvider.applyFogOfWar ?? false,
             levelLayout: configProvider.levelLayout,
-            constraints: {},
+            constraints: {
+                maxTimeSec: configProvider.constraintTime,
+                maxMoves: configProvider.constraintMaxSteps,
+                minScore: configProvider.constraintMinScore,
+            },
         };
     }
 

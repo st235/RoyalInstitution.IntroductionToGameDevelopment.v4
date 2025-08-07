@@ -77,7 +77,7 @@
                     "id": "id.sandbox.intro",
                     "type": "sandbox",
                     "data": {
-                        "persistencyId": "message.intro",
+                        "persistencyId": "dialog.intro",
                         "placeholder": "I am a template message,\nI am required to setup the gameplay",
                         "minLinesCount": 3
                     }
@@ -95,7 +95,7 @@
                     "id": "id.sandbox.gameOver",
                     "type": "sandbox",
                     "data": {
-                        "persistencyId": "message.gameOver",
+                        "persistencyId": "dialog.game-over",
                         "placeholder": "Haha!\nI knew it would be hard\nto finish the maze!",
                         "minLinesCount": 3
                     }
@@ -113,7 +113,7 @@
                     "id": "id.sandbox.victory",
                     "type": "sandbox",
                     "data": {
-                        "persistencyId": "message.victory",
+                        "persistencyId": "dialog.victory",
                         "placeholder": "Congratulations!\nWell done.",
                         "minLinesCount": 3
                     }
@@ -403,6 +403,56 @@
                         "persistencyId": "config.monsters",
                         "placeholder": "101, 202, 303, 404",
                         "minLinesCount": 10
+                    }
+                },
+                {
+                    "id": "id.label.level",
+                    "type": "label",
+                    "data": {
+                        "title": "Level layout:",
+                        "variant": "caption"
+                    }
+                },
+                {
+                    "id": "id.sandbox.level",
+                    "type": "sandbox",
+                    "data": {
+                        "persistencyId": "level.layout",
+                        "placeholder": "W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0\nW0 SP .  .  .  .  .  .  .  .  .  .  .  W0 SP .  .  .  .  .  .  .  .  .  .  .  .  .  .  W0\nW0 W0 W0 W0 W0 .  W0 W0 W0 W0 W0 W0 W0 .  W0 W0 W0 W0 W0 W0 W0 .  W0 W0 W0 W0 .  W0 W0 W0\nW0 W0 .  .  .  .  W0 .  .  .  .  .  .  W0 .  .  .  .  .  .  .  .  W0 W0 .  .  .  .  .  W0\nW0 W0 W0 W0 W0 .  W0 W0 W0 W0 W0 W0 W0 .  W0 W0 W0 W0 W0 W0 W0 .  W0 W0 W0 W0 .  W0 W0 W0\nW0 W0 W0 .  .  .  .  W0 .  .  .  .  .  W0 .  .  .  .  .  .  .  .  W0 W0 .  .  .  .  .  W0\nW0 W0 W0 W0 W0 W0 .  W0 W0 W0 W0 .  W0 W0 W0 W0 .  W0 W0 .  W0 W0 W0 W0 W0 .  W0 W0 .  W0\nW0 .  .  .  .  .  W0 .  .  .  .  .  W0 .  .  .  .  .  .  .  W0 .  .  .  .  .  W0 W0 .  W0\nW0 W0 W0 W0 W0 .  W0 W0 W0 W0 W0 W0 W0 .  W0 W0 W0 W0 W0 .  W0 W0 W0 W0 W0 W0 .  W0 W0 W0\nW0 .  .  .  .  .  .  W0 .  .  .  .  .  .  W0 .  .  .  .  .  W0 .  .  .  .  .  .  W0 .  W0\nW0 W0 W0 W0 W0 .  W0 W0 W0 W0 W0 W0 W0 .  W0 W0 W0 W0 W0 W0 .  W0 W0 W0 W0 W0 .  W0 W0 W0\nW0 .  .  .  .  .  .  .  W0 .  .  .  .  .  W0 .  .  .  .  .  .  .  W0 .  .  .  .  .  .  W0\nW0 W0 W0 W0 W0 .  W0 W0 W0 W0 W0 W0 W0 .  W0 W0 W0 W0 W0 W0 .  W0 W0 W0 W0 W0 .  W0 W0 W0\nW0 .  .  .  .  .  .  .  W0 .  .  .  .  .  W0 .  .  .  .  .  .  .  W0 .  .  .  .  .  .  W0\nW0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0",
+                        "minLinesCount": 18
+                    }
+                }
+            ],
+            "shouldOpen": ["8"]
+        },
+        {
+            "id": "8",
+            "ordinal": 8,
+            "components": [
+                {
+                    "id": "id.infocard",
+                    "type": "info-card",
+                    "data": {
+                        "title": "Exercise 8: 🐣 easter eggs?",
+                        "description": "<p>We're almost done! Now let's place the finishing touches on your level by adding optional <strong>garnitures</strong> to make your level feel more alive and complete.</p><p>This exercise is all about defining which tiles represent these special elements.</p> <p>There is a field below to complete:</p><ol><li><strong>Garniture Tile IDs</strong> enter a new line-separated list of tile IDs with a flag whether they should be collideable (e.g., <code>201 false<br>301 true</code>) that represent optional garniture tiles—visual or thematic elements like grass, torches, banners, or any decorative details that don't affect gameplay, do they? These will be mapped to <code>G0</code>, <code>G1</code>, ..., <code>GN</code>.</li></ol><p>Once you've defined these, you can place the garnitures directly into your maze layout.</p><p>Here's an example of how your layout might use them: you can use non-collideable garniture and a wall tile to create a hidden passage to a secret room.</p><p>This will create a visually interesting finish area for extra challenging the player!</p><p>Ready to wrap up your level? Add your garnitures using the fields below, and update your layout to complete your masterpiece!</p><p>Below are garniture tiles:</p><img src=\"@public/tiles-examples-garnitures.png\" width=\"350\"></img>"
+                    }
+                },
+                {
+                    "id": "id.label.garniture",
+                    "type": "label",
+                    "data": {
+                        "title": "Garnitures:",
+                        "description": "Tip: multiline text. Every line is space separated pair of tileID and a boolean flag",
+                        "variant": "caption"
+                    }
+                },
+                {
+                    "id": "id.sandbox.garniture",
+                    "type": "sandbox",
+                    "data": {
+                        "persistencyId": "config.garniture",
+                        "placeholder": "101, 202, 303, 404",
+                        "minLinesCount": 5
                     }
                 },
                 {
