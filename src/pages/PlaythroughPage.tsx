@@ -1,12 +1,11 @@
 import playthroughDemoConfig from "@assets/game/demos/playthrough_demo.json";
 import riMondayDemoConfig from "@assets/game/demos/ri_monday_demo.json";
 
-import { useEffect, useMemo, useRef } from "react";
+import { useEffect, useMemo } from "react";
 import { useAppSelector, useAppDispatch } from "@/hooks/redux";
 
 import { AssociateStateAndPersistencyId, CanCompletePage, GetPageTraversalContext, MergeComponentStates } from "@/util/PageUtil";
 import { completePage } from "@/reducers/pagesSlice";
-import { deepEquals } from "@/util/Objects";
 import { ObtainGameAndLevelConfigsOverwrites } from "@/util/GameConfigUtil";
 import { useDeepCompareMemo } from "@/hooks/useDeepEffects";
 import ComponentFactory from "@/pages/base/components/component-factory/ComponentFactory";
@@ -17,10 +16,9 @@ import PageInteractiveContainer from "@/pages/base/components/page-interactive-c
 import PanelsLayout from "@components/panels-layout/PanelsLayout";
 import type { ComponentPersistentState } from "@/models/ui-data/ComponentPersistentState";
 import type { GameConfig } from "@game/config/GameConfigReader";
-import type { GlobalStatesLookup } from "@/reducers/pageComponentsSlice";
 import type { LevelConfig } from "@game/config/LevelConfigReader";
 import type { MazeSceneParams } from "@game/scenes/MazeScene";
-import type { Page, PageComponent } from "@/models/Page";
+import type { Page } from "@/models/Page";
 
 type PlaythroughPageProps = {
     page: Page;
