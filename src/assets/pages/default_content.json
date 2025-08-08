@@ -590,23 +590,6 @@
                         "placeholder": "101, 202, 303, 404",
                         "minLinesCount": 3
                     }
-                },
-                {
-                    "id": "id.label.level",
-                    "type": "label",
-                    "data": {
-                        "title": "Level layout:",
-                        "variant": "caption"
-                    }
-                },
-                {
-                    "id": "id.sandbox.level",
-                    "type": "sandbox",
-                    "data": {
-                        "persistencyId": "level.layout",
-                        "placeholder": "W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0\nW0 SP .  .  .  .  .  .  .  .  .  .  .  W0 SP .  .  .  .  .  .  .  .  .  .  .  .  .  .  W0\nW0 W0 W0 W0 W0 .  W0 W0 W0 W0 W0 W0 W0 .  W0 W0 W0 W0 W0 W0 W0 .  W0 W0 W0 W0 .  W0 W0 W0\nW0 W0 .  .  .  .  W0 .  .  .  .  .  .  W0 .  .  .  .  .  .  .  .  W0 W0 .  .  .  .  .  W0\nW0 W0 W0 W0 W0 .  W0 W0 W0 W0 W0 W0 W0 .  W0 W0 W0 W0 W0 W0 W0 .  W0 W0 W0 W0 .  W0 W0 W0\nW0 W0 W0 .  .  .  .  W0 .  .  .  .  .  W0 .  .  .  .  .  .  .  .  W0 W0 .  .  .  .  .  W0\nW0 W0 W0 W0 W0 W0 .  W0 W0 W0 W0 .  W0 W0 W0 W0 .  W0 W0 .  W0 W0 W0 W0 W0 .  W0 W0 .  W0\nW0 .  .  .  .  .  W0 .  .  .  .  .  W0 .  .  .  .  .  .  .  W0 .  .  .  .  .  W0 W0 .  W0\nW0 W0 W0 W0 W0 .  W0 W0 W0 W0 W0 W0 W0 .  W0 W0 W0 W0 W0 .  W0 W0 W0 W0 W0 W0 .  W0 W0 W0\nW0 .  .  .  .  .  .  W0 .  .  .  .  .  .  W0 .  .  .  .  .  W0 .  .  .  .  .  .  W0 .  W0\nW0 W0 W0 W0 W0 .  W0 W0 W0 W0 W0 W0 W0 .  W0 W0 W0 W0 W0 W0 .  W0 W0 W0 W0 W0 .  W0 W0 W0\nW0 .  .  .  .  .  .  .  W0 .  .  .  .  .  W0 .  .  .  .  .  .  .  W0 .  .  .  .  .  .  W0\nW0 W0 W0 W0 W0 .  W0 W0 W0 W0 W0 W0 W0 .  W0 W0 W0 W0 W0 W0 .  W0 W0 W0 W0 W0 .  W0 W0 W0\nW0 .  .  .  .  .  .  .  W0 .  .  .  .  .  W0 .  .  .  .  .  .  .  W0 .  .  .  .  .  .  W0\nW0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0",
-                        "minLinesCount": 18
-                    }
                 }
             ],
             "shouldOpen": ["11"]
