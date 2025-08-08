@@ -1,11 +1,11 @@
 import "@components/phaser/PhaserGameContainer.css";
 
 import Phaser from "phaser";
-import React, { useEffect, useLayoutEffect, useRef } from "react";
+import React, { useEffect, useRef } from "react";
 
 import { EventBus } from "@components/phaser/EventBus";
 import { LaunchScene } from "@components/phaser/LaunchScene";
-import { deepEquals } from "@/util/Objects";
+import { useDeepCompareLayoutEffect } from "@/hooks/useDeepEffects";
 
 type PhaserScenesType = Phaser.Types.Scenes.SceneType | Phaser.Types.Scenes.SceneType[];
 
@@ -32,26 +32,16 @@ function PhaserGameContainer(props: PhaserGameContainerProps) {
     const ref = props.containerRef;
 
     const gameRef = useRef<Phaser.Game>(null);
-    const scenesRef = useRef<PhaserScenesType>(props.scenes);
-    const launchDataRef = useRef<object | undefined>(props.launch.data);
 
-    if (!deepEquals(scenesRef.current, props.scenes)) {
-        scenesRef.current = props.scenes;
-    }
-
-    if (!deepEquals(launchDataRef.current, props.launch.data)) {
-        launchDataRef.current = props.launch.data;
-    }
-
-    useLayoutEffect(() => {
+    useDeepCompareLayoutEffect(() => {
         if (!gameRef.current) {
             gameRef.current = LaunchScene(
                 "game-canvas",
-                scenesRef.current,
+                props.scenes,
                 props.viewport.width,
                 props.viewport.height,
             );
-            gameRef.current.scene.start(props.launch.key, launchDataRef.current);
+            gameRef.current.scene.start(props.launch.key, props.launch.data);
 
             if (ref !== null) {
                 ref.current = { game: gameRef.current, activeScene: null };
@@ -64,7 +54,7 @@ function PhaserGameContainer(props: PhaserGameContainerProps) {
                 gameRef.current = null;
             }
         };
-    }, [ref, gameRef, scenesRef, launchDataRef, props.viewport.width, props.viewport.height, props.launch.key]);
+    }, [ref, gameRef, props.scenes, props.launch.data, props.viewport.width, props.viewport.height, props.launch.key]);
 
     useEffect(() => {
         EventBus.on("current-scene-ready", (newScene: Phaser.Scene) => {

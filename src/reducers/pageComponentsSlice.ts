@@ -44,5 +44,6 @@ const pageComponentsState = createSlice({
 });
 
 export { pageComponentsState };
+export type { GlobalStatesLookup };
 export const { updateComponent } = pageComponentsState.actions;
 export default pageComponentsState.reducer;

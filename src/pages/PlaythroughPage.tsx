@@ -1,21 +1,26 @@
 import playthroughDemoConfig from "@assets/game/demos/playthrough_demo.json";
 import riMondayDemoConfig from "@assets/game/demos/ri_monday_demo.json";
 
+import { useEffect, useMemo, useRef } from "react";
 import { useAppSelector, useAppDispatch } from "@/hooks/redux";
 
 import { AssociateStateAndPersistencyId, CanCompletePage, GetPageTraversalContext, MergeComponentStates } from "@/util/PageUtil";
 import { completePage } from "@/reducers/pagesSlice";
+import { deepEquals } from "@/util/Objects";
 import { ObtainGameAndLevelConfigsOverwrites } from "@/util/GameConfigUtil";
-import { useEffect, useMemo } from "react";
+import { useDeepCompareMemo } from "@/hooks/useDeepEffects";
 import ComponentFactory from "@/pages/base/components/component-factory/ComponentFactory";
 import DragHandler from "@components/drag-handler/DragHandler";
 import GameControlsLayout from "@/pages/base/components/game-controls-layout/GameControlsLayout";
 import GameInteractiveContainer from "@/pages/base/components/game-interactive-container/GameInteractiveContainer";
 import PageInteractiveContainer from "@/pages/base/components/page-interactive-container/PageInteractiveContainer";
 import PanelsLayout from "@components/panels-layout/PanelsLayout";
-import type { MazeSceneParams } from "@game/scenes/MazeScene";
-import type { Page } from "@/models/Page";
+import type { ComponentPersistentState } from "@/models/ui-data/ComponentPersistentState";
+import type { GameConfig } from "@game/config/GameConfigReader";
+import type { GlobalStatesLookup } from "@/reducers/pageComponentsSlice";
 import type { LevelConfig } from "@game/config/LevelConfigReader";
+import type { MazeSceneParams } from "@game/scenes/MazeScene";
+import type { Page, PageComponent } from "@/models/Page";
 
 type PlaythroughPageProps = {
     page: Page;
@@ -52,13 +57,22 @@ function PlaythroughPage(props: PlaythroughPageProps) {
     const pagesState = useAppSelector(state => state.pagesState);
     const globalComponentsState = useAppSelector(state => state.pageComponentsState);
 
-    const pageTraversalContext = GetPageTraversalContext(page.id);
-    const [gameConfig, levelConfig] = ObtainGameAndLevelConfigsOverwrites(
-        AssociateStateAndPersistencyId(
-            globalComponentsState.pageToComponentsLookup,
-            pageTraversalContext
-        )
-    );
+    const [gameConfig, levelConfig, componentPersistenceStates] = 
+        useDeepCompareMemo<[GameConfig | undefined, LevelConfig | undefined, ComponentPersistentState[]]>(() => {
+            const pageTraversalContext = GetPageTraversalContext(page.id);
+
+            const [gameConfig, levelConfig] = ObtainGameAndLevelConfigsOverwrites(
+                AssociateStateAndPersistencyId(
+                    globalComponentsState.pageToComponentsLookup,
+                    pageTraversalContext
+                )
+            );
+
+            const componentPersistenceStates = page.components.map(component => 
+                MergeComponentStates(component.id, globalComponentsState.pageToComponentsLookup, pageTraversalContext));
+
+            return [gameConfig, levelConfig, componentPersistenceStates];
+        }, [globalComponentsState.pageToComponentsLookup, page.components, page.id]);
 
     const completedPagesIds = pagesState.completedPageIds;
     useEffect(() => {
@@ -88,12 +102,12 @@ function PlaythroughPage(props: PlaythroughPageProps) {
                     {
                         content: (
                             <PageInteractiveContainer>
-                                {page.components.map(component => (
+                                {page.components.map((component, index) => (
                                     <ComponentFactory
                                         key={`${page.id}-${component.id}`}
                                         pageId={page.id}
                                         component={component}
-                                        savedState={MergeComponentStates(component.id, globalComponentsState.pageToComponentsLookup, pageTraversalContext)}
+                                        savedState={componentPersistenceStates[index]}
                                     />
                                 ))}
                             </PageInteractiveContainer>
