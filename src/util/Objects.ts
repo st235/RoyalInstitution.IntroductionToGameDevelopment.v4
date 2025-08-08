@@ -2,6 +2,11 @@ function isObject(value: unknown | null | undefined): boolean {
     return (value !== null && value !== undefined && (typeof value) === "object" && !Array.isArray(value));
 }
 
+function isPrimitive(value: unknown | null | undefined) {
+    const valueType = typeof value;
+    return (valueType === "boolean" || valueType === "number" || valueType === "string");
+}
+
 function deepEquals(a: unknown, b: unknown): boolean {
     if (a === b) {
         return true;
@@ -9,6 +14,14 @@ function deepEquals(a: unknown, b: unknown): boolean {
 
     if (typeof a !== typeof b) {
         return false;
+    }
+
+    if (isPrimitive(a)) {
+        return a === b;
+    }
+
+    if ((a === null || a === undefined) || (b === null || b === undefined)) {
+        return a === b;
     }
 
     if (Array.isArray(a) && Array.isArray(b)) {
