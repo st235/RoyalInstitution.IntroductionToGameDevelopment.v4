@@ -1,10 +1,13 @@
-import "./PhaserGameContainer.css";
+import "@components/phaser/PhaserGameContainer.css";
 
 import Phaser from "phaser";
 import React, { useEffect, useLayoutEffect, useRef } from "react";
 
-import { EventBus } from "./EventBus";
-import { LaunchScene } from "./LaunchScene";
+import { EventBus } from "@components/phaser/EventBus";
+import { LaunchScene } from "@components/phaser/LaunchScene";
+import { deepEquals } from "@/util/Objects";
+
+type PhaserScenesType = Phaser.Types.Scenes.SceneType | Phaser.Types.Scenes.SceneType[];
 
 type PhaserGameContainerRef = {
     game: Phaser.Game;
@@ -20,7 +23,7 @@ type PhaserGameContainerProps = {
         key: string;
         data?: object;
     };
-    scenes: Phaser.Types.Scenes.SceneType | Phaser.Types.Scenes.SceneType[];
+    scenes: PhaserScenesType;
     containerRef: React.RefObject<PhaserGameContainerRef>;
     onNewScene?: (scene: Phaser.Scene) => void;
 };
@@ -28,30 +31,40 @@ type PhaserGameContainerProps = {
 function PhaserGameContainer(props: PhaserGameContainerProps) {
     const ref = props.containerRef;
 
-    const game = useRef<Phaser.Game>(null);
+    const gameRef = useRef<Phaser.Game>(null);
+    const scenesRef = useRef<PhaserScenesType>(props.scenes);
+    const launchDataRef = useRef<object | undefined>(props.launch.data);
+
+    if (!deepEquals(scenesRef.current, props.scenes)) {
+        scenesRef.current = props.scenes;
+    }
+
+    if (!deepEquals(launchDataRef.current, props.launch.data)) {
+        launchDataRef.current = props.launch.data;
+    }
 
     useLayoutEffect(() => {
-        if (!game.current) {
-            game.current = LaunchScene(
+        if (!gameRef.current) {
+            gameRef.current = LaunchScene(
                 "game-canvas",
-                props.scenes,
+                scenesRef.current,
                 props.viewport.width,
                 props.viewport.height,
             );
-            game.current.scene.start(props.launch.key, props.launch.data);
+            gameRef.current.scene.start(props.launch.key, launchDataRef.current);
 
             if (ref !== null) {
-                ref.current = { game: game.current, activeScene: null };
+                ref.current = { game: gameRef.current, activeScene: null };
             }
         }
 
         return () => {
-            if (game.current) {
-                game.current.destroy(true, false);
-                game.current = null;
+            if (gameRef.current) {
+                gameRef.current.destroy(true, false);
+                gameRef.current = null;
             }
         };
-    }, [ref, game, props.scenes, props.viewport.width, props.viewport.height, props.launch.key, props.launch.data]);
+    }, [ref, gameRef, scenesRef, launchDataRef, props.viewport.width, props.viewport.height, props.launch.key]);
 
     useEffect(() => {
         EventBus.on("current-scene-ready", (newScene: Phaser.Scene) => {

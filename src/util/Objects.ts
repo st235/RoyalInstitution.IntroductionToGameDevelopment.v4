@@ -2,6 +2,77 @@ function isObject(value: unknown | null | undefined): boolean {
     return (value !== null && value !== undefined && (typeof value) === "object" && !Array.isArray(value));
 }
 
+function deepEquals(a: unknown, b: unknown): boolean {
+    if (a === b) {
+        return true;
+    }
+
+    if (typeof a !== typeof b) {
+        return false;
+    }
+
+    if (Array.isArray(a) && Array.isArray(b)) {
+        if (a.length !== b.length) {
+            return false;
+        }
+
+        for (let i = 0; i < a.length; i++) {
+            if (!deepEquals(a[i], b[i])) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    if (a instanceof Map && b instanceof Map) {
+        if (a.size !== b.size) {
+            return false;
+        }
+
+        for (const key of b.keys()) {
+            if (!a.has(key)) {
+                return false;
+            }
+
+            if (!deepEquals(a.get(key), b.get(key))) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    if (a instanceof Set && b instanceof Set) {
+        if (a.size !== b.size) {
+            return false;
+        }
+
+        for (const [value,] of a.entries()) {
+            if (!b.has(value)) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    const aKeys = Object.keys(a as object);
+    const bKeys = Object.keys(b as object);
+
+    if (aKeys.length !== bKeys.length) {
+        return false;
+    }
+
+    for (const key of aKeys) {
+        if (!deepEquals((a as {[key: string]: unknown})[key], (b as {[key: string]: unknown})[key])) {
+            return false;
+        }
+    }
+
+    return true;
+}
+
 function deepMerge(target: {[Key: string]: unknown}, ...sources: unknown[]): {[Key: string]: unknown} {
     if (sources.length === 0) {
         return target;
@@ -47,4 +118,4 @@ function flatten(value: {[Key: string]: unknown} | undefined | null): {[Key: str
     return flattenedObject;
 }
 
-export { isObject, deepMerge, flatten };
+export { isObject, deepMerge, deepEquals, flatten };
