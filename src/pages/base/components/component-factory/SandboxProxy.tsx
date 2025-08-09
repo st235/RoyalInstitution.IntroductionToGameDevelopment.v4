@@ -8,6 +8,7 @@ import { require } from "@/util/Assert";
 import Button from "@/components/button/Button";
 import LineNumberedTextarea from "@/components/line-numbered-textarea/LineNumberedTextarea";
 import type { SandboxData } from "@/models/ui-data/SandboxData";
+import { debounce } from "@/util/Debounce";
 
 type SandboxSavedState = {
     value?: string;
@@ -22,14 +23,17 @@ type SandboxProxyProps = {
 
 function Sandbox(props: SandboxProxyProps) {
     const dispatch = useAppDispatch();
-    const [value, setValue] = useState(props?.savedState?.value);
 
-    function onSaveContent() {
+    function onValueChanged(value: string) {
+        if (!props.data.persistencyId) {
+            return;
+        }
+
         dispatch(
             updateComponent({
                 pageId: props.pageId,
                 componentId: props.componentId,
-                persistencyId: require(props.data.persistencyId),
+                persistencyId: props.data.persistencyId,
                 state: {
                     value,
                 }
@@ -37,16 +41,14 @@ function Sandbox(props: SandboxProxyProps) {
         );
     }
 
+    const onValueChangedDebounced = debounce(onValueChanged, 1500);
+
     return (
         <LineNumberedTextarea
             minLines={props.data.minLinesCount ?? 10}
             placeholder={props.data.placeholder}
-            initialValue={value}
-            controlsContent={
-                props.data.persistencyId ? 
-                    (<Button variant="primary" text="Save" leadingIcon={IconFloppy2Fill} onClick={onSaveContent} />) : null
-            }
-            onValueChanged={value => setValue(value)}
+            initialValue={props?.savedState?.value}
+            onValueChanged={value => onValueChangedDebounced(value)}
         />
     );
 }
