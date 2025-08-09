@@ -2,9 +2,29 @@
     margin: 4px 8px;
 }
 
+h1.label {
+    margin: 0;
+}
+
+h2.label {
+    margin: 0;
+}
+
+h3.label {
+    margin: 0;
+}
+
+h4.label {
+    margin: 0;
+}
+
+p.label {
+    margin: 0;
+}
+
 .label.caption {
     font-weight: 600;
-    font-size: 1.1em;
+    font-size: 1.0em;
     color: var(--text-caption);
 }
 

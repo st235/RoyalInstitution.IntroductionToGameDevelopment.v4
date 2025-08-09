@@ -148,7 +148,7 @@ const configOverwritesMappers: {[Key: string]: ConfigOverwriteMapperFunction} = 
     "fx.fog-of-war": _WrapOverwriteMapper((data: {value: string}, outConfigProvider: ConfigProvider) => {
         outConfigProvider.applyFogOfWar = parseBoolean(data.value);
     }),
-    "fx.cathod-ray-tube": _WrapOverwriteMapper((data: {value: string}, outConfigProvider: ConfigProvider) => {
+    "fx.cathode-ray-tube": _WrapOverwriteMapper((data: {value: string}, outConfigProvider: ConfigProvider) => {
         outConfigProvider.applyCathodRayTube = parseBoolean(data.value);
     }),
 };

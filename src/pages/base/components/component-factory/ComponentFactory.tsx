@@ -1,7 +1,9 @@
-import { UI_KEY_INFO_CARD, UI_KEY_SANDBOX, UI_KEY_LABEL } from "@/models/ui-data/UiKeys";
+import { UI_KEY_CHECKBOX, UI_KEY_INFO_CARD, UI_KEY_SANDBOX, UI_KEY_LABEL } from "@/models/ui-data/UiKeys";
+import CheckboxProxy, { type CheckboxSavedState } from "@/pages/base/components/component-factory/CheckboxProxy";
 import InfoCardProxy from "@/pages/base/components/component-factory/InfoCardProxy";
 import LabelProxy from "@/pages/base/components/component-factory/LabelProxy";
 import SandboxProxy, { type SandboxSavedState } from "@/pages/base/components/component-factory/SandboxProxy";
+import type { CheckboxData } from "@/models/ui-data/CheckboxData";
 import type { ComponentPersistentState } from "@/models/ui-data/ComponentPersistentState";
 import type { InfoCardData } from "@/models/ui-data/InfoCardData";
 import type { LabelData } from "@/models/ui-data/LabelData";
@@ -36,6 +38,14 @@ function ComponentFactory(props: ComponentFactoryProps) {
             pageId={props.pageId}
             componentId={props.component.id}
             data={props.component.data as LabelData}
+        />
+    );
+    case UI_KEY_CHECKBOX: return (
+        <CheckboxProxy
+            pageId={props.pageId}
+            componentId={props.component.id}
+            data={props.component.data as CheckboxData}
+            savedState={props.savedState?.state as CheckboxSavedState}
         />
     );
     default: return (<></>);

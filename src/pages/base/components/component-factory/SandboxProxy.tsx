@@ -16,7 +16,7 @@ type SandboxProxyProps = {
     savedState?: SandboxSavedState;
 }
 
-function Sandbox(props: SandboxProxyProps) {
+function SandboxProxy(props: SandboxProxyProps) {
     const dispatch = useAppDispatch();
 
     function onValueChanged(value: string) {
@@ -48,5 +48,5 @@ function Sandbox(props: SandboxProxyProps) {
     );
 }
 
-export default Sandbox;
+export default SandboxProxy;
 export type { SandboxProxyProps, SandboxSavedState };
