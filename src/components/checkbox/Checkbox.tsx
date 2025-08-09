@@ -20,8 +20,6 @@ function Checkbox(props: CheckboxProps) {
         props.onToggle?.(newToggleState);
     }
 
-    console.log("new toggle state", toggleState);
-
     return (
         <div className="checkbox-container" onClick={onChange}>
             <div className="checkbox-info">
