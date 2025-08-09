@@ -1,6 +1,7 @@
 import defaultPagesContent from "@assets/pages/default_content.json";
 
 import type { Page, StatefulPage, PageState } from "@/models/Page";
+import type { LevelCompletionData } from "@/models/ui-data/LevelCompletionData";
 import type { PersistentData } from "@/models/ui-data/PersistentData";
 import type { ComponentPersistentState } from "@/models/ui-data/ComponentPersistentState";
 
@@ -155,7 +156,8 @@ function CanCompletePage(
     stateLookup: PageComponentsState,
 ): boolean {
     for (const component of Object.values(page.components)) {
-        if (!(component.data as PersistentData | undefined)?.persistencyId) {
+        if (!(component.data as PersistentData | undefined)?.persistencyId ||
+            (component.data as LevelCompletionData | undefined)?.optional) {
             continue;
         }
 

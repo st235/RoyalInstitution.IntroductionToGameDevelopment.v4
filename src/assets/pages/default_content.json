@@ -86,7 +86,7 @@
                     "id": "id.label.gameOver",
                     "type": "label",
                     "data": {
-                        "title": "\"Game Over\" message:",
+                        "title": "[Optional] \"Game Over\" message:",
                         "description": "Tip: max 7 lines",
                         "variant": "caption"
                     }
@@ -95,6 +95,7 @@
                     "id": "id.sandbox.gameOver",
                     "type": "sandbox",
                     "data": {
+                        "optional": true,
                         "persistencyId": "dialog.game-over",
                         "placeholder": "Haha!\nI knew it would be hard\nto finish the maze!",
                         "minLinesCount": 3
@@ -104,7 +105,7 @@
                     "id": "id.label.victory",
                     "type": "label",
                     "data": {
-                        "title": "\"Victory\" message:",
+                        "title": "[Optional] \"Victory\" message:",
                         "description": "Tip: max 7 lines",
                         "variant": "caption"
                     }
@@ -113,6 +114,7 @@
                     "id": "id.sandbox.victory",
                     "type": "sandbox",
                     "data": {
+                        "optional": true,
                         "persistencyId": "dialog.victory",
                         "placeholder": "Congratulations!\nWell done.",
                         "minLinesCount": 3
@@ -219,7 +221,7 @@
                     "id": "id.label.coins.default-score",
                     "type": "label",
                     "data": {
-                        "title": "Default score:",
+                        "title": "[Optional] Default score:",
                         "description": "Tip: a single positive number",
                         "variant": "caption"
                     }
@@ -228,6 +230,7 @@
                     "id": "id.sandbox.coins.default-score",
                     "type": "sandbox",
                     "data": {
+                        "optional": true,
                         "persistencyId": "config.coins.default-score",
                         "placeholder": "50",
                         "minLinesCount": 3
@@ -237,7 +240,7 @@
                     "id": "id.label.coins.values",
                     "type": "label",
                     "data": {
-                        "title": "Values:",
+                        "title": "[Optional] Values:",
                         "description": "Tip: a list of pairs separated by a new line. Every pair consists of coin id and score separated by space.",
                         "variant": "caption"
                     }
@@ -246,6 +249,7 @@
                     "id": "id.sandbox.coins.values",
                     "type": "sandbox",
                     "data": {
+                        "optional": true,
                         "persistencyId": "config.coins.values",
                         "placeholder": "0 10\n1 20\n…",
                         "minLinesCount": 10
@@ -541,7 +545,7 @@
                     "id": "id.label.max-time",
                     "type": "label",
                     "data": {
-                        "title": "Max time:",
+                        "title": "[Optional] Max time:",
                         "description": "Tip: a positive integer in seconds",
                         "variant": "caption"
                     }
@@ -550,6 +554,7 @@
                     "id": "id.sandbox.max-time",
                     "type": "sandbox",
                     "data": {
+                        "optional": true,
                         "persistencyId": "constraint.time",
                         "placeholder": "101, 202, 303, 404",
                         "minLinesCount": 3
@@ -559,7 +564,7 @@
                     "id": "id.label.max-moves",
                     "type": "label",
                     "data": {
-                        "title": "Max moves:",
+                        "title": "[Optional] Max moves:",
                         "description": "Tip: a positive integer",
                         "variant": "caption"
                     }
@@ -568,6 +573,7 @@
                     "id": "id.sandbox.max-moves",
                     "type": "sandbox",
                     "data": {
+                        "optional": true,
                         "persistencyId": "constraint.max-moves",
                         "placeholder": "101, 202, 303, 404",
                         "minLinesCount": 3
@@ -577,7 +583,7 @@
                     "id": "id.label.min-score",
                     "type": "label",
                     "data": {
-                        "title": "Min score:",
+                        "title": "[Optional] Min score:",
                         "description": "Tip: a positive integer, defines when flag appears on the level",
                         "variant": "caption"
                     }
@@ -586,6 +592,7 @@
                     "id": "id.sandbox.min-score",
                     "type": "sandbox",
                     "data": {
+                        "optional": true,
                         "persistencyId": "constraint.min-score",
                         "placeholder": "101, 202, 303, 404",
                         "minLinesCount": 3
@@ -628,6 +635,7 @@
                     "id": "id.checkbox.effect-cathode-ray",
                     "type": "checkbox",
                     "data": {
+                        "optional": true,
                         "persistencyId": "fx.cathode-ray-tube",
                         "title": "Apply Cathode Ray Tube Effect",
                         "description": "Simulates an old tv with a big belly"
@@ -637,6 +645,7 @@
                     "id": "id.checkbox.effect-fog-of-war",
                     "type": "checkbox",
                     "data": {
+                        "optional": true,
                         "persistencyId": "fx.fog-of-war",
                         "title": "Apply Fog of War Effect",
                         "description": "Restricts visibility to a really small area"

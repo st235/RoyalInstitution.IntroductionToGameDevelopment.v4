@@ -1,9 +1,12 @@
 import "@components/line-numbered-textarea/LineNumberedTextarea.css";
 
-import { useMemo, useState } from "react";
+import React, { useMemo, useState } from "react";
+
+type LineNumberedTextareaStyle = "required" | "optional";
 
 type LineNumberedTextareaProps = {
     minLines: number;
+    style?: LineNumberedTextareaStyle;
     placeholder?: string;
     initialValue?: string;
     name?: string;
@@ -13,6 +16,13 @@ type LineNumberedTextareaProps = {
 };
 
 function LineNumberedTextarea(props: LineNumberedTextareaProps) {
+    const cssProperties: React.CSSProperties = {
+        borderStyle: "solid",
+    };
+    if (props.style === "optional") {
+        cssProperties.borderStyle = "dashed";
+    }
+
     const [value, setValue] = useState(props.initialValue ?? "");
 
     const lineCount = useMemo(() => {
@@ -36,7 +46,7 @@ function LineNumberedTextarea(props: LineNumberedTextareaProps) {
     [lineCount]);
 
     return (
-        <div className="line-numbered-textarea">
+        <div className="line-numbered-textarea" style={cssProperties}>
             <ul className="lines-counter">
                 {linesArray.map(line => (
                     <li key={line} className="line">{line}</li>
