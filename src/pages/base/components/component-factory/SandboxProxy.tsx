@@ -1,11 +1,6 @@
-import IconFloppy2Fill from "@assets/icons/floppy2-fill.svg";
-
 import { useAppDispatch } from "@/hooks/redux";
-import { useState } from "react";
 import { updateComponent } from "@/reducers/pageComponentsSlice";
 
-import { require } from "@/util/Assert";
-import Button from "@/components/button/Button";
 import LineNumberedTextarea from "@/components/line-numbered-textarea/LineNumberedTextarea";
 import type { SandboxData } from "@/models/ui-data/SandboxData";
 import { debounce } from "@/util/Debounce";
