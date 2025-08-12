@@ -3,6 +3,7 @@ import type { PersistentData } from "@/models/ui-data/PersistentData";
 
 type SandboxData = LevelCompletionData & PersistentData & {
     placeholder?: string;
+    initialValue?: string;
     minLinesCount?: number;
 };
 

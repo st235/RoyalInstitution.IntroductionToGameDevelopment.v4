@@ -1,4 +1,4 @@
-import defaultLevelConfig from "@assets/game/demos/exercise_dialog_default_level_config.json";
+import defaultLevelConfig from "@assets/pages/exercises/exercise_dialog_default_level_config.json";
 import playthroughDemoConfig from "@assets/game/demos/playthrough_demo.json";
 import riMondayDemoConfig from "@assets/game/demos/ri_monday_demo.json";
 

@@ -42,7 +42,7 @@ function SandboxProxy(props: SandboxProxyProps) {
         <LineNumberedTextarea
             minLines={props.data.minLinesCount ?? 10}
             placeholder={props.data.placeholder}
-            initialValue={props.savedState?.value}
+            initialValue={props.savedState?.value ?? props.data.initialValue}
             style={props.data.optional ? "optional" : "required"}
             onValueChanged={value => onValueChangedDebounced(value)}
         />
