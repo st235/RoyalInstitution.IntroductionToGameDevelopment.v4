@@ -1,3 +1,4 @@
+import defaultLevelConfig from "@assets/game/demos/exercise_dialog_default_level_config.json";
 import playthroughDemoConfig from "@assets/game/demos/playthrough_demo.json";
 import riMondayDemoConfig from "@assets/game/demos/ri_monday_demo.json";
 
@@ -22,30 +23,6 @@ import type { Page } from "@/models/Page";
 
 type PlaythroughPageProps = {
     page: Page;
-};
-
-const defaultLevelLayout = [
-    "SP .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . ",
-    ".  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . ",
-    ".  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . ",
-    ".  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . ",
-    ".  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . ",
-    ".  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . ",
-    ".  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . ",
-    ".  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . ",
-    ".  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  F0",
-    ".  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . ",
-    ".  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . ",
-    ".  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  F0",
-    ".  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . ",
-    ".  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . "
-];
-
-const defaultLevelConfig: LevelConfig = {
-    id: 0,
-    title: "No Level",
-    levelLayout: defaultLevelLayout,
-    constraints: {},
 };
 
 function PlaythroughPage(props: PlaythroughPageProps) {
