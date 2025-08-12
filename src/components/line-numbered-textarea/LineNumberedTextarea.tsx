@@ -47,11 +47,13 @@ function LineNumberedTextarea(props: LineNumberedTextareaProps) {
 
     return (
         <div className="line-numbered-textarea" style={cssProperties}>
-            <ul className="lines-counter">
-                {linesArray.map(line => (
-                    <li key={line} className="line">{line}</li>
-                ))}
-            </ul>
+            <div className="lines-container">
+                <ul className="lines-counter">
+                    {linesArray.map(line => (
+                        <li key={line} className="line">{line}</li>
+                    ))}
+                </ul>
+            </div>
             <textarea className="textarea"
                 name={props.name}
                 value={value}
