@@ -18,6 +18,6 @@
         "SP .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . "
     ],
     "constraints": {
-        "maxTimeSec": 30
+        "maxTimeSec": 15
     }
 }
