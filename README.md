@@ -11,41 +11,40 @@ and built to demystify how games are made - from gameplay mechanics to level des
 
 ## Workshop Learning Plan
 
-### 1. What Makes Up a Video Game?
+#### 1. What Makes Up a Video Game?
 - **Gameplay** – How the player interacts with the game.
 - **Mechanics** – The rules and systems (e.g., keys open doors, coins increase score).
 - **End Goal** – What does it mean to win or finish the game?
 
-### 2. Playthrough & Analysis
+#### 2. Playthrough & Analysis
 - Play the sample maze and try to understand its rules.
 - Brainstorm 2–3 mechanics you'd like to add that aren't in the game yet.
 
-### 3. Building a Custom Level
+#### 3. Building a Custom Level
 - Learn about config/data-driven design.
 - Understand wall configuration and layout logic.
 - Create your own tile config.
 - Design your own maze.
 
-### 4. Adding Mechanics
+#### 4. Adding Mechanics
 - Revisit mechanic ideas and choose a few to implement.
 - Add coin tiles.
 - Assign different point values to different coins.
 - Introduce doors and keys.
 
-### 5. Design Challenge
+#### 5. Design Challenge
 - Place doors and keys in a way that makes the level interesting.
 - Refine and test a custom labyrinth.
 
-### 6. Thinking About AI
+#### 6. Thinking About AI
 - What would a monster do? Where would it go?
 - Prototype custom monster behavior in text config.
 
-### 7. Misc – Spice It Up!
+#### 7. Misc – Spice It Up!
 - Add easter eggs or secret levels.
 - Add additional constraints like a move limit, timer, or collectibles challenge.
 
-
-## Educational Goals
+### Educational Goals
 
 By the end of this workshop, students will:
 
@@ -93,6 +92,13 @@ npm run build
 | Title | Dialog system | Maze |
 | ---- | ---- | ---- |
 | ![Title](./assets/title.png) | ![Dialog System](./assets/dialog.png) | ![Maze](./assets/maze_monsters.png) |
+
+### Web IDE
+
+| Constraints | Special Effects | Coins |
+| ---- | ---- | ---- |
+| ![Constraints](./assets/ide_screen_constraints.png) | ![Special Effects](./assets/ide_screen_fxs.png) | ![Coins](./assets/ide_screen_coins.png) |
+
 
 
 Created with ❤️ for the Royal Institution.
