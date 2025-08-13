@@ -32,7 +32,7 @@ function PlaythroughPage(props: PlaythroughPageProps) {
     const pagesState = useAppSelector(state => state.pagesState);
     const globalComponentsState = useAppSelector(state => state.pageComponentsState);
 
-    const [gameConfig, levelConfig, componentPersistenceStates] = 
+    const [inMemoryGameConfig, inMemoryLevelConfig, componentPersistentStates] = 
         useDeepCompareMemo<[GameConfig | undefined, LevelConfig | undefined, ComponentPersistentState[]]>(() => {
             const pageTraversalContext = GetPageTraversalContext(page.id);
 
@@ -64,11 +64,11 @@ function PlaythroughPage(props: PlaythroughPageProps) {
         }
 
         return {
-            initialLevelId: levelConfig?.id ?? 0,
-            gameConfig: gameConfig,
-            levels: [levelConfig ?? defaultLevelConfig],
+            initialLevelId: inMemoryLevelConfig?.id ?? 0,
+            gameConfig: inMemoryGameConfig,
+            levels: [inMemoryLevelConfig ?? defaultLevelConfig],
         };
-    }, [gameConfig, levelConfig, page.asset]);
+    }, [inMemoryGameConfig, inMemoryLevelConfig, page.asset]);
 
     return (
         <>
@@ -82,7 +82,7 @@ function PlaythroughPage(props: PlaythroughPageProps) {
                                         key={`${page.id}-${component.id}`}
                                         pageId={page.id}
                                         component={component}
-                                        savedState={componentPersistenceStates[index]}
+                                        savedState={componentPersistentStates[index]}
                                     />
                                 ))}
                             </PageInteractiveContainer>
