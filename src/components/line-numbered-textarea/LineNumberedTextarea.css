@@ -84,6 +84,9 @@
     overflow-x: scroll;
     overflow-y: hidden;
 
+    scrollbar-width: auto;
+    scrollbar-color: var(--container-secondary) transparent;
+
     &::-webkit-scrollbar {
         width: var(--default-font-size);
         height: var(--default-font-size);

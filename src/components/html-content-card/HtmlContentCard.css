@@ -72,3 +72,13 @@
     font-weight: 600;
     color: var(--logo-accent-colour);
 }
+
+.html-content-card > .description > * > span.logo {
+    font-family: "BitPotion";
+    font-weight: bold;
+    font-size: 1.8em;
+    padding: 2px 8px;
+
+    background-color: var(--logo-background-colour);
+    color: var(--logo-accent-colour);
+}

@@ -38,6 +38,8 @@
 }
 
 .logo-popup-content > .title > span.highlight {
+    font-family: "BitPotion";
+    font-size: 1.8em;
     color: var(--logo-accent-colour);
 }
 

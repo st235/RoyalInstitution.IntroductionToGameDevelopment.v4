@@ -10,8 +10,8 @@ body {
 }
 
 @font-face {
-  font-family: BitPotion;
-  src: url(./BitPotion.ttf);
+  font-family: "BitPotion";
+  src: url(./RoyalInstitution.IntroductionToGameDevelopment.v4/BitPotion.ttf);
 }
 
 @font-face {
@@ -19,7 +19,7 @@ body {
   font-optical-sizing: auto;
   font-synthesis-weight: auto;
   font-style: normal;
-  src: url(./Montserrat-VariableFont_wght.ttf);
+  src: url(./RoyalInstitution.IntroductionToGameDevelopment.v4/Montserrat-VariableFont_wght.ttf);
 }
 
 @font-face {
@@ -27,7 +27,7 @@ body {
   font-optical-sizing: auto;
   font-synthesis-weight: auto;
   font-style: italic;
-  src: url(./Montserrat-Italic-VariableFont_wght.ttf);
+  src: url(./RoyalInstitution.IntroductionToGameDevelopment.v4/Montserrat-Italic-VariableFont_wght.ttf);
 }
 
 #root {
