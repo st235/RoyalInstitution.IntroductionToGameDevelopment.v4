@@ -62,6 +62,10 @@ function LineNumberedTextarea(props: LineNumberedTextareaProps) {
                     setValue(e.target.value);
                     props.onValueChanged?.(e.target.value);
                 }}
+                autoComplete="false"
+                autoCapitalize="false"
+                autoCorrect="false"
+                spellCheck="false"
                 wrap="off"
             />
             {props.controlsContent && <div className="controls">{props.controlsContent}</div>}
