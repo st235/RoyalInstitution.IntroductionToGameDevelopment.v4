@@ -1,10 +1,12 @@
-import { UI_KEY_CHECKBOX, UI_KEY_INFO_CARD, UI_KEY_SANDBOX, UI_KEY_LABEL } from "@/models/ui-data/UiKeys";
+import { UI_KEY_CHECKBOX, UI_KEY_CONFIG_UPLOADER, UI_KEY_INFO_CARD, UI_KEY_SANDBOX, UI_KEY_LABEL } from "@/models/ui-data/UiKeys";
 import CheckboxProxy, { type CheckboxSavedState } from "@/pages/base/components/component-factory/CheckboxProxy";
+import ConfigUploaderLayoutProxy from "@/pages/base/components/component-factory/ConfigUploaderLayoutProxy";
 import InfoCardProxy from "@/pages/base/components/component-factory/InfoCardProxy";
 import LabelProxy from "@/pages/base/components/component-factory/LabelProxy";
 import SandboxProxy, { type SandboxSavedState } from "@/pages/base/components/component-factory/SandboxProxy";
 import type { CheckboxData } from "@/models/ui-data/CheckboxData";
 import type { ComponentPersistentState } from "@/models/ui-data/ComponentPersistentState";
+import type { ConfigUploaderData } from "@/models/ui-data/ConfigUploaderData";
 import type { InfoCardData } from "@/models/ui-data/InfoCardData";
 import type { LabelData } from "@/models/ui-data/LabelData";
 import type { PageComponent } from "@/models/Page";
@@ -46,6 +48,13 @@ function ComponentFactory(props: ComponentFactoryProps) {
             componentId={props.component.id}
             data={props.component.data as CheckboxData}
             savedState={props.savedState?.state as CheckboxSavedState}
+        />
+    );
+    case UI_KEY_CONFIG_UPLOADER: return (
+        <ConfigUploaderLayoutProxy
+            pageId={props.pageId}
+            componentId={props.component.id}
+            data={props.component.data as ConfigUploaderData}
         />
     );
     default: return (<></>);

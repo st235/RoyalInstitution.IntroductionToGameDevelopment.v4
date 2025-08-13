@@ -28,8 +28,8 @@ function GetDefaultPageId(): string {
     return defaultPagesContent.defaultPageId;
 }
 
-function GetPageTraversalContext(pageId: string): string[] {
-    if (pageTraversalContextLookup[pageId]) {
+function GetPageTraversalContext(pageId?: string): string[] {
+    if (pageId && pageTraversalContextLookup[pageId]) {
         return pageTraversalContextLookup[pageId];
     }
 
@@ -67,12 +67,14 @@ function GetPageTraversalContext(pageId: string): string[] {
         }
     }
 
-    if (!traversalFound) {
+    if (!traversalFound && pageId) {
         pageTraversalContextLookup[pageId] = [];
         return [];
     }
 
-    pageTraversalContextLookup[pageId] = outPages;
+    if (pageId) {
+        pageTraversalContextLookup[pageId] = outPages;
+    }
     return outPages;
 }
 

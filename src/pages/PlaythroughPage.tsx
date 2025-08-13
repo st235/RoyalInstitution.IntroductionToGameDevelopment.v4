@@ -2,7 +2,7 @@ import defaultLevelConfig from "@assets/pages/exercises/exercise_dialog_default_
 import playthroughDemoConfig from "@assets/game/demos/playthrough_demo.json";
 import riMondayDemoConfig from "@assets/game/demos/ri_monday_demo.json";
 
-import { useEffect, useMemo } from "react";
+import { useEffect } from "react";
 import { useAppSelector, useAppDispatch } from "@/hooks/redux";
 
 import { AssociateStateAndPersistencyId, CanCompletePage, GetPageTraversalContext, MergeComponentStates } from "@/util/PageUtil";
@@ -31,6 +31,7 @@ function PlaythroughPage(props: PlaythroughPageProps) {
 
     const pagesState = useAppSelector(state => state.pagesState);
     const globalComponentsState = useAppSelector(state => state.pageComponentsState);
+    const fileConfigsState = useAppSelector(state => state.fileConfigsState);
 
     const [inMemoryGameConfig, inMemoryLevelConfig, componentPersistentStates] = 
         useDeepCompareMemo<[GameConfig | undefined, LevelConfig | undefined, ComponentPersistentState[]]>(() => {
@@ -57,10 +58,11 @@ function PlaythroughPage(props: PlaythroughPageProps) {
         }
     }, [completedPagesIds, dispatch, globalComponentsState.pageToComponentsLookup, page]);
 
-    const mazeSceneProps = useMemo<MazeSceneParams>(() => {
+    const mazeSceneProps = useDeepCompareMemo<MazeSceneParams>(() => {
         switch (page.asset) {
         case "ri_monday_demo.json": return riMondayDemoConfig;
         case "playthrough_demo.json": return playthroughDemoConfig;
+        case "local-file": if (fileConfigsState.selectedFileConfig) return fileConfigsState.selectedFileConfig;
         }
 
         return {
@@ -68,7 +70,7 @@ function PlaythroughPage(props: PlaythroughPageProps) {
             gameConfig: inMemoryGameConfig,
             levels: [inMemoryLevelConfig ?? defaultLevelConfig],
         };
-    }, [inMemoryGameConfig, inMemoryLevelConfig, page.asset]);
+    }, [page.asset, fileConfigsState.selectedFileConfig, inMemoryGameConfig, inMemoryLevelConfig]);
 
     return (
         <>

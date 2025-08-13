@@ -1,0 +1,7 @@
+.config-uploader-container {
+    display: flex;
+    flex-direction: row;
+
+    justify-content: left;
+    column-gap: 16px;
+}

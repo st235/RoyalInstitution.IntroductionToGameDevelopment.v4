@@ -689,6 +689,38 @@
             "shouldOpen": ["13"]
         },
         {
+            "id": "13",
+            "ordinal": 13,
+            "components": [
+                {
+                    "id": "id.infocard",
+                    "type": "info-card",
+                    "data": {
+                        "title": "Exercise 13: Share Your Creation",
+                        "description": "<p>You completed your level. It is time to let others experience it!</p><p>In this exercise, you will download the <strong>game configuration file</strong> you created during the workshop and share it with another student sitting near you. This way, you can explore each other's work, exchange feedback, and get inspired by different design approaches.</p><p>Click the <strong>Download my config</strong> button to save your game configuration file to the disk. This file contains all of the settings, tiles, and level constraints you built so far.</p><p>Share the file with another student: either by sending it digitally (USB stick, chat app, etc.) or by swapping devices briefly (in case there is no way to share files).</p><p>Load their configuration into your editor using <string>Load someone's config</strong>.</p><p>Discuss the similarities and differences between your designs and give each other constructive feedback.</p>"
+                    }
+                },
+                {
+                    "id": "id.label.share",
+                    "type": "label",
+                    "data": {
+                        "title": "Share your config:",
+                        "description": "It is time to release your config to production. Use buttons below to download and upload config files.",
+                        "variant": "secondary"
+                    }
+                },
+                {
+                    "id": "id.config-uploader.share",
+                    "type": "config-uploader",
+                    "data": {
+                        "downloadFilename": "demo-game-config"
+                    }
+                }
+            ],
+            "asset": "local-file",
+            "shouldOpen": []
+        },
+        {
             "id": "demo-ri-monday",
             "ordinal": 100,
             "components": [
@@ -702,6 +734,40 @@
                 }
             ],
             "asset": "ri_monday_demo.json",
+            "isHidden": true,
+            "isOpenByDefault": true,
+            "shouldOpen": []
+        },
+        {
+            "id": "demo-local-config",
+            "ordinal": 101,
+            "components": [
+                {
+                    "id": "id.infocard",
+                    "type": "info-card",
+                    "data": {
+                        "title": "Local config demo",
+                        "description": "<p>In the very first exercise, you identified several game mechanics that you wanted to improve or add to the game.</p><p>Now that you've built and customized your level, it's time to reflect on your work.</p> <p>Use the text box below to:</p><ul><li>Describe which game mechanics you originally identified as needing improvement or addition.</li><li>Explain how you implemented these mechanics throughout your level.</li><li>Compare your initial ideas with the final implementation. What changed, what worked well, and what could be improved further.</li></ul><p>This exercise helps you think critically about your design choices and learn from your creative process.</p>"
+                    }
+                },
+                {
+                    "id": "id.label.demo-local-file",
+                    "type": "label",
+                    "data": {
+                        "title": "Try uploading or downloading a custom config file:",
+                        "description": "Revisit mechanics you identified as nice to have and see what you added",
+                        "variant": "secondary"
+                    }
+                },
+                {
+                    "id": "id.config-uploader.demo-local-file",
+                    "type": "config-uploader",
+                    "data": {
+                        "downloadFilename": "demo-game-config"
+                    }
+                }
+            ],
+            "asset": "local-file",
             "isHidden": true,
             "isOpenByDefault": true,
             "shouldOpen": []
