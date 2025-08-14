@@ -76,9 +76,34 @@
 .html-content-card > .description > * > span.logo {
     font-family: "BitPotion";
     font-weight: bold;
-    font-size: 1.8em;
+    font-size: 1.6em;
     padding: 2px 8px;
 
     background-color: var(--logo-background-colour);
     color: var(--logo-accent-colour);
+}
+
+.html-content-card > .description > a.button {
+    font-weight: 700;
+    font-size: 1.0em;
+    padding: 8px 12px;
+    margin: 8px 0px;
+
+    color: var(--container-on-primary);
+    background-color: var(--container-primary);
+
+    &:hover {
+        color: var(--on-accent);
+        background-color: var(--accent-primary);
+    };
+
+    & > img {
+        width: 20px;
+        margin-right: 10px;
+    }
+
+    &:hover > img {
+        filter: invert(100%);
+        -webkit-filter: invert(100%);
+    }
 }
