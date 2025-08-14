@@ -11,7 +11,6 @@ import { ObtainGameAndLevelConfigsOverwrites } from "@/util/GameConfigUtil";
 import { useDeepCompareMemo } from "@/hooks/useDeepEffects";
 import ComponentFactory from "@/pages/base/components/component-factory/ComponentFactory";
 import DragHandler from "@components/drag-handler/DragHandler";
-import GameControlsLayout from "@/pages/base/components/game-controls-layout/GameControlsLayout";
 import GameInteractiveContainer from "@/pages/base/components/game-interactive-container/GameInteractiveContainer";
 import PageInteractiveContainer from "@/pages/base/components/page-interactive-container/PageInteractiveContainer";
 import PanelsLayout from "@components/panels-layout/PanelsLayout";
@@ -94,9 +93,7 @@ function PlaythroughPage(props: PlaythroughPageProps) {
                     },
                     {
                         content: (
-                            <GameInteractiveContainer data={mazeSceneProps}>
-                                <GameControlsLayout />
-                            </GameInteractiveContainer>
+                            <GameInteractiveContainer data={mazeSceneProps} />
                         ),
                         defaultWeight: 1,
                         minWidth: 600,
