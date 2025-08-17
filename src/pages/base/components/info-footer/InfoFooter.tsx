@@ -45,7 +45,7 @@ function InfoFooter() {
                         <img className="logo" src={IconGithub} />
                         <span className="text">Found an issue?<br/>Contribute to Github</span>
                     </a>
-                    <a className="link common-container" target="_blank" href="https://docs.google.com/presentation/d/1Mjba1zi_cBy_Yj6Ie7shPmTOuNbAomML247daykqZMo/edit?usp=sharing">
+                    <a className="link common-container" target="_blank" href="https://docs.google.com/presentation/d/1R8_n5psB2on9c9GqWzcsr4_hY3RgGmwzgG40t_wzVbQ/edit?usp=sharing">
                         <img className="logo" src={ImageLogoGoogleSlides} />
                         <span className="text">Consult with the workshop<br/>slides for more tips & trics</span>
                     </a>
