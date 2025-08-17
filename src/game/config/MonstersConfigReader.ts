@@ -10,6 +10,8 @@ const rawPathMapping: { [Key: string]: [number, number] } = {
     "down": [1, 0],
 };
 
+const PATH_COMMAND_SEPARATOR = ":";
+
 type MonsterDescriptor = {
     id: number,
     variant: number,
@@ -47,15 +49,44 @@ class MonstersConfigReader {
         return this._descriptors[monster].path;
     }
 
+    private static _convertPathCommand(command: string, separator: string = PATH_COMMAND_SEPARATOR): string[] | undefined {
+        const out: string[] = [];
+
+        if (command.indexOf(separator) === -1) {
+            // Command with no multiplier specifier.
+            return [command];
+        }
+
+        const commandParts = command.split(separator);
+        if (commandParts.length !== 2) {
+            return undefined;
+        }
+
+        const rawRepeatCounter = parseInt(commandParts[1]);
+        const repeatCounter = isNaN(rawRepeatCounter) ? 1 : Math.min(Math.max(rawRepeatCounter, 0), 20);
+        for (let _ = 0; _ < repeatCounter; _++) {
+            out.push(commandParts[0]);
+        }
+
+        return out;
+    }
+
     private static _convertPath(rawPath: string[]): [number, number][] | undefined {
         const out: [number, number][] = [];
 
-        for (const rawDirection of rawPath) {
-            const direction = rawPathMapping[rawDirection];
-            if (!direction) {
+        for (const pathCommand of rawPath) {
+            const rawDirections = this._convertPathCommand(pathCommand);
+            if (!rawDirections || rawDirections.length === 0) {
                 return undefined;
             }
-            out.push(direction);
+
+            for (const rawDirection of rawDirections) {
+                const direction = rawPathMapping[rawDirection];
+                if (!direction) {
+                    return undefined;
+                }
+                out.push(direction);
+            }
         }
 
         return out;
