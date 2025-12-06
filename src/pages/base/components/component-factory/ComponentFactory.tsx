@@ -9,7 +9,7 @@ import type { ComponentPersistentState } from "@/models/ui-data/ComponentPersist
 import type { ConfigUploaderData } from "@/models/ui-data/ConfigUploaderData";
 import type { InfoCardData } from "@/models/ui-data/InfoCardData";
 import type { LabelData } from "@/models/ui-data/LabelData";
-import type { PageComponent } from "@/models/Page";
+import type { PageComponent } from "@/models/PageDescriptor";
 import type { SandboxData } from "@/models/ui-data/SandboxData";
 
 type ComponentFactoryProps = {

@@ -1,0 +1,48 @@
+{
+    "id": "9",
+    "components": [
+        {
+            "id": "id.infocard",
+            "type": "info-card",
+            "data": {
+                "title": "Exercise 9: Polishing level layout",
+                "description": "<p>Great work so far! Now let's give your <strong>flag</strong> a bit of extra flair by defining different <strong>appearances</strong>.</p><p>In this exercise, you'll provide a list of <strong>tile IDs</strong> that represent the different flags. These tiles will be automatically assigned as <code>F0</code>, <code>F1</code>, <code>F2</code>, and so on, in the exact same order you list them.</p><p>This allows your flag to have different appearance within the same level to make the layout harder to memorise and add some customisation to your design.</p><p><strong>Instructions:</strong></p><ul><li>Enter a comma-separated list of tile IDs (e.g., <code>120, 121, 122</code>).</li> <li>The first tile becomes <code>F0</code>, the second <code>F1</code>, and so on.</li></ul><p>Once assigned, you can reference <code>F0</code>, <code>F1</code>, etc. in your level layout.</p><p>Below is the image with flag tile IDs</p><img src=\"@public/tiles-examples-flags.png\" width=\"500\"></img><p>Time to make that flag wave proudly!</p><a class=\"button\" href=\"@public/tiles-examples-full.png\" target=\"__blank\"><img src=\"@public/icons/arrow-up-right-square-fill.svg\" />See full tilemap</a>"
+            }
+        },
+        {
+            "id": "id.label.flags",
+            "type": "label",
+            "data": {
+                "title": "Flag tile IDs:",
+                "description": "Tip: comma-separated list of numbers",
+                "variant": "caption"
+            }
+        },
+        {
+            "id": "id.sandbox.flags",
+            "type": "sandbox",
+            "data": {
+                "persistencyId": "config.flags",
+                "placeholder": "101, 202, 303, 404",
+                "minLinesCount": 3
+            }
+        },
+        {
+            "id": "id.label.level",
+            "type": "label",
+            "data": {
+                "title": "Your level layout:",
+                "variant": "caption"
+            }
+        },
+        {
+            "id": "id.sandbox.level",
+            "type": "sandbox",
+            "data": {
+                "persistencyId": "level.layout",
+                "placeholder": "W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0\nW0 SP .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  W0\nW0 .  W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 .  W0\nW0 .  W0 .  .  .  .  .  .  .  .  .  .  .  .  .  .  W0 .  W0\nW0 .  W0 .  W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 .  W0 .  W0\nW0 .  W0 .  W0 .  .  .  .  .  .  .  .  .  .  W0 .  W0 .  W0\nW0 .  W0 .  W0 .  W0 W0 W0 W0 W0 W0 W0 W0 .  W0 .  W0 .  W0\nW0 .  W0 .  W0 .  W0 .  .  .  .  .  .  W0 .  W0 .  W0 .  W0\nW0 .  W0 .  W0 .  W0 .  W0 W0 W0 W0 .  W0 .  W0 .  W0 .  W0\nW0 .  W0 .  W0 .  W0 .  W0 .  .  .  .  W0 .  W0 .  W0 .  W0\nW0 .  W0 .  W0 .  W0 .  W0 .  W0 W0 W0  W0 .  W0 .  W0 . W0\nW0 .  .  .  W0 .  W0 .  W0 .  .  .  .  .  .  W0 .  .  .  W0\nW0 W0 W0 W0 W0 .  W0 .  W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0\nW0 .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  W0\nW0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0",
+                "minLinesCount": 18
+            }
+        }
+    ]
+}

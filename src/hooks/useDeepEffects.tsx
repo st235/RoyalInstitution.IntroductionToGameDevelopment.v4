@@ -1,6 +1,6 @@
+import type { DependencyList, EffectCallback } from "react";
 
 import { useEffect, useLayoutEffect, useMemo, useRef } from "react";
-import type { DependencyList, EffectCallback } from "react";
 
 import { deepEquals } from "@/util/Objects";
 

@@ -1,9 +1,8 @@
 import defaultLevelConfig from "@assets/pages/exercises/exercise_dialog_default_level_config.json";
-import playthroughDemoConfig from "@assets/game/demos/playthrough_demo.json";
-import riMondayDemoConfig from "@assets/game/demos/ri_monday_demo.json";
 
 import { useEffect } from "react";
 import { useAppSelector, useAppDispatch } from "@/hooks/redux";
+import { usePageContent } from "@/hooks/usePageContent";
 
 import { AssociateStateAndPersistencyId, CanCompletePage, GetPageTraversalContext, MergeComponentStates } from "@/util/PageUtil";
 import { completePage } from "@/reducers/pagesSlice";
@@ -18,15 +17,16 @@ import type { ComponentPersistentState } from "@/models/ui-data/ComponentPersist
 import type { GameConfig } from "@game/config/GameConfigReader";
 import type { LevelConfig } from "@game/config/LevelConfigReader";
 import type { MazeSceneParams } from "@game/scenes/MazeScene";
-import type { Page } from "@/models/Page";
+import type { PageDescriptor } from "@/models/PageDescriptor";
 
 type PlaythroughPageProps = {
-    page: Page;
+    page: PageDescriptor;
 };
 
 function PlaythroughPage(props: PlaythroughPageProps) {
     const page = props.page;
     const dispatch = useAppDispatch();
+    const [[pageContent, levelConfigOverride], error, isLoading] = usePageContent(page.id);
 
     const pagesState = useAppSelector(state => state.pagesState);
     const globalComponentsState = useAppSelector(state => state.pageComponentsState);
@@ -43,25 +43,28 @@ function PlaythroughPage(props: PlaythroughPageProps) {
                 )
             );
 
-            const componentPersistenceStates = page.components.map(component => 
-                MergeComponentStates(component.id, globalComponentsState.pageToComponentsLookup, pageTraversalContext));
+            const componentPersistenceStates = pageContent?.components?.map(component => 
+                MergeComponentStates(component.id, globalComponentsState.pageToComponentsLookup, pageTraversalContext)
+            ) ?? [];
 
             return [gameConfig, levelConfig, componentPersistenceStates];
-        }, [globalComponentsState.pageToComponentsLookup, page.components, page.id]);
+        }, [globalComponentsState.pageToComponentsLookup, pageContent, page.id]);
 
     const completedPagesIds = pagesState.completedPageIds;
     useEffect(() => {
         if (!completedPagesIds.find(i => i == page.id) && 
-            CanCompletePage(page, globalComponentsState.pageToComponentsLookup)) {
+            CanCompletePage(page, pageContent?.components, globalComponentsState.pageToComponentsLookup)) {
             dispatch(completePage(page.id));
         }
     }, [completedPagesIds, dispatch, globalComponentsState.pageToComponentsLookup, page]);
 
     const mazeSceneProps = useDeepCompareMemo<MazeSceneParams>(() => {
-        switch (page.asset) {
-        case "ri_monday_demo.json": return riMondayDemoConfig;
-        case "playthrough_demo.json": return playthroughDemoConfig;
-        case "local-file": if (fileConfigsState.selectedFileConfig) return fileConfigsState.selectedFileConfig;
+        if (pageContent?.isLocalConfigAllowed && fileConfigsState.selectedFileConfig) {
+            return fileConfigsState.selectedFileConfig;
+        }
+
+        if (levelConfigOverride) {
+            return levelConfigOverride;
         }
 
         return {
@@ -69,7 +72,7 @@ function PlaythroughPage(props: PlaythroughPageProps) {
             gameConfig: inMemoryGameConfig,
             levels: [inMemoryLevelConfig ?? defaultLevelConfig],
         };
-    }, [page.asset, fileConfigsState.selectedFileConfig, inMemoryGameConfig, inMemoryLevelConfig]);
+    }, [pageContent, levelConfigOverride, fileConfigsState.selectedFileConfig, inMemoryGameConfig, inMemoryLevelConfig]);
 
     return (
         <>
@@ -78,7 +81,7 @@ function PlaythroughPage(props: PlaythroughPageProps) {
                     {
                         content: (
                             <PageInteractiveContainer>
-                                {page.components.map((component, index) => (
+                                {pageContent?.components?.map((component, index) => (
                                     <ComponentFactory
                                         key={`${page.id}-${component.id}`}
                                         pageId={page.id}

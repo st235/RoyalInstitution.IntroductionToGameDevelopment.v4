@@ -1,21 +1,20 @@
-import defaultPagesContent from "@assets/pages/default_content.json";
+import defaultManifest from "@assets/pages/manifest.json";
 
-import type { Page, StatefulPage, PageState } from "@/models/Page";
+import type { PageComponent } from "@/models/PageContent";
+import type { PageDescriptor, StatefulPageDescriptor, PageState } from "@/models/PageDescriptor";
 import type { LevelCompletionData } from "@/models/ui-data/LevelCompletionData";
 import type { PersistentData } from "@/models/ui-data/PersistentData";
 import type { ComponentPersistentState } from "@/models/ui-data/ComponentPersistentState";
 
 type PageComponentsState = {[Key: string]: {[Key: string]: { persistencyId: string, state: object | undefined }}};
 
-const pagesLookup: { [id: string]: Page } =
+const pagesLookup: { [id: string]: PageDescriptor } =
     Object.fromEntries(
-        defaultPagesContent.pages.map(page => {
+        defaultManifest.pages.map(page => {
             return {
                 id: page.id,
                 ordinal: page.ordinal,
                 shouldOpen: page.shouldOpen ?? [],
-                components: page.components,
-                asset: page.asset,
                 isHidden: page.isHidden,
                 isOpenByDefault: page.isOpenByDefault,
             };
@@ -25,7 +24,7 @@ const pagesLookup: { [id: string]: Page } =
 const pageTraversalContextLookup: { [id: string]: string[] } = {};
 
 function GetDefaultPageId(): string {
-    return defaultPagesContent.defaultPageId;
+    return defaultManifest.defaultPageId;
 }
 
 function GetPageTraversalContext(pageId?: string): string[] {
@@ -39,7 +38,7 @@ function GetPageTraversalContext(pageId?: string): string[] {
 
     let traversalFound = false;
 
-    queue.push(defaultPagesContent.defaultPageId);
+    queue.push(defaultManifest.defaultPageId);
     while (queue.length > 0) {
         const currentPageId = queue.shift();
         if (!currentPageId) {
@@ -78,11 +77,11 @@ function GetPageTraversalContext(pageId?: string): string[] {
     return outPages;
 }
 
-function GetDefaultStatefulPages(completedExerciseIds: string[]): StatefulPage[] {
+function GetDefaultStatefulPages(completedExerciseIds: string[]): StatefulPageDescriptor[] {
     const completedExerciseIdsLookup = new Set<string>(completedExerciseIds);
 
     const openedExerciseIds = new Set<string>(
-        defaultPagesContent.openByDefault as string[]
+        defaultManifest.openByDefault as string[]
     );
 
     for (const completedId of completedExerciseIdsLookup) {
@@ -154,10 +153,11 @@ function _AssociateStateAndPersistencyIdWithinPage(
 }
 
 function CanCompletePage(
-    page: Page,
+    page: PageDescriptor,
+    components: PageComponent[] | undefined,
     stateLookup: PageComponentsState,
 ): boolean {
-    for (const component of Object.values(page.components)) {
+    for (const component of (components ?? [])) {
         if (!(component.data as PersistentData | undefined)?.persistencyId ||
             (component.data as LevelCompletionData | undefined)?.optional) {
             continue;

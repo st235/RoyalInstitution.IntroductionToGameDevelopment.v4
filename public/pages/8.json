@@ -1,0 +1,48 @@
+{
+    "id": "8",
+    "components": [
+        {
+            "id": "id.infocard",
+            "type": "info-card",
+            "data": {
+                "title": "Exercise 8: 🐣 Easter eggs?!",
+                "description": "<p>We're almost done! Now let's place the finishing touches on your level by adding optional <strong>garnitures</strong> to make your level feel more alive and complete.</p><p>This exercise is all about defining which tiles represent these special elements.</p><p>Garnitures are additional visual or thematic elements like grass, torches, banners, or any decorative details that don't affect gameplay, or do they?</p><p>There is a field below to complete:</p><ol><li><strong>Garniture Tile IDs</strong>: a \"new line\"-separated list of tile IDs with a boolean flag (<code>true</code> or <code>false</code>) displaying whether they should be collideable (e.g., <code>201 false<br>301 true</code>). The lines will be mapped to <code>G0</code>, <code>G1</code>, ..., <code>GN</code>.</li></ol><p>Once you've defined the garnitures config, you can place them directly into your maze layout.</p><p>Here's a peculiar example of how your layout might use them: you can use non-collideable garniture representing a wall tile to create a hidden passage to a secret room (but use distinguishable tile to help user to understand this is not a regular wall).</p><p>It polishes your game layout and sprinkles extra challenge for a player.</p><p>Ready to wrap up your level? Add your garnitures using the fields below, and update your layout to complete your masterpiece!</p><p>Below is the image with garniture tile IDs:</p><img src=\"@public/tiles-examples-garnitures.png\" width=\"350\"></img><a class=\"button\" href=\"@public/tiles-examples-full.png\" target=\"__blank\"><img src=\"@public/icons/arrow-up-right-square-fill.svg\" />See full tilemap</a>"
+            }
+        },
+        {
+            "id": "id.label.garniture",
+            "type": "label",
+            "data": {
+                "title": "Garnitures config:",
+                "description": "Tip: multiline text. Every line is space separated pair of tileID and a boolean flag.",
+                "variant": "caption"
+            }
+        },
+        {
+            "id": "id.sandbox.garniture",
+            "type": "sandbox",
+            "data": {
+                "persistencyId": "config.garniture",
+                "placeholder": "101 true\n202 false\n203 false",
+                "minLinesCount": 5
+            }
+        },
+        {
+            "id": "id.label.level",
+            "type": "label",
+            "data": {
+                "title": "Your level layout:",
+                "variant": "caption"
+            }
+        },
+        {
+            "id": "id.sandbox.level",
+            "type": "sandbox",
+            "data": {
+                "persistencyId": "level.layout",
+                "placeholder": "W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0\nW0 SP .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  W0\nW0 .  W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 .  W0\nW0 .  W0 .  .  .  .  .  .  .  .  .  .  .  .  .  .  W0 .  W0\nW0 .  W0 .  W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 .  W0 .  W0\nW0 .  W0 .  W0 .  .  .  .  .  .  .  .  .  .  W0 .  W0 .  W0\nW0 .  W0 .  W0 .  W0 W0 W0 W0 W0 W0 W0 W0 .  W0 .  W0 .  W0\nW0 .  W0 .  W0 .  W0 .  .  .  .  .  .  W0 .  W0 .  W0 .  W0\nW0 .  W0 .  W0 .  W0 .  W0 W0 W0 W0 .  W0 .  W0 .  W0 .  W0\nW0 .  W0 .  W0 .  W0 .  W0 .  .  .  .  W0 .  W0 .  W0 .  W0\nW0 .  W0 .  W0 .  W0 .  W0 .  W0 W0 W0  W0 .  W0 .  W0 . W0\nW0 .  .  .  W0 .  W0 .  W0 .  .  .  .  .  .  W0 .  .  .  W0\nW0 W0 W0 W0 W0 .  W0 .  W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0\nW0 .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  W0\nW0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0",
+                "minLinesCount": 18
+            }
+        }
+    ]
+}

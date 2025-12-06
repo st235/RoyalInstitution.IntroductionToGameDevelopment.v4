@@ -1,0 +1,48 @@
+{
+    "id": "4",
+    "components": [
+        {
+            "id": "id.infocard",
+            "type": "info-card",
+            "data": {
+                "title": "Exercise 4: Improving the visual appearance",
+                "description": "<p>Now that your level structure is in place, it's time to enhance its visual appearance using custom tile mapping.</p><p>In this exercise, you'll define how each tile should look by providing a list of <strong>tile IDs</strong> (ordinal values) that will be mapped to specific tile types in your maze.</p><p>Each tile ID you enter will be automatically assigned to a corresponding tile code: the first value becomes <code>W0</code>, the second <code>W1</code>, and so on—up to <code>WN</code>, where <strong>N</strong> is the index of the last value you provide.</p><p>Enter your tile IDs in the text box below, separated by commas (e.g., <code>17, 21, 34, 56</code>). These values will control how each wall tile appears in the final rendered game.</p><p>You can be creative here! Think of these tile IDs as different styles or textures: cracked stone, mossy brick, or a broken piece of wall. Just be sure to keep the order consistent with how you'll use <code>W0</code>, <code>W1</code>, etc., in your maze layout.</p><p>Below is an image to help you identify tiles in your game.</p><img src=\"@public/tiles-examples-walls.png\" width=\"500\"></img><a class=\"button\" href=\"@public/tiles-examples-full.png\" target=\"__blank\"><img src=\"@public/icons/arrow-up-right-square-fill.svg\" />See full tilemap</a>"
+            }
+        },
+        {
+            "id": "id.label.walls",
+            "type": "label",
+            "data": {
+                "title": "Wall tile IDs:",
+                "description": "Tip: comma-separated list of numbers.",
+                "variant": "caption"
+            }
+        },
+        {
+            "id": "id.sandbox.walls",
+            "type": "sandbox",
+            "data": {
+                "persistencyId": "config.walls",
+                "placeholder": "340, 212, 343",
+                "minLinesCount": 3
+            }
+        },
+        {
+            "id": "id.label.level",
+            "type": "label",
+            "data": {
+                "title": "Your level layout:",
+                "variant": "caption"
+            }
+        },
+        {
+            "id": "id.sandbox.level",
+            "type": "sandbox",
+            "data": {
+                "persistencyId": "level.layout",
+                "placeholder": "W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0\nW0 SP .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  W0\nW0 .  W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 .  W0\nW0 .  W0 .  .  .  .  .  .  .  .  .  .  .  .  .  .  W0 .  W0\nW0 .  W0 .  W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 .  W0 .  W0\nW0 .  W0 .  W0 .  .  .  .  .  .  .  .  .  .  W0 .  W0 .  W0\nW0 .  W0 .  W0 .  W0 W0 W0 W0 W0 W0 W0 W0 .  W0 .  W0 .  W0\nW0 .  W0 .  W0 .  W0 .  .  .  .  .  .  W0 .  W0 .  W0 .  W0\nW0 .  W0 .  W0 .  W0 .  W0 W0 W0 W0 .  W0 .  W0 .  W0 .  W0\nW0 .  W0 .  W0 .  W0 .  W0 .  .  .  .  W0 .  W0 .  W0 .  W0\nW0 .  W0 .  W0 .  W0 .  W0 .  W0 W0 W0  W0 .  W0 .  W0 . W0\nW0 .  .  .  W0 .  W0 .  W0 .  .  .  .  .  .  W0 .  .  .  W0\nW0 W0 W0 W0 W0 .  W0 .  W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0\nW0 .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  W0\nW0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0",
+                "minLinesCount": 18
+            }
+        }
+    ]
+}

@@ -4,7 +4,7 @@ import IconLockFill from "@assets/icons/lock-fill.svg";
 import IconCheckLg from "@assets/icons/check-lg.svg";
 
 import TextToggle from "@components/text-toggle/TextToggle";
-import type { StatefulPage } from "@/models/Page";
+import type { StatefulPage } from "@/models/PageDescriptor";
 
 type PageListProps = {
     selectedPageId?: string;

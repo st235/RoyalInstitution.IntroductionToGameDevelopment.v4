@@ -3,7 +3,7 @@ import type { PayloadAction } from "@reduxjs/toolkit";
 
 import { AppendCompletedPageId, GetDefaultPageId, GetDefaultStatefulPages } from "@/util/PageUtil";
 import { ReadFromLocalStorage, SaveToLocalStorage } from "@/util/LocalStorageUtil";
-import type { StatefulPage } from "@/models/Page";
+import type { StatefulPage } from "@/models/PageDescriptor";
 
 const _LOCAL_STORAGE_KEY_SELECTED_PAGE_ID = "pages-state.selected-page-id";
 const _LOCAL_STORAGE_KEY_COMPLETED_PAGES_LIST = "pages-state.completed-pages-list";

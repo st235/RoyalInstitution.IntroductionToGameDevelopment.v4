@@ -1,0 +1,31 @@
+{
+    "id": "3",
+    "components": [
+        {
+            "id": "id.infocard",
+            "type": "info-card",
+            "data": {
+                "title": "Exercise 3: Designing your first level layout",
+                "description": "<p>Time to put your level design skills to work.</p><p>In this exercise, you'll be designing your very first custom maze layout.</p><p>Your maze should be <strong>20 tiles wide</strong> and <strong>14 tiles high</strong>, but don't worry if it is bigger or smaller than <strong>20x14</strong> the layout will be expanded or cropped depending respectively.</p><p>You should use the next symbols to build a successful layout:<ul><li><code>W0</code> to represent walls</li><li><code>.</code> (a dot) to represent empty spaces that the player can walk through.</li><li><code>SP</code> starting point. You can place a few of them around the maze, then one will be randomly chosen.</li><li><code>F0</code> for the finish point. You can also have a few of them in your layout the same as <code>SP</code>.</li></ul></p><p>Focus on building a clear, playable layout. Think about where the player might start, where they could go, and how the maze flows.</p><p>Treat it like the skeleton of your level!</p><p>P.S.: If your game is stuck at some point, just refresh the page. Don't worry all saved data will be restored.</p>"
+            }
+        },
+        {
+            "id": "id.label.level",
+            "type": "label",
+            "data": {
+                "title": "Your level layout:",
+                "variant": "caption"
+            }
+        },
+        {
+            "id": "id.sandbox.level",
+            "type": "sandbox",
+            "data": {
+                "persistencyId": "level.layout",
+                "placeholder": "W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0\nW0 SP .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  W0\nW0 .  W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 .  W0\nW0 .  W0 .  .  .  .  .  .  .  .  .  .  .  .  .  .  W0 .  W0\nW0 .  W0 .  W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 .  W0 .  W0\nW0 .  W0 .  W0 .  .  .  .  .  .  .  .  .  .  W0 .  W0 .  W0\nW0 .  W0 .  W0 .  W0 W0 W0 W0 W0 W0 W0 W0 .  W0 .  W0 .  W0\nW0 .  W0 .  W0 .  W0 .  .  .  .  .  .  W0 .  W0 .  W0 .  W0\nW0 .  W0 .  W0 .  W0 .  W0 W0 W0 W0 .  W0 .  W0 .  W0 .  W0\nW0 .  W0 .  W0 .  W0 .  W0 .  .  .  .  W0 .  W0 .  W0 .  W0\nW0 .  W0 .  W0 .  W0 .  W0 .  W0 W0 W0  W0 .  W0 .  W0 . W0\nW0 .  .  .  W0 .  W0 .  W0 .  .  .  .  .  .  W0 .  .  .  W0\nW0 W0 W0 W0 W0 .  W0 .  W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0\nW0 .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  W0\nW0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0",
+                "initialValue": "SP .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  \n.  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  \n.  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  \n.  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  \n.  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  \n.  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  \n.  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  \n.  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  \n.  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  \n.  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  \n.  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  \n.  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  \n.  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  \n.  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  F0 ",
+                "minLinesCount": 18
+            }
+        }
+    ]
+}

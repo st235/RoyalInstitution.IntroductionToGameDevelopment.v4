@@ -1,0 +1,85 @@
+{
+    "defaultPageId": "1",
+    "openByDefault": ["1"],
+    "pages": [
+        {
+            "id": "1",
+            "ordinal": 1,
+            "shouldOpen": ["2"]
+        },
+        {
+            "id": "2",
+            "ordinal": 2,
+            "shouldOpen": ["3"]
+        },
+        {
+            "id": "3",
+            "ordinal": 3,
+            "shouldOpen": ["4"]
+        },
+        {
+            "id": "4",
+            "ordinal": 4,
+            "shouldOpen": ["5"]
+        },
+        {
+            "id": "5",
+            "ordinal": 5,
+            "shouldOpen": ["6"]
+        },
+        {
+            "id": "6",
+            "ordinal": 6,
+            "shouldOpen": ["7"]
+        },
+        {
+            "id": "7",
+            "ordinal": 7,
+            "shouldOpen": ["8"]
+        },
+        {
+            "id": "8",
+            "ordinal": 8,
+            "shouldOpen": ["9"]
+        },
+        {
+            "id": "9",
+            "ordinal": 9,
+            "shouldOpen": ["10"]
+        },
+        {
+            "id": "10",
+            "ordinal": 10,
+            "shouldOpen": ["11"]
+        },
+        {
+            "id": "11",
+            "ordinal": 11,
+            "shouldOpen": ["12"]
+        },
+        {
+            "id": "12",
+            "ordinal": 12,
+            "shouldOpen": ["13"]
+        },
+        {
+            "id": "13",
+            "ordinal": 13,
+            "shouldOpen": []
+        },
+        {
+            "id": "demo-ri-monday",
+            "ordinal": 100,
+            "isHidden": true,
+            "isOpenByDefault": true,
+            "shouldOpen": []
+        },
+        {
+            "id": "demo-local-config",
+            "ordinal": 101,
+            "isHidden": true,
+            "isOpenByDefault": true,
+            "shouldOpen": []
+        }
+    ]
+}

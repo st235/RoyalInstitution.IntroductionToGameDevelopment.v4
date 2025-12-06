@@ -1,0 +1,48 @@
+{
+    "id": "1",
+    "components": [
+        {
+            "id": "id.infocard",
+            "type": "info-card",
+            "data": {
+                "title": "Exercise 1: Learn and Play",
+                "description": "<p>Welcome to your very first activity!</p><p>Before we dive into creating anything, let's take a moment to explore how the game works. In this step, you will play <span class=\"logo\">the Legend of Royal Institution</span> (a maze game) and observe how it behaves.</p><p>Put on your game designer hat and figure out how the game works. The following questions will help you to start:</p><ul><li>What are the rules of the maze?</li><li>How does the player move through it?</li><li>What marks the end of the game?</li></ul><p>Use the <strong>text boxes below</strong> to jot down any rules, patterns, or interesting game mechanics you notice.</p><p>As you explore the game, start thinking about how you could make it more interesting or challenging. What new <strong>game mechanics</strong> could you add? Think about how these elements could change the way the game is played and how they might make it more fun or challenging.</p><p>P.S.: There are no wrong answers! This is all about being curious and observant.</p>"
+            }
+        },
+        {
+            "id": "id.label.rules",
+            "type": "label",
+            "data": {
+                "title": "Observed mechanics:",
+                "variant": "secondary"
+            }
+        },
+        {
+            "id": "id.sandbox.rules",
+            "type": "sandbox",
+            "data": {
+                "persistencyId": "temp.rules",
+                "placeholder": "Here are a few ideas for the game rules:\nThe character moves when user clicks a button\nGame starts with a dialog\n…",
+                "minLinesCount": 5
+            }
+        },
+        {
+            "id": "id.label.features",
+            "type": "label",
+            "data": {
+                "title": "Further improvements:",
+                "variant": "secondary"
+            }
+        },
+        {
+            "id": "id.sandbox.features",
+            "type": "sandbox",
+            "data": {
+                "persistencyId": "temp.features",
+                "placeholder": "Spawn the character randomly at some pre-defined start point\n…",
+                "minLinesCount": 5
+            }
+        }
+    ],
+    "gameConfig": "playthrough_demo.json"
+}

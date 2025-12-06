@@ -11,14 +11,14 @@ import MinScreenSizeOverlay from "@/components/min-screen-size-overlay/MinScreen
 import NavigationRail from "@/components/navigation-rail/NavigationRail";
 import PageList from "@/pages/base/components/page-list/PageList";
 import SideBarLayout from "@/components/sidebar-layout/SideBarLayout";
-import type { StatefulPage } from "@/models/Page";
+import type { StatefulPageDescriptor } from "@/models/PageDescriptor";
 import WindowSizeWarning from "@/pages/base/components/window-size-warning/WindowSizeWarning";
 import { useEffect } from "react";
 
 type SidebarRailProps = {
   selectedPageId: string;
-  pages: StatefulPage[];
-  onPageSelected: (page: StatefulPage) => void;
+  pages: StatefulPageDescriptor[];
+  onPageSelected: (page: StatefulPageDescriptor) => void;
 };
 
 function SidebarRail(props: SidebarRailProps) {
@@ -60,7 +60,7 @@ function RootNavigator() {
         }
     }, [dispatch, navigate, navigationPageId, pagesState.pagesLookup, pagesState.selectedPageId, selectedPage, selectedPage.state]);
 
-    function onPageSelected(e: StatefulPage) {
+    function onPageSelected(e: StatefulPageDescriptor) {
         if (e.state === "locked" || e.id === pagesState.selectedPageId) {
             return;
         }
