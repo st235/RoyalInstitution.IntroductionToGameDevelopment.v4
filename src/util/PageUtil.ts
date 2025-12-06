@@ -157,7 +157,13 @@ function CanCompletePage(
     components: PageComponent[] | undefined,
     stateLookup: PageComponentsState,
 ): boolean {
-    for (const component of (components ?? [])) {
+    // Page cannot be deemed as completed,
+    // if there are no components to complete.
+    if (!components) {
+        return false;
+    }
+
+    for (const component of components) {
         if (!(component.data as PersistentData | undefined)?.persistencyId ||
             (component.data as LevelCompletionData | undefined)?.optional) {
             continue;
