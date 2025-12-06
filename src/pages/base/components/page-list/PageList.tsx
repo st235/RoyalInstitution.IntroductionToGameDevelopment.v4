@@ -4,12 +4,12 @@ import IconLockFill from "@assets/icons/lock-fill.svg";
 import IconCheckLg from "@assets/icons/check-lg.svg";
 
 import TextToggle from "@components/text-toggle/TextToggle";
-import type { StatefulPage } from "@/models/PageDescriptor";
+import type { StatefulPageDescriptor } from "@/models/PageDescriptor";
 
 type PageListProps = {
     selectedPageId?: string;
-    pages: StatefulPage[];
-    onPageSelected: (exercise: StatefulPage) => void;
+    pages: StatefulPageDescriptor[];
+    onPageSelected: (exercise: StatefulPageDescriptor) => void;
 };
 
 function PageList(props: PageListProps) {
