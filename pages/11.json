@@ -1,0 +1,51 @@
+{
+    "id": "11",
+    "components": [
+        {
+            "id": "id.infocard",
+            "type": "info-card",
+            "data": {
+                "title": "Exercise 11: Special effects",
+                "description": "<p>You've built your level, added gameplay elements, and tuned its rules. Now it's time to give it a name and add some <strong>special effects</strong> to make it truly stand out!</p> <p>In this exercise, you'll set the <strong>title of your level</strong> and optionally apply <strong>post-processing effects</strong> that change how it looks and feels during gameplay.</p><p>There are three settings to configure:</p><ol><li><strong>Level title:</strong> enter a short, catchy name for your level. The title is displayed in the top right corner of the level.</li><li><strong>Cathode Ray Tube Effect:</strong> toggle this on to apply a subtle screen distortion and scan-line effect, similar to the look of an old CRT television. Great for retro vibes 📺</li><li><strong>Fog of War Effect:</strong> toggle this on to restrict player visibility, revealing only areas near the player's position. Perfect for sprinking more challenge.</li></ol><p>With this setup, your level will start with a dramatic, old-TV aesthetic and players will only see the immediate area around them—making exploration more intense</p>"
+            }
+        },
+        {
+            "id": "id.label.level-title",
+            "type": "label",
+            "data": {
+                "title": "Level title:",
+                "description": "Tip: a string of maximum 20 characters.",
+                "variant": "caption"
+            }
+        },
+        {
+            "id": "id.sandbox.level-title",
+            "type": "sandbox",
+            "data": {
+                "persistencyId": "level.title",
+                "placeholder": "My very first level",
+                "minLinesCount": 2
+            }
+        },
+        {
+            "id": "id.checkbox.effect-cathode-ray",
+            "type": "checkbox",
+            "data": {
+                "optional": true,
+                "persistencyId": "fx.cathode-ray-tube",
+                "title": "Apply Cathode Ray Tube Effect",
+                "description": "Simulates an old TV with a big belly 📺"
+            }
+        },
+        {
+            "id": "id.checkbox.effect-fog-of-war",
+            "type": "checkbox",
+            "data": {
+                "optional": true,
+                "persistencyId": "fx.fog-of-war",
+                "title": "Apply Fog of War Effect",
+                "description": "Restricts visibility to a really small area."
+            }
+        }
+    ]
+}

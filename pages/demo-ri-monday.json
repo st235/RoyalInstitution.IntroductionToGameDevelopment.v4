@@ -1,0 +1,14 @@
+{
+    "id": "demo-ri-monday",
+    "components": [
+        {
+            "id": "id.infocard",
+            "type": "info-card",
+            "data": {
+                "title": "Monday Meeting Demo",
+                "description": "<p>Welcome to the Monday demo presented on <strong>21.07.25</strong></p><p>This demonstration showcases the full progression of potential exercises within the workshop experience. Students begin by exploring what makes up a video game its gameplay, mechanics, and end goals before diving into an analytical playthrough of a sample maze to identify existing rules and brainstorm new mechanics.</p><p>Next, they'll learn how to build their own custom level using data-driven design principles: configure wall layouts, define tile types, and bring their mazes to life.</p><p>Once a level is set, we'll implement mechanics like coins with varying point values, doors, and keys, then take on a design challenge to place those elements thoughtfully for an engaging gameplay experience.</p><p>From there, they'll explore simple AI concepts by imagining and prototyping monster behavior using text-based config files.</p><p>Finally, we'll spice things up with creative ideas—think secret levels, easter eggs, move limits, timers, and collectible challenges to make the game unique and fun.</p><p>This demo is a comprehensive journey through game design fundamentals using a hands-on, iterative approach. Have fun exploring and creating!</p><p>The levels included into this version are:<ol><li>Intro with basic mechanices</li><li>Gems</li><li>Doors</li><li>Monsters AI</li><li>Garniture: easter eggs</li><li>FX: Fog of War</li><li>Custom wall asset</li></ol><p>The game config can be found <a href=\"https://github.com/st235/RoyalInstitution.IntroductionToGameDevelopment.v4/blob/main/src/assets/game/demos/ri_monday_demo.json\" target=\"_blank\">here</a>.</p>"
+            }
+        }
+    ],
+    "gameConfig": "ri_monday_demo.json"
+}
