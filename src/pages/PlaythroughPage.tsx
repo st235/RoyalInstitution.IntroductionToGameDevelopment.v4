@@ -1,3 +1,5 @@
+import "@/pages/PlaythroughPage.css";
+
 import defaultLevelConfig from "@assets/pages/exercises/exercise_dialog_default_level_config.json";
 
 import { useEffect } from "react";
@@ -13,6 +15,7 @@ import DragHandler from "@components/drag-handler/DragHandler";
 import GameInteractiveContainer from "@/pages/base/components/game-interactive-container/GameInteractiveContainer";
 import PageInteractiveContainer from "@/pages/base/components/page-interactive-container/PageInteractiveContainer";
 import PanelsLayout from "@components/panels-layout/PanelsLayout";
+import Spinner from "@/components/spinner/Spinner";
 import type { ComponentPersistentState } from "@/models/ui-data/ComponentPersistentState";
 import type { GameConfig } from "@game/config/GameConfigReader";
 import type { LevelConfig } from "@game/config/LevelConfigReader";
@@ -74,9 +77,11 @@ function PlaythroughPage(props: PlaythroughPageProps) {
         };
     }, [pageContent, levelConfigOverride, fileConfigsState.selectedFileConfig, inMemoryGameConfig, inMemoryLevelConfig]);
 
+    const shouldShowSpinner = (isLoading || error);
     return (
         <>
-            <PanelsLayout
+            {shouldShowSpinner && <div className="playthroughpage spinner-container"><Spinner size="large" variant="primary" /></div>}
+            {!shouldShowSpinner && <PanelsLayout
                 columns={[
                     {
                         content: (
@@ -103,7 +108,7 @@ function PlaythroughPage(props: PlaythroughPageProps) {
                     },
                 ]}
                 resizer={<DragHandler variant="collapsed" />}
-            />
+            />}
         </>
     );
 }
