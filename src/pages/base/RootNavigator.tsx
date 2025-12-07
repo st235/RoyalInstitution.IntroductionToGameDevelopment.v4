@@ -1,19 +1,22 @@
 import "@/pages/base/RootNavigator.css";
 
-import { useParams, useNavigate } from "react-router";
+import { useParams } from "react-router";
+import { useNavigateWithLocale } from "@/hooks/useNavigationWithLocale";
 import { useAppSelector, useAppDispatch } from "@/hooks/redux";
 
+import { getHomeUrl, isHomePage, isLanguageSupportedForNavigation } from "@/util/Navigation";
+import { selectLanguage } from "@/reducers/localeSlice";
 import { selectPage } from "@/reducers/pagesSlice";
-import PlaythroughPage from "@/pages/PlaythroughPage";
+import { useLayoutEffect } from "react";
 import InfoFooter from "@/pages/base/components/info-footer/InfoFooter";
 import LogoPopup from "@/pages/base/components/logo-popup/LogoPopup";
 import MinScreenSizeOverlay from "@/components/min-screen-size-overlay/MinScreenSizeOverlay";
 import NavigationRail from "@/components/navigation-rail/NavigationRail";
 import PageList from "@/pages/base/components/page-list/PageList";
+import PlaythroughPage from "@/pages/PlaythroughPage";
 import SideBarLayout from "@/components/sidebar-layout/SideBarLayout";
 import type { StatefulPageDescriptor } from "@/models/PageDescriptor";
 import WindowSizeWarning from "@/pages/base/components/window-size-warning/WindowSizeWarning";
-import { useEffect } from "react";
 
 type SidebarRailProps = {
   selectedPageId: string;
@@ -36,16 +39,36 @@ function SidebarRail(props: SidebarRailProps) {
 
 function RootNavigator() {
     const params = useParams();
-    const navigate = useNavigate();
+    const lang = params.lang;
     const navigationPageId = params.pageId;
 
     const dispatch = useAppDispatch();
     const pagesState = useAppSelector(state => state.pagesState);
+    const localeState = useAppSelector(state => state.localeState);
+
+    const navigate = useNavigateWithLocale(localeState.defaultLanguage,
+        localeState.selectedLanguage);
 
     const selectedPage = pagesState.pagesLookup[pagesState.selectedPageId];
 
-    useEffect(() => {
-        if (navigationPageId === "default" || 
+    useLayoutEffect(() => {
+        if (lang) {
+            if (!isLanguageSupportedForNavigation(lang,
+                localeState.supportedLanguages)) {
+                // If the selected language is unsupported,
+                // let's bring user back.
+                navigate(getHomeUrl());
+                return;
+            }
+
+            if (localeState.selectedLanguage !== lang.toLowerCase()) {
+                // If navigation is supported,
+                // let's change to state.
+                dispatch(selectLanguage(lang));
+            }
+        }
+
+        if (isHomePage(navigationPageId) || 
             (navigationPageId && (
                 !pagesState.pagesLookup[navigationPageId] || 
                 pagesState.pagesLookup[navigationPageId].state === "locked")
