@@ -55,11 +55,11 @@ function PlaythroughPage(props: PlaythroughPageProps) {
 
     const completedPagesIds = pagesState.completedPageIds;
     useEffect(() => {
-        if (!completedPagesIds.find(i => i == page.id) && 
+        if (!isLoading && !completedPagesIds.find(i => i == page.id) && 
             CanCompletePage(page, pageContent?.components, globalComponentsState.pageToComponentsLookup)) {
             dispatch(completePage(page.id));
         }
-    }, [completedPagesIds, dispatch, globalComponentsState.pageToComponentsLookup, page]);
+    }, [completedPagesIds, dispatch, globalComponentsState.pageToComponentsLookup, page, pageContent, isLoading]);
 
     const mazeSceneProps = useDeepCompareMemo<MazeSceneParams>(() => {
         if (pageContent?.isLocalConfigAllowed && fileConfigsState.selectedFileConfig) {
@@ -75,7 +75,7 @@ function PlaythroughPage(props: PlaythroughPageProps) {
             gameConfig: inMemoryGameConfig,
             levels: [inMemoryLevelConfig ?? defaultLevelConfig],
         };
-    }, [pageContent, levelConfigOverride, fileConfigsState.selectedFileConfig, inMemoryGameConfig, inMemoryLevelConfig]);
+    }, [pageContent, fileConfigsState.selectedFileConfig, inMemoryGameConfig, inMemoryLevelConfig, levelConfigOverride]);
 
     const shouldShowSpinner = (isLoading || error);
     return (

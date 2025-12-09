@@ -1,11 +1,9 @@
 import "@/pages/base/RootNavigator.css";
 
-import { useParams } from "react-router";
-import { useNavigateWithLocale } from "@/hooks/useNavigationWithLocale";
+import { useParams, useNavigate } from "react-router";
 import { useAppSelector, useAppDispatch } from "@/hooks/redux";
 
-import { getHomeUrl, isHomePage, isLanguageSupportedForNavigation } from "@/util/Navigation";
-import { selectLanguage } from "@/reducers/localeSlice";
+import { isHomePage } from "@/util/Navigation";
 import { selectPage } from "@/reducers/pagesSlice";
 import { useLayoutEffect } from "react";
 import InfoFooter from "@/pages/base/components/info-footer/InfoFooter";
@@ -39,35 +37,15 @@ function SidebarRail(props: SidebarRailProps) {
 
 function RootNavigator() {
     const params = useParams();
-    const lang = params.lang;
+    const navigate = useNavigate();
     const navigationPageId = params.pageId;
 
     const dispatch = useAppDispatch();
     const pagesState = useAppSelector(state => state.pagesState);
-    const localeState = useAppSelector(state => state.localeState);
-
-    const navigate = useNavigateWithLocale(localeState.defaultLanguage,
-        localeState.selectedLanguage);
 
     const selectedPage = pagesState.pagesLookup[pagesState.selectedPageId];
 
     useLayoutEffect(() => {
-        if (lang) {
-            if (!isLanguageSupportedForNavigation(lang,
-                localeState.supportedLanguages)) {
-                // If the selected language is unsupported,
-                // let's bring user back.
-                navigate(getHomeUrl());
-                return;
-            }
-
-            if (localeState.selectedLanguage !== lang.toLowerCase()) {
-                // If navigation is supported,
-                // let's change to state.
-                dispatch(selectLanguage(lang));
-            }
-        }
-
         if (isHomePage(navigationPageId) || 
             (navigationPageId && (
                 !pagesState.pagesLookup[navigationPageId] || 

@@ -5,16 +5,16 @@
             "id": "id.infocard",
             "type": "info-card",
             "data": {
-                "title": "Exercise 7: Adding monsters 👿",
-                "description": "<p>It's time to bring your level to life with some <strong>monster logic</strong>! In this exercise, you'll define how monsters behave by specifying their spawn points, movement patterns, and update timing.</p><p>You'll provide your monster configurations using a text field below. Each line represents one monster and follows this exact format:</p><pre>tileID updateTimeMs direction1 direction2 ... directionN</pre><p>Here's what each part means:</p><ul><li><li><strong>tileID</strong>: the tile ID used to visually represent the monster.</li><li><strong>updateTimeMs</strong>: the time (in milliseconds) between each movement of your creature. For example, <code>500</code> means the monster updates its position twice in a second (every half a second).</li><li><strong>directions</strong> a sequence of movement directions the monster will follow in order. Valid directions are: <code>left</code>, <code>right</code>, <code>up</code>, <code>down</code>.<strong>Directions list should move the monster in a way that it starts and finishes in the exactly same point.</strong></li></ul><p>The first monster becomes <code>M0</code>, the second <code>M1</code>, and so on.</p> <p>See an example:</p> <pre>27 1000 right down down up up left<br>33 500 left left right right</pre><p>In this example: <ul><li><code>M0</code> uses tile ID 27, updates every 1000ms, and moves in a knight (chess figure) pattern.</li><li><code>M1</code> uses tile ID 33, updates every 500ms, and moves two steps left and then back right, repeating that pattern.</li></ul></p> <p>Once defined, you can place monsters in your maze using <code>M0</code>, <code>M1</code>, etc., just like other entities.</p> <p>This logic lets you create patrol patterns, chase paths, or timed threats. Get creative with how you design their movement!</p><p>Below is the image of monster tiles:</p><img src=\"@public/tiles-examples-creatures.png\" width=\"600\"></img><a class=\"button\" href=\"@public/tiles-examples-full-creatures.png\" target=\"__blank\"><img src=\"@public/icons/arrow-up-right-square-fill.svg\" />See Creatures tilemap</a>"
+                "title": "page-7.title",
+                "description": "page-7.description"
             }
         },
         {
             "id": "id.label.monsters",
             "type": "label",
             "data": {
-                "title": "Monsters config:",
-                "description": "Tip: multiline text. Every line is space separated and follows: tileID updateTimeMs direction1 direction2 ... directionN.",
+                "title": "page-7.monsters.title",
+                "description": "page-7.monsters.description",
                 "variant": "caption"
             }
         },
@@ -31,7 +31,7 @@
             "id": "id.label.level",
             "type": "label",
             "data": {
-                "title": "Your level layout:",
+                "title": "pages-all.level-layout.title",
                 "variant": "caption"
             }
         },

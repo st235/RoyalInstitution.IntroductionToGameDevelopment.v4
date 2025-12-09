@@ -1,6 +1,7 @@
 import { useAppDispatch } from "@/hooks/redux";
 import { updateComponent } from "@/reducers/pageComponentsSlice";
 
+import { t } from "@/util/LocalisationContext";
 import { debounce } from "@/util/Debounce";
 import Checkbox from "@components/checkbox/Checkbox";
 import type { CheckboxData } from "@/models/ui-data/CheckboxData";
@@ -40,8 +41,8 @@ function CheckboxProxy(props: CheckboxProxyProps) {
 
     return (
         <Checkbox
-            title={props.data.title}
-            description={props.data.description}
+            title={t(props.data.title)}
+            description={t(props.data.description)}
             isToggled={props.savedState?.value}
             onToggle={value => onValueChangedDebounced(value)}
         />

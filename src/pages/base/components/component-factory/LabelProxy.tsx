@@ -2,6 +2,7 @@ import React from "react";
 
 import Label from "@components/label/Label";
 import type { LabelData } from "@/models/ui-data/LabelData";
+import { t } from "@/util/LocalisationContext";
 
 type LabelProxyProps = {
     pageId: string;
@@ -13,12 +14,12 @@ function LabelProxy(props: LabelProxyProps): React.ReactNode {
     return (
         <div>
             <Label
-                title={props.data.title}
+                title={t(props.data.title)}
                 variant={props.data.variant}
             />
             {props.data.description && 
                 <Label
-                    title={props.data.description}
+                    title={t(props.data.description)}
                     variant="footnote"
                 />
             }
