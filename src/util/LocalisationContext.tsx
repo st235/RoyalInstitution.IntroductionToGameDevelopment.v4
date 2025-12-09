@@ -26,7 +26,7 @@ function LocalisationProvider(props: LocalisationProviderProps) {
     );
 }
 
-function t<T>(key: T): T {
+function t(key: string): string {
     if (!key) {
         return key;
     }

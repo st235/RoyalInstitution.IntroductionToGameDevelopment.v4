@@ -42,7 +42,7 @@ function CheckboxProxy(props: CheckboxProxyProps) {
     return (
         <Checkbox
             title={t(props.data.title)}
-            description={t(props.data.description)}
+            description={props.data.description ? t(props.data.description) : undefined}
             isToggled={props.savedState?.value}
             onToggle={value => onValueChangedDebounced(value)}
         />

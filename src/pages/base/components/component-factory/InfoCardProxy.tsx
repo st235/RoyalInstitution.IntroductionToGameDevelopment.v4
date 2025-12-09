@@ -14,7 +14,7 @@ function InfoCardProxy(props: InfoCardProxyProps): React.ReactNode {
     return (
         <HtmlContentCard
             id={props.pageId}
-            title={t(props.data.title)}
+            title={props.data.title ? t(props.data.title) : undefined}
             description={t(props.data.description)} />
     );
 }
