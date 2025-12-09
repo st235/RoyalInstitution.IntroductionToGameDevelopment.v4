@@ -3,17 +3,18 @@ import "@/pages/base/RootNavigator.css";
 import { useParams, useNavigate } from "react-router";
 import { useAppSelector, useAppDispatch } from "@/hooks/redux";
 
+import { isHomePage } from "@/util/Navigation";
 import { selectPage } from "@/reducers/pagesSlice";
-import PlaythroughPage from "@/pages/PlaythroughPage";
+import { useLayoutEffect } from "react";
 import InfoFooter from "@/pages/base/components/info-footer/InfoFooter";
 import LogoPopup from "@/pages/base/components/logo-popup/LogoPopup";
 import MinScreenSizeOverlay from "@/components/min-screen-size-overlay/MinScreenSizeOverlay";
 import NavigationRail from "@/components/navigation-rail/NavigationRail";
 import PageList from "@/pages/base/components/page-list/PageList";
+import PlaythroughPage from "@/pages/PlaythroughPage";
 import SideBarLayout from "@/components/sidebar-layout/SideBarLayout";
 import type { StatefulPageDescriptor } from "@/models/PageDescriptor";
 import WindowSizeWarning from "@/pages/base/components/window-size-warning/WindowSizeWarning";
-import { useEffect } from "react";
 
 type SidebarRailProps = {
   selectedPageId: string;
@@ -44,8 +45,8 @@ function RootNavigator() {
 
     const selectedPage = pagesState.pagesLookup[pagesState.selectedPageId];
 
-    useEffect(() => {
-        if (navigationPageId === "default" || 
+    useLayoutEffect(() => {
+        if (isHomePage(navigationPageId) || 
             (navigationPageId && (
                 !pagesState.pagesLookup[navigationPageId] || 
                 pagesState.pagesLookup[navigationPageId].state === "locked")

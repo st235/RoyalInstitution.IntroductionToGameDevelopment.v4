@@ -5,16 +5,16 @@
             "id": "id.infocard",
             "type": "info-card",
             "data": {
-                "title": "Exercise 5: Adding coins",
-                "description": "<p>Now it's time to populate the maze with collectible <strong>coins</strong> to make gameplay more rewarding.</p><p>In this exercise, you'll define the coin tiles that players can collect by providing a list of <strong>tile IDs</strong> (ordinal values) and optionally assigning them different scores. Each coin tile ID will be mapped to a code starting from <code>C0</code>, <code>C1</code>, and so on—up to <code>CN</code>, where <strong>N</strong> is the index of the last coin you define (similar to what you already achieved with the walls config).</p><p>There are three parts to this setup:</p><ol><li><strong>Default Coin Score</strong>: a positive number that is used as the score for any coin tile that doesn't have a custom score assigned.</li> <li><strong>Scores List</strong>: a list of specific scores assigned to every coin. Each line should be in the format <code>X Y</code>, where <code>X</code> is the coin code (a number in <code>C0</code>, <code>C1</code>, ... <code>CN</code>), and <code>Y</code> is the score. Example: <pre>0 5</pre><pre>2 10</pre></li><li><strong>Coin Tile IDs list</strong> a list of tile IDs (e.g., <code>12, 23, 45</code>) that will be used for coins. These values correspond to the tiles shown in the image below and will be mapped to <code>C0</code>, <code>C1</code>, etc.</li></ol><p>Once you've defined your coins and scores, you'll be able to place them directly into your maze layout using the <code>CX</code> codes.</p><p>Below is an image to help you select the coin tile IDs:</p><img src=\"@public/tiles-examples-gems.png\" width=\"500\" /><p>Add your coins using the fields below, and then update your maze layout accordingly. Have fun designing your collectible paths!</p><a class=\"button\" href=\"@public/tiles-examples-full-gems.png\" target=\"__blank\"><img src=\"@public/icons/arrow-up-right-square-fill.svg\" />See Gems tilemap</a>"
+                "title": "page-5.title",
+                "description": "page-5.description"
             }
         },
         {
             "id": "id.label.coins.default-score",
             "type": "label",
             "data": {
-                "title": "[Optional] Default score:",
-                "description": "Tip: a single positive number.",
+                "title": "page-5.default-score.title",
+                "description": "page-5.default-score.description",
                 "variant": "caption"
             }
         },
@@ -32,8 +32,8 @@
             "id": "id.label.coins.values",
             "type": "label",
             "data": {
-                "title": "[Optional] Values:",
-                "description": "Tip: a list of pairs separated by a new line. Every pair consists of coin id and score separated by space.",
+                "title": "page-5.values.title",
+                "description": "page-5.values.description",
                 "variant": "caption"
             }
         },
@@ -51,8 +51,8 @@
             "id": "id.label.coins.tiles",
             "type": "label",
             "data": {
-                "title": "Coin tile IDs:",
-                "description": "Tip: comma-separated list of numbers.",
+                "title": "page-5.tiles.title",
+                "description": "page-5.tiles.description",
                 "variant": "caption"
             }
         },
@@ -69,7 +69,7 @@
             "id": "id.label.level",
             "type": "label",
             "data": {
-                "title": "Your level layout:",
+                "title": "pages-all.level-layout.title",
                 "variant": "caption"
             }
         },

@@ -5,16 +5,16 @@
             "id": "id.infocard",
             "type": "info-card",
             "data": {
-                "title": "Exercise 2: Kicking off the plot!",
-                "description": "<p>Great job exploring the game. In this activity, you're stepping into the role of a <span class=\"highlight\">narrative designer</span>.</p> <p>You'll get a chance to change the <strong>dialogues</strong> that appear in important moments of the game:</p><ul><li><strong>Game Intro</strong>: the message players see before the gameplay begins. This message should help to justify the gameplay.</li><li><strong>Game Over</strong>: a message that is shown when the player fails to complete a level.</li><li><strong>Victory</strong>: the celebratory message when the player finishes the maze.</li></ul><p>Take a few moments to play the maze game again and pay close attention to the text that appears during these scenarios. Then, think about how you would change.</p><p>Do you want to make it more dramatic, silly, mysterious, or even motivational? Use the <strong>text boxes below</strong> to rewrite each of the three dialogues in your own style. Be creative and have fun with it!</p>"
+                "title": "page-2.title",
+                "description": "page-2.description"
             }
         },
         {
             "id": "id.label.intro",
             "type": "label",
             "data": {
-                "title": "\"Game Intro\" message:",
-                "description": "Tip: 2-3 words per line, max 7 lines.",
+                "title": "page-2.messages.game-intro.title",
+                "description": "page-2.messages.game-intro.description",
                 "variant": "caption"
             }
         },
@@ -23,7 +23,7 @@
             "type": "sandbox",
             "data": {
                 "persistencyId": "dialog.intro",
-                "placeholder": "I am a template message,\nI am required to setup the gameplay",
+                "placeholder": "page-2.messages.game-intro.placeholder",
                 "minLinesCount": 3
             }
         },
@@ -31,8 +31,8 @@
             "id": "id.label.gameOver",
             "type": "label",
             "data": {
-                "title": "[Optional] \"Game Over\" message:",
-                "description": "Tip: 2-3 words per line, max 7 lines.",
+                "title": "page-2.messages.game-over.title",
+                "description": "page-2.messages.game-over.description",
                 "variant": "caption"
             }
         },
@@ -42,7 +42,7 @@
             "data": {
                 "optional": true,
                 "persistencyId": "dialog.game-over",
-                "placeholder": "That is all folks!",
+                "placeholder": "page-2.messages.game-over.placeholder",
                 "minLinesCount": 3
             }
         },
@@ -50,8 +50,8 @@
             "id": "id.label.victory",
             "type": "label",
             "data": {
-                "title": "[Optional] \"Victory\" message:",
-                "description": "Tip: 2-3 words per line, max 7 lines.",
+                "title": "page-2.messages.victory.title",
+                "description": "page-2.messages.victory.description",
                 "variant": "caption"
             }
         },
@@ -61,7 +61,7 @@
             "data": {
                 "optional": true,
                 "persistencyId": "dialog.victory",
-                "placeholder": "Congratulations!\nWell done.",
+                "placeholder": "page-2.messages.victory.placeholder",
                 "minLinesCount": 3
             }
         }

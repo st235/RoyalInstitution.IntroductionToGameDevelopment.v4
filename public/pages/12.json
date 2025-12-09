@@ -5,16 +5,16 @@
             "id": "id.infocard",
             "type": "info-card",
             "data": {
-                "title": "Exercise 12: Reflect and Refine Your Game Mechanics",
-                "description": "<p>In the very first exercise, you identified several game mechanics that you wanted to improve or add to the game.</p><p>Now that you've built and customized your level, it's time to reflect on your work.</p> <p>Use the text box below to:</p><ul><li>Describe which game mechanics you originally identified as needing improvement or addition.</li><li>Explain how you implemented these mechanics throughout your level.</li><li>Compare your initial ideas with the final implementation. What changed, what worked well, and what could be improved further.</li></ul><p>This exercise helps you think critically about your design choices and learn from your creative process.</p>"
+                "title": "page-12.title",
+                "description": "page-12.description"
             }
         },
         {
             "id": "id.label.features",
             "type": "label",
             "data": {
-                "title": "Mechanics to add:",
-                "description": "Revisit mechanics you identified and see whether they are a good fit.",
+                "title": "page-12.features.title",
+                "description": "page-12.features.description",
                 "variant": "secondary"
             }
         },
@@ -23,7 +23,7 @@
             "type": "sandbox",
             "data": {
                 "persistencyId": "temp.features",
-                "placeholder": "Spawn the character randomly at some pre-defined start point\nPlayer collects the coins\n…",
+                "placeholder": "page-12.features.placeholder",
                 "minLinesCount": 5
             }
         }

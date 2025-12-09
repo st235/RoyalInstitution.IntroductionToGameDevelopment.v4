@@ -5,16 +5,16 @@
             "id": "id.infocard",
             "type": "info-card",
             "data": {
-                "title": "Exercise 10: Level constraints",
-                "description": "<p>Now that your level is built and decorated, let's make it more challenging by defining the <strong>constraints and win conditions</strong>.</p><p>In this exercise, you'll configure how the level behaves in terms of time, movement, and scoring. These constraints help shape the difficulty and strategy of your level—forcing players to plan carefully, move efficiently, or collect more before they can win.</p><p>You can adjust the following values:</p><ol><li><strong>Max time (in seconds)</strong>: the total amount of time a player has to complete the level.</li><li><strong>Max moves</strong>: the maximum number of moves the player can make.</li><li><strong>Minimum score</strong>: the minimum score the player must collect before the flag appears in the level.</li></ol><p>Here's an example configuration:</p><pre> Max time: 60<br>Max steps: 200</pre><p>With this setup, the player has 60 seconds and 200 moves available to completel the level.</p><p>Ready to tweak your level's challenge? Enter your constraint values below and test how they change the gameplay experience!</p>"
+                "title": "page-10.title",
+                "description": "page-10.description"
             }
         },
         {
             "id": "id.label.max-time",
             "type": "label",
             "data": {
-                "title": "[Optional] Max time:",
-                "description": "Tip: a positive integer in seconds.",
+                "title": "page-10.max-time.title",
+                "description": "page-10.max-time.description",
                 "variant": "caption"
             }
         },
@@ -32,8 +32,8 @@
             "id": "id.label.max-moves",
             "type": "label",
             "data": {
-                "title": "[Optional] Max moves:",
-                "description": "Tip: a positive integer, defines how much moves a character can take before the game stops.",
+                "title": "page-10.max-moves.title",
+                "description": "page-10.max-moves.description",
                 "variant": "caption"
             }
         },
@@ -51,8 +51,8 @@
             "id": "id.label.min-score",
             "type": "label",
             "data": {
-                "title": "[Optional] Min score:",
-                "description": "Tip: a positive integer, defines when flag appears on the level.",
+                "title": "page-10.min-score.title",
+                "description": "page-10.min-score.description",
                 "variant": "caption"
             }
         },

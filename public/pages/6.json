@@ -5,16 +5,16 @@
             "id": "id.infocard",
             "type": "info-card",
             "data": {
-                "title": "Exercise 6: Dynamic maze layout",
-                "description": "<p>Now let's turn around our core game mechanic: make the layout dynamic by introducing <strong class=\"highlight\">keys and doors</strong>. This feature adds challenge and progression to your level by requiring players to collect specific keys to unlock matching doors.</p><p>In this exercise, you'll define which tile IDs represent <strong>keys</strong>, <strong>doors</strong>, and optionally, the <strong>closed versions of doors</strong>. Each key and door pair will be mapped with a unique code: <code>K0</code>/<code>D0</code>, <code>K1</code>/<code>D1</code>, and so on.</p> <p>Here's how to set it up:</p><ol><li><strong>Keys</strong>: enter the tile IDs for all the keys in your level (e.g., <code>14, 33, 47</code>). Similar to what we worked with before: the first ID becomes <code>K0</code>, the second <code>K1</code>, and so on.</li><li><strong>Doors</strong>: the corresponding tile IDs for doors (e.g., <code>28, 39, 52</code>). These will be assigned as <code>D0</code>, <code>D1</code>, etc. There must be exactly one door tile per key tile.</li> <li><strong>Open Door Tile IDs</strong>: a list of tiles to use for unblocked doors. Character can travel through the open doors. If you only provide one value, all doors will use <strong>that tile</strong>. If you provide more than one, the number of open door tiles <strong>must exactly match the number of doors (aka closed doors)</strong> and be listed in the same order.</li></ol><p>Once you've defined your keys and doors, you can use <code>K0</code>, <code>K1</code>, ... and <code>D0</code>, <code>D1</code>, ... directly in your maze layout to place them where needed.</p><p>These images will help you identify the correct tile IDs for keys and doors:</p><p><strong>Key Tile IDs</strong>:</p><img src=\"@public/tiles-examples-keys.png\" width=\"500\" /><p><strong>Door Tile IDs</strong>:</p> <img src=\"@public/tiles-examples-doors.png\" width=\"500\" /><p>This will make your maze more interactive and strategic!</p><a class=\"button\" href=\"@public/tiles-examples-full-tools.png\" target=\"__blank\"><img src=\"@public/icons/arrow-up-right-square-fill.svg\" />See Tools tilemap</a><a class=\"button\" href=\"@public/tiles-examples-full.png\" target=\"__blank\"><img src=\"@public/icons/arrow-up-right-square-fill.svg\" />See full tilemap</a>"
+                "title": "page-6.title",
+                "description": "page-6.description"
             }
         },
         {
             "id": "id.label.keys",
             "type": "label",
             "data": {
-                "title": "Key tile IDs:",
-                "description": "Tip: comma-separated list of numbers.",
+                "title": "page-6.keys.title",
+                "description": "page-6.keys.description",
                 "variant": "caption"
             }
         },
@@ -31,8 +31,8 @@
             "id": "id.label.doors.close",
             "type": "label",
             "data": {
-                "title": "Close door tile IDs:",
-                "description": "Tip: comma-separated list of numbers.",
+                "title": "page-6.close-doors.title",
+                "description": "page-6.close-doors.description",
                 "variant": "caption"
             }
         },
@@ -49,8 +49,8 @@
             "id": "id.label.doors.open",
             "type": "label",
             "data": {
-                "title": "Open door tile IDs:",
-                "description": "Tip: a single number or comma-separated list of numbers.",
+                "title": "page-6.open-doors.title",
+                "description": "page-6.open-doors.description",
                 "variant": "caption"
             }
         },
@@ -67,7 +67,7 @@
             "id": "id.label.level",
             "type": "label",
             "data": {
-                "title": "Your level layout:",
+                "title": "pages-all.level-layout.title",
                 "variant": "caption"
             }
         },

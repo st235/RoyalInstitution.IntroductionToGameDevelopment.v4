@@ -1,6 +1,7 @@
 import { useAppDispatch } from "@/hooks/redux";
 import { updateComponent } from "@/reducers/pageComponentsSlice";
 
+import { t } from "@/util/LocalisationContext";
 import LineNumberedTextarea from "@/components/line-numbered-textarea/LineNumberedTextarea";
 import type { SandboxData } from "@/models/ui-data/SandboxData";
 import { debounce } from "@/util/Debounce";
@@ -41,7 +42,7 @@ function SandboxProxy(props: SandboxProxyProps) {
     return (
         <LineNumberedTextarea
             minLines={props.data.minLinesCount ?? 10}
-            placeholder={props.data.placeholder}
+            placeholder={props.data.placeholder ? t(props.data.placeholder) : undefined}
             initialValue={props.savedState?.value ?? props.data.initialValue}
             style={props.data.optional ? "optional" : "required"}
             onValueChanged={value => onValueChangedDebounced(value)}

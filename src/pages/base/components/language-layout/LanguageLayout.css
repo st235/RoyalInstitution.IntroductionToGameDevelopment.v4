@@ -1,0 +1,41 @@
+.language-layout {
+    width: 100%;
+
+    display: flex;
+    flex-direction: row;
+}
+
+.language-layout .item {
+    display: flex;
+    width: max-content;
+
+    margin: 4px;
+    padding-top: 4px;
+    padding-bottom: 4px;
+    padding-left: 12px;
+    padding-right: 12px;
+    
+    cursor: pointer;
+
+    color: var(--container-on-secondary);
+    background-color: var(--container-secondary);
+
+    border-radius: 16px;
+    text-decoration: none;
+
+    &:hover,&.selected {
+        color: var(--container-on-secondary);
+        background-color: var(--container-secondary);
+        outline-style: solid;
+        outline-width: 2px;
+        outline-color: var(--container-on-secondary);
+    }
+}
+
+.language-layout .item .emoji-icon {
+    margin-right: 8px;
+}
+
+.language-layout .item .text {
+    font-weight: 600;
+}
