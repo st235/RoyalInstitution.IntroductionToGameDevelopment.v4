@@ -5,16 +5,16 @@
             "id": "id.infocard",
             "type": "info-card",
             "data": {
-                "title": "Exercise 13: Share Your Creation",
-                "description": "<p>You completed your level. It is time to let others experience it similar to professional game developers preparing their game for production!</p><p>In this exercise, you will download the <strong>game configuration file</strong> you created during the workshop and share it with another student sitting near you. This way, you can explore each other's work, exchange feedback, and get inspired by different design approaches.</p><p>Click the <strong>Download my config</strong> button to save your game configuration file to the disk. This file contains all of the settings, tiles, and level constraints you built so far.</p><p>Share the file with another student: either by sending it digitally (USB stick, chat app, etc.) or by swapping devices briefly (in case there is no way to share files).</p><p>Load their configuration into your editor using <string>Load someone's config</strong>.</p><p>Discuss the similarities and differences between your designs and give each other constructive feedback.</p>"
+                "title": "page-13.title",
+                "description": "page-13.description"
             }
         },
         {
             "id": "id.label.share",
             "type": "label",
             "data": {
-                "title": "Share your config:",
-                "description": "It is time to release your config to production. Use buttons below to download and upload config files.",
+                "title": "page-13.share.title",
+                "description": "page-13.share.description",
                 "variant": "secondary"
             }
         },

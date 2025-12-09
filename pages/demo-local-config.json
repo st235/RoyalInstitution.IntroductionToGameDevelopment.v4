@@ -6,16 +6,16 @@
             "id": "id.infocard",
             "type": "info-card",
             "data": {
-                "title": "Upload Your Own Config",
-                "description": "<p>Welcome to the tool allowing you to load custom game configs into the game.</p><p>This demonstrates the ability of the game to run custom config files and shows its outstanding flexibility.</p>"
+                "title": "page-demo-local-config.title",
+                "description": "page-demo-local-config.description"
             }
         },
         {
             "id": "id.label.demo-local-file",
             "type": "label",
             "data": {
-                "title": "Config uploader:",
-                "description": "Download saves a globally available game config, upload plays the config from disk.",
+                "title": "page-demo-local-config.upload.title",
+                "description": "page-demo-local-config.upload.description",
                 "variant": "secondary"
             }
         },
