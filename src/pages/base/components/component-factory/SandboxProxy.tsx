@@ -40,7 +40,7 @@ function SandboxProxy(props: SandboxProxyProps) {
                 }
             })
         );
-    }, [debouncedValue]);
+    }, [dispatch, debouncedValue, props.componentId, props.data.persistencyId, props.pageId]);
 
     let placeholder = props.data.placeholder;
     if (props.data.shouldTranslatePlaceholder !== false && placeholder) {

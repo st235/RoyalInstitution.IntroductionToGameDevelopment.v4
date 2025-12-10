@@ -40,7 +40,7 @@ function CheckboxProxy(props: CheckboxProxyProps) {
                 }
             })
         );
-    }, [debouncedValue]);
+    }, [dispatch, debouncedValue, props.componentId, props.data.persistencyId, props.pageId]);
 
     return (
         <Checkbox
