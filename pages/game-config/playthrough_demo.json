@@ -3,10 +3,10 @@
         "applyCathodRayTubeEffect": false,
         "messagesOverwrites": {
             "character": 0,
-            "intro": "Greetings,\nfearless students!\nEscape the maze...\nor at least debug it.",
+            "intro": "Greetings,\nRI students!\nTime to escape\nthis maze...",
             "introHeight": 80,
-            "gameOver": "Mistakes happen...\nGive it another go",
-            "victory": "Great job!\nYou've completed\nthe first step.\nMore challenges\nlie ahead!",
+            "gameOver": "Give it\nanother go",
+            "victory": "Great job!\nMore challenges\nlie ahead!",
             "victoryHeight": 90
         },
         "configsOverwrites": {
@@ -21,20 +21,18 @@
             "id": 1,
             "title": "Workshop demo",
             "levelLayout": [
-                "SP .  W0 .  .  W0 .  .  .  W0 .  .  .  W0 .  W3 .  .  .  W0",
-                ".  W0 W2 .  W0 W0 .  W0 .  W0 .  W0 .  .  .  .  W2 .  W0 . ",
-                ".  .  .  .  .  .  .  W0 .  W0 .  W0 W0 W0 .  .  .  .  W0 . ",
-                ".  W7 W7 W7 W7 .  W0 .  .  .  .  .  .  W0 W0 W0 .  W4 W0 . ",
-                ".  .  .  .  W0 .  W0 W0 W0 .  W0 W0 .  .  .  .  .  .  .  . ",
-                "W0 W0 W0 .  W0 .  .  .  .  .  W0 .  W0 W0 W0 W0 W7 W3 W7 W0",
-                ".  .  .  .  W0 W0 W0 .  W0 .  W0 .  .  .  .  W1 .  .  .  . ",
-                ".  W0 W0 .  .  .  .  .  W0 .  W0 W0 W7 .  W0 W0 W0 W0 W0 . ",
-                ".  .  .  W0 W0 W0 W0 .  W0 .  .  .  .  .  W0 .  .  .  .  F0",
-                ".  W0 .  .  .  .  .  .  W0 W0 W1 .  W7 .  W0 .  W0 W0 .  . ",
-                ".  W0 W0 W0 W0 .  W0 W0 W0 .  .  .  W1 .  .  .  .  W2 W0 . ",
-                ".  .  .  .  .  .  .  .  .  .  W1 W8 .  W0 W0 .  .  .  .  F0",
-                ".  W3 W3 W3 W3 W3 W3 W3 W3 .  .  .  .  .  .  W0 W2 W0 W0 . ",
-                ".  .  .  .  .  .  .  .  W0 W0 .  W0 W0 W0 .  .  .  .  .  . "
+                "SP .  W0 .  .  W0 .  .  .  .  .  .  .  .  .  . ",
+                ".  W0 W2 .  W0 W0 .  W0 .  .  .  .  W2 .  W0 . ",
+                ".  .  .  .  .  .  .  W0 .  W0 .  W0 W0 W0 .  . ",
+                ".  W7 W7 W7 W7 .  W0 .  .  .  .  .  .  W0 W0 W0",
+                ".  .  .  .  W0 .  W0 W0 W0 .  W0 W0 .  .  .  . ",
+                "W0 W0 W0 .  W0 .  .  .  .  .  W0 .  W0 W0 .  . ",
+                ".  .  .  .  W0 .  .  .  .  .  W0 .  .  .  .  . ",
+                ".  W0 W0 .  W0 .  .  .  W0 .  .  W7 .  W0 W0 . ",
+                ".  .  .  W0 .  .  W0 .  W0 .  .  .  .  .  .  F0",
+                ".  W0 .  .  .  .  .  .  W0 W0 W1 .  W7 .  .  . ",
+                ".  W0 W0 W0 W0 .  W0 .  .  .  .  .  W1 .  .  F0",
+                ".  .  .  .  .  .  .  .  .  .  W1 W8 .  W0 W0 . "
             ],
             "constraints": {
                 "maxTimeSec": 45
