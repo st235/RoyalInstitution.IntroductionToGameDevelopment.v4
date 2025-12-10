@@ -212,5 +212,14 @@ function ObtainGameAndLevelConfigsOverwrites(
     return [gameConfig, levelConfig];
 }
 
+function GetViewportSizeFromGameField(desiredWidth: number, 
+    desiredHeight: number, tileSize: number = 10) {
+    // Field has the following properties:
+    // There are 2 horizontal offsets to the field,
+    // on the left and right sides.
+    // Moreover, there are 2 vertical field offsets,
+    // and an area of 2 blocks reserved for level information.
+    return [ (desiredWidth + 2) * tileSize, (desiredHeight + 4) * tileSize ];
+}
 
-export { ObtainGameAndLevelConfigsOverwrites };
+export { GetViewportSizeFromGameField, ObtainGameAndLevelConfigsOverwrites };

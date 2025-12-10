@@ -17,6 +17,10 @@ const pagesLookup: { [id: string]: PageDescriptor } =
                 shouldOpen: page.shouldOpen ?? [],
                 isHidden: page.isHidden,
                 isOpenByDefault: page.isOpenByDefault,
+                requestedViewport: {
+                    width: page.requestedViewport.width,
+                    height: page.requestedViewport.height,
+                },
             };
         }).map(page => [page.id, page])
     );

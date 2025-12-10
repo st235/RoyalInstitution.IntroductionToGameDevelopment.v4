@@ -4,6 +4,10 @@ type PageDescriptor = {
     id: string;
     ordinal: number;
     shouldOpen: string[];
+    requestedViewport: {
+        width: number;
+        height: number;
+    };
     isHidden?: boolean;
     isOpenByDefault?: boolean;
 }

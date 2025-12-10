@@ -5,81 +5,141 @@
         {
             "id": "1",
             "ordinal": 1,
-            "shouldOpen": ["2"]
+            "shouldOpen": ["2"],
+            "requestedViewport": {
+                "width": 16,
+                "height": 12
+            }
         },
         {
             "id": "2",
             "ordinal": 2,
-            "shouldOpen": ["3"]
+            "shouldOpen": ["3"],
+            "requestedViewport": {
+                "width": 16,
+                "height": 12
+            }
         },
         {
             "id": "3",
             "ordinal": 3,
-            "shouldOpen": ["4"]
+            "shouldOpen": ["4"],
+            "requestedViewport": {
+                "width": 16,
+                "height": 12
+            }
         },
         {
             "id": "4",
             "ordinal": 4,
-            "shouldOpen": ["5"]
+            "shouldOpen": ["5"],
+            "requestedViewport": {
+                "width": 16,
+                "height": 12
+            }
         },
         {
             "id": "5",
             "ordinal": 5,
-            "shouldOpen": ["6"]
+            "shouldOpen": ["6"],
+            "requestedViewport": {
+                "width": 16,
+                "height": 12
+            }
         },
         {
             "id": "6",
             "ordinal": 6,
-            "shouldOpen": ["7"]
+            "shouldOpen": ["7"],
+            "requestedViewport": {
+                "width": 16,
+                "height": 12
+            }
         },
         {
             "id": "7",
             "ordinal": 7,
-            "shouldOpen": ["8"]
+            "shouldOpen": ["8"],
+            "requestedViewport": {
+                "width": 16,
+                "height": 12
+            }
         },
         {
             "id": "8",
             "ordinal": 8,
-            "shouldOpen": ["9"]
+            "shouldOpen": ["9"],
+            "requestedViewport": {
+                "width": 16,
+                "height": 12
+            }
         },
         {
             "id": "9",
             "ordinal": 9,
-            "shouldOpen": ["10"]
+            "shouldOpen": ["10"],
+            "requestedViewport": {
+                "width": 16,
+                "height": 12
+            }
         },
         {
             "id": "10",
             "ordinal": 10,
-            "shouldOpen": ["11"]
+            "shouldOpen": ["11"],
+            "requestedViewport": {
+                "width": 16,
+                "height": 12
+            }
         },
         {
             "id": "11",
             "ordinal": 11,
-            "shouldOpen": ["12"]
+            "shouldOpen": ["12"],
+            "requestedViewport": {
+                "width": 16,
+                "height": 12
+            }
         },
         {
             "id": "12",
             "ordinal": 12,
-            "shouldOpen": ["13"]
+            "shouldOpen": ["13"],
+            "requestedViewport": {
+                "width": 16,
+                "height": 12
+            }
         },
         {
             "id": "13",
             "ordinal": 13,
-            "shouldOpen": []
+            "shouldOpen": [],
+            "requestedViewport": {
+                "width": 16,
+                "height": 12
+            }
         },
         {
             "id": "demo-ri-monday",
             "ordinal": 100,
             "isHidden": true,
             "isOpenByDefault": true,
-            "shouldOpen": []
+            "shouldOpen": [],
+            "requestedViewport": {
+                "width": 20,
+                "height": 14
+            }
         },
         {
             "id": "demo-local-config",
             "ordinal": 101,
             "isHidden": true,
             "isOpenByDefault": true,
-            "shouldOpen": []
+            "shouldOpen": [],
+            "requestedViewport": {
+                "width": 20,
+                "height": 14
+            }
         }
     ]
 }

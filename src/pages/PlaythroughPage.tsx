@@ -2,13 +2,13 @@ import "@/pages/PlaythroughPage.css";
 
 import defaultLevelConfig from "@assets/pages/exercises/exercise_dialog_default_level_config.json";
 
-import { useEffect } from "react";
+import { useEffect, useMemo } from "react";
 import { useAppSelector, useAppDispatch } from "@/hooks/redux";
 import { usePageContent } from "@/hooks/usePageContent";
 
 import { AssociateStateAndPersistencyId, CanCompletePage, GetPageTraversalContext, MergeComponentStates } from "@/util/PageUtil";
 import { completePage } from "@/reducers/pagesSlice";
-import { ObtainGameAndLevelConfigsOverwrites } from "@/util/GameConfigUtil";
+import { ObtainGameAndLevelConfigsOverwrites, GetViewportSizeFromGameField } from "@/util/GameConfigUtil";
 import { useDeepCompareMemo } from "@/hooks/useDeepEffects";
 import ComponentFactory from "@/pages/base/components/component-factory/ComponentFactory";
 import DragHandler from "@components/drag-handler/DragHandler";
@@ -34,6 +34,10 @@ function PlaythroughPage(props: PlaythroughPageProps) {
     const pagesState = useAppSelector(state => state.pagesState);
     const globalComponentsState = useAppSelector(state => state.pageComponentsState);
     const fileConfigsState = useAppSelector(state => state.fileConfigsState);
+
+    const requestedViewport = useMemo(
+        () => GetViewportSizeFromGameField(page.requestedViewport.width, page.requestedViewport.height),
+        [page]);
 
     const [inMemoryGameConfig, inMemoryLevelConfig, componentPersistentStates] = 
         useDeepCompareMemo<[GameConfig | undefined, LevelConfig | undefined, ComponentPersistentState[]]>(() => {
@@ -101,7 +105,9 @@ function PlaythroughPage(props: PlaythroughPageProps) {
                     },
                     {
                         content: (
-                            <GameInteractiveContainer data={mazeSceneProps} />
+                            <GameInteractiveContainer
+                                viewport={{width:requestedViewport[0], height: requestedViewport[1]}}
+                                data={mazeSceneProps} />
                         ),
                         defaultWeight: 1,
                         minWidth: 600,

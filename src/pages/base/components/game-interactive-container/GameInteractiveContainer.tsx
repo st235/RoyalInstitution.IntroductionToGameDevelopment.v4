@@ -10,6 +10,7 @@ import type { PhaserGameContainerRef } from "@/components/phaser/PhaserGameConta
 
 interface GameInteractiveContainerProps extends React.PropsWithChildren {
     initialScene?: string;
+    viewport: { width: number, height: number };
     data?: object;
 }
 
@@ -50,7 +51,7 @@ function GameInteractiveContainer(props: GameInteractiveContainerProps) {
             onMouseLeave={onMouseLeavesContainer}
             onMouseEnter={onMouseEntersContainer}>
             <PhaserGameContainer
-                viewport={{width: 220, height: 180}}
+                viewport={{width: props.viewport.width, height: props.viewport.height}}
                 launch={{key: props.initialScene ?? "StartScene", data: props.data}}
                 scenes={[StartScene, MazeScene, TextDialogScene]}
                 containerRef={phaserRef}
