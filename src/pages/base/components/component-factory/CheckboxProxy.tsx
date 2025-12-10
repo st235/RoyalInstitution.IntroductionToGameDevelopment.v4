@@ -1,8 +1,10 @@
+import { useState, useEffect } from "react";
+
 import { useAppDispatch } from "@/hooks/redux";
 import { updateComponent } from "@/reducers/pageComponentsSlice";
 
 import { t } from "@/util/LocalisationContext";
-import { debounce } from "@/util/Debounce";
+import { useDebounce } from "@/hooks/useDebounce";
 import Checkbox from "@components/checkbox/Checkbox";
 import type { CheckboxData } from "@/models/ui-data/CheckboxData";
 
@@ -20,8 +22,11 @@ type CheckboxProxyProps = {
 function CheckboxProxy(props: CheckboxProxyProps) {
     const dispatch = useAppDispatch();
 
-    function onValueChanged(value: boolean) {
-        if (!props.data.persistencyId) {
+    const [value, setValue] = useState<boolean | undefined>(undefined);
+    const debouncedValue = useDebounce(value, 1500);
+
+    useEffect(() => {
+        if (!props.data.persistencyId || !debouncedValue) {
             return;
         }
 
@@ -31,20 +36,18 @@ function CheckboxProxy(props: CheckboxProxyProps) {
                 componentId: props.componentId,
                 persistencyId: props.data.persistencyId,
                 state: {
-                    value,
+                    value: debouncedValue,
                 }
             })
         );
-    }
-
-    const onValueChangedDebounced = debounce(onValueChanged, 1500);
+    }, [debouncedValue]);
 
     return (
         <Checkbox
             title={t(props.data.title)}
             description={props.data.description ? t(props.data.description) : undefined}
             isToggled={props.savedState?.value}
-            onToggle={value => onValueChangedDebounced(value)}
+            onToggle={setValue}
         />
     );
 }

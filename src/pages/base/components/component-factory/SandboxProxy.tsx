@@ -1,10 +1,12 @@
+import { useState, useEffect } from "react";
+
 import { useAppDispatch } from "@/hooks/redux";
 import { updateComponent } from "@/reducers/pageComponentsSlice";
 
 import { t } from "@/util/LocalisationContext";
 import LineNumberedTextarea from "@/components/line-numbered-textarea/LineNumberedTextarea";
 import type { SandboxData } from "@/models/ui-data/SandboxData";
-import { debounce } from "@/util/Debounce";
+import { useDebounce } from "@/hooks/useDebounce";
 
 type SandboxSavedState = {
     value?: string;
@@ -20,8 +22,11 @@ type SandboxProxyProps = {
 function SandboxProxy(props: SandboxProxyProps) {
     const dispatch = useAppDispatch();
 
-    function onValueChanged(value: string) {
-        if (!props.data.persistencyId) {
+    const [value, setValue] = useState<string | undefined>(undefined);
+    const debouncedValue = useDebounce(value, 1500);
+
+    useEffect(() => {
+        if (!props.data.persistencyId || !debouncedValue) {
             return;
         }
 
@@ -31,21 +36,24 @@ function SandboxProxy(props: SandboxProxyProps) {
                 componentId: props.componentId,
                 persistencyId: props.data.persistencyId,
                 state: {
-                    value,
+                    value: debouncedValue,
                 }
             })
         );
-    }
+    }, [debouncedValue]);
 
-    const onValueChangedDebounced = debounce(onValueChanged, 1500);
+    let placeholder = props.data.placeholder;
+    if (props.data.shouldTranslatePlaceholder !== false && placeholder) {
+        placeholder = t(placeholder);
+    }
 
     return (
         <LineNumberedTextarea
             minLines={props.data.minLinesCount ?? 10}
-            placeholder={props.data.placeholder ? t(props.data.placeholder) : undefined}
+            placeholder={placeholder}
             initialValue={props.savedState?.value ?? props.data.initialValue}
             style={props.data.optional ? "optional" : "required"}
-            onValueChanged={value => onValueChangedDebounced(value)}
+            onValueChanged={setValue}
         />
     );
 }
