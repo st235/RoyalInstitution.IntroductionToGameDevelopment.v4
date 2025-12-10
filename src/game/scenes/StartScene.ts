@@ -92,7 +92,7 @@ class StartScene extends BaseScene {
         layer.setAlpha(0.5);
 
         this.add.bitmapText(this.game.scale.width / 2, this.game.scale.height / 2,
-            "bitpotion", "Legend of Royal Institution", 11)
+            "bitpotion", "Legend of Royal Institution", 9)
             .setCenterAlign()
             .setOrigin(0.5, 0.5);
 

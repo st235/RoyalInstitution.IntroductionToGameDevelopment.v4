@@ -78,7 +78,8 @@
             "type": "sandbox",
             "data": {
                 "persistencyId": "level.layout",
-                "placeholder": "W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0\nW0 SP .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  W0\nW0 .  W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 .  W0\nW0 .  W0 .  .  .  .  .  .  .  .  .  .  .  .  .  .  W0 .  W0\nW0 .  W0 .  W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 .  W0 .  W0\nW0 .  W0 .  W0 .  .  .  .  .  .  .  .  .  .  W0 .  W0 .  W0\nW0 .  W0 .  W0 .  W0 W0 W0 W0 W0 W0 W0 W0 .  W0 .  W0 .  W0\nW0 .  W0 .  W0 .  W0 .  .  .  .  .  .  W0 .  W0 .  W0 .  W0\nW0 .  W0 .  W0 .  W0 .  W0 W0 W0 W0 .  W0 .  W0 .  W0 .  W0\nW0 .  W0 .  W0 .  W0 .  W0 .  .  .  .  W0 .  W0 .  W0 .  W0\nW0 .  W0 .  W0 .  W0 .  W0 .  W0 W0 W0  W0 .  W0 .  W0 . W0\nW0 .  .  .  W0 .  W0 .  W0 .  .  .  .  .  .  W0 .  .  .  W0\nW0 W0 W0 W0 W0 .  W0 .  W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0\nW0 .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  W0\nW0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0",
+                "placeholder": "SP .  .  .  .  .  .  .  .  .  .  .  .  .  .  W0\n.  W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 W0 .  W0\n.  W0 .  .  .  .  .  .  .  .  .  .  .  W0 .  W0\n.  W0 .  W0 W0 W0 W0 W0 W0 W0 W0 W0 .  W0 .  W0\n.  W0 .  W0 .  .  .  .  .  .  .  .  .  W0 .  W0\n.  W0 .  W0 .  W0 W0 W0 W0 W0 W0 .  .  W0 .  W0\n.  W0 .  W0 .  W0 .  .  .  .  W0 .  .  W0 .  . \n.  W0 .  W0 .  W0 .  W0 W0 .  W0 .  W0 W0 .  F0\n.  W0 .  W0 .  W0 .  W0 .  .  .  .  .  .  .  . \n.  W0 .  W0 .  W0 .  W0 .  W0 W0 W0 .  .  .  W0\n.  W0 .  W0 .  W0 .  W0 .  .  .  .  .  .  .  W0\n.  .  .  .  .  .  .  .  .  .  .  .  .  .  .  F0",
+                "shouldTranslatePlaceholder": false,
                 "minLinesCount": 18
             }
         }

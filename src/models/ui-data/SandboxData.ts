@@ -5,6 +5,7 @@ type SandboxData = LevelCompletionData & PersistentData & {
     placeholder?: string;
     initialValue?: string;
     minLinesCount?: number;
+    shouldTranslatePlaceholder?: boolean;
 };
 
 export type { SandboxData };
