@@ -28,4 +28,8 @@ function RemoveFromLocalStorage(key: string): boolean {
     }
 }
 
-export { SaveToLocalStorage, ReadFromLocalStorage, RemoveFromLocalStorage };
+function ClearLocalStorage() {
+    window.localStorage.clear();
+}
+
+export { SaveToLocalStorage, ReadFromLocalStorage, RemoveFromLocalStorage, ClearLocalStorage };

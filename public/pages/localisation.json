@@ -9,6 +9,12 @@
         "info-footer.links.slides.1": "Consult with the workshop",
         "info-footer.links.slides.2": "slides for more tips & trics",
         "info-footer.collaboration.ri": "In collaboration with:",
+        "info-footer.debug": "Debug:",
+        "info-footer.nuke-user-data.entry": "Nuke user data",
+        "info-footer.nuke-user-data.sure": "Are you sure?",
+        "info-footer.nuke-user-data.suresure": "Are you absolutely sure?",
+        "info-footer.nuke-user-data.erasedata": "This will erase ALL user data",
+        "info-footer.nuke-user-data.confirm": "Click to proceed (no return point)",
 
         "window-size-warning": "Sorry, the window size is too small for comfortable IDE usages. Please try resizing the window, increasing your screen resolution, or using a device with a larger display.",
 
@@ -122,6 +128,12 @@
         "info-footer.links.slides.1": "Остались вопросы?",
         "info-footer.links.slides.2": "Посмотрите слайды, чтобы узнать больше",
         "info-footer.collaboration.ri": "В сотрудничестве с:",
+        "info-footer.debug": "Отладка:",
+        "info-footer.nuke-user-data.entry": "Стереть пользовательские данные",
+        "info-footer.nuke-user-data.sure": "Вы уверены?",
+        "info-footer.nuke-user-data.suresure": "Вы точно уверены?",
+        "info-footer.nuke-user-data.erasedata": "Действие удалит ВСЕ данные",
+        "info-footer.nuke-user-data.confirm": "Подтвердите (точка невозврата)",
 
         "window-size-warning": "К сожалению, размер окна слишком мал для комфортного использования IDE. Попробуйте изменить размер окна, увеличить разрешение экрана или использовать устройство с большим дисплеем.",
 

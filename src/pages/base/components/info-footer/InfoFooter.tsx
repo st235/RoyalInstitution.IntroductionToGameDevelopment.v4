@@ -14,6 +14,7 @@ import { t } from "@/util/LocalisationContext";
 
 import Icon from "@components/icon/Icon";
 import LanguageLayout from "@/pages/base/components/language-layout/LanguageLayout";
+import NukeDataButton from "@/pages/base/components/nuke-data-button/NukeDataButton";
 import PopupLayout from "@components/popup-layout/PopupLayout";
 
 function InfoFooter() {
@@ -69,6 +70,8 @@ function InfoFooter() {
                         <span className="in-collaboration">{t("info-footer.collaboration.ri")}</span>
                         <img className="logo-ri" src={ImageLogoRoyalInstitution} />
                     </a>
+                    <span className="title">{t("info-footer.debug")}</span>
+                    <NukeDataButton />
                 </div>
             }>
             <Icon icon={IconInfoLg} />
