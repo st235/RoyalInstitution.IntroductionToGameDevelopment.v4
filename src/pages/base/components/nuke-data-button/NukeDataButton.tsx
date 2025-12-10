@@ -1,6 +1,6 @@
 import "@/pages/base/components/nuke-data-button/NukeDataButton.css";
 
-import IconInkEraser from "@assets/icons/ink-eraser.svg";
+import IconEraserFill from "@assets/icons/eraser-fill.svg";
 
 import { useEffect, useState } from "react";
 import { ClearLocalStorage } from "@/util/LocalStorageUtil";
@@ -69,7 +69,7 @@ function NukeDataButton() {
     return (
         <div className="nuke-data-button"
             onClick={() => state.action(changeState)}>
-            <img className="logo" src={IconInkEraser} />{t(state.messageId)}
+            <img className="logo" src={IconEraserFill} />{t(state.messageId)}
         </div>
     );
 }
