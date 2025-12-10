@@ -35,6 +35,8 @@ function InfoFooter() {
                         selectedLanguage={selectedLanguage}
                         supportedLanguages={supportedLanguages}
                         onLanguageSelected={code => dispatch(selectLanguage(code))} />
+                    <span className="title">{t("info-footer.debug")}</span>
+                    <NukeDataButton />
                     <span className="title">{t("info-footer.credits.ide-assets")}</span>
                     <a className="link common-container" target="_blank" href="https://icons.getbootstrap.com/">
                         <img className="logo small" src={IconBootstrapFill} />
@@ -70,8 +72,6 @@ function InfoFooter() {
                         <span className="in-collaboration">{t("info-footer.collaboration.ri")}</span>
                         <img className="logo-ri" src={ImageLogoRoyalInstitution} />
                     </a>
-                    <span className="title">{t("info-footer.debug")}</span>
-                    <NukeDataButton />
                 </div>
             }>
             <Icon icon={IconInfoLg} />
