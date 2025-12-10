@@ -9,7 +9,7 @@
             "victory": "Great job!\nMore challenges\nlie ahead!",
             "victoryHeight": 90
         },
-        "configsOverwrites": {
+        "configOverwrites": {
             "walls": {
                 "variations": [340, 212, 341, 339, 338, 337, 344, 342, 343, 59]
             }
