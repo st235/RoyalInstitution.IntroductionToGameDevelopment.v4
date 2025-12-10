@@ -16,36 +16,36 @@ const InitialState: NukeDataButtonState = {
     action: (stateChanger: (state: NukeDataButtonState) => void) => {
         stateChanger(AreYouSureState);
     }
-}
+};
 
 const AreYouSureState: NukeDataButtonState = {
     messageId: "info-footer.nuke-user-data.sure",
     action: (stateChanger: (state: NukeDataButtonState) => void) => {
         stateChanger(AreYouAbsolutelySureState);
     }
-}
+};
 
 const AreYouAbsolutelySureState: NukeDataButtonState = {
     messageId: "info-footer.nuke-user-data.suresure",
     action: (stateChanger: (state: NukeDataButtonState) => void) => {
         stateChanger(ThisWillDestroyAllUserDataState);
     }
-}
+};
 
 const ThisWillDestroyAllUserDataState: NukeDataButtonState = {
     messageId: "info-footer.nuke-user-data.erasedata",
     action: (stateChanger: (state: NukeDataButtonState) => void) => {
         stateChanger(ConfirmRemovalState);
     }
-}
+};
 
 const ConfirmRemovalState: NukeDataButtonState = {
     messageId: "info-footer.nuke-user-data.confirm",
-    action: (_: (state: NukeDataButtonState) => void) => {
+    action: () => {
         ClearLocalStorage();
         window.location.reload();
     }
-}
+};
 
 function NukeDataButton() {
     const [state, setState] = useState<NukeDataButtonState>(InitialState);
@@ -68,7 +68,7 @@ function NukeDataButton() {
 
     return (
         <div className="nuke-data-button"
-             onClick={() => state.action(changeState)}>
+            onClick={() => state.action(changeState)}>
             <img className="logo" src={IconInkEraser} />{t(state.messageId)}
         </div>
     );
