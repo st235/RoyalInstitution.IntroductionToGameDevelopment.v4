@@ -1,6 +1,6 @@
 import "@components/line-numbered-textarea/LineNumberedTextarea.css";
 
-import React, { useMemo, useState } from "react";
+import React, { useLayoutEffect, useMemo, useState } from "react";
 
 type LineNumberedTextareaStyle = "required" | "optional";
 
@@ -23,6 +23,7 @@ function LineNumberedTextarea(props: LineNumberedTextareaProps) {
         cssProperties.borderStyle = "dashed";
     }
 
+    const [firedInitialValue, setFiredInitialValue] = useState<boolean>(false);
     const [value, setValue] = useState(props.initialValue ?? "");
 
     const lineCount = useMemo(() => {
@@ -45,6 +46,13 @@ function LineNumberedTextarea(props: LineNumberedTextareaProps) {
         ),
     [lineCount]);
 
+    useLayoutEffect(() => {
+        if (props.initialValue && !firedInitialValue && value === props.initialValue) {
+            setFiredInitialValue(true);
+            props.onValueChanged?.(value);
+        }
+    }, [firedInitialValue, value, props.initialValue]);
+
     return (
         <div className="line-numbered-textarea" style={cssProperties}>
             <div className="lines-container">
@@ -59,8 +67,10 @@ function LineNumberedTextarea(props: LineNumberedTextareaProps) {
                 value={value}
                 placeholder={props.placeholder}
                 onChange={e => {
-                    setValue(e.target.value);
-                    props.onValueChanged?.(e.target.value);
+                    if (value !== e.target.value) {
+                        setValue(e.target.value);
+                        props.onValueChanged?.(e.target.value);
+                    }
                 }}
                 autoComplete="false"
                 autoCapitalize="false"
