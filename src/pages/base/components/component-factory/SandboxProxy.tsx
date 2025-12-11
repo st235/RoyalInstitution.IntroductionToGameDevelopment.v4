@@ -58,12 +58,12 @@ function SandboxProxy(props: SandboxProxyProps) {
         }
     }, [isFullscreen]);
 
-  useEffect(() => {
-    document.addEventListener("keydown", handleKeyDown);
-    return () => {
-      document.removeEventListener("keydown", handleKeyDown);
-    };
-  }, [isFullscreen, handleKeyDown]);
+    useEffect(() => {
+        document.addEventListener("keydown", handleKeyDown);
+        return () => {
+            document.removeEventListener("keydown", handleKeyDown);
+        };
+    }, [isFullscreen, handleKeyDown]);
 
     return (
         <LineNumberedTextarea
