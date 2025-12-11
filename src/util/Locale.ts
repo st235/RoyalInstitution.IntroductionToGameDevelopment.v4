@@ -2,7 +2,7 @@ const __DEFAULT_LOCALE_LANGUAGE = "en";
 const __DEFAULT_LANGUAGE_EMOJI_ICON = "🏳️";
 
 const __LANGUAGE_TO_EMOJI_MAPPING: { [Key: string]: string } = {
-    "en": "🇺🇸",
+    "en": "🇬🇧",
     "ru": "🇷🇺"
 };
 
