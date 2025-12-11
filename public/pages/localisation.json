@@ -19,6 +19,8 @@
         "window-size-warning": "Sorry, the window size is too small for comfortable IDE usages. Please try resizing the window, increasing your screen resolution, or using a device with a larger display.",
 
         "pages-all.level-layout.title": "Your level layout:",
+        "pages-all.go-fullscreen": "Expand",
+        "pages-all.close-fullscreen": "Collapse",
 
         "page-1.title": "Exercise 1: Learn and Play",
         "page-1.description": "<p>Welcome to your very first activity!</p><p>Before we dive into creating anything, let's take a moment to explore how the game works. In this step, you will play <span class=\"logo\">the Legend of Royal Institution</span> (a maze game) and observe how it behaves.</p><p>Put on your game designer hat and figure out how the game works. The following questions will help you to start:</p><ul><li>What are the rules of the maze?</li><li>How does the player move through it?</li><li>What marks the end of the game?</li></ul><p>Use the <strong>text boxes below</strong> to jot down any rules, patterns, or interesting game mechanics you notice.</p><p>As you explore the game, start thinking about how you could make it more interesting or challenging. What new <strong>game mechanics</strong> could you add? Think about how these elements could change the way the game is played and how they might make it more fun or challenging.</p><p>P.S.: There are no wrong answers! This is all about being curious and observant.</p>",
@@ -138,6 +140,8 @@
         "window-size-warning": "К сожалению, размер окна слишком мал для комфортного использования IDE. Попробуйте изменить размер окна, увеличить разрешение экрана или использовать устройство с большим дисплеем.",
 
         "pages-all.level-layout.title": "Ваш level layout:",
+        "pages-all.go-fullscreen": "Раскрыть",
+        "pages-all.close-fullscreen": "Свернуть",
 
         "page-1.title": "Упражнение 1: Играй и Учись!",
         "page-1.description": "<p>Добро пожаловать в ваше самое первое задание!</p><p>Перед тем как мы начнём что-то создавать, давайте немного поизучаем, как устроена игра. В этом шаге вы будете играть в <span class=\"logo\">the Legend of Royal Institution</span> (лабиринт) и наблюдать, как он работает.</p><p>Наденьте шляпу game designer'а и разберитесь, как работает игра. Следующие вопросы помогут начать:</p><ul><li>Каковы правила лабиринта?</li><li>Как игрок перемещается?</li><li>Что означает конец игры?</li></ul><p>Используйте <strong>текстовые поля ниже</strong>, чтобы записывать любые правила, паттерны или интересные game mechanics, которые вы заметите.</p><p>Исследуя игру, подумайте, как можно сделать её интереснее или сложнее. Какие новые <strong>game mechanics</strong> можно добавить? Как эти элементы могут изменить геймплей?</p><p>P.S.: Нет неправильных ответов! Главное — быть любопытными и наблюдательными.</p>",

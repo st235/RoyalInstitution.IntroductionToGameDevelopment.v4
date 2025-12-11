@@ -12,6 +12,7 @@ type LineNumberedTextareaProps = {
     name?: string;
     extraLinesOffset?: number;
     controlsContent?: React.ReactNode;
+    isFullscreen?: boolean;
     onValueChanged?: (value: string) => void;
 };
 
@@ -54,7 +55,7 @@ function LineNumberedTextarea(props: LineNumberedTextareaProps) {
     }, [firedInitialValue, value, props.initialValue]);
 
     return (
-        <div className="line-numbered-textarea" style={cssProperties}>
+        <div className={`line-numbered-textarea ${props.isFullscreen ? "fullscreen" : ""}`} style={cssProperties}>
             <div className="lines-container">
                 <ul className="lines-counter">
                     {linesArray.map(line => (

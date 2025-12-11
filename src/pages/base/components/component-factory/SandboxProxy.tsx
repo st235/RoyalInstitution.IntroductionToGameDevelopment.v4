@@ -1,4 +1,7 @@
-import { useState, useEffect } from "react";
+import { useCallback, useState, useEffect } from "react";
+
+import IconOpenFullscreen from "@assets/icons/fullscreen.svg";
+import IconCloseFullscreen from "@assets/icons/fullscreen-exit.svg";
 
 import { useAppDispatch } from "@/hooks/redux";
 import { updateComponent } from "@/reducers/pageComponentsSlice";
@@ -6,6 +9,7 @@ import { updateComponent } from "@/reducers/pageComponentsSlice";
 import { t } from "@/util/LocalisationContext";
 import LineNumberedTextarea from "@/components/line-numbered-textarea/LineNumberedTextarea";
 import type { SandboxData } from "@/models/ui-data/SandboxData";
+import Button from "@/components/button/Button";
 import { useDebounce } from "@/hooks/useDebounce";
 
 type SandboxSavedState = {
@@ -22,6 +26,7 @@ type SandboxProxyProps = {
 function SandboxProxy(props: SandboxProxyProps) {
     const dispatch = useAppDispatch();
 
+    const [isFullscreen, setFullscreen] = useState<boolean>(false);
     const [value, setValue] = useState<string | undefined>(undefined);
     const debouncedValue = useDebounce(value, 1500);
 
@@ -47,12 +52,33 @@ function SandboxProxy(props: SandboxProxyProps) {
         placeholder = t(placeholder);
     }
 
+    const handleKeyDown = useCallback((event: KeyboardEvent) => {
+        if (event.key === "Escape" && isFullscreen) {
+            setFullscreen(false);
+        }
+    }, [isFullscreen]);
+
+  useEffect(() => {
+    document.addEventListener("keydown", handleKeyDown);
+    return () => {
+      document.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [isFullscreen, handleKeyDown]);
+
     return (
         <LineNumberedTextarea
             minLines={props.data.minLinesCount ?? 10}
             placeholder={placeholder}
             initialValue={props.savedState?.value ?? props.data.initialValue}
             style={props.data.optional ? "optional" : "required"}
+            controlsContent={
+                <Button text={t(isFullscreen ? "pages-all.close-fullscreen" : "pages-all.go-fullscreen")}
+                    variant="primary"
+                    size="small"
+                    leadingIcon={isFullscreen ? IconCloseFullscreen : IconOpenFullscreen}
+                    onClick={() => setFullscreen(!isFullscreen)} />
+            }
+            isFullscreen={isFullscreen}
             onValueChanged={setValue}
         />
     );
